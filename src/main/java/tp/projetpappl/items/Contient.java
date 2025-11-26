@@ -8,7 +8,6 @@ package tp.projetpappl.items;
  *
  * @author nathan
  */
-public class Constitution {
-    private int nbHeure;
-    private TypeLecon type;
+public class Contient {
+    
 }

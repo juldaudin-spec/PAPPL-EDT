@@ -9,7 +9,5 @@ package tp.projetpappl.items;
  * @author nathan
  */
 public class Enseignant {
-    private String nomEnseignant;
-    private String prenomEnseignant;
-    private String codeEnseignant;
+    
 }

@@ -8,6 +8,6 @@ package tp.projetpappl.items;
  *
  * @author nathan
  */
-public class Responsable extends Enseignant {
+public class Gerer {
     
 }

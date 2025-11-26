@@ -9,9 +9,5 @@ package tp.projetpappl.items;
  * @author nathan
  */
 public class Salle {
-    private int numeroSalle;
-    private char batiment;
-    private int capacite;
-    private boolean prise;
-            
+    
 }
