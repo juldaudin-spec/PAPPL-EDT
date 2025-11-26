@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author nathan
  */
 public class DataBaseTools {
-   
+
     private String login;
     private String password;
     private String url;
@@ -56,7 +56,7 @@ public class DataBaseTools {
      * Get connection to the database
      */
     public void connect() {
-        if ((this.connection == null) && (url != null) && (! url.isEmpty())) {
+        if ((this.connection == null) && (url != null) && (!url.isEmpty())) {
             try {
                 this.connection = DriverManager.getConnection(url, login, password);
             } catch (SQLException ex) {
@@ -82,70 +82,84 @@ public class DataBaseTools {
     public void creationTable() throws SQLException {
         this.connect();
         String query = "CREATE TABLE enseignant("
-                    + "initiales CHARACTER VARYING(5) NOT NULL PRIMARY KEY,"
-                    + "nom_enseignant CHARACTER VARYING(64) NOT NULL,"
-                    + "prenom CHARACTER VARYING(64)"
-                    + ");"
-                    + "CREATE TABLE enseignement("
-                    + "acronyme CHARACTER VARYING(10) NOT NULL PRIMARY KEY,"
-                    + "nom_enseignement CHARACTER VARYING(128),"
-                    + "filiere CHARACTER VARYING(64),"
-                    + "responsable CHARACTER VARYING(4) NOT NULL REFERENCES enseignant"
-                    + ");"
-                    + "CREATE TABLE enseigne("
-                    + "initiales CHARACTER VARYING(4) NOT NULL REFERENCES enseignant,"
-                    + "acronyme CHARACTER VARYING(10) NOT NULL REFERENCES enseignement,"
-                    + "PRIMARY KEY(initiales,acronyme)"
-                    + ");"
-                    + "CREATE TABLE type_lecon("
-                    + "intitule CHARACTER VARYING(8) NOT NULL PRIMARY KEY,"
-                    + "nb_enseignant INTEGER"
-                    + ");"
-                    + "CREATE TABLE salle("
-                    + "numero_salle INTEGER NOT NULL PRIMARY KEY,"
-                    + "capacite INTEGER,"
-                    + "typologie CHARACTER VARYING(20)"
-                    + ");"
-                    + "CREATE TABLE contient("
-                    + "acronyme CHARACTER VARYING(10) NOT NULL REFERENCES enseignement,"
-                    + "intitule CHARACTER VARYING(8) NOT NULL REFERENCES type_lecon,"
-                    + "salle_preconisee INTEGER REFERENCES salle,"
-                    + "volumetrie NUMERIC"
-                    + ");"
-                    + "CREATE TABLE groupe("
-                    + "nb_eleve INTEGER,"
-                    + "nom_groupe CHARACTER VARYING(128) NOT NULL PRIMARY KEY"
-                    + ");"
-                    + "CREATE TABLE etudie("
-                    + "acronyme CHARACTER VARYING(10) NOT NULL REFERENCES enseignement,"
-                    + "nom_groupe CHARACTER VARYING(128) NOT NULL REFERENCES groupe,"
-                    + "PRIMARY KEY(acronyme,nom_groupe)"
-                    + ");"
-                    + "CREATE TABLE seance("
-                    + "acronyme CHARACTER VARYING(10) NOT NULL REFERENCES enseignement,"
-                    + "intitule CHARACTER VARYING(8) NOT NULL REFERENCES type_lecon,"
-                    + "h_debut TIMESTAMP,"
-                    + "duree INTEGER,"
-                    + "id_seance SERIAL NOT NULL PRIMARY KEY"
-                    + ");"
-                    + "CREATE TABLE a_lieu("
-                    + "id_seance INTEGER NOT NULL REFERENCES seance,"
-                    + "numero_salle INTEGER REFERENCES salle,"
-                    + "PRIMARY KEY(id_seance, numero_salle)"
-                    + ");"
-                    + "CREATE TABLE donne_cours("
-                    + "initiales CHARACTER VARYING(4) NOT NULL REFERENCES enseignant,"
-                    + "id_seance INTEGER NOT NULL REFERENCES seance,"
-                    + "PRIMARY KEY(initiales,id_seance)"
-                    + ");"
-                    + "CREATE TABLE participe("
-                    + "id_seance INTEGER NOT NULL REFERENCES seance,"
-                    + "nom_groupe CHARACTER VARYING(128) NOT NULL REFERENCES groupe"
-                    + ");";
-            PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.executeUpdate();
-            this.disconnect();
-            }
+                + "initiales CHARACTER VARYING(5) NOT NULL PRIMARY KEY,"
+                + "nom_enseignant CHARACTER VARYING(64) NOT NULL,"
+                + "prenom CHARACTER VARYING(64),"
+                + "login CHARACTER VARYING(64),"
+                + "mdp CHARACTER VARYING(64)"
+                + ");"
+                + "CREATE TABLE enseignement("
+                + "acronyme CHARACTER VARYING(10) NOT NULL PRIMARY KEY,"
+                + "nom_enseignement CHARACTER VARYING(128),"
+                + "filiere CHARACTER VARYING(64),"
+                + "responsable CHARACTER VARYING(4) NOT NULL REFERENCES enseignant"
+                + ");"
+                +"CREATE TABLE gerer("
+                + "initiales CHARACTER VARYING(5) NOT NULL,"
+                + "acronyme CHARACTER VARYING(10) NOT NULL,"
+                + "PRIMARY KEY(initiales,acronyme)"
+                + ");"
+                + "CREATE TABLE enseigne("
+                + "initiales CHARACTER VARYING(4) NOT NULL REFERENCES enseignant,"
+                + "acronyme CHARACTER VARYING(10) NOT NULL REFERENCES enseignement,"
+                + "PRIMARY KEY(initiales,acronyme)"
+                + ");"
+                + "CREATE TABLE type_lecon("
+                + "intitule CHARACTER VARYING(8) NOT NULL PRIMARY KEY,"
+                + "nb_enseignant INTEGER"
+                + ");"
+                + "CREATE TABLE salle("
+                + "numero_salle CHARACTER VARYING(4) NOT NULL PRIMARY KEY,"
+                + "capacite INTEGER,"
+                + "typologie CHARACTER VARYING(20)"
+                + ");"
+                + "CREATE TABLE contient("
+                + "acronyme CHARACTER VARYING(10) NOT NULL REFERENCES enseignement,"
+                + "intitule CHARACTER VARYING(8) NOT NULL REFERENCES type_lecon,"
+                + "salle_preconisee CHARACTER VARYING(4) REFERENCES salle,"
+                + "volumetrie NUMERIC,"
+                + "PRIMARY KEY(intitule,acronyme)"
+                + ");"
+                + "CREATE TABLE groupe("
+                + "nb_eleve INTEGER,"
+                + "nom_groupe CHARACTER VARYING(128) NOT NULL PRIMARY KEY"
+                + ");"
+                +"CREATE TABLE depend("
+                + "pere CHARACTER VARYING(128) NOT NULL REFERENCES groupe,"
+                + "fils CHARACTER VARYING(128) NOT NULL REFERENCES groupe,"
+                + "PRIMARY KEY(pere,fils)"
+                + ");"
+                + "CREATE TABLE etudie("
+                + "acronyme CHARACTER VARYING(10) NOT NULL,"
+                + "intitule CHARACTER VARYING(8) NOT NULL,"
+                + "nom_groupe CHARACTER VARYING(128) NOT NULL REFERENCES groupe,"
+                + "PRIMARY KEY(acronyme,intitule,nom_groupe),"
+                + "FOREIGN KEY (acronyme,intitule) REFERENCES contient(acronyme,intitule)"
+                + ");"
+                + "CREATE TABLE seance("
+                + "acronyme CHARACTER VARYING(10) NOT NULL REFERENCES enseignement,"
+                + "intitule CHARACTER VARYING(8) NOT NULL REFERENCES type_lecon,"
+                + "h_debut TIMESTAMP,"
+                + "duree INTEGER,"
+                + "id_seance SERIAL NOT NULL PRIMARY KEY"
+                + ");"
+                + "CREATE TABLE a_lieu("
+                + "id_seance INTEGER NOT NULL REFERENCES seance,"
+                + "numero_salle CHARACTER VARYING(4) REFERENCES salle,"
+                + "PRIMARY KEY(id_seance, numero_salle)"
+                + ");"
+                + "CREATE TABLE donne_cours("
+                + "initiales CHARACTER VARYING(4) NOT NULL REFERENCES enseignant,"
+                + "id_seance INTEGER NOT NULL REFERENCES seance,"
+                + "PRIMARY KEY(initiales,id_seance)"
+                + ");"
+                + "CREATE TABLE participe("
+                + "id_seance INTEGER NOT NULL REFERENCES seance,"
+                + "nom_groupe CHARACTER VARYING(128) NOT NULL REFERENCES groupe"
+                + ");";
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt.executeUpdate();
+        this.disconnect();
+    }
 
-    
 }
