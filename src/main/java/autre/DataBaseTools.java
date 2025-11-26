@@ -4,27 +4,84 @@
  */
 package autre;
 
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author nathan
  */
-public class Creation_BDD {
+public class DataBaseTools {
+   
+    private String login;
+    private String password;
+    private String url;
+    private Connection connection;
 
-    /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
-     */
     /**
-     *
-     * @author nathan
+     * Load infos
      */
-    public class Creatable {
+    public DataBaseTools() {
+        try {
+            // Get Properties file
+            ResourceBundle properties = ResourceBundle.getBundle(DataBaseTools.class.getPackage().getName() + ".database");
 
-        String request;
+            // USE config parameters
+            login = properties.getString("login");
+            password = properties.getString("password");
+            String server = properties.getString("server");
+            String database = properties.getString("database");
+            url = "jdbc:postgresql://" + server + "/" + database;
 
-        public Creatable() {
-            request = "CREATE TABLE enseigne("
-                    + "initiales CHARACTER VARYING(4) NOT NULL REFERENCES enseignant"
+            // Mount driver
+            Driver driver = DriverManager.getDriver(url);
+            if (driver == null) {
+                Class.forName("org.postgresql.Driver");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DataBaseTools.class.getName()).log(Level.SEVERE, null, ex);
+            // If driver is not found, cancel url
+            url = null;
+        }
+        this.connection = null;
+    }
+
+    /**
+     * Get connection to the database
+     */
+    public void connect() {
+        if ((this.connection == null) && (url != null) && (! url.isEmpty())) {
+            try {
+                this.connection = DriverManager.getConnection(url, login, password);
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBaseTools.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    /**
+     * Disconnect from database
+     */
+    public void disconnect() {
+        if (this.connection != null) {
+            try {
+                this.connection.close();
+                this.connection = null;
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBaseTools.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void creationTable() throws SQLException {
+            String query = "initiales CHARACTER VARYING(4) NOT NULL REFERENCES enseignant"
+                    + "CREATE TABLE enseigne("
                     + "acronyme CHARACTER VARYING(10) NOT NULL REFERENCES enseignement"
                     + "PRIMARY KEY(initiales,acronyme)"
                     + ");"
@@ -85,5 +142,10 @@ public class Creation_BDD {
                     + "id_seance INTEGER NOT NULL REFERENCES seance"
                     + "nom_groupe CHARACTER VARYING(128) NOT NULL REFERENCES groupe"
                     + ");";
-        }
-    }
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.executeUpdate();
+            this.disconnect();
+            }
+
+    
+}
