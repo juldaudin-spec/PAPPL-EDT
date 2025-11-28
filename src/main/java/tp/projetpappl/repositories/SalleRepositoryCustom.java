@@ -8,6 +8,6 @@ package tp.projetpappl.repositories;
  *
  * @author nathan
  */
-public interface SalleRepositoryCustom extends SalleRepository{
+public interface SalleRepositoryCustom {
     
 }

@@ -8,6 +8,6 @@ package tp.projetpappl.repositories;
  *
  * @author nathan
  */
-public interface TypeLeconRepositoryCustom extends TypeLeconRepository{
+public interface TypeLeconRepositoryCustom {
     
 }

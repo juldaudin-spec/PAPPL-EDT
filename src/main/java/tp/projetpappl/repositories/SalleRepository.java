@@ -12,6 +12,6 @@ import tp.projetpappl.items.Salle;
  * @author nathan
  */
 @Repository
-public interface SalleRepository extends JpaRepository<Salle, String> {
+public interface SalleRepository extends JpaRepository<Salle, String>, SalleRepositoryCustom {
     
 }

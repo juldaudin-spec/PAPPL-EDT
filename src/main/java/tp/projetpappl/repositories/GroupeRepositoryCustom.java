@@ -8,6 +8,6 @@ package tp.projetpappl.repositories;
  *
  * @author nathan
  */
-public interface GroupeRepositoryCustom extends GroupeRepository{
+public interface GroupeRepositoryCustom {
     
 }

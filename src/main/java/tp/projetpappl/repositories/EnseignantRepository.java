@@ -12,6 +12,6 @@ import tp.projetpappl.items.Enseignant;
  * @author nathan
  */
 @Repository
-public interface EnseignantRepository extends JpaRepository<Enseignant, String> {
+public interface EnseignantRepository extends JpaRepository<Enseignant, String>, EnseignantRepositoryCustom {
     
 }

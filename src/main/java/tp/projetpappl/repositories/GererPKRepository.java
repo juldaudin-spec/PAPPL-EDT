@@ -12,6 +12,6 @@ import tp.projetpappl.items.GererPK;
  * @author nathan
  */
 @Repository
-public interface GererPKRepository extends JpaRepository<GererPK, String> {
+public interface GererPKRepository extends JpaRepository<GererPK, String>, GererPKRepositoryCustom {
     
 }

@@ -12,6 +12,6 @@ import tp.projetpappl.items.TypeLecon;
  * @author nathan
  */
 @Repository
-public interface TypeLeconRepository extends JpaRepository<TypeLecon, String> {
+public interface TypeLeconRepository extends JpaRepository<TypeLecon, String>, TypeLeconRepositoryCustom {
     
 }

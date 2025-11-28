@@ -12,6 +12,6 @@ import tp.projetpappl.items.Groupe;
  * @author nathan
  */
 @Repository
-public interface GroupeRepository extends JpaRepository<Groupe, String> {
+public interface GroupeRepository extends JpaRepository<Groupe, String>, GroupeRepositoryCustom {
     
 }

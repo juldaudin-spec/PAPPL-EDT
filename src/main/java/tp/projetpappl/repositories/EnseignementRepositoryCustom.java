@@ -8,6 +8,6 @@ package tp.projetpappl.repositories;
  *
  * @author nathan
  */
-public interface EnseignementRepositoryCustom extends EnseignementRepository{
+public interface EnseignementRepositoryCustom {
     
 }

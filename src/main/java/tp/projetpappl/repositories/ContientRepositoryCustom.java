@@ -8,6 +8,6 @@ package tp.projetpappl.repositories;
  *
  * @author nathan
  */
-public interface ContientRepositoryCustom extends ContientRepository{
+public interface ContientRepositoryCustom {
     
 }

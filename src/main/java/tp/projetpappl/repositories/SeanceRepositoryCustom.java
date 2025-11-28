@@ -8,6 +8,6 @@ package tp.projetpappl.repositories;
  *
  * @author nathan
  */
-public interface SeanceRepositoryCustom extends SeanceRepository{
+public interface SeanceRepositoryCustom {
     
 }

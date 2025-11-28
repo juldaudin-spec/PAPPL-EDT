@@ -12,6 +12,6 @@ import tp.projetpappl.items.Contient;
  * @author nathan
  */
 @Repository
-public interface ContientRepository extends JpaRepository<Contient, String> {
+public interface ContientRepository extends JpaRepository<Contient, String>, ContientRepositoryCustom{
     
 }

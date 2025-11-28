@@ -8,6 +8,6 @@ package tp.projetpappl.repositories;
  *
  * @author nathan
  */
-public interface GererPKRepositoryCustom extends GererPKRepository{
+public interface GererPKRepositoryCustom {
     
 }
