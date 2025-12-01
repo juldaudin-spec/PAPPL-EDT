@@ -25,7 +25,7 @@ import java.util.List;
  * @author nathan
  */
 @Entity
-@Table(name = "type_lecon")
+@Table(name = "type_lecon", catalog = "dbpappl", schema = "PAPPL")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TypeLecon.findAll", query = "SELECT t FROM TypeLecon t"),
@@ -42,7 +42,7 @@ public class TypeLecon implements Serializable {
     private String intitule;
     @Column(name = "nb_enseignant")
     private Integer nbEnseignant;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLecon")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "intitule")
     private List<Contient> contientList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "intitule")
     private List<Seance> seanceList;

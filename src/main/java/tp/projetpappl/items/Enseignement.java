@@ -29,7 +29,7 @@ import java.util.List;
  * @author nathan
  */
 @Entity
-@Table(name = "enseignement")
+@Table(name = "enseignement", catalog = "dbpappl", schema = "PAPPL")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Enseignement.findAll", query = "SELECT e FROM Enseignement e"),
@@ -59,7 +59,7 @@ public class Enseignement implements Serializable {
     @JoinColumn(name = "responsable", referencedColumnName = "initiales")
     @ManyToOne(optional = false)
     private Enseignant responsable;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "enseignement")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "acronyme")
     private List<Contient> contientList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "acronyme")
     private List<Seance> seanceList;
