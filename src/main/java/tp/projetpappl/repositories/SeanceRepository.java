@@ -12,6 +12,6 @@ import tp.projetpappl.items.Seance;
  * @author nathan
  */
 @Repository
-public interface SeanceRepository extends JpaRepository<Seance, String>, SeanceRepositoryCustom {
+public interface SeanceRepository extends JpaRepository<Seance, Integer>, SeanceRepositoryCustom {
     
 }

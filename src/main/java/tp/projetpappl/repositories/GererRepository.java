@@ -12,6 +12,6 @@ import tp.projetpappl.items.Gerer;
  * @author nathan
  */
 @Repository
-public interface GererRepository extends JpaRepository<Gerer, String>, GererRepositoryCustom {
+public interface GererRepository extends JpaRepository<Gerer, Integer>, GererRepositoryCustom {
     
 }
