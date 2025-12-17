@@ -4,10 +4,14 @@
  */
 package tp.projetpappl.repositories;
 
+import java.util.List;
+
 /**
  *
  * @author nathan
  */
 public interface EnseignementRepositoryCustom {
-    
+    List<String> findAllAcronyme();
+    List<String> findAcronymeParEnseignant(String initiales);
+    List<String> findAcronymeParGroupe(String initiales);
 }

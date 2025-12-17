@@ -4,10 +4,13 @@
  */
 package tp.projetpappl.repositories;
 
+import java.util.List;
+
 /**
  *
  * @author nathan
  */
 public interface EnseignantRepositoryCustom {
-    
+    List<String> findAllInitaleEnseignant();
+    List<String> findinitialeEnseignantParEnseignement(String initiale);
 }

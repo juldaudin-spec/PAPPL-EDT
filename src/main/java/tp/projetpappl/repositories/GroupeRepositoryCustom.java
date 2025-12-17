@@ -4,10 +4,13 @@
  */
 package tp.projetpappl.repositories;
 
+import java.util.List;
+
 /**
  *
  * @author nathan
  */
 public interface GroupeRepositoryCustom {
-    
+    List<String> findAllNomGroupe();
+    List<String> findGroupeParEnseignement(String acronyme);
 }
