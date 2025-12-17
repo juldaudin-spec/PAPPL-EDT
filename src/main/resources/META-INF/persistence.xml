@@ -11,7 +11,19 @@
     <class>tp.projetpappl.items.Gerer</class>
     <class>tp.projetpappl.items.Groupe</class>
     <class>tp.projetpappl.items.Seance</class>
-    <class>tp.projetpappl.items.TypeLecon</class>    
+    <class>tp.projetpappl.items.TypeLecon</class>
+    <class>tp.projetpappl.controllers.Groupe</class>
+    <class>tp.projetpappl.controllers.Seance</class>
+    <class>tp.projetpappl.controllers.Salle</class>
+    <class>tp.projetpappl.controllers.Gerer</class>
+    <class>tp.projetpappl.controllers.Contient</class>
+    <class>tp.projetpappl.controllers.Enseignant</class>
+    <class>tp.projetpappl.items.Seance_1</class>
+    <class>tp.projetpappl.items.Enseignant_1</class>
+    <class>tp.projetpappl.items.Gerer_1</class>
+    <class>tp.projetpappl.items.Contient_1</class>
+    <class>tp.projetpappl.items.Salle_1</class>
+    <class>tp.projetpappl.items.Groupe_1</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dbpappl"/>
       <property name="jakarta.persistence.jdbc.user" value="postgres"/>
