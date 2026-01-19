@@ -18,42 +18,45 @@
        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
        ">
 
-  <!--
-  Most controllers will use the ControllerClassNameHandlerMapping above, but
-  for the index controller we are using ParameterizableViewController, so we must
-  define an explicit mapping for it.
-  -->
+    <!--
+    Most controllers will use the ControllerClassNameHandlerMapping above, but
+    for the index controller we are using ParameterizableViewController, so we must
+    define an explicit mapping for it.
+    -->
 
-  <!-- We use annotations -->
-  <mvc:annotation-driven/>
-  <!-- just in case, controllers location -->
-  <context:component-scan base-package="tp.projetpappl.controllers" />
+    <!-- We use annotations -->
+    <mvc:annotation-driven/>
+    <!-- just in case, controllers location -->
+    <context:component-scan base-package="tp.projetpappl.controllers" />
 
-  <!-- next bean is not use any more -->
-  <!--
-  <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-    <property name="mappings">
-      <props>
-        <prop key="index.do">indexController</prop>
-      </props>
-    </property>
-  </bean>
-  -->
+    <!-- next bean is not use any more -->
+    <!--
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+      <property name="mappings">
+        <props>
+          <prop key="index.do">indexController</prop>
+        </props>
+      </property>
+    </bean>
+    -->
 
-  <!-- link views to JSP files : feel free to change folder name -->
-  <bean id="viewResolver"
+    <!-- link views to JSP files : feel free to change folder name -->
+    <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/views/"
           p:suffix=".jsp" />
-
-  <!--
-  The index controller.
-  -->
-  <!-- not used any more -->
-  <!--
-  <bean name="indexController"
-        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-        p:viewName="index" />
-  -->
+    <mvc:resources mapping="/img/**" location="/img/" />
+    <mvc:resources mapping="/bootstrap/**" location="/bootstrap/" />
+    <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/js/**" location="/webapp/js/" />
+    <!--
+    The index controller.
+    -->
+    <!-- not used any more -->
+    <!--
+    <bean name="indexController"
+          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+          p:viewName="index" />
+    -->
   
 </beans>

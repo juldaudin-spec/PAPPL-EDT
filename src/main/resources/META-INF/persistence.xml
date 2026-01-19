@@ -11,7 +11,7 @@
     <class>tp.projetpappl.items.Gerer</class>
     <class>tp.projetpappl.items.Groupe</class>
     <class>tp.projetpappl.items.Seance</class>
-    <class>tp.projetpappl.items.TypeLecon</class>    
+    <class>tp.projetpappl.items.TypeLecon</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dbpappl"/>
       <property name="jakarta.persistence.jdbc.user" value="postgres"/>
