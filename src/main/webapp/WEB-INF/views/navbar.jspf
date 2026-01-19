@@ -15,6 +15,7 @@
 
         <div class="collapse navbar-collapse" id="navbar1">
             <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="affichageEDT.do">Afficher</a></li>
                 <li class="nav-item"><a class="nav-link" href="matières.do">Matières</a></li>
                 <li class="nav-item"><a class="nav-link" href="groupes.do">Groupes</a></li>
                 <li class="nav-item"><a class="nav-link" href="enseignants.do">Enseignants</a></li>
