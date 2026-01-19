@@ -13,5 +13,5 @@ import tp.projetpappl.items.Enseignant;
  */
 @Repository
 public interface EnseignantRepository extends JpaRepository<Enseignant, String>, EnseignantRepositoryCustom {
-    
+
 }

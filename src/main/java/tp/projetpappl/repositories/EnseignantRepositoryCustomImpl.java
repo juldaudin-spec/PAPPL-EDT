@@ -9,6 +9,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import tp.projetpappl.items.Enseignant;
 
@@ -22,7 +23,8 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
     @PersistenceContext
     private EntityManager entityManager;
     @Autowired
-    private EnseignantRepository enseignantRepository;
+    @Lazy
+    EnseignantRepository enseignantRepository;
     
     @Override
     public List<String> findAllInitaleEnseignant() {
@@ -75,9 +77,10 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
     }
     @Override
     public Enseignant create(String initiales, String prenom, String nom){
-        if ((nom != null) && (! prenom.isEmpty())
-                && (nom != null) && (! nom.isEmpty())){
-            Enseignant item = new Enseignant();
+        if ((nom != null) && (! nom.isEmpty())
+                && (prenom != null) && (! prenom.isEmpty())
+                && (initiales != null && (!initiales.isEmpty()))){
+            Enseignant item = new Enseignant(initiales);
             // Update data
             item.setPrenom(prenom);
             item.setNomEnseignant(nom);
