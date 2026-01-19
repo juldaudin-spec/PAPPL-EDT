@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
     <div class="container">
         <a class="navbar-brand" href="#">${view}</a>
         <a class="navbar-brand" href="index.do">
@@ -12,14 +13,21 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar1">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbar1">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="matières.do">Matières</a></li>
-                <li class="nav-item"><a class="nav-link" href="groupes.do">Groupes</a></li>
-                <li class="nav-item"><a class="nav-link" href="enseignants.do">Enseignants</a></li>
-                <li class="nav-item"><a class="nav-link" href="cours.do">Cours</a></li>
+                <form method="POST">
+                    <li class="nav-item"><button class="nav-link" formaction="matiere.do">Matière</button></li>
+                </form>
+                <form method="POST">
+                    <li class="nav-item"><button class="nav-link" formaction="groupe.do">Groupe</button></li>
+                </form>
+                <form method="POST">
+                    <li class="nav-item"><button class="nav-link" formaction="enseignant.do">Enseignant</button></li>
+                </form>
+                <form method="POST">
+                    <li class="nav-item"><button class="nav-link" formaction="cours.do">Cours</button></li>
+                </form>
             </ul>
         </div>
-    </div>
+        </form>
 </nav>
