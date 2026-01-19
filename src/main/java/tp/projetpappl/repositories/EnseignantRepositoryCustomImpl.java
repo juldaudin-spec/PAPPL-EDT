@@ -9,6 +9,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
 import org.springframework.stereotype.Repository;
+import tp.projetpappl.items.Enseignant;
 
 
 /**
@@ -33,5 +34,9 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
         return query.getResultList();
     }
+    public Enseignant findByInitiales(String initiales){
+        return entityManager.createNamedQuery("Enseignant.findByInitiales", Enseignant.class).setParameter("initiales", initiales).getSingleResult();
+    }
+    
     
 }
