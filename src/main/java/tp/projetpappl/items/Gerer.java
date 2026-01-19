@@ -23,7 +23,7 @@ import java.io.Serializable;
  * @author nathan
  */
 @Entity
-@Table(name = "gerer", catalog = "dbpappl", schema = "PAPPL")
+@Table(name = "gerer")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Gerer.findAll", query = "SELECT g FROM Gerer g"),

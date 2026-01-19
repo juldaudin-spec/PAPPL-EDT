@@ -31,7 +31,7 @@ import java.util.List;
  * @author nathan
  */
 @Entity
-@Table(name = "seance", catalog = "dbpappl", schema = "PAPPL")
+@Table(name = "seance")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Seance.findAll", query = "SELECT s FROM Seance s"),
