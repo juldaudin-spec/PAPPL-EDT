@@ -12,8 +12,8 @@
         crossorigin="anonymous"></script>
         <link href="css/enseignants.css" type="text/css" rel="stylesheet" />
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
     </head>
     <body>
