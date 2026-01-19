@@ -32,7 +32,7 @@ public class EnseignantController {
     @Autowired
     private EnseignantRepository enseignantRepository;
 
-    @RequestMapping(value = "enseignants.do", method = RequestMethod.POST)
+    @RequestMapping(value = "enseignants.do")
     public ModelAndView handlePostUsers(HttpServletRequest request) {
         List<Enseignant> myList = new ArrayList<>(enseignantRepository.findAll());
         Collections.sort(myList, Enseignant.getComparator());
