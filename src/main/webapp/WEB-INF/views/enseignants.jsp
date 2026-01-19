@@ -12,8 +12,8 @@
         crossorigin="anonymous"></script>
         <link href="css/enseignants.css" type="text/css" rel="stylesheet" />
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/bootstrap-5.3.8-dist/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap/bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+        <script type="text/javascript" src="bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
     </head>
     <body>
@@ -23,7 +23,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer un Enseignant</h1>
+                        <h1>Créer un nouvel enseignant</h1>
                     </div>
                 </div>
                 <div class="row">

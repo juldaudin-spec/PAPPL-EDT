@@ -18,12 +18,13 @@
         crossorigin="anonymous"></script>
         <link href="css/enseignants.css" type="text/css" rel="stylesheet" />
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/bootstrap-5.3.8-dist/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap/bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+        <script type="text/javascript" src="bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
     </head>
+    
     <body>
-
+        <header><%@include file="navbar.jspf" %></header>
         <h1>Créer un nouveau groupe</h1>
 
         <form action="infos" method="GET">
