@@ -4,10 +4,12 @@
  */
 package tp.projetpappl.repositories;
 
+import java.util.List;
 /**
  *
  * @author nathan
  */
 public interface TypeLeconRepositoryCustom {
-    
+    List<String> findAllTypeLecon();
+    List<String> findTypeLeconParEnseignementParGroupe(String acronyme, String nomGroupe);
 }

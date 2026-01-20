@@ -29,7 +29,7 @@ import java.util.List;
  * @author nathan
  */
 @Entity
-@Table(name = "enseignement", catalog = "dbpappl", schema = "PAPPL")
+@Table(name = "enseignement")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Enseignement.findAll", query = "SELECT e FROM Enseignement e"),
