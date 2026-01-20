@@ -8,6 +8,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import tp.projetpappl.items.Enseignant;
 
@@ -20,6 +22,9 @@ import tp.projetpappl.items.Enseignant;
 public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
+    @Autowired
+    @Lazy
+    EnseignantRepository enseignantRepository;
     
     @Override
     public List<String> findAllInitaleEnseignant() {
@@ -34,8 +39,57 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
         return query.getResultList();
     }
-    public Enseignant findByInitiales(String initiales){
+    public Enseignant getByInitiales(String initiales){
         return entityManager.createNamedQuery("Enseignant.findByInitiales", Enseignant.class).setParameter("initiales", initiales).getSingleResult();
+    }
+    @Override
+    public Enseignant update(String initiales, String prenom, String nom){
+        Enseignant enseignantInitiales = null;
+        if(initiales != null){
+            // Ensure validity from database
+            enseignantInitiales = getByInitiales(initiales);
+            initiales = enseignantInitiales.getInitiales();
+        }
+        if ((initiales != null)
+                && (prenom != null) && (! prenom.isEmpty())
+                && (nom != null) && (! nom.isEmpty())){
+            // Update data
+            enseignantInitiales = getByInitiales(initiales);
+            enseignantInitiales.setPrenom(prenom);
+            enseignantInitiales.setNomEnseignant(nom);
+            // Save to database
+            enseignantRepository.saveAndFlush(enseignantInitiales);
+            //Ensure we have the last version
+            enseignantInitiales = getByInitiales(enseignantInitiales.getInitiales());
+        }
+        return enseignantInitiales;
+    }
+    @Override
+    public void remove(String initiales){
+        if (initiales !=null){
+            //Ensure validity from database
+            Enseignant enseignant = getByInitiales(initiales);
+            initiales = enseignant.getInitiales();
+        }
+        if (initiales != null){
+            enseignantRepository.delete(getByInitiales(initiales));
+        }
+    }
+    @Override
+    public Enseignant create(String initiales, String prenom, String nom){
+        if ((nom != null) && (! nom.isEmpty())
+                && (prenom != null) && (! prenom.isEmpty())
+                && (initiales != null && (!initiales.isEmpty()))){
+            Enseignant item = new Enseignant(initiales);
+            // Update data
+            item.setPrenom(prenom);
+            item.setNomEnseignant(nom);
+            // Save to database
+            enseignantRepository.saveAndFlush(item);
+            //Ensure we have the last version
+            return getByInitiales(initiales);
+        }
+        return null;
     }
     
     

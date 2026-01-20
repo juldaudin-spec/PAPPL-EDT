@@ -28,7 +28,7 @@ import java.util.List;
  * @author nathan
  */
 @Entity
-@Table(name = "contient", catalog = "dbpappl", schema = "PAPPL")
+@Table(name = "contient")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Contient.findAll", query = "SELECT c FROM Contient c"),
