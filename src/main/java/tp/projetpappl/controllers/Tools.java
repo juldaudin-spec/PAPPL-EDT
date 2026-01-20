@@ -21,7 +21,7 @@ public class Tools {
         try {
             intValue = Integer.parseInt(value);
         } catch (NumberFormatException ex) {
-            Logger.getLogger(EnseignantController.class.getName()).log(Level.WARNING, null, ex);
+            Logger.getLogger(GroupeController.class.getName()).log(Level.WARNING, null, ex);
         }
         return intValue;
     }

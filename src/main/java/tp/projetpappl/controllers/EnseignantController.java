@@ -62,8 +62,6 @@ public class EnseignantController {
             Enseignant enseignant = enseignantRepository.getByInitiales(initiales);
             returned = new ModelAndView("enseignant");
             returned.addObject("enseignant", enseignant);
-            boolean success=false;
-            returned.addObject("newutilisateur", success);
         } else {
             returned = new ModelAndView("enseignants");
             Collection<Enseignant> myList = enseignantRepository.findAll();
@@ -73,7 +71,7 @@ public class EnseignantController {
         return returned;
     }
 
-    @RequestMapping(value = "creerenseignant.do", method = RequestMethod.POST)
+    @RequestMapping(value = "saveenseignant.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveUser(HttpServletRequest request) {
 
         ModelAndView returned;
