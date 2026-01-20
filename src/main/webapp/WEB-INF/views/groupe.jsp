@@ -3,14 +3,14 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Ajouter Enseignant</title>
+        <title>Ajouter Groupe</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- jQuery (optionnel pour Bootstrap 5) -->
         <script src="https://code.jquery.com/jquery-3.7.1.js"
                 integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
-        <link href="css/enseignants.css" type="text/css" rel="stylesheet" />
+        <link href="css/groupes.css" type="text/css" rel="stylesheet" />
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -23,30 +23,26 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer un nouvel enseignant</h1>
+                        <h1>Créer un nouveau groupe</h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="saveenseignant.do" method="POST">
+                        <form action="savegroupe.do" method="POST">
                             <table class="table table-striped">
                                 <tbody>
                                     <tr>
-                                        <th scope="col">Initiales</th>
+                                        <th scope="col">Nom du Groupe</th>
                                         <td>
                                             <c:choose>
-                                                <c:when test="${(empty enseignant) || (empty enseignant.initiales)}"><input name="Initiales" value=""/></c:when>
-                                                <c:otherwise><input type="text" class="form-control" name="Initiales" value="${enseignant.initiales}"/></c:otherwise>
+                                                <c:when test="${(empty groupe) || (empty groupe.nomGroupe)}"><input name="NomGroupe" value=""/></c:when>
+                                                <c:otherwise><input type="text" class="form-control" name="NomGroupe" value="${groupe.nomGroupe}"/></c:otherwise>
                                             </c:choose>
                                         </td>
                                     
                                     <tr>
-                                        <th scope="col">Nom</th>
-                                        <td><input type="text" class="form-control" name="Nom" value="${enseignant.nomEnseignant}"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Prenom</th>
-                                        <td><input type="text" class="form-control" name="Prenom" value="${enseignant.prenom}"/></td>
+                                        <th scope="col">Nombre d'élèves</th>
+                                        <td><input type="text" class="form-control" name="NbEleve" value="${groupe.nbEleve}"/></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
@@ -60,15 +56,15 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <c:if test='${newenseignant}'>
-                            <p>Enseignant créé/modifié avec succès</p>
+                        <c:if test='${newgroupe}'>
+                            <p>Groupe créé/modifié avec succès</p>
                         </c:if>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="enseignants.do" method="POST">
-                            <button formaction="enseignants.do">Afficher la liste des Enseignants</button>
+                        <form action="groupes.do" method="POST">
+                            <button formaction="groupes.do">Afficher la liste des Groupes</button>
                         </form>
                     </div>
                 </div>
