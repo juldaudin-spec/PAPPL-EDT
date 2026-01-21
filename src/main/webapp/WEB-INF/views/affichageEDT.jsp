@@ -5,7 +5,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Accueil</title>
+        <title>Emploi du temps</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- jQuery (optionnel pour Bootstrap 5) -->
@@ -24,15 +24,25 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Logiciel de création d'emplois du temps</h2>
+                        <h5>Logiciel de création d'emplois du temps</h5>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
 
-                        <h5>Veuillez choisir dans les groupes à visualiser</h5>
+                        <h5>Veuillez choisir les groupes à visualiser</h5>
                     </div>
+                    <form action="affichageEDT.do" method="POST">
+                    <select name="idGroupe" multiple>
+                        <c:forEach var="groupe" items="${groupes}">
+                        <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
+                        </c:forEach>
+                    </select>
+                        <button>
+                            valider
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
