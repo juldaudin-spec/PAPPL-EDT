@@ -7,7 +7,7 @@
     <div class="container">
         <a class="navbar-brand" href="#">${view}</a>
         <a class="navbar-brand" href="index.do">
-            <img src="${pageContext.request.contextPath}/img/centraleNantes.png" alt ="Logo Centrale Nantes" class="icon">
+            <img src="img/centraleNantes.png" alt ="Logo Centrale Nantes" class="icon">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar1">
@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbar1">
             <ul class="navbar-nav ms-auto">
                 <form method="POST">
-                    <li class="nav-item"><button class="nav-link" formaction="enseignement.do">Matière</button></li>
+                    <li class="nav-item"><button class="nav-link" formaction="enseignement.do">Enseignement</button></li>
                 </form>
                 <form method="POST">
                     <li class="nav-item"><button class="nav-link" formaction="groupe.do">Groupe</button></li>
@@ -25,7 +25,7 @@
                     <li class="nav-item"><button class="nav-link" formaction="enseignant.do">Enseignant</button></li>
                 </form>
                 <form method="POST">
-                    <li class="nav-item"><button class="nav-link" formaction="cours.do">Cours</button></li>
+                    <li class="nav-item"><button class="nav-link" formaction="seance.do">Seance</button></li>
                 </form>
             </ul>
         </div>

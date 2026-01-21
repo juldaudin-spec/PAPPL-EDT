@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -12,11 +11,11 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js"
                 integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
-        <link href="${pageContext.request.contextPath}/css/mainPage.css" type="text/css" rel="stylesheet" />
+        <link href="css/main.css" type="text/css" rel="stylesheet" />
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/main.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
