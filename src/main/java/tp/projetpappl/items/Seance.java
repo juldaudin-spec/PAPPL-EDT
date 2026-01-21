@@ -22,6 +22,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -169,6 +170,33 @@ public class Seance implements Serializable {
     @Override
     public String toString() {
         return "tp.projetpappl.items.Seance[ idSeance=" + idSeance + " ]";
+    }
+    
+    public int compareTo(Object objet){
+        if(objet==null){
+            return 1;
+        }
+        else if (!(objet instanceof Seance)){
+            return 1;
+    }
+        Seance seance = (Seance) objet;
+        if (this.hDebut.equals(seance.getHDebut())){
+        return this.idSeance.compareTo(seance.getIdSeance());}
+        else{
+            return this.hDebut.compareTo(seance.getHDebut());
+        }
+    }
+    public static Comparator<Seance> getComparator(){
+        return new Comparator<Seance>(){
+            @Override
+            public int compare(Seance obj1, Seance obj2){
+                if (obj1==null){
+                    return -1;
+                }else {
+                    return obj1.compareTo(obj2);
+                }
+            }
+        };
     }
     
 }
