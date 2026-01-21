@@ -8,14 +8,18 @@
         <title>Accueil</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
+        <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.7.1.js"
                 integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
+        
+        <!-- ✅ CHANGÉ : Bootstrap CSS depuis Internet au lieu de ton ordinateur -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Ton CSS personnalisé -->
         <link href="${pageContext.request.contextPath}/css/mainPage.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+        
+        <!-- Ton JS personnalisé -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
     </head>
     <body>
@@ -30,11 +34,13 @@
 
                 <div class="row">
                     <div class="col-md-12">
-
                         <h5>Veuillez choisir dans le menu ci-dessus l'action à réaliser</h5>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- ✅ AJOUTÉ : Bootstrap JS à la fin (avant </body>) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
