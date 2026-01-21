@@ -96,9 +96,13 @@ public class AffichageController {
             for (Date horaire : listHDebut){
                 ligne = new ArrayList<>(myList2.size());
                 for (List<Seance> SeanceGroupe : myList2){
+                    if (!SeanceGroupe.isEmpty()){
                     if (horaire==SeanceGroupe.get(0).getHDebut()){
                         ligne.add(SeanceGroupe.remove(0));
                     }
+                    else{
+                        ligne.add(null);
+                    }}
                     else{
                         ligne.add(null);
                     }
