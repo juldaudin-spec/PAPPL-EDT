@@ -7,6 +7,7 @@ package tp.projetpappl.controllers;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -84,6 +85,7 @@ public class AffichageController {
                     }
                 }
             }
+            listHDebut.sort(Comparator.naturalOrder());
         }
         return listHDebut;
     }
