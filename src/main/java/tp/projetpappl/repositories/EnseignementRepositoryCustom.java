@@ -5,6 +5,8 @@
 package tp.projetpappl.repositories;
 
 import java.util.List;
+import tp.projetpappl.items.Enseignant;
+import tp.projetpappl.items.Enseignement;
 
 /**
  *
@@ -14,4 +16,8 @@ public interface EnseignementRepositoryCustom {
     List<String> findAllAcronyme();
     List<String> findAcronymeParEnseignant(String initiales);
     List<String> findAcronymeParGroupe(String initiales);
+    Enseignement getByAcronyme(String acronyme);
+    Enseignement update(String acronyme, String nom, String filiere, Enseignant responsable);
+    void remove(String acronyme);
+    Enseignement create(String acronyme, String nom, String filiere, Enseignant responsable);
 }
