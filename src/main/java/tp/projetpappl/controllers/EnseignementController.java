@@ -48,9 +48,12 @@ public class EnseignementController {
     public ModelAndView handlePostEnseignement(HttpServletRequest request) {
         List<Enseignement> myList = new ArrayList<>(enseignementRepository.findAll());
         Collections.sort(myList, Enseignement.getComparator());
+        List<Enseignant> Enseignants = new ArrayList<>(enseignantRepository.findAll());
+        Collections.sort(myList, Enseignement.getComparator());
 
         ModelAndView returned = new ModelAndView("enseignements");
         returned.addObject("enseignementsList", myList);
+        returned.addObject("enseignantsList", Enseignants);
 
         return returned;
 }
@@ -84,7 +87,10 @@ public class EnseignementController {
         String acronyme = request.getParameter("Acronyme");
         String nomEnseignement = request.getParameter("NomEnseignement");
         String filiere = request.getParameter("Filiere");
-        String responsableStr = request.getParameter("Responsable");
+        String responsableStr = request.getParameter("InitialesEnseignant");
+        System.out.println(responsableStr);
+        System.out.println(nomEnseignement);
+        System.out.println(acronyme);
         Enseignant responsable = enseignantRepository.getByInitiales(responsableStr);
         boolean succes = false;
 
@@ -114,6 +120,8 @@ public class EnseignementController {
         returned = new ModelAndView("enseignements");
         Collection<Enseignement> myList = enseignementRepository.findAll();
         returned.addObject("enseignementsList", myList);
+        Collection<Enseignant> Enseignants = enseignantRepository.findAll();
+        returned.addObject("enseignantsList", Enseignants);
 
         return returned;
     }

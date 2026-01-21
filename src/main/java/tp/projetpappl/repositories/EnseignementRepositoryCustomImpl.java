@@ -46,9 +46,15 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
         return query.getResultList();
     }
     @Override
-    public Enseignement getByAcronyme(String acronyme){
-        
-        return entityManager.createNamedQuery("Enseignement.findByAcronyme", Enseignement.class).setParameter("acronyme", acronyme).getSingleResult();
+    public Enseignement getByAcronyme(String acronyme) {
+        try {
+            return entityManager
+                    .createNamedQuery("Enseignement.findByAcronyme", Enseignement.class)
+                    .setParameter("acronyme", acronyme)
+                    .getSingleResult();
+        } catch (jakarta.persistence.NoResultException e) {
+            return null;
+        }
     }
     @Override
     public Enseignement update(String acronyme, String nom, String filiere, Enseignant responsable){
