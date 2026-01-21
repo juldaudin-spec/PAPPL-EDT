@@ -5,9 +5,10 @@
 package tp.projetpappl.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +61,51 @@ public class AffichageController {
                 listeGroupe.add(groupe.getNomGroupe());}
             }
         }
+        
+        List<Date> listHDebut = listHDebut(myList2);
+        List<List<Seance>> listSeance = transform(myList2, listHDebut);
+        
+        
         returned.addObject("groupes", groupes);
-        returned.addObject("listeSeance", myList2);
+        returned.addObject("HDebut", listHDebut);
+        returned.addObject("listeSeance", listSeance);
         returned.addObject("listeGroupe", listeGroupe);
         return returned;
     }
     
+    public List<Date> listHDebut(List<List<Seance>> myList2){
+        List<Date> listHDebut=null;
+        if (myList2!=null){
+            listHDebut=new ArrayList<>();
+            for (List<Seance> seanceGroupe : myList2){
+                for (Seance seance : seanceGroupe){
+                    if (!listHDebut.contains(seance.getHDebut())){
+                        listHDebut.add(seance.getHDebut());
+                    }
+                }
+            }
+        }
+        return listHDebut;
+    }
+    
+    public List<List<Seance>> transform(List<List<Seance>> myList2, List<Date> listHDebut){
+        List<List<Seance>> listeSeance=null;
+        List<Seance> ligne;
+        if (myList2!=null&&listHDebut!=null){
+            listeSeance=new LinkedList<>();
+            for (Date horaire : listHDebut){
+                ligne = new ArrayList<>(myList2.size());
+                for (List<Seance> SeanceGroupe : myList2){
+                    if (horaire==SeanceGroupe.get(0).getHDebut()){
+                        ligne.add(SeanceGroupe.remove(0));
+                    }
+                    else{
+                        ligne.add(null);
+                    }
+                }
+                listeSeance.add(ligne);
+            } 
+        }
+        return listeSeance;
+    }
 }
