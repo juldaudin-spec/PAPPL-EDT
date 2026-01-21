@@ -71,8 +71,7 @@
 
                             <tfoot>
                                 <tr id="addNew">
-                                    <td colspan="3"></td>
-                                    <td class="text-center">
+                                    <td colspan="5">
                                         <form action="salle.do" method="POST">
                                             <button class="btn">
                                                 <img src="img/add.png" alt="add" class="icon">

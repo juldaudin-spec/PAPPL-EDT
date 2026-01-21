@@ -68,8 +68,7 @@
 
                             <tfoot>
                                 <tr id="addNew">
-                                    <td colspan="3"></td>
-                                    <td class="text-center">
+                                    <td colspan="3">
                                         <form action="groupe.do" method="POST">
                                             <button class="btn">
                                                 <img src="img/add.png" alt="add" class="icon">
