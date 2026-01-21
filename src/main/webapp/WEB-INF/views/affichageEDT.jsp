@@ -24,25 +24,54 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h5>Logiciel de création d'emplois du temps</h5>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
 
                         <h5>Veuillez choisir les groupes à visualiser</h5>
                     </div>
                     <form action="affichageEDT.do" method="POST">
-                    <select name="idGroupe" multiple>
-                        <c:forEach var="groupe" items="${groupes}">
-                        <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
-                        </c:forEach>
-                    </select>
+                        <select name="idGroupe" multiple>
+                            <c:forEach var="groupe" items="${groupes}">
+                                <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
+                            </c:forEach>
+                        </select>
                         <button>
                             valider
                         </button>
                     </form>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">Horaire</th>
+                                            <c:forEach var="groupeSelect" items="${listeGroupe}">
+                                            <th scope="col" class="text-center">${groupeSelect}</th>
+                                            </c:forEach>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="Debut" items="${HDebut}" varStatus="status">
+                                    <td>
+                                        <fmt:formatDate value="${Debut}" pattern="yyyy-MM-dd--HH:mm"/>
+                                    </td>
+                                    <c:forEach var="seance" items="${listeSeance[status.index]}">
+                                        <td class="texte-center">
+                                            <c:choose>
+                                                <c:when test="${not empty seance.acronyme}">
+                                                    ${seance.acronyme}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    libre
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                    </c:forEach>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
