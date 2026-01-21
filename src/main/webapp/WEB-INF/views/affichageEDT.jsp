@@ -34,15 +34,42 @@
                         <h5>Veuillez choisir les groupes à visualiser</h5>
                     </div>
                     <form action="affichageEDT.do" method="POST">
-                    <select name="idGroupe" multiple>
-                        <c:forEach var="groupe" items="${groupes}">
-                        <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
-                        </c:forEach>
-                    </select>
+                        <label for="choix">Sélectionnez vos groupes:</label>
+                        <select name="idGroupe" multiple>
+                            <c:forEach var="groupe" items="${groupes}">
+                                <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
+                            </c:forEach>
+                        </select>
                         <button>
                             valider
                         </button>
                     </form>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">Horaire</th>
+                                            <c:forEach var="groupeSelect" items="${listeGroupe}">
+                                            <th scope="col" class="text-center">${groupeSelect}</th>
+                                            </c:forEach>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>heure</td>
+                                        <c:forEach var="seance" items="${listeSeance}">
+
+                                            <td>${seance}</td>
+
+                                        </c:forEach>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
