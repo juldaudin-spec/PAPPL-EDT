@@ -7,7 +7,7 @@
     <div class="container">
         <a class="navbar-brand" href="#">${view}</a>
         <a class="navbar-brand" href="index.do">
-            <img src="${pageContext.request.contextPath}/img/centraleNantes.png" alt ="Logo Centrale Nantes" class="icon">
+            <img src="img/centraleNantes.png" alt ="Logo Centrale Nantes" class="icon">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar1">
@@ -19,7 +19,7 @@
                 <li class="nav-item"><button class="nav-link" formaction="affichageEDT.do" method="POST" name="idGroupe" value="">Afficher</button></li>
                 </form>
                 <form method="POST">
-                    <li class="nav-item"><button class="nav-link" formaction="enseignement.do">Matière</button></li>
+                    <li class="nav-item"><button class="nav-link" formaction="enseignement.do">Enseignement</button></li>
                 </form>
                 <form method="POST">
                     <li class="nav-item"><button class="nav-link" formaction="groupe.do">Groupe</button></li>
@@ -28,7 +28,10 @@
                     <li class="nav-item"><button class="nav-link" formaction="enseignant.do">Enseignant</button></li>
                 </form>
                 <form method="POST">
-                    <li class="nav-item"><button class="nav-link" formaction="cours.do">Cours</button></li>
+                    <li class="nav-item"><button class="nav-link" formaction="salle.do">Salle</button></li>
+                </form>
+                <form method="POST">
+                    <li class="nav-item"><button class="nav-link" formaction="seance.do">Séance</button></li>
                 </form>
             </ul>
         </div>
