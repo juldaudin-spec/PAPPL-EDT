@@ -25,7 +25,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer un nouveau salle</h1>
+                        <h1>Créer une nouvelle salle</h1>
                     </div>
                 </div>
                 <div class="row">

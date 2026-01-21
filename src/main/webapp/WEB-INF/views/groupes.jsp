@@ -11,7 +11,7 @@
 <html lang="fr-fr">
     <head>
         <meta charset="UTF-8">
-        <title>Liste Enseignants</title>
+        <title>Liste Groupes</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- jQuery (optionnel pour Bootstrap 5) -->
