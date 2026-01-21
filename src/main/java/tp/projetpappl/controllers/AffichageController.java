@@ -42,9 +42,13 @@ public class AffichageController {
         
         Optional<Groupe> result;
         Groupe groupe;
-        List<String> listeGroupe=new ArrayList<>(idStr.length); 
+        List<String> listeGroupe= null;
         List<Seance> myList;
-        List<List<Seance>> myList2=new ArrayList<>(idStr.length); 
+        List<List<Seance>> myList2=null;
+        
+        if (idStr!=null){
+        listeGroupe=new ArrayList<>(idStr.length); 
+        myList2=new ArrayList<>(idStr.length); 
         
         for (String elem :idStr){
             result = groupeRepository.findById(elem);
@@ -55,7 +59,7 @@ public class AffichageController {
                 myList2.add(myList);
                 listeGroupe.add(groupe.getNomGroupe());}
             }
-        
+        }
         returned.addObject("groupes", groupes);
         returned.addObject("listeSeance", myList2);
         returned.addObject("listeGroupe", listeGroupe);
