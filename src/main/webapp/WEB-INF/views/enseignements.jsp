@@ -1,5 +1,5 @@
 <%-- 
-    Document   : enseignants
+    Document   : enseignements
     Created on : 19 janv. 2026, 16:31:33
     Author     : julda
 --%>
@@ -12,7 +12,7 @@
 <html lang="fr-fr">
     <head>
         <meta charset="UTF-8">
-        <title>Liste Enseignants</title>
+        <title>Liste Enseignements</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- jQuery (optionnel pour Bootstrap 5) -->
@@ -32,7 +32,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Liste des enseignants</h1>
+                        <h1>Liste des enseignements</h1>
                     </div>
                 </div>
 
@@ -42,25 +42,27 @@
                         <table class="table table-striped table-md sortable">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="col-md-2">Initiales</th>
-                                    <th scope="col" class="col-md-3">Nom</th>
-                                    <th scope="col" class="col-md-3">Prénom</th>
+                                    <th scope="col" class="col-md-2">Acronyme</th>
+                                    <th scope="col" class="col-md-3">Nom de l'enseignement</th>
+                                    <th scope="col" class="col-md-3">Filière(s)</th>
+                                    <th scope="col" class="col-md-3">Responsable</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <c:forEach var="item" items="${enseignantsList}">
+                                <c:forEach var="item" items="${enseignementsList}">
                                     <tr>
-                                        <td  scope="col">${item.initiales}</td>
-                                        <td>${item.nomEnseignant}</td>
-                                        <td>${item.prenom}</td>
+                                        <td  scope="col">${item.acronyme}</td>
+                                        <td>${item.nomEnseignement}</td>
+                                        <td>${item.filiere}</td>
+                                        <td>${item.responsable.nomEnseignant} ${item.responsable.prenom}</td>
                                         <td class="text-center">
                                             <form action="editUser" method="POST">
-                                                <input type="hidden" name="Initiales" value="${item.initiales}" />
-                                                <button class="btn" formaction="editenseignant.do" name="edit" class="icon">
+                                                <input type="hidden" name="Acronyme" value="${item.acronyme}" />
+                                                <button class="btn" formaction="editenseignement.do" name="edit" class="icon">
                                                     <img src="img/edit.png" alt="edit" class="icon">
                                                 </button>
-                                                <button class="btn" name="delete" formaction="deleteenseignant.do" class="icon">
+                                                <button class="btn" name="delete" formaction="deleteenseignement.do" class="icon">
                                                     <img src="img/delete.png" alt="delete" class="icon">
                                                 </button>
                                             </form>
@@ -73,7 +75,7 @@
                                 <tr id="addNew">
                                     <td colspan="3"></td>
                                     <td class="text-center">
-                                        <form action="enseignant.do" method="POST">
+                                        <form action="enseignement.do" method="POST">
                                             <button class="btn">
                                                 <img src="img/add.png" alt="add" class="icon">
                                             </button>
@@ -90,4 +92,3 @@
         </div>
     </body>
 </html>
-

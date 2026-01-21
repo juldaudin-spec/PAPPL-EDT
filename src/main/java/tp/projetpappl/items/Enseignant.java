@@ -19,6 +19,7 @@ import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -168,5 +169,29 @@ public class Enseignant implements Serializable {
     public String toString() {
         return "tp.projetpappl.items.Enseignant[ initiales=" + initiales + " ]";
     }
-    
+    public int compareTo(Object object) {
+        if (object == null) {
+            return 1;
+        } else if (!(object instanceof Enseignant)) {
+            return 1;
+        }
+        Enseignant itemId = (Enseignant) object;
+        if (this.getNomEnseignant().toUpperCase().equals(itemId.getNomEnseignant().toUpperCase())){
+            return this.getPrenom().toUpperCase().compareTo(itemId.getPrenom().toUpperCase());
+        } else{
+            return this.getNomEnseignant().toUpperCase().compareTo(itemId.getNomEnseignant().toUpperCase());
+        }
+    }
+    public static Comparator<Enseignant> getComparator() {
+        return new Comparator<Enseignant>() {
+            @Override
+            public int compare(Enseignant object1, Enseignant object2){
+                if (object1 == null){
+                    return -1;
+                } else{
+                    return object1.compareTo(object2);
+                }
+            }
+        };
+    }
 }
