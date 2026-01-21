@@ -24,7 +24,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer un nouveau seance</h1>
+                        <h1>Créer une nouvelle séance</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -56,7 +56,7 @@
                                             <select name="Enseignement" required
                                                     class="form-control form-select form-select-lg mb-3">
                                                 <c:choose>
-                                                    <c:when test="${(empty seance) || (empty seance.acronyme)}"><option value="" disabled selected>Choisissez le(s) enseignant(s)</option></c:when>
+                                                    <c:when test="${(empty seance) || (empty seance.acronyme)}"><option value="" disabled selected>Choisissez la matière</option></c:when>
                                                     <c:otherwise><option value="${seance.acronyme}" disabled selected>${seance.acronyme.nomEnseignement}</option></c:otherwise>
                                                 </c:choose>
 
@@ -90,7 +90,7 @@
                                             <select name="nomGroupe" required
                                                     class="form-control form-select form-select-lg mb-3">
                                                 <c:choose>
-                                                    <c:when test="${(empty seance) || (empty seance.groupeList)}"><option value="" disabled selected>Choisissez un ou plusieurs groupes</option></c:when>
+                                                    <c:when test="${(empty seance) || (empty seance.groupeList)}"><option value="" disabled selected>Choisissez un ou plusieurs groupe(s)</option></c:when>
                                                     <c:otherwise><option value="${seance.groupeList}" disabled selected>${seance.groupeList}</option></c:otherwise>
                                                 </c:choose>
 
@@ -107,7 +107,7 @@
                                             <select name="InitialesEnseignant" required
                                                     class="form-control form-select form-select-lg mb-3">
                                                 <c:choose>
-                                                    <c:when test="${(empty seance) || (empty seance.enseignantList)}"><option value="" disabled selected>Choisissez un ou plusieurs enseignant</option></c:when>
+                                                    <c:when test="${(empty seance) || (empty seance.enseignantList)}"><option value="" disabled selected>Choisissez 0 ou plusieurs enseignant(s)</option></c:when>
                                                     <c:otherwise><option value="${seance.enseignantList}" disabled selected>${seance.enseignantList}</option></c:otherwise>
                                                 </c:choose>
 
@@ -124,7 +124,7 @@
                                             <select name="numeroSalle" required
                                                     class="form-control form-select form-select-lg mb-3">
                                                 <c:choose>
-                                                    <c:when test="${(empty seance) || (empty seance.salleList)}"><option value="" disabled selected>Choisissez la/les salles</option></c:when>
+                                                    <c:when test="${(empty seance) || (empty seance.salleList)}"><option value="" disabled selected>Choisissez 0 à plusieurs salle(s)</option></c:when>
                                                     <c:otherwise><option value="${seance.salle}" disabled selected>${seance.salleList}</option></c:otherwise>
                                                 </c:choose>
 

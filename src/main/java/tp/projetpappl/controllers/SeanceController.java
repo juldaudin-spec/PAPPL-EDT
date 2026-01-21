@@ -137,7 +137,7 @@ public class SeanceController {
         
         Seance retour = null;
         if (idSeance > 0){//if id exist
-            //update à gérer
+            retour = seanceRepository.update(idSeance, enseignement, enseignant, typeLecon, groupe, salle, hDebut, duree);
         }
         else{
             retour = seanceRepository.create(enseignement, enseignant, typeLecon, groupe, salle, hDebut, duree);
