@@ -58,14 +58,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>heure</td>
-                                        <c:forEach var="seance" items="${listeSeance}">
+                                    <c:forEach var="seanceGroupe" items="${listeSeance}" varStatus="status">
+                                    <td>
+                                        <fmt:formatDate value="${HDebut[status.index]}" pattern="yyyy-MM-dd"/>
+                                    </td>
+                                    <c:forEach var="seance" items="${seanceGroupe}">
+                                        <td>
+                                            ${seance} 
+                                        </td>
+                                    </c:forEach>
+                                </c:forEach>
 
-                                            <td>${seance}</td>
-
-                                        </c:forEach>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
