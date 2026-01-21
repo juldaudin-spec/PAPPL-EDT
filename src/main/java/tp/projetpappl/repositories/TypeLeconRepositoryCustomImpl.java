@@ -7,8 +7,14 @@ package tp.projetpappl.repositories;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Repository;
+import tp.projetpappl.items.Enseignant;
+import tp.projetpappl.items.Enseignement;
+import tp.projetpappl.items.Seance;
+import tp.projetpappl.items.TypeLecon;
 /**
  *
  * @author nathan
@@ -29,5 +35,17 @@ public class TypeLeconRepositoryCustomImpl implements TypeLeconRepositoryCustom 
         String requete = "SELECT intitule FROM Contient JOIN Etudie ON Contient.contient_id=Etudie.contient_id WHERE acronyme="+acronyme+"AND nom_groupe="+nomGroupe;
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
         return query.getResultList();
+    }
+    
+    @Override
+    public TypeLecon getByIntitule(String intitule){
+        try {
+            return entityManager
+                    .createNamedQuery("TypeLecon.findByIntitule", TypeLecon.class)
+                    .setParameter("intitule", intitule)
+                    .getSingleResult();
+        } catch (jakarta.persistence.NoResultException e) {
+            return null;
+        }
     }
 }
