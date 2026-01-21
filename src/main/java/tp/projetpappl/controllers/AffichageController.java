@@ -37,7 +37,9 @@ public class AffichageController {
         ModelAndView returned = new ModelAndView("affichageEDT");
         
         String[] idStr=request.getParameterValues("idGroupe");
-    
+        
+        List<Groupe> groupes=groupeRepository.findAll();
+        
         Optional<Groupe> result;
         Groupe groupe;
         List<String> listeGroupe=new ArrayList<>(idStr.length); 
@@ -54,6 +56,7 @@ public class AffichageController {
                 listeGroupe.add(groupe.getNomGroupe());}
             }
         
+        returned.addObject("groupes", groupes);
         returned.addObject("listeSeance", myList2);
         returned.addObject("listeGroupe", listeGroupe);
         return returned;
