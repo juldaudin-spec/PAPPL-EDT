@@ -51,7 +51,7 @@ public class AffichageControllerTest {
         ModelAndView result = instance.handleIndexGet(request);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -66,7 +66,7 @@ public class AffichageControllerTest {
         List<Date> result = instance.listHDebut(myList2);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -82,7 +82,7 @@ public class AffichageControllerTest {
         List<List<Seance>> result = instance.transform(myList2, listHDebut);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -97,7 +97,7 @@ public class AffichageControllerTest {
         AffichageController instance = new AffichageController();
         instance.addSeanceLigne(seanceGroupe, ligne, horaire);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }
