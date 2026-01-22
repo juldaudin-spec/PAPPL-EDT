@@ -4,10 +4,12 @@
  */
 package tp.projetpappl.repositories;
 
+import tp.projetpappl.items.Salle;
+
 /**
  *
  * @author nathan
  */
 public interface SalleRepositoryCustom {
-    
+    Salle getByNumeroSalle(String acronyme);
 }
