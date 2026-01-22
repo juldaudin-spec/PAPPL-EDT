@@ -40,6 +40,7 @@ public class AffichageController {
     public ModelAndView handleIndexGet(HttpServletRequest request){
         ModelAndView returned = new ModelAndView("affichageEDT");
         
+        if (request!=null){
         String[] idStr=request.getParameterValues("idGroupe");
         
         List<Groupe> groupes=groupeRepository.findAll();
@@ -72,7 +73,7 @@ public class AffichageController {
         returned.addObject("groupes", groupes);
         returned.addObject("HDebut", listHDebut);
         returned.addObject("listeSeance", listSeance);
-        returned.addObject("listeGroupe", listeGroupe);
+        returned.addObject("listeGroupe", listeGroupe);}
         return returned;
     }
     
@@ -125,7 +126,8 @@ public class AffichageController {
      * @param horaire 
      */
     public void addSeanceLigne(List<Seance> seanceGroupe, List<Seance> ligne, Date horaire){
-        if (!seanceGroupe.isEmpty()&&horaire!=null){
+        if (seanceGroupe!=null&&ligne!=null){
+        if ((!seanceGroupe.isEmpty())&&horaire!=null){
                     if (horaire.compareTo(seanceGroupe.get(0).getHDebut())==0){
                         ligne.add(seanceGroupe.remove(0));
                     }
@@ -136,5 +138,5 @@ public class AffichageController {
                         ligne.add(null);
                     }
                 
-    }
+    }}
 }
