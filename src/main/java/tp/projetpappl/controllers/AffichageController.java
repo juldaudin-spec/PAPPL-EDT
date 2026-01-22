@@ -20,20 +20,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import tp.projetpappl.items.Groupe;
 import tp.projetpappl.items.Seance;
 import tp.projetpappl.repositories.GroupeRepository;
-import tp.projetpappl.repositories.SeanceRepository;
 
 /**
- *
+ * Ceci est le controlleur pour tout ce qui concerne l'affichage de l'emplois du temps (EDT)
  * @author nathan
  */
 @Controller
 public class AffichageController {
     
     @Autowired
-    private SeanceRepository seanceRepository;
-    @Autowired
     private GroupeRepository groupeRepository;
     
+    /**
+     * permet d'ouvrir la page d'affichage des EDT
+     * @param request
+     * @return 
+     */
     @RequestMapping(value="affichageEDT.do",method=RequestMethod.POST)
     public ModelAndView handleIndexGet(HttpServletRequest request){
         ModelAndView returned = new ModelAndView("affichageEDT");
@@ -74,6 +76,11 @@ public class AffichageController {
         return returned;
     }
     
+    /**
+     * Permet de récupérer la liste des heures où les cours commencent
+     * @param myList2
+     * @return 
+     */
     public List<Date> listHDebut(List<List<Seance>> myList2){
         List<Date> listHDebut=null;
         if (myList2!=null){
@@ -89,7 +96,12 @@ public class AffichageController {
         }
         return listHDebut;
     }
-    
+    /**
+     * permet de transformer la liste qui affiche les cours à l'horizontal vers une liste qui permet d'afficher les cours à la verticale
+     * @param myList2
+     * @param listHDebut
+     * @return 
+     */
     public List<List<Seance>> transform(List<List<Seance>> myList2, List<Date> listHDebut){
         List<List<Seance>> listeSeance=null;
         List<Seance> ligne;
@@ -97,10 +109,25 @@ public class AffichageController {
             listeSeance=new LinkedList<>();
             for (Date horaire : listHDebut){
                 ligne = new ArrayList<>(myList2.size());
-                for (List<Seance> SeanceGroupe : myList2){
-                    if (!SeanceGroupe.isEmpty()){
-                    if (horaire.compareTo(SeanceGroupe.get(0).getHDebut())==0){
-                        ligne.add(SeanceGroupe.remove(0));
+                for (List<Seance> seanceGroupe : myList2){
+                    addSeanceLigne(seanceGroupe, ligne, horaire);
+                }
+                listeSeance.add(ligne);
+            } 
+        }
+        return listeSeance;
+    }
+    
+    /**
+     * fonction qui permet d'ajouter une séance à la ligne si l'horaire de la ligne correspond à celle de la séance
+     * @param seanceGroupe
+     * @param ligne
+     * @param horaire 
+     */
+    public void addSeanceLigne(List<Seance> seanceGroupe, List<Seance> ligne, Date horaire){
+        if (!seanceGroupe.isEmpty()&&horaire!=null){
+                    if (horaire.compareTo(seanceGroupe.get(0).getHDebut())==0){
+                        ligne.add(seanceGroupe.remove(0));
                     }
                     else{
                         ligne.add(null);
@@ -108,10 +135,6 @@ public class AffichageController {
                     else{
                         ligne.add(null);
                     }
-                }
-                listeSeance.add(ligne);
-            } 
-        }
-        return listeSeance;
+                
     }
 }
