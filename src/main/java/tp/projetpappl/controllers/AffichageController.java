@@ -120,7 +120,7 @@ public class AffichageController {
     }
     
     /**
-     * fonction qui permet d'ajouter une séance à la ligne si l'horaire de la ligne correspond à celle de la séance
+     * fonction qui permet d'ajouter une séance à la ligne si l'horaire de la ligne correspond à celle de la séance et que tout va bien
      * @param seanceGroupe
      * @param ligne
      * @param horaire 
