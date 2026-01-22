@@ -52,6 +52,7 @@
                                 </thead>
                                 <tbody>
                                     <c:forEach var="Debut" items="${HDebut}" varStatus="status">
+                                        <tr>
                                     <td>
                                         <fmt:formatDate value="${Debut}" pattern="yyyy-MM-dd--HH:mm"/>
                                     </td>
@@ -59,14 +60,15 @@
                                         <td class="texte-center">
                                             <c:choose>
                                                 <c:when test="${not empty seance.acronyme}">
-                                                    ${seance.acronyme}
+                                                    <button actionform="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    libre
+                                                    
                                                 </c:otherwise>
                                             </c:choose>
                                         </td>
                                     </c:forEach>
+                                        </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
