@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
+
     <div class="container">
         <a class="navbar-brand" href="#">${view}</a>
         <a class="navbar-brand" href="index.do">
@@ -34,6 +35,32 @@
                     <li class="nav-item"><button class="nav-link" formaction="seance.do">Séance</button></li>
                 </form>
             </ul>
+            <!-- CAS Authentication: Login/Logout buttons -->
+            <ul class="navbar-nav ms-auto">
+                <c:choose>
+                    <c:when test="${not empty user}">
+                        <!-- User is logged in -->
+                        <li class="nav-item">
+                            <span class="navbar-text text-white me-3">
+                                Bonjour, <strong>${user.connectionLogin}</strong>
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light btn-sm"
+                               href="logout.do?connexion=${user.connectionCode}">
+                                Déconnexion
+                            </a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- User is not logged in -->
+                        <li class="nav-item">
+                            <a class="btn btn-primary btn-sm" href="login.do">
+                                Connexion CAS
+                            </a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </ul>
         </div>
-        </form>
 </nav>
