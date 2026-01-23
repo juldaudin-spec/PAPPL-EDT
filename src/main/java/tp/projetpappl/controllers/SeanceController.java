@@ -32,6 +32,7 @@ import tp.projetpappl.repositories.GroupeRepository;
 import tp.projetpappl.repositories.SalleRepository;
 import tp.projetpappl.repositories.SeanceRepository;
 import tp.projetpappl.repositories.TypeLeconRepository;
+import tp.projetpappl.validators.SeanceValidator; // ← AJOUT 1
 
 /**
  *
@@ -50,10 +51,13 @@ public class SeanceController {
     private TypeLeconRepository typeLeconRepository;
     @Autowired
     private EnseignementRepository enseignementRepository;
-    
     @Autowired
     private SalleRepository salleRepository;
     
+    // ========== AJOUT 2 : Injection du validator ==========
+    @Autowired
+    private SeanceValidator seanceValidator;
+    // ======================================================
 
     @RequestMapping(value = "seance.do", method=RequestMethod.POST)
     public ModelAndView handlePostSeances(HttpServletRequest request) {
@@ -67,52 +71,18 @@ public class SeanceController {
         returned.addObject("sallesList",salleRepository.findAll());
         return returned;
     }
-    /*
-    @RequestMapping(value = "seances.do", method=RequestMethod.POST)
-    public ModelAndView handlePostSeance(HttpServletRequest request) {
-        List<Seance> myList = new ArrayList<>(seanceRepository.findAll());
-        Collections.sort(myList, Seance.getComparator());
-        List<Enseignant> Enseignants = new ArrayList<>(enseignantRepository.findAll());
-        Collections.sort(myList, Seance.getComparator());
 
-        ModelAndView returned = new ModelAndView("seances");
-        returned.addObject("seancesList", myList);
-        returned.addObject("enseignantsList", Enseignants);
-
-        return returned;
-}
-
-    @RequestMapping(value = "editseance.do", method = RequestMethod.POST)
-    public ModelAndView handleEditUserPost(HttpServletRequest request) {
-        ModelAndView returned;
-
-        String idSeanceStr = request.getParameter("idSeance");
-        int idSeance = Tools.getIntFromString(idSeanceStr);
-        if (idSeance != null) {
-            //ID may exist
-            Seance seance = seanceRepository.getById(idSeance);
-            returned = new ModelAndView("seance");
-            returned.addObject("seance", seance);
-            returned.addObject("enseignantsList", enseignantRepository.findAll());
-        } else {
-            returned = new ModelAndView("seances");
-            Collection<Seance> myList = seanceRepository.findAll();
-            returned.addObject("seancesList", myList);
-
-        }
-        return returned;
-    }
-    */
     @RequestMapping(value = "saveseance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveUser(HttpServletRequest request) {
 
         ModelAndView returned;
 
-        // Create or update seances
+        // Récupérer les paramètres
         String idSeanceStr = request.getParameter("IdSeance");
         int idSeance = Tools.getIntFromString(idSeanceStr);
         String dureeStr = request.getParameter("Duree");
         int duree = Tools.getIntFromString(dureeStr);
+        
         if (duree <= 0) {
             throw new IllegalArgumentException("Duree invalide, merci de remplir une durée strictement supérieur à 0");
         }
@@ -123,56 +93,61 @@ public class SeanceController {
         TypeLecon typeLecon = typeLeconRepository.getByIntitule(intituleLecon);
         String nomGroupe = request.getParameter("nomGroupe");
         Groupe groupe = groupeRepository.getByNomGroupe(nomGroupe);
-        
         String salleStr = request.getParameter("numeroSalle");
         Salle salle = salleRepository.getByNumeroSalle(salleStr);
-        
         String hDebutStr = request.getParameter("HDebut");
         Date hDebut = Tools.getDateFromString(hDebutStr, "yyyy-MM-dd'T'HH:mm");
-
-        
         String enseignantStr = request.getParameter("InitialesEnseignant");
         Enseignant enseignant = enseignantRepository.getByInitiales(enseignantStr);
-        boolean succes = false;
+
+        // ========== AJOUT 3 : Calculer heure de fin ==========
+        Date hFin = new Date(hDebut.getTime() + (duree * 60 * 1000));
+        // =====================================================
+
+        // ========== AJOUT 4 : Validation des conflits ==========
+        String erreur = seanceValidator.verifierTousLesConflits(
+            salleStr,       // Numéro de salle
+            enseignantStr,  // Initiales enseignant
+            nomGroupe,      // Nom du groupe
+            hDebut,         // Date de début
+            hFin,           // Date de fin
+            idSeance        // ID séance (0 si création)
+        );
         
-        Seance retour = null;
-        if (idSeance > 0){//if id exist
-            retour = seanceRepository.update(idSeance, enseignement, enseignant, typeLecon, groupe, salle, hDebut, duree);
+        // Si conflit détecté, retourner au formulaire avec erreur
+        if (erreur != null) {
+            returned = new ModelAndView("seance");
+            returned.addObject("erreur", erreur); // ← Message d'erreur
+            returned.addObject("enseignantsList", enseignantRepository.findAll());
+            returned.addObject("groupesList", groupeRepository.findAll());
+            returned.addObject("enseignementsList", enseignementRepository.findAll());
+            returned.addObject("typeLeconsList", typeLeconRepository.findAll());
+            returned.addObject("sallesList", salleRepository.findAll());
+            return returned;
         }
-        else{
+        // =======================================================
+
+        // Pas de conflit, créer/modifier la séance
+        boolean succes = false;
+        Seance retour = null;
+        
+        if (idSeance > 0) { // Modification
+            retour = seanceRepository.update(idSeance, enseignement, enseignant, typeLecon, groupe, salle, hDebut, duree);
+        } else { // Création
             retour = seanceRepository.create(enseignement, enseignant, typeLecon, groupe, salle, hDebut, duree);
         }
-        if(retour !=null){
-                succes = true;
-            }
+        
+        if (retour != null) {
+            succes = true;
+        }
+        
         returned = new ModelAndView("seance");
         returned.addObject("newseance", succes);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
-        returned.addObject("groupesList",groupeRepository.findAll());
-        returned.addObject("enseignementsList",enseignementRepository.findAll());
-        returned.addObject("typeLeconsList",typeLeconRepository.findAll());
-        returned.addObject("sallesList",salleRepository.findAll());
+        returned.addObject("groupesList", groupeRepository.findAll());
+        returned.addObject("enseignementsList", enseignementRepository.findAll());
+        returned.addObject("typeLeconsList", typeLeconRepository.findAll());
+        returned.addObject("sallesList", salleRepository.findAll());
         return returned;
     }
-    /*
-    @RequestMapping(value = "deleteseance.do", method = RequestMethod.POST)
-    public ModelAndView handlePostDeleteUser(HttpServletRequest request) {
-
-        ModelAndView returned;
-
-        // Create or update seances
-        String acronyme = request.getParameter("Acronyme");
-
-        seanceRepository.remove(acronyme);
-
-        // return to list
-        returned = new ModelAndView("seances");
-        Collection<Seance> myList = seanceRepository.findAll();
-        returned.addObject("seancesList", myList);
-        Collection<Enseignant> Enseignants = enseignantRepository.findAll();
-        returned.addObject("enseignantsList", Enseignants);
-
-        return returned;
-    }
-    */
 }
