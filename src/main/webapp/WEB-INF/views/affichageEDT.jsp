@@ -51,31 +51,40 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="Debut" items="${HDebut}" varStatus="status">
+                                    <c:forEach var="jour" items="${HDebut}" varStatus="status">
                                         <tr>
-                                    <td>
-                                        <fmt:formatDate value="${Debut}" pattern="yyyy-MM-dd--HH:mm"/>
-                                    </td>
-                                    <c:forEach var="seance" items="${listeSeance[status.index]}">
-                                        <td class="texte-center">
-                                            <c:choose>
-                                                <c:when test="${not empty seance.acronyme}">
-                                                    <button actionform="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </td>
-                                    </c:forEach>
-                                        </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
+                                            <td>
+                                                <div class="Jour">
+                                                    ${jour}
+                                                </div>
+                                            </td>
+                                            <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
+
+                                                <td class="texte-center">
+                                                    <div class="Jour">
+                                                        <c:forEach var="seance" items="${seanceByDay}">
+                                                            <c:choose>
+                                                                <c:when test="${not empty seance.acronyme}">
+                                                                    <div class="Seance">
+                                                                    ${seance.acronyme.acronyme}<!-- <button actionform="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> -->
+                                                                    </div>
+                                                                </c:when>
+                                                                <c:otherwise>
+
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                        </div>
+                                                    </td>
+                                                </c:forEach>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </body>
-</html>
+        </body>
+    </html>
