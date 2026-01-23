@@ -187,7 +187,7 @@ public class AffichageController {
                 for (List<Seance> seanceGroupe : myList2) {
                     seanceOfGroupe = new ArrayList<>();
                     Collections.sort(seanceGroupe, Seance.getComparator());
-                    while (comparerDate(date, seanceGroupe.get(0).getHDebut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
+                    while (!seanceGroupe.isEmpty()&&comparerDate(date, seanceGroupe.get(0).getHDebut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
                         seanceOfGroupe.add(seanceGroupe.remove(0));
                     }
                     seanceOfDay.add(seanceOfGroupe);
