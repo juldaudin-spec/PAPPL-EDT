@@ -56,7 +56,7 @@ public class SeanceController {
     
 
     @RequestMapping(value = "seance.do", method=RequestMethod.POST)
-    public ModelAndView handlePostSeances(HttpServletRequest request) {
+    public ModelAndView handlePostSeance(HttpServletRequest request) {
 
         ModelAndView returned = new ModelAndView("seance");
         returned.addObject("enseignantsList", enseignantRepository.findAll());
@@ -83,7 +83,7 @@ public class SeanceController {
 }
 
     @RequestMapping(value = "editseance.do", method = RequestMethod.POST)
-    public ModelAndView handleEditUserPost(HttpServletRequest request) {
+    public ModelAndView handleEditSeancePost(HttpServletRequest request) {
         ModelAndView returned;
 
         String idSeanceStr = request.getParameter("idSeance");
@@ -104,7 +104,7 @@ public class SeanceController {
     }
     */
     @RequestMapping(value = "saveseance.do", method = RequestMethod.POST)
-    public ModelAndView handlePostSaveUser(HttpServletRequest request) {
+    public ModelAndView handlePostSaveSeance(HttpServletRequest request) {
 
         ModelAndView returned;
 
@@ -156,7 +156,7 @@ public class SeanceController {
     }
     /*
     @RequestMapping(value = "deleteseance.do", method = RequestMethod.POST)
-    public ModelAndView handlePostDeleteUser(HttpServletRequest request) {
+    public ModelAndView handlePostDeleteSeance(HttpServletRequest request) {
 
         ModelAndView returned;
 

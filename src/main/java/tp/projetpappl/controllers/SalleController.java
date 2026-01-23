@@ -51,7 +51,7 @@ public class SalleController {
 }
 
     @RequestMapping(value = "editsalle.do", method = RequestMethod.POST)
-    public ModelAndView handleEditUserPost(HttpServletRequest request) {
+    public ModelAndView handleEditSallePost(HttpServletRequest request) {
         ModelAndView returned;
 
         String numeroSalle = request.getParameter("NumeroSalle");
@@ -70,7 +70,7 @@ public class SalleController {
     }
 
     @RequestMapping(value = "savesalle.do", method = RequestMethod.POST)
-    public ModelAndView handlePostSaveUser(HttpServletRequest request) {
+    public ModelAndView handlePostSaveSalle(HttpServletRequest request) {
 
         ModelAndView returned;
 
@@ -96,7 +96,7 @@ public class SalleController {
     }
 
     @RequestMapping(value = "deletesalle.do", method = RequestMethod.POST)
-    public ModelAndView handlePostDeleteUser(HttpServletRequest request) {
+    public ModelAndView handlePostDeleteSalle(HttpServletRequest request) {
 
         ModelAndView returned;
 

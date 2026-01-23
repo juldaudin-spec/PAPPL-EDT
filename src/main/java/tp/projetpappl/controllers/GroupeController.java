@@ -52,7 +52,7 @@ public class GroupeController {
 }
 
     @RequestMapping(value = "editgroupe.do", method = RequestMethod.POST)
-    public ModelAndView handleEditUserPost(HttpServletRequest request) {
+    public ModelAndView handleEditGroupePost(HttpServletRequest request) {
         ModelAndView returned;
 
         String nomGroupe = request.getParameter("NomGroupe");
@@ -71,7 +71,7 @@ public class GroupeController {
     }
 
     @RequestMapping(value = "savegroupe.do", method = RequestMethod.POST)
-    public ModelAndView handlePostSaveUser(HttpServletRequest request) {
+    public ModelAndView handlePostSaveGroupe(HttpServletRequest request) {
 
         ModelAndView returned;
 
@@ -96,7 +96,7 @@ public class GroupeController {
     }
 
     @RequestMapping(value = "deletegroupe.do", method = RequestMethod.POST)
-    public ModelAndView handlePostDeleteUser(HttpServletRequest request) {
+    public ModelAndView handlePostDeleteGroupe(HttpServletRequest request) {
 
         ModelAndView returned;
 
@@ -110,6 +110,38 @@ public class GroupeController {
         Collection<Groupe> myList = groupeRepository.findAll();
         returned.addObject("groupesList", myList);
 
+        return returned;
+    }
+    
+    @RequestMapping(value = "csvgroupe.do", method = RequestMethod.POST)
+    public ModelAndView handlePostCSVGroupe(HttpServletRequest request) {
+
+        ModelAndView returned;
+
+        // Create or update groupes
+        String fichier = request.getParameter("csvFile");
+        ArrayList<Class> Format = new ArrayList<Class>(2);
+        Format.add(String.class);
+        Format.add(int.class);
+        ArrayList<ArrayList<Object>> donnees= new ArrayList<ArrayList<Object>>();
+        try{
+            donnees = Tools.haveValues(fichier, Format);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        String nbEleveStr = request.getParameter("NbEleve");
+        int nbEleve = Tools.getIntFromString(nbEleveStr);
+        boolean success = true;
+        for (List<Object> valeur : donnees){
+            if(valeur.get(0).getClass()==String.class && valeur.get(1).getClass()==int.class){
+                groupeRepository.create((String) valeur.get(0),(int) valeur.get(1));
+            }
+            else{
+                success = false;
+            }
+        }
+        returned = new ModelAndView("groupe");
+        returned.addObject("newgroupe", success);
         return returned;
     }
 }
