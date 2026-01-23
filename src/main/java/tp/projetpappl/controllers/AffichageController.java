@@ -74,8 +74,7 @@ public class AffichageController {
 
             List<Date> listHDebut = listHDebut(myList2);
             List<LocalDate> listDate = getTheDates(listHDebut);
-            List<List<Seance>> listSeance = transform(myList2, listHDebut);
-            List<List<Seance>> listSeance2;
+            List<List<List<Seance>>> listSeance = groupByDates( listDate,myList2);
 
             returned.addObject("groupes", groupes);
             returned.addObject("HDebut", listDate);
