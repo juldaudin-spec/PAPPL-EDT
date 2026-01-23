@@ -45,9 +45,9 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="text-center">Date</th>
+                                        <th scope="col" class="col-2 text-center">Date</th>
                                             <c:forEach var="groupeSelect" items="${listeGroupe}">
-                                            <th scope="col" class="text-center">${groupeSelect}</th>
+                                            <th scope="col-auto" class="text-center">${groupeSelect}</th>
                                             </c:forEach>
                                     </tr>
                                 </thead>
@@ -57,6 +57,18 @@
                                             <td>
                                                 <div class="position-relative" id="Jour">
                                                     ${jour}
+                                                    <div id="Horaire" style="--position-element: 0px; --taille-element:1px;">
+                                                        8h </div>
+                                                    <div id="Horaire" style="--position-element: 40px; --taille-element:1px;">
+                                                        10h</div>
+                                                    <div id="Horaire" style="--position-element: 80px; --taille-element:1px;">
+                                                        12h</div>
+                                                    <div id="Horaire" style="--position-element: 120px; --taille-element:1px;">
+                                                        14h</div>
+                                                    <div id="Horaire" style="--position-element: 160px; --taille-element:1px;">
+                                                        16h</div>
+                                                    <div id="Horaire" style="--position-element: 200px; --taille-element:1px;">
+                                                        18h</div>
                                                 </div>
                                             </td>
                                             <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
