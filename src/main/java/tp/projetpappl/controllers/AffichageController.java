@@ -5,6 +5,8 @@
 package tp.projetpappl.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -67,11 +69,12 @@ public class AffichageController {
         }
         
         List<Date> listHDebut = listHDebut(myList2);
+        List<LocalDate> listDate=getTheDates(listHDebut);
         List<List<Seance>> listSeance = transform(myList2, listHDebut);
-        
+        List<List<Seance>> listSeance2;
         
         returned.addObject("groupes", groupes);
-        returned.addObject("HDebut", listHDebut);
+        returned.addObject("HDebut", listDate);
         returned.addObject("listeSeance", listSeance);
         returned.addObject("listeGroupe", listeGroupe);}
         return returned;
@@ -139,4 +142,42 @@ public class AffichageController {
                     }
                 
     }}
+    
+    public List<LocalDate> getTheDates(List<Date> listHDebut){
+        if (listHDebut!=null){
+            listHDebut.sort(Comparator.naturalOrder());
+            Date date;
+            LocalDate localDate;
+            LocalDate newLocalDate;
+            List<LocalDate> listOfDay= new ArrayList<>();
+            for (int i=0; i<listHDebut.size();i++){
+                date =listHDebut.get(i);
+                localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                newLocalDate = LocalDate.of(2026, 1, 22);
+                if (!comparerDate(localDate,newLocalDate)){
+                    listOfDay.add(newLocalDate);
+                }
+            }
+        return listOfDay;            
+        }        
+        return null;
+    }
+    
+    public boolean comparerDate(LocalDate date1, LocalDate date2){
+        return ((date1.getYear()==date2.getYear())&&(date1.getMonthValue()==date2.getMonthValue())&&(date1.getDayOfMonth()==date2.getDayOfMonth()));
+    }
+    
+    public List<List<Seance>> groupByDates(List<LocalDate> listDates, List<List<Seance>> myList2){
+        if (listDates!=null&&myList2!=null){
+            List<List<Seance>> seanceByDay=new ArrayList<>(listDates.size());
+            listDates.sort(Comparator.naturalOrder());
+            for (List<Seance> seanceGroupe : myList2){
+                Collections.sort(seanceGroupe, Seance.getComparator());
+                for (LocalDate date : listDates){
+                    if (comparerDate(date,))
+                }
+            }
+        }        
+        return null;
+    }
 }
