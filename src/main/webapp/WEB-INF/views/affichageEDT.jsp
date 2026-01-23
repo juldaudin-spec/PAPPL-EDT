@@ -12,11 +12,12 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js"
                 integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
-        <link href="${pageContext.request.contextPath}/css/mainPage.css" type="text/css" rel="stylesheet" />
+        <link href="css/mainPage.css" type="text/css" rel="stylesheet" />
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/main.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/EDT.css">
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
@@ -44,7 +45,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="text-center">Horaire</th>
+                                        <th scope="col" class="text-center">Date</th>
                                             <c:forEach var="groupeSelect" items="${listeGroupe}">
                                             <th scope="col" class="text-center">${groupeSelect}</th>
                                             </c:forEach>
@@ -54,23 +55,26 @@
                                     <c:forEach var="jour" items="${HDebut}" varStatus="status">
                                         <tr>
                                             <td>
-                                                <div class="Jour">
+                                                <div class="position-relative" id="Jour">
                                                     ${jour}
                                                 </div>
                                             </td>
                                             <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
 
                                                 <td class="texte-center">
-                                                    <div class="Jour">
+                                                    <div class="position-relative" >
                                                         <c:forEach var="seance" items="${seanceByDay}">
                                                             <c:choose>
                                                                 <c:when test="${not empty seance.acronyme}">
-                                                                    <div class="Seance">
-                                                                    ${seance.acronyme.acronyme}<!-- <button actionform="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> -->
-                                                                    </div>
+                                                                        <div id="Seance" style="
+                                                                             --position-element: ${((seance.HDebut.getHours()-8)*60+seance.HDebut.getMinutes())/3}px;
+                                                                             --taille-element:   ${seance.duree/3}px
+                                                                             ">
+                                                                            <button actionform="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
+                                                                        </div>
                                                                 </c:when>
                                                                 <c:otherwise>
-
+                                                                        
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </c:forEach>
