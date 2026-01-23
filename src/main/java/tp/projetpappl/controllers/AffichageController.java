@@ -154,12 +154,12 @@ public class AffichageController {
     }
 
     public List<LocalDate> getTheDates(List<Date> listHDebut) {
+        List<LocalDate> listOfDay =null;
         if (listHDebut != null) {
             listHDebut.sort(Comparator.naturalOrder());
             Date date;
             LocalDate localDate;
-            LocalDate newLocalDate;
-            List<LocalDate> listOfDay = new ArrayList<>();
+            listOfDay = new ArrayList<>();
             for (int i = 0; i < listHDebut.size(); i++) {
                 date = listHDebut.get(i);
                 localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -167,9 +167,8 @@ public class AffichageController {
                     listOfDay.add(localDate);
                 }
             }
-            return listOfDay;
         }
-        return null;
+        return listOfDay;
     }
 
     public boolean comparerDate(LocalDate date1, LocalDate date2) {
@@ -177,8 +176,9 @@ public class AffichageController {
     }
 
     public List<List<List<Seance>>> groupByDates(List<LocalDate> listDates, List<List<Seance>> myList2) {
+        List<List<List<Seance>>> seanceByDay=null;
         if (listDates != null && myList2 != null) {
-            List<List<List<Seance>>> seanceByDay = new ArrayList<>(listDates.size());//par jour et par groupe
+            seanceByDay = new ArrayList<>(listDates.size());//par jour et par groupe
             List<List<Seance>> seanceOfDay;
             List<Seance> seanceOfGroupe;
             listDates.sort(Comparator.naturalOrder());
@@ -194,8 +194,7 @@ public class AffichageController {
                 }
                 seanceByDay.add(seanceOfDay);
             }
-            return seanceByDay;
         }
-        return null;
+        return seanceByDay;
     }
 }
