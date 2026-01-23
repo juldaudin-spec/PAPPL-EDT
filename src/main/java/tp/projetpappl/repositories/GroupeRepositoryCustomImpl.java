@@ -35,8 +35,9 @@ public class GroupeRepositoryCustomImpl implements GroupeRepositoryCustom {
     
     @Override
     public List<String> findGroupeParEnseignement(String acronyme){
-        String requete = "SELECT nom_groupe FROM Etudie JOIN Contient ON Contient.contient_id=Etudie.contient_id WHERE acronyme="+acronyme;
+        String requete = "SELECT nom_groupe FROM Etudie JOIN Contient ON Contient.contient_id=Etudie.contient_id WHERE acronyme= :acronyme";
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
+        query.setParameter("acronyme", acronyme);
         return query.getResultList();
     }
     @Override
