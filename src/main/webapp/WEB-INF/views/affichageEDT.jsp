@@ -68,9 +68,9 @@
                                                                 <c:when test="${not empty seance.acronyme}">
                                                                         <div id="Seance" style="
                                                                              --position-element: ${((seance.HDebut.getHours()-8)*60+seance.HDebut.getMinutes())/3}px;
-                                                                             --taille-element:   ${seance.duree/3}px
+                                                                             --taille-element:   ${seance.duree/3}px;
                                                                              ">
-                                                                            <button actionform="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
+                                                                            <button class="nav-link" style="text-align:center" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
                                                                         </div>
                                                                 </c:when>
                                                                 <c:otherwise>
