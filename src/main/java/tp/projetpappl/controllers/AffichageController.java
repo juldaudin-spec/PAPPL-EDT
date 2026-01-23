@@ -163,9 +163,8 @@ public class AffichageController {
             for (int i = 0; i < listHDebut.size(); i++) {
                 date = listHDebut.get(i);
                 localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                newLocalDate = LocalDate.of(2026, 1, 22);
-                if (!comparerDate(localDate, newLocalDate)) {
-                    listOfDay.add(newLocalDate);
+                if (!listOfDay.contains(localDate)){
+                    listOfDay.add(localDate);
                 }
             }
             return listOfDay;
