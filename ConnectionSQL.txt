@@ -1,0 +1,6 @@
+CREATE TABLE connection (
+    connection_code VARCHAR(128) PRIMARY KEY,
+    connection_login VARCHAR(256) NOT NULL
+);
+
+CREATE INDEX idx_connection_login ON connection(connection_login);

@@ -1,5 +1,6 @@
 tp\projetpappl\items\TypeLecon.class
 tp\projetpappl\repositories\EnseignementRepositoryCustomImpl.class
+tp\projetpappl\tools\CASClient$1.class
 tp\projetpappl\repositories\ContientRepository.class
 tp\projetpappl\items\Seance.class
 tp\projetpappl\controllers\IndexController.class
@@ -42,6 +43,7 @@ tp\projetpappl\repositories\GroupeRepository.class
 tp\projetpappl\repositories\SeanceRepositoryCustom.class
 tp\projetpappl\repositories\SeanceRepositoryCustomImpl.class
 tp\projetpappl\controllers\EnseignementController.class
+tp\projetpappl\controllers\AuthHelper.class
 tp\projetpappl\repositories\ContientRepositoryCustom.class
 tp\projetpappl\repositories\TypeLeconRepository.class
 tp\projetpappl\controllers\GroupeController.class

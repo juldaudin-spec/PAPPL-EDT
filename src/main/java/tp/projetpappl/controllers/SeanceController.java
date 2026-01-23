@@ -26,6 +26,7 @@ import tp.projetpappl.items.Groupe;
 import tp.projetpappl.items.Salle;
 import tp.projetpappl.items.Seance;
 import tp.projetpappl.items.TypeLecon;
+import tp.projetpappl.items.Connection;
 import tp.projetpappl.repositories.EnseignantRepository;
 import tp.projetpappl.repositories.EnseignementRepository;
 import tp.projetpappl.repositories.GroupeRepository;
@@ -42,21 +43,32 @@ public class SeanceController {
 
     @Autowired
     private SeanceRepository seanceRepository;
-    @Autowired 
+
+    @Autowired
     private EnseignantRepository enseignantRepository;
+
     @Autowired
     private GroupeRepository groupeRepository;
+
     @Autowired
     private TypeLeconRepository typeLeconRepository;
+
     @Autowired
     private EnseignementRepository enseignementRepository;
-    
+
     @Autowired
     private SalleRepository salleRepository;
-    
+
+    @Autowired
+    private AuthHelper authHelper;
 
     @RequestMapping(value = "seance.do", method=RequestMethod.POST)
     public ModelAndView handlePostSeances(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
 
         ModelAndView returned = new ModelAndView("seance");
         returned.addObject("enseignantsList", enseignantRepository.findAll());
@@ -65,46 +77,17 @@ public class SeanceController {
         returned.addObject("enseignementsList",enseignementRepository.findAll());
         returned.addObject("typeLeconsList",typeLeconRepository.findAll());
         returned.addObject("sallesList",salleRepository.findAll());
+        returned.addObject("user", user);
         return returned;
     }
-    /*
-    @RequestMapping(value = "seances.do", method=RequestMethod.POST)
-    public ModelAndView handlePostSeance(HttpServletRequest request) {
-        List<Seance> myList = new ArrayList<>(seanceRepository.findAll());
-        Collections.sort(myList, Seance.getComparator());
-        List<Enseignant> Enseignants = new ArrayList<>(enseignantRepository.findAll());
-        Collections.sort(myList, Seance.getComparator());
 
-        ModelAndView returned = new ModelAndView("seances");
-        returned.addObject("seancesList", myList);
-        returned.addObject("enseignantsList", Enseignants);
-
-        return returned;
-}
-
-    @RequestMapping(value = "editseance.do", method = RequestMethod.POST)
-    public ModelAndView handleEditUserPost(HttpServletRequest request) {
-        ModelAndView returned;
-
-        String idSeanceStr = request.getParameter("idSeance");
-        int idSeance = Tools.getIntFromString(idSeanceStr);
-        if (idSeance != null) {
-            //ID may exist
-            Seance seance = seanceRepository.getById(idSeance);
-            returned = new ModelAndView("seance");
-            returned.addObject("seance", seance);
-            returned.addObject("enseignantsList", enseignantRepository.findAll());
-        } else {
-            returned = new ModelAndView("seances");
-            Collection<Seance> myList = seanceRepository.findAll();
-            returned.addObject("seancesList", myList);
-
-        }
-        return returned;
-    }
-    */
     @RequestMapping(value = "saveseance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveUser(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
 
         ModelAndView returned;
 
@@ -116,25 +99,25 @@ public class SeanceController {
         if (duree <= 0) {
             throw new IllegalArgumentException("Duree invalide, merci de remplir une durée strictement supérieur à 0");
         }
-        
+
         String acronymeEnseignement = request.getParameter("Enseignement");
         Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
         String intituleLecon = request.getParameter("TypeLecon");
         TypeLecon typeLecon = typeLeconRepository.getByIntitule(intituleLecon);
         String nomGroupe = request.getParameter("nomGroupe");
         Groupe groupe = groupeRepository.getByNomGroupe(nomGroupe);
-        
+
         String salleStr = request.getParameter("numeroSalle");
         Salle salle = salleRepository.getByNumeroSalle(salleStr);
-        
+
         String hDebutStr = request.getParameter("HDebut");
         Date hDebut = Tools.getDateFromString(hDebutStr, "yyyy-MM-dd'T'HH:mm");
 
-        
+
         String enseignantStr = request.getParameter("InitialesEnseignant");
         Enseignant enseignant = enseignantRepository.getByInitiales(enseignantStr);
         boolean succes = false;
-        
+
         Seance retour = null;
         if (idSeance > 0){//if id exist
             //update à gérer
@@ -143,8 +126,8 @@ public class SeanceController {
             retour = seanceRepository.create(enseignement, enseignant, typeLecon, groupe, salle, hDebut, duree);
         }
         if(retour !=null){
-                succes = true;
-            }
+            succes = true;
+        }
         returned = new ModelAndView("seance");
         returned.addObject("newseance", succes);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
@@ -152,27 +135,7 @@ public class SeanceController {
         returned.addObject("enseignementsList",enseignementRepository.findAll());
         returned.addObject("typeLeconsList",typeLeconRepository.findAll());
         returned.addObject("sallesList",salleRepository.findAll());
+        returned.addObject("user", user);
         return returned;
     }
-    /*
-    @RequestMapping(value = "deleteseance.do", method = RequestMethod.POST)
-    public ModelAndView handlePostDeleteUser(HttpServletRequest request) {
-
-        ModelAndView returned;
-
-        // Create or update seances
-        String acronyme = request.getParameter("Acronyme");
-
-        seanceRepository.remove(acronyme);
-
-        // return to list
-        returned = new ModelAndView("seances");
-        Collection<Seance> myList = seanceRepository.findAll();
-        returned.addObject("seancesList", myList);
-        Collection<Enseignant> Enseignants = enseignantRepository.findAll();
-        returned.addObject("enseignantsList", Enseignants);
-
-        return returned;
-    }
-    */
 }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import tp.projetpappl.items.Enseignant;
 import tp.projetpappl.items.Enseignement;
+import tp.projetpappl.items.Connection;
 import tp.projetpappl.repositories.EnseignantRepository;
 import tp.projetpappl.repositories.EnseignementRepository;
 
@@ -33,19 +34,37 @@ public class EnseignementController {
 
     @Autowired
     private EnseignementRepository enseignementRepository;
-    @Autowired EnseignantRepository enseignantRepository;
+
+    @Autowired
+    private EnseignantRepository enseignantRepository;
+
+    @Autowired
+    private AuthHelper authHelper;
 
     @RequestMapping(value = "enseignement.do", method=RequestMethod.POST)
     public ModelAndView handlePostEnseignements(HttpServletRequest request) {
 
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         ModelAndView returned = new ModelAndView("enseignement");
         returned.addObject("enseignantsList", enseignantRepository.findAll());
         returned.addObject("enseignement",new Enseignement());
+        returned.addObject("user", user);
 
         return returned;
     }
+
     @RequestMapping(value = "enseignements.do", method=RequestMethod.POST)
     public ModelAndView handlePostEnseignement(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         List<Enseignement> myList = new ArrayList<>(enseignementRepository.findAll());
         Collections.sort(myList, Enseignement.getComparator());
         List<Enseignant> Enseignants = new ArrayList<>(enseignantRepository.findAll());
@@ -54,12 +73,19 @@ public class EnseignementController {
         ModelAndView returned = new ModelAndView("enseignements");
         returned.addObject("enseignementsList", myList);
         returned.addObject("enseignantsList", Enseignants);
+        returned.addObject("user", user);
 
         return returned;
-}
+    }
 
     @RequestMapping(value = "editenseignement.do", method = RequestMethod.POST)
     public ModelAndView handleEditUserPost(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         ModelAndView returned;
 
         String acronyme = request.getParameter("Acronyme");
@@ -75,11 +101,17 @@ public class EnseignementController {
             returned.addObject("enseignementsList", myList);
 
         }
+        returned.addObject("user", user);
         return returned;
     }
 
     @RequestMapping(value = "saveenseignement.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveUser(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
 
         ModelAndView returned;
 
@@ -103,11 +135,17 @@ public class EnseignementController {
         returned = new ModelAndView("enseignement");
         returned.addObject("newenseignement", succes);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
+        returned.addObject("user", user);
         return returned;
     }
 
     @RequestMapping(value = "deleteenseignement.do", method = RequestMethod.POST)
     public ModelAndView handlePostDeleteUser(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
 
         ModelAndView returned;
 
@@ -122,6 +160,7 @@ public class EnseignementController {
         returned.addObject("enseignementsList", myList);
         Collection<Enseignant> Enseignants = enseignantRepository.findAll();
         returned.addObject("enseignantsList", Enseignants);
+        returned.addObject("user", user);
 
         return returned;
     }

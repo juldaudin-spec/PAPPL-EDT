@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import tp.projetpappl.items.Groupe;
+import tp.projetpappl.items.Connection;
 import tp.projetpappl.repositories.GroupeRepository;
 
 /**
@@ -32,27 +33,50 @@ public class GroupeController {
     @Autowired
     private GroupeRepository groupeRepository;
 
+    @Autowired
+    private AuthHelper authHelper;
+
     @RequestMapping(value = "groupe.do", method=RequestMethod.POST)
     public ModelAndView handlePostGroupes(HttpServletRequest request) {
 
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         ModelAndView returned = new ModelAndView("groupe");
         returned.addObject("groupe",new Groupe());
+        returned.addObject("user", user);
 
         return returned;
     }
+
     @RequestMapping(value = "groupes.do", method=RequestMethod.POST)
     public ModelAndView handlePostGroupe(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         List<Groupe> myList = new ArrayList<>(groupeRepository.findAll());
         Collections.sort(myList, Groupe.getComparator());
 
         ModelAndView returned = new ModelAndView("groupes");
         returned.addObject("groupesList", myList);
+        returned.addObject("user", user);
 
         return returned;
-}
+    }
 
     @RequestMapping(value = "editgroupe.do", method = RequestMethod.POST)
     public ModelAndView handleEditUserPost(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         ModelAndView returned;
 
         String nomGroupe = request.getParameter("NomGroupe");
@@ -67,11 +91,17 @@ public class GroupeController {
             returned.addObject("groupesList", myList);
 
         }
+        returned.addObject("user", user);
         return returned;
     }
 
     @RequestMapping(value = "savegroupe.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveUser(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
 
         ModelAndView returned;
 
@@ -92,11 +122,17 @@ public class GroupeController {
             returned = new ModelAndView("groupe");
         }
         returned.addObject("newgroupe", succes);
+        returned.addObject("user", user);
         return returned;
     }
 
     @RequestMapping(value = "deletegroupe.do", method = RequestMethod.POST)
     public ModelAndView handlePostDeleteUser(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
 
         ModelAndView returned;
 
@@ -109,8 +145,8 @@ public class GroupeController {
         returned = new ModelAndView("groupes");
         Collection<Groupe> myList = groupeRepository.findAll();
         returned.addObject("groupesList", myList);
+        returned.addObject("user", user);
 
         return returned;
     }
 }
-

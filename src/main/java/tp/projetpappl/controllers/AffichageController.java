@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import tp.projetpappl.items.Groupe;
 import tp.projetpappl.items.Seance;
+import tp.projetpappl.items.Connection;
 import tp.projetpappl.repositories.GroupeRepository;
 
 /**
@@ -35,6 +36,9 @@ public class AffichageController {
     @Autowired
     private GroupeRepository groupeRepository;
 
+    @Autowired
+    private AuthHelper authHelper;
+
     /**
      * permet d'ouvrir la page d'affichage des EDT
      *
@@ -43,6 +47,12 @@ public class AffichageController {
      */
     @RequestMapping(value = "affichageEDT.do", method = RequestMethod.POST)
     public ModelAndView handleIndexGet(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         ModelAndView returned = new ModelAndView("affichageEDT");
 
         if (request != null) {
@@ -81,6 +91,7 @@ public class AffichageController {
             returned.addObject("listeSeance", listSeance);
             returned.addObject("listeGroupe", listeGroupe);
         }
+        returned.addObject("user", user);
         return returned;
     }
 

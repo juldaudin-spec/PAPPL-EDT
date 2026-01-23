@@ -35,6 +35,13 @@ import org.springframework.http.ResponseEntity;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.security.cert.X509Certificate;
+import java.security.NoSuchAlgorithmException;
+import java.security.KeyManagementException;
+
 /**
  * Manage CAS.
  *
@@ -126,6 +133,43 @@ public class CASClient {
     }
 
     /**
+     * Create an HttpClient that trusts all SSL certificates
+     * WARNING: Only use this for test/development environments!
+     *
+     * @return HttpClient with SSL verification disabled
+     */
+    private static HttpClient createTrustingHttpClient() {
+        try {
+            // Create a trust manager that does not validate certificate chains
+            TrustManager[] trustAllCerts = new TrustManager[]{
+                    new X509TrustManager() {
+                        public X509Certificate[] getAcceptedIssuers() {
+                            return new X509Certificate[0];
+                        }
+                        public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                        }
+                        public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                        }
+                    }
+            };
+
+            // Install the all-trusting trust manager
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+
+            // Create HttpClient with custom SSL context
+            return HttpClient.newBuilder()
+                    .sslContext(sslContext)
+                    .build();
+
+        } catch (NoSuchAlgorithmException | KeyManagementException ex) {
+            System.out.println("ERROR creating SSL context: " + ex.getMessage());
+            // Fallback to default client
+            return HttpClient.newHttpClient();
+        }
+    }
+
+    /**
      * Get XML infos from CAS ticket
      *
      * @param token
@@ -152,10 +196,10 @@ public class CASClient {
                         .GET()
                         .build();
 
-                System.out.println("Sending HTTP request to CAS...");
+                System.out.println("Sending HTTP request to CAS (SSL verification disabled for test server)...");
 
-                // Launch request and get result
-                HttpClient client = HttpClient.newHttpClient();
+                // Use the trusting HTTP client that bypasses SSL verification
+                HttpClient client = createTrustingHttpClient();
                 HttpResponse<byte[]> responseOfByteArray = client.send(request, HttpResponse.BodyHandlers.ofByteArray());
 
                 System.out.println("HTTP Response Status: " + responseOfByteArray.statusCode());
