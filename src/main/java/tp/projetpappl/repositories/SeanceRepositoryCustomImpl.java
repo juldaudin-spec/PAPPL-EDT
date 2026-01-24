@@ -6,6 +6,7 @@ package tp.projetpappl.repositories;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -44,20 +45,22 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
     
     
     @Override
-    public Seance create(Enseignement enseignement, Enseignant enseignant, TypeLecon typeLecon, Groupe groupe, Salle salle, Date hDebut, int duree) {
+    public Seance create(Enseignement enseignement, Enseignant enseignant, TypeLecon typeLecon, List<Groupe> Groupes, Salle salle, Date hDebut, int duree) {
 
         // Ensure we have full data
         if (enseignement != null) {
-            enseignement = enseignementRepository.getReferenceById(enseignement.getAcronyme());
+            enseignement = enseignementRepository.getByAcronyme(enseignement.getAcronyme());
         }
         if (enseignant != null) {
-            enseignant = enseignantRepository.getReferenceById(enseignant.getInitiales());
+            enseignant = enseignantRepository.getByInitiales(enseignant.getInitiales());
         }
         if (typeLecon != null) {
-            typeLecon = typeLeconRepository.getReferenceById(typeLecon.getIntitule());
+            typeLecon = typeLeconRepository.getByIntitule(typeLecon.getIntitule());
         }
-        if (groupe != null) {
-            groupe = groupeRepository.getReferenceById(groupe.getNomGroupe());
+        for(int i=0;i<Groupes.size();i++){
+            if(Groupes.get(i)!= null){
+                Groupes.set(i, groupeRepository.getByNomGroupe(Groupes.get(i).getNomGroupe()));
+            }
         }
 
         // Build new seance
@@ -66,13 +69,11 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
             item.setHDebut(hDebut);
             ArrayList<Enseignant> ListEnseignant = new ArrayList<Enseignant>();
             ListEnseignant.add(enseignant);
-            ArrayList<Groupe> ListGroupe = new ArrayList<Groupe>();
-            ListGroupe.add(groupe);
             ArrayList<Salle> ListSalle = new ArrayList<Salle>();
             ListSalle.add(salle);
             item.setSalleList(ListSalle);
             item.setEnseignantList(ListEnseignant);
-            item.setGroupeList(ListGroupe);
+            item.setGroupeList(Groupes);
             item.setAcronyme(enseignement);
             item.setIntitule(typeLecon);
             item.setDuree(duree);
@@ -87,11 +88,12 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
                 enseignementRepository.saveAndFlush(enseignement);
                 enseignant.getSeanceList().add(item);
                 enseignantRepository.saveAndFlush(enseignant);
-                groupe.getSeanceList().add(item);
-                groupeRepository.saveAndFlush(groupe);
+                for(Groupe groupe : Groupes){
+                    groupe.getSeanceList().add(item);
+                    groupeRepository.saveAndFlush(groupe);
+                }
                 salle.getSeanceList().add(item);
                 salleRepository.saveAndFlush(salle);
-
                 // return item
                 return item;
             }
@@ -99,7 +101,7 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         return null;
     }
     @Override
-    public Seance update(int IdSeance, Enseignement enseignement, Enseignant enseignant, TypeLecon typeLecon, Groupe groupe, Salle salle, Date hDebut, int duree) {
+    public Seance update(int IdSeance, Enseignement enseignement, Enseignant enseignant, TypeLecon typeLecon, List<Groupe> Groupes, Salle salle, Date hDebut, int duree) {
         if (IdSeance>0){
             IdSeance = seanceRepository.getReferenceById(IdSeance).getIdSeance();
         }
@@ -113,8 +115,8 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         if (typeLecon != null) {
             typeLecon = typeLeconRepository.getReferenceById(typeLecon.getIntitule());
         }
-        if (groupe != null) {
-            groupe = groupeRepository.getReferenceById(groupe.getNomGroupe());
+        for(int i=0;i<Groupes.size();i++){
+            Groupes.set(i, groupeRepository.getByNomGroupe(Groupes.get(i).getNomGroupe()));
         }
 
         // Build new seance
@@ -123,13 +125,11 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
             item.setHDebut(hDebut);
             ArrayList<Enseignant> ListEnseignant = new ArrayList<Enseignant>();
             ListEnseignant.add(enseignant);
-            ArrayList<Groupe> ListGroupe = new ArrayList<Groupe>();
-            ListGroupe.add(groupe);
             ArrayList<Salle> ListSalle = new ArrayList<Salle>();
             ListSalle.add(salle);
             item.setSalleList(ListSalle);
             item.setEnseignantList(ListEnseignant);
-            item.setGroupeList(ListGroupe);
+            item.setGroupeList(Groupes);
             item.setAcronyme(enseignement);
             item.setIntitule(typeLecon);
             item.setDuree(duree);
@@ -144,8 +144,10 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
                 enseignementRepository.saveAndFlush(enseignement);
                 enseignant.getSeanceList().add(item);
                 enseignantRepository.saveAndFlush(enseignant);
-                groupe.getSeanceList().add(item);
-                groupeRepository.saveAndFlush(groupe);
+                for(Groupe groupe : Groupes){
+                    groupe.getSeanceList().add(item);
+                    groupeRepository.saveAndFlush(groupe);
+                }
                 salle.getSeanceList().add(item);
                 salleRepository.saveAndFlush(salle);
 

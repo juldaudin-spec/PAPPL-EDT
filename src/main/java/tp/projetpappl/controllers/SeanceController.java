@@ -8,13 +8,14 @@ package tp.projetpappl.controllers;
  *
  * @author julda
  */
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,7 @@ public class SeanceController {
 
     @Autowired
     private SeanceRepository seanceRepository;
-    @Autowired 
+    @Autowired
     private EnseignantRepository enseignantRepository;
     @Autowired
     private GroupeRepository groupeRepository;
@@ -50,23 +51,23 @@ public class SeanceController {
     private TypeLeconRepository typeLeconRepository;
     @Autowired
     private EnseignementRepository enseignementRepository;
-    
+
     @Autowired
     private SalleRepository salleRepository;
-    
 
-    @RequestMapping(value = "seance.do", method=RequestMethod.POST)
+    @RequestMapping(value = "seance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSeance(HttpServletRequest request) {
 
         ModelAndView returned = new ModelAndView("seance");
         returned.addObject("enseignantsList", enseignantRepository.findAll());
-        returned.addObject("seance",new Seance());
-        returned.addObject("groupesList",groupeRepository.findAll());
-        returned.addObject("enseignementsList",enseignementRepository.findAll());
-        returned.addObject("typeLeconsList",typeLeconRepository.findAll());
-        returned.addObject("sallesList",salleRepository.findAll());
+        returned.addObject("seance", new Seance());
+        returned.addObject("groupesList", groupeRepository.findAll());
+        returned.addObject("enseignementsList", enseignementRepository.findAll());
+        returned.addObject("typeLeconsList", typeLeconRepository.findAll());
+        returned.addObject("sallesList", salleRepository.findAll());
         return returned;
     }
+
     /*
     @RequestMapping(value = "seances.do", method=RequestMethod.POST)
     public ModelAndView handlePostSeance(HttpServletRequest request) {
@@ -102,7 +103,7 @@ public class SeanceController {
         }
         return returned;
     }
-    */
+     */
     @RequestMapping(value = "saveseance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveSeance(HttpServletRequest request) {
 
@@ -116,42 +117,49 @@ public class SeanceController {
         if (duree <= 0) {
             throw new IllegalArgumentException("Duree invalide, merci de remplir une durée strictement supérieur à 0");
         }
-        
+
         String acronymeEnseignement = request.getParameter("Enseignement");
         Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
         String intituleLecon = request.getParameter("TypeLecon");
         TypeLecon typeLecon = typeLeconRepository.getByIntitule(intituleLecon);
-        String nomGroupe = request.getParameter("nomGroupe");
-        Groupe groupe = groupeRepository.getByNomGroupe(nomGroupe);
-        
+        HashMap<String, String> nomGroupes
+                = Tools.getArrayFromRequest(request, "ml");
+        System.out.println(nomGroupes);
+        ArrayList<Groupe> groupes = new ArrayList<>();
+
+        for (String nomGroupe : nomGroupes.values()) {
+            Groupe g = groupeRepository.getByNomGroupe(nomGroupe);
+            if (g != null) {
+                groupes.add(g);
+            }
+        }
+
         String salleStr = request.getParameter("numeroSalle");
         Salle salle = salleRepository.getByNumeroSalle(salleStr);
-        
+
         String hDebutStr = request.getParameter("HDebut");
         Date hDebut = Tools.getDateFromString(hDebutStr, "yyyy-MM-dd'T'HH:mm");
 
-        
         String enseignantStr = request.getParameter("InitialesEnseignant");
         Enseignant enseignant = enseignantRepository.getByInitiales(enseignantStr);
         boolean succes = false;
-        
+
         Seance retour = null;
-        if (idSeance > 0){//if id exist
-            retour = seanceRepository.update(idSeance, enseignement, enseignant, typeLecon, groupe, salle, hDebut, duree);
+        if (idSeance > 0) {//if id exist
+            retour = seanceRepository.update(idSeance, enseignement, enseignant, typeLecon, groupes, salle, hDebut, duree);
+        } else {
+            retour = seanceRepository.create(enseignement, enseignant, typeLecon, groupes, salle, hDebut, duree);
         }
-        else{
-            retour = seanceRepository.create(enseignement, enseignant, typeLecon, groupe, salle, hDebut, duree);
+        if (retour != null) {
+            succes = true;
         }
-        if(retour !=null){
-                succes = true;
-            }
         returned = new ModelAndView("seance");
         returned.addObject("newseance", succes);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
-        returned.addObject("groupesList",groupeRepository.findAll());
-        returned.addObject("enseignementsList",enseignementRepository.findAll());
-        returned.addObject("typeLeconsList",typeLeconRepository.findAll());
-        returned.addObject("sallesList",salleRepository.findAll());
+        returned.addObject("groupesList", groupeRepository.findAll());
+        returned.addObject("enseignementsList", enseignementRepository.findAll());
+        returned.addObject("typeLeconsList", typeLeconRepository.findAll());
+        returned.addObject("sallesList", salleRepository.findAll());
         return returned;
     }
     /*
@@ -174,5 +182,5 @@ public class SeanceController {
 
         return returned;
     }
-    */
+     */
 }
