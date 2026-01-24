@@ -122,36 +122,86 @@
                                 </tr>
                                 <tr>
                                     <th scope="col">Enseignant(s)</th>
-                                    <td colspan="2">
-                                        <input type="hidden" name="IdSeance" value="${seance.idSeance}" />
-                                        <select name="InitialesEnseignant" required
-                                                class="form-control form-select form-select-lg mb-3">
-                                            <c:choose>
-                                                <c:when test="${(empty seance) || (empty seance.enseignantList)}"><option value="" disabled selected>Choisissez 0 ou plusieurs enseignant(s)</option></c:when>
-                                                <c:otherwise><option value="${seance.enseignantList}" disabled selected>${seance.enseignantList}</option></c:otherwise>
-                                            </c:choose>
-
-                                            <c:forEach var="enseignant" items="${enseignantsList}">
-                                                <option value="${enseignant.initiales}">${enseignant.nomEnseignant} ${enseignant.prenom}</option>
-                                            </c:forEach>
-                                        </select>
+                                    <td>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div id="listenseignants" 
+                                                         class="list-group overflow-auto border border-primary" 
+                                                         style="height:350px;overflow-y: scroll;" 
+                                                         tabindex="0" 
+                                                         ondrop="dropAndRename(event, 'e')" 
+                                                         ondragover="allowDrop(event)">
+                                                        <c:forEach var="itemIter" items="${seance.enseignantList}">
+                                                            <div class="list-group-item list-group-item-action" id="e_${itemIter.initiales}" draggable="true" ondragstart="drag(event)">
+                                                                <input type="hidden" name="e[${itemIter.initiales}]" value="${itemIter.initiales}"/>
+                                                                ${itemIter.initiales.nomEnseignant} ${itemIter.initiales.prenom}
+                                                            </div>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div id="listAllenseignants" 
+                                                         class="list-group overflow-auto border border-primary" 
+                                                         style="height:350px;overflow-y: scroll;" 
+                                                         tabindex="0" 
+                                                         ondrop="dropAndRename(event, 'el')" 
+                                                         ondragover="allowDrop(event)">
+                                                        <c:forEach var="enseignant" items="${enseignantsList}">
+                                                            <div class="list-group-item list-group-item-action" id="e_${enseignant.initiales}" draggable="true" ondragstart="drag(event)" style="display:block">
+                                                                <input type="hidden" name="el[${enseignant.initiales}]" value="${enseignant.initiales}"/>
+                                                                ${enseignant.nomEnseignant} ${enseignant.prenom}
+                                                            </div>
+                                                        </c:forEach>
+                                                    </div>
+                                                    <div onkeyup="filterList('listAllenseignants', 'listAllenseignantsFilter')" >
+                                                        <input type="text" id="listAllenseignantsFilter" placeholder="Rechercher.." title="Type in a name" style="width:100%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Salle</th>
-                                    <td colspan="2">
-                                        <input type="hidden" name="IdSeance" value="${seance.idSeance}" />
-                                        <select name="numeroSalle" required
-                                                class="form-control form-select form-select-lg mb-3">
-                                            <c:choose>
-                                                <c:when test="${(empty seance) || (empty seance.salleList)}"><option value="" disabled selected>Choisissez 0 à plusieurs salle(s)</option></c:when>
-                                                <c:otherwise><option value="${seance.salle}" disabled selected>${seance.salleList}</option></c:otherwise>
-                                            </c:choose>
-
-                                            <c:forEach var="salle" items="${sallesList}">
-                                                <option value="${salle.numeroSalle}">${salle.numeroSalle}</option>
-                                            </c:forEach>
-                                        </select>
+                                    <th scope="col">Salle(s)</th>
+                                    <td>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div id="listsalles" 
+                                                         class="list-group overflow-auto border border-primary" 
+                                                         style="height:350px;overflow-y: scroll;" 
+                                                         tabindex="0" 
+                                                         ondrop="dropAndRename(event, 's')" 
+                                                         ondragover="allowDrop(event)">
+                                                        <c:forEach var="itemIter" items="${seance.salleList}">
+                                                            <div class="list-group-item list-group-item-action" id="s_${itemIter.numeroSalle}" draggable="true" ondragstart="drag(event)">
+                                                                <input type="hidden" name="s[${itemIter.numeroSalle}]" value="${itemIter.numeroSalle}"/>
+                                                                ${itemIter.numeroSalle}
+                                                            </div>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div id="listAllsalles" 
+                                                         class="list-group overflow-auto border border-primary" 
+                                                         style="height:350px;overflow-y: scroll;" 
+                                                         tabindex="0" 
+                                                         ondrop="dropAndRename(event, 'sl')" 
+                                                         ondragover="allowDrop(event)">
+                                                        <c:forEach var="salle" items="${sallesList}">
+                                                            <div class="list-group-item list-group-item-action" id="s_${salle.numeroSalle}" draggable="true" ondragstart="drag(event)" style="display:block">
+                                                                <input type="hidden" name="sl[${salle.numeroSalle}]" value="${salle.numeroSalle}"/>
+                                                                ${salle.numeroSalle}
+                                                            </div>
+                                                        </c:forEach>
+                                                    </div>
+                                                    <div onkeyup="filterList('listAllsalles', 'listAllsallesFilter')" >
+                                                        <input type="text" id="listAllsallesFilter" placeholder="Rechercher.." title="Type in a name" style="width:100%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>

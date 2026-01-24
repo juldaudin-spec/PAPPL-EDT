@@ -18,6 +18,6 @@ import tp.projetpappl.items.TypeLecon;
  * @author nathan
  */
 public interface SeanceRepositoryCustom {
-    Seance create(Enseignement enseignement, Enseignant enseignant, TypeLecon typeLecon, List<Groupe> groupe, Salle salle, Date hDebut, int duree);
-    public Seance update(int IdSeance, Enseignement enseignement, Enseignant enseignant, TypeLecon typeLecon, List<Groupe> groupe, Salle salle, Date hDebut, int duree);
+    Seance create(Enseignement enseignement, List<Enseignant> Enseignants, TypeLecon typeLecon, List<Groupe> groupe, List<Salle> Salles, Date hDebut, int duree);
+    Seance update(int IdSeance, Enseignement enseignement, List<Enseignant> Enseignants, TypeLecon typeLecon, List<Groupe> groupe, List<Salle> Salles, Date hDebut, int duree);
 }

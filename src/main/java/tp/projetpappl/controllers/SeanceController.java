@@ -124,7 +124,6 @@ public class SeanceController {
         TypeLecon typeLecon = typeLeconRepository.getByIntitule(intituleLecon);
         HashMap<String, String> nomGroupes
                 = Tools.getArrayFromRequest(request, "ml");
-        System.out.println(nomGroupes);
         ArrayList<Groupe> groupes = new ArrayList<>();
 
         for (String nomGroupe : nomGroupes.values()) {
@@ -134,21 +133,37 @@ public class SeanceController {
             }
         }
 
-        String salleStr = request.getParameter("numeroSalle");
-        Salle salle = salleRepository.getByNumeroSalle(salleStr);
+        HashMap<String, String> numeroSalles
+                = Tools.getArrayFromRequest(request, "sl");
+        ArrayList<Salle> salles = new ArrayList<>();
+
+        for (String numeroSalle : numeroSalles.values()) {
+            Salle s = salleRepository.getByNumeroSalle(numeroSalle);
+            if (s != null) {
+                salles.add(s);
+            }
+        }
 
         String hDebutStr = request.getParameter("HDebut");
         Date hDebut = Tools.getDateFromString(hDebutStr, "yyyy-MM-dd'T'HH:mm");
 
-        String enseignantStr = request.getParameter("InitialesEnseignant");
-        Enseignant enseignant = enseignantRepository.getByInitiales(enseignantStr);
+        HashMap<String, String> initialesEnseignants
+                = Tools.getArrayFromRequest(request, "el");
+        ArrayList<Enseignant> enseignants = new ArrayList<>();
+
+        for (String initialesEnseignant : initialesEnseignants.values()) {
+            Enseignant e = enseignantRepository.getByInitiales(initialesEnseignant);
+            if (e != null) {
+                enseignants.add(e);
+            }
+        }
         boolean succes = false;
 
         Seance retour = null;
         if (idSeance > 0) {//if id exist
-            retour = seanceRepository.update(idSeance, enseignement, enseignant, typeLecon, groupes, salle, hDebut, duree);
+            retour = seanceRepository.update(idSeance, enseignement, enseignants, typeLecon, groupes, salles, hDebut, duree);
         } else {
-            retour = seanceRepository.create(enseignement, enseignant, typeLecon, groupes, salle, hDebut, duree);
+            retour = seanceRepository.create(enseignement, enseignants, typeLecon, groupes, salles, hDebut, duree);
         }
         if (retour != null) {
             succes = true;
