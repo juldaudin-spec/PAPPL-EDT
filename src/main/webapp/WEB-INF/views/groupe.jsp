@@ -69,6 +69,11 @@
                             <button formaction="groupes.do">Afficher la liste des Groupes</button>
                         </form>
                     </div>
+                    <div class="col-md-12">
+                        <form action="groupes.do" method="POST">
+                            <button formaction="groupes.do">Afficher la liste des Groupes</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

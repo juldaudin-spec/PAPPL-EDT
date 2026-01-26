@@ -48,7 +48,7 @@
     <mvc:resources mapping="/img/**" location="/img/" />
     <mvc:resources mapping="/bootstrap/**" location="/bootstrap/" />
     <mvc:resources mapping="/css/**" location="/css/" />
-    <mvc:resources mapping="/js/**" location="/webapp/js/" />
+    <mvc:resources mapping="/js/**" location="/js/" />
     <!--
     The index controller.
     -->
