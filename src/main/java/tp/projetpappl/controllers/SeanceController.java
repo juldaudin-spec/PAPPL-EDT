@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package tp.projetpappl.controllers;
 
-/**
- *
- * @author julda
- */
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -34,10 +26,6 @@ import tp.projetpappl.repositories.SalleRepository;
 import tp.projetpappl.repositories.SeanceRepository;
 import tp.projetpappl.repositories.TypeLeconRepository;
 
-/**
- *
- * @author julda
- */
 @Controller
 public class SeanceController {
 
@@ -51,13 +39,11 @@ public class SeanceController {
     private TypeLeconRepository typeLeconRepository;
     @Autowired
     private EnseignementRepository enseignementRepository;
-
     @Autowired
     private SalleRepository salleRepository;
 
     @RequestMapping(value = "seance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSeance(HttpServletRequest request) {
-
         ModelAndView returned = new ModelAndView("seance");
         returned.addObject("enseignantsList", enseignantRepository.findAll());
         returned.addObject("seance", new Seance());
@@ -68,42 +54,6 @@ public class SeanceController {
         return returned;
     }
 
-    /*
-    @RequestMapping(value = "seances.do", method=RequestMethod.POST)
-    public ModelAndView handlePostSeance(HttpServletRequest request) {
-        List<Seance> myList = new ArrayList<>(seanceRepository.findAll());
-        Collections.sort(myList, Seance.getComparator());
-        List<Enseignant> Enseignants = new ArrayList<>(enseignantRepository.findAll());
-        Collections.sort(myList, Seance.getComparator());
-
-        ModelAndView returned = new ModelAndView("seances");
-        returned.addObject("seancesList", myList);
-        returned.addObject("enseignantsList", Enseignants);
-
-        return returned;
-}
-
-    @RequestMapping(value = "editseance.do", method = RequestMethod.POST)
-    public ModelAndView handleEditSeancePost(HttpServletRequest request) {
-        ModelAndView returned;
-
-        String idSeanceStr = request.getParameter("idSeance");
-        int idSeance = Tools.getIntFromString(idSeanceStr);
-        if (idSeance != null) {
-            //ID may exist
-            Seance seance = seanceRepository.getById(idSeance);
-            returned = new ModelAndView("seance");
-            returned.addObject("seance", seance);
-            returned.addObject("enseignantsList", enseignantRepository.findAll());
-        } else {
-            returned = new ModelAndView("seances");
-            Collection<Seance> myList = seanceRepository.findAll();
-            returned.addObject("seancesList", myList);
-
-        }
-        return returned;
-    }
-     */
     @RequestMapping(value = "saveseance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveSeance(HttpServletRequest request) {
 
@@ -122,8 +72,7 @@ public class SeanceController {
         Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
         String intituleLecon = request.getParameter("TypeLecon");
         TypeLecon typeLecon = typeLeconRepository.getByIntitule(intituleLecon);
-        HashMap<String, String> nomGroupes
-                = Tools.getArrayFromRequest(request, "ml");
+        HashMap<String, String> nomGroupes = Tools.getArrayFromRequest(request, "ml");
         ArrayList<Groupe> groupes = new ArrayList<>();
 
         for (String nomGroupe : nomGroupes.values()) {
@@ -133,8 +82,7 @@ public class SeanceController {
             }
         }
 
-        HashMap<String, String> numeroSalles
-                = Tools.getArrayFromRequest(request, "sl");
+        HashMap<String, String> numeroSalles = Tools.getArrayFromRequest(request, "sl");
         ArrayList<Salle> salles = new ArrayList<>();
 
         for (String numeroSalle : numeroSalles.values()) {
@@ -147,8 +95,7 @@ public class SeanceController {
         String hDebutStr = request.getParameter("HDebut");
         Date hDebut = Tools.getDateFromString(hDebutStr, "yyyy-MM-dd'T'HH:mm");
 
-        HashMap<String, String> initialesEnseignants
-                = Tools.getArrayFromRequest(request, "el");
+        HashMap<String, String> initialesEnseignants = Tools.getArrayFromRequest(request, "el");
         ArrayList<Enseignant> enseignants = new ArrayList<>();
 
         for (String initialesEnseignant : initialesEnseignants.values()) {
@@ -157,8 +104,25 @@ public class SeanceController {
                 enseignants.add(e);
             }
         }
-        boolean succes = false;
 
+        // ========== VÉRIFICATION DES CONFLITS ==========
+        String conflitMessage = verifierConflits(idSeance, groupes, enseignants, salles, hDebut, duree);
+        
+        if (conflitMessage != null) {
+            // Il y a un conflit - retourner avec message d'erreur
+            returned = new ModelAndView("seance");
+            returned.addObject("error", conflitMessage);
+            returned.addObject("newseance", false);
+            returned.addObject("enseignantsList", enseignantRepository.findAll());
+            returned.addObject("groupesList", groupeRepository.findAll());
+            returned.addObject("enseignementsList", enseignementRepository.findAll());
+            returned.addObject("typeLeconsList", typeLeconRepository.findAll());
+            returned.addObject("sallesList", salleRepository.findAll());
+            return returned;
+        }
+        // ===============================================
+
+        boolean succes = false;
         Seance retour = null;
         if (idSeance > 0) {//if id exist
             retour = seanceRepository.update(idSeance, enseignement, enseignants, typeLecon, groupes, salles, hDebut, duree);
@@ -177,25 +141,189 @@ public class SeanceController {
         returned.addObject("sallesList", salleRepository.findAll());
         return returned;
     }
-    /*
-    @RequestMapping(value = "deleteseance.do", method = RequestMethod.POST)
-    public ModelAndView handlePostDeleteSeance(HttpServletRequest request) {
 
-        ModelAndView returned;
-
-        // Create or update seances
-        String acronyme = request.getParameter("Acronyme");
-
-        seanceRepository.remove(acronyme);
-
-        // return to list
-        returned = new ModelAndView("seances");
-        Collection<Seance> myList = seanceRepository.findAll();
-        returned.addObject("seancesList", myList);
-        Collection<Enseignant> Enseignants = enseignantRepository.findAll();
-        returned.addObject("enseignantsList", Enseignants);
-
-        return returned;
-    }
+    // ========== MÉTHODES DE VÉRIFICATION DES CONFLITS ==========
+    
+    /**
+     * Vérifie tous les conflits possibles
+     * @return null si pas de conflit, sinon message d'erreur
      */
+    private String verifierConflits(int idSeance, List<Groupe> groupes, 
+                                    List<Enseignant> enseignants, 
+                                    List<Salle> salles, 
+                                    Date hDebut, int duree) {
+        if (hDebut == null || duree <= 0) {
+            return "Date et durée invalides";
+        }
+        
+        Date fin = new Date(hDebut.getTime() + duree * 60000);
+        
+        // Récupérer TOUTES les séances une seule fois
+        Collection<Seance> toutesSeances = seanceRepository.findAll();
+        
+        // Vérifier conflits groupes
+        String conflitGroupe = verifierConflitsGroupes(idSeance, groupes, hDebut, fin, toutesSeances);
+        if (conflitGroupe != null) {
+            return conflitGroupe;
+        }
+        
+        // Vérifier conflits enseignants
+        String conflitEnseignant = verifierConflitsEnseignants(idSeance, enseignants, hDebut, fin, toutesSeances);
+        if (conflitEnseignant != null) {
+            return conflitEnseignant;
+        }
+        
+        // Vérifier conflits salles
+        String conflitSalle = verifierConflitsSalles(idSeance, salles, hDebut, fin, toutesSeances);
+        if (conflitSalle != null) {
+            return conflitSalle;
+        }
+        
+        return null; // Pas de conflit
+    }
+    
+    /**
+     * Vérifie les conflits pour les groupes et leurs dépendances
+     */
+    private String verifierConflitsGroupes(int idSeance, List<Groupe> groupes, 
+                                          Date debut, Date fin, 
+                                          Collection<Seance> toutesSeances) {
+        for (Groupe groupe : groupes) {
+            // Récupérer tous les groupes liés (père et fils)
+            List<Groupe> groupesLies = getGroupesLies(groupe);
+            groupesLies.add(groupe);
+            
+            for (Groupe g : groupesLies) {
+                // Parcourir toutes les séances
+                for (Seance seanceExist : toutesSeances) {
+                    // Ignorer la séance elle-même si modification
+                    if (idSeance > 0 && seanceExist.getIdSeance() != null && 
+                        seanceExist.getIdSeance() == idSeance) {
+                        continue;
+                    }
+                    
+                    // Vérifier si cette séance concerne le groupe
+                    if (seanceExist.getGroupeList() != null) {
+                        for (Groupe groupeSeance : seanceExist.getGroupeList()) {
+                            if (groupeSeance.getNomGroupe().equals(g.getNomGroupe())) {
+                                // Vérifier la superposition horaire
+                                if (seanceExist.getHDebut() != null && seanceExist.getDuree() != null) {
+                                    Date debutExist = seanceExist.getHDebut();
+                                    Date finExist = new Date(debutExist.getTime() + 
+                                        seanceExist.getDuree() * 60000);
+                                    
+                                    if (debut.before(finExist) && fin.after(debutExist)) {
+                                        return "Conflit détecté : Le groupe '" + g.getNomGroupe() + 
+                                               "' a déjà une séance à cet horaire";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Récupère tous les groupes liés (pères et fils)
+     */
+    private List<Groupe> getGroupesLies(Groupe groupe) {
+        List<Groupe> groupesLies = new ArrayList<>();
+        
+        // Recharger le groupe avec ses relations
+        Groupe groupeComplet = groupeRepository.getByNomGroupe(groupe.getNomGroupe());
+        
+        if (groupeComplet != null) {
+            // Ajouter les groupes pères
+            if (groupeComplet.getGroupeList() != null) {
+                groupesLies.addAll(groupeComplet.getGroupeList());
+            }
+            
+            // Ajouter les groupes fils
+            if (groupeComplet.getGroupeList1() != null) {
+                groupesLies.addAll(groupeComplet.getGroupeList1());
+            }
+        }
+        
+        return groupesLies;
+    }
+    
+    /**
+     * Vérifie les conflits pour les enseignants
+     */
+    private String verifierConflitsEnseignants(int idSeance, List<Enseignant> enseignants, 
+                                               Date debut, Date fin,
+                                               Collection<Seance> toutesSeances) {
+        for (Enseignant enseignant : enseignants) {
+            // Parcourir toutes les séances
+            for (Seance seanceExist : toutesSeances) {
+                // Ignorer la séance elle-même si modification
+                if (idSeance > 0 && seanceExist.getIdSeance() != null && 
+                    seanceExist.getIdSeance() == idSeance) {
+                    continue;
+                }
+                
+                // Vérifier si cette séance concerne l'enseignant
+                if (seanceExist.getEnseignantList() != null) {
+                    for (Enseignant enseignantSeance : seanceExist.getEnseignantList()) {
+                        if (enseignantSeance.getInitiales().equals(enseignant.getInitiales())) {
+                            // Vérifier la superposition horaire
+                            if (seanceExist.getHDebut() != null && seanceExist.getDuree() != null) {
+                                Date debutExist = seanceExist.getHDebut();
+                                Date finExist = new Date(debutExist.getTime() + 
+                                    seanceExist.getDuree() * 60000);
+                                
+                                if (debut.before(finExist) && fin.after(debutExist)) {
+                                    return "Conflit détecté : L'enseignant '" + 
+                                           enseignant.getNomEnseignant() + 
+                                           "' a déjà une séance à cet horaire";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Vérifie les conflits pour les salles
+     */
+    private String verifierConflitsSalles(int idSeance, List<Salle> salles, 
+                                         Date debut, Date fin,
+                                         Collection<Seance> toutesSeances) {
+        for (Salle salle : salles) {
+            // Parcourir toutes les séances
+            for (Seance seanceExist : toutesSeances) {
+                // Ignorer la séance elle-même si modification
+                if (idSeance > 0 && seanceExist.getIdSeance() != null && 
+                    seanceExist.getIdSeance() == idSeance) {
+                    continue;
+                }
+                
+                // Vérifier si cette séance concerne la salle
+                if (seanceExist.getSalleList() != null) {
+                    for (Salle salleSeance : seanceExist.getSalleList()) {
+                        if (salleSeance.getNumeroSalle().equals(salle.getNumeroSalle())) {
+                            // Vérifier la superposition horaire
+                            if (seanceExist.getHDebut() != null && seanceExist.getDuree() != null) {
+                                Date debutExist = seanceExist.getHDebut();
+                                Date finExist = new Date(debutExist.getTime() + 
+                                    seanceExist.getDuree() * 60000);
+                                
+                                if (debut.before(finExist) && fin.after(debutExist)) {
+                                    return "Conflit détecté : La salle '" + salle.getNumeroSalle() + 
+                                           "' est déjà réservée à cet horaire";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }

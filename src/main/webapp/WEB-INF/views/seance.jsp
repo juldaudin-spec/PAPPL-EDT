@@ -27,6 +27,27 @@
                         <h1>Créer une nouvelle séance</h1>
                     </div>
                 </div>
+                
+                <!-- ========== AJOUT DES MESSAGES D'ERREUR ET SUCCÈS ========== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <c:if test="${not empty error}">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Erreur !</strong> ${error}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </c:if>
+                        
+                        <c:if test="${newseance}">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Succès !</strong> Séance créée/modifiée avec succès
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </c:if>
+                    </div>
+                </div>
+                <!-- =========================================================== -->
+                
                 <div class="row">
                     <div class="col-md-12">
                         <form action="saveseance.do" method="POST">
@@ -212,13 +233,6 @@
                                 </tfoot>
                             </table>
                         </form>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <c:if test='${newseance}'>
-                            <p>Seance créé/modifié avec succès</p>
-                        </c:if>
                     </div>
                 </div>
             </div>
