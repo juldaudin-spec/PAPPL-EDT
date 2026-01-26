@@ -59,7 +59,6 @@ public class SeanceController {
 
         ModelAndView returned;
 
-        // Create or update seances
         String idSeanceStr = request.getParameter("IdSeance");
         int idSeance = Tools.getIntFromString(idSeanceStr);
         String dureeStr = request.getParameter("Duree");
@@ -105,11 +104,9 @@ public class SeanceController {
             }
         }
 
-        // ========== VÉRIFICATION DES CONFLITS ==========
-        String conflitMessage = verifierConflits(idSeance, groupes, enseignants, salles, hDebut, duree);
+        String conflitMessage = verifierConflits(idSeance, groupes, enseignants, salles, hDebut, duree, enseignement, typeLecon);
         
         if (conflitMessage != null) {
-            // Il y a un conflit - retourner avec message d'erreur
             returned = new ModelAndView("seance");
             returned.addObject("error", conflitMessage);
             returned.addObject("newseance", false);
@@ -120,11 +117,10 @@ public class SeanceController {
             returned.addObject("sallesList", salleRepository.findAll());
             return returned;
         }
-        // ===============================================
 
         boolean succes = false;
         Seance retour = null;
-        if (idSeance > 0) {//if id exist
+        if (idSeance > 0) {
             retour = seanceRepository.update(idSeance, enseignement, enseignants, typeLecon, groupes, salles, hDebut, duree);
         } else {
             retour = seanceRepository.create(enseignement, enseignants, typeLecon, groupes, salles, hDebut, duree);
@@ -142,71 +138,58 @@ public class SeanceController {
         return returned;
     }
 
-    // ========== MÉTHODES DE VÉRIFICATION DES CONFLITS ==========
-    
-    /**
-     * Vérifie tous les conflits possibles
-     * @return null si pas de conflit, sinon message d'erreur
-     */
     private String verifierConflits(int idSeance, List<Groupe> groupes, 
                                     List<Enseignant> enseignants, 
                                     List<Salle> salles, 
-                                    Date hDebut, int duree) {
+                                    Date hDebut, int duree,
+                                    Enseignement enseignement, TypeLecon typeLecon) {
         if (hDebut == null || duree <= 0) {
             return "Date et durée invalides";
         }
         
         Date fin = new Date(hDebut.getTime() + duree * 60000);
-        
-        // Récupérer TOUTES les séances une seule fois
         Collection<Seance> toutesSeances = seanceRepository.findAll();
         
-        // Vérifier conflits groupes
         String conflitGroupe = verifierConflitsGroupes(idSeance, groupes, hDebut, fin, toutesSeances);
         if (conflitGroupe != null) {
             return conflitGroupe;
         }
         
-        // Vérifier conflits enseignants
         String conflitEnseignant = verifierConflitsEnseignants(idSeance, enseignants, hDebut, fin, toutesSeances);
         if (conflitEnseignant != null) {
             return conflitEnseignant;
         }
         
-        // Vérifier conflits salles
         String conflitSalle = verifierConflitsSalles(idSeance, salles, hDebut, fin, toutesSeances);
         if (conflitSalle != null) {
             return conflitSalle;
         }
         
-        return null; // Pas de conflit
+        String erreurVolumetrie = verifierVolumetrieHoraire(idSeance, enseignement, typeLecon, duree, toutesSeances);
+        if (erreurVolumetrie != null) {
+            return erreurVolumetrie;
+        }
+        
+        return null;
     }
     
-    /**
-     * Vérifie les conflits pour les groupes et leurs dépendances
-     */
     private String verifierConflitsGroupes(int idSeance, List<Groupe> groupes, 
                                           Date debut, Date fin, 
                                           Collection<Seance> toutesSeances) {
         for (Groupe groupe : groupes) {
-            // Récupérer tous les groupes liés (père et fils)
             List<Groupe> groupesLies = getGroupesLies(groupe);
             groupesLies.add(groupe);
             
             for (Groupe g : groupesLies) {
-                // Parcourir toutes les séances
                 for (Seance seanceExist : toutesSeances) {
-                    // Ignorer la séance elle-même si modification
                     if (idSeance > 0 && seanceExist.getIdSeance() != null && 
                         seanceExist.getIdSeance() == idSeance) {
                         continue;
                     }
                     
-                    // Vérifier si cette séance concerne le groupe
                     if (seanceExist.getGroupeList() != null) {
                         for (Groupe groupeSeance : seanceExist.getGroupeList()) {
                             if (groupeSeance.getNomGroupe().equals(g.getNomGroupe())) {
-                                // Vérifier la superposition horaire
                                 if (seanceExist.getHDebut() != null && seanceExist.getDuree() != null) {
                                     Date debutExist = seanceExist.getHDebut();
                                     Date finExist = new Date(debutExist.getTime() + 
@@ -226,22 +209,14 @@ public class SeanceController {
         return null;
     }
     
-    /**
-     * Récupère tous les groupes liés (pères et fils)
-     */
     private List<Groupe> getGroupesLies(Groupe groupe) {
         List<Groupe> groupesLies = new ArrayList<>();
-        
-        // Recharger le groupe avec ses relations
         Groupe groupeComplet = groupeRepository.getByNomGroupe(groupe.getNomGroupe());
         
         if (groupeComplet != null) {
-            // Ajouter les groupes pères
             if (groupeComplet.getGroupeList() != null) {
                 groupesLies.addAll(groupeComplet.getGroupeList());
             }
-            
-            // Ajouter les groupes fils
             if (groupeComplet.getGroupeList1() != null) {
                 groupesLies.addAll(groupeComplet.getGroupeList1());
             }
@@ -250,26 +225,19 @@ public class SeanceController {
         return groupesLies;
     }
     
-    /**
-     * Vérifie les conflits pour les enseignants
-     */
     private String verifierConflitsEnseignants(int idSeance, List<Enseignant> enseignants, 
                                                Date debut, Date fin,
                                                Collection<Seance> toutesSeances) {
         for (Enseignant enseignant : enseignants) {
-            // Parcourir toutes les séances
             for (Seance seanceExist : toutesSeances) {
-                // Ignorer la séance elle-même si modification
                 if (idSeance > 0 && seanceExist.getIdSeance() != null && 
                     seanceExist.getIdSeance() == idSeance) {
                     continue;
                 }
                 
-                // Vérifier si cette séance concerne l'enseignant
                 if (seanceExist.getEnseignantList() != null) {
                     for (Enseignant enseignantSeance : seanceExist.getEnseignantList()) {
                         if (enseignantSeance.getInitiales().equals(enseignant.getInitiales())) {
-                            // Vérifier la superposition horaire
                             if (seanceExist.getHDebut() != null && seanceExist.getDuree() != null) {
                                 Date debutExist = seanceExist.getHDebut();
                                 Date finExist = new Date(debutExist.getTime() + 
@@ -289,26 +257,19 @@ public class SeanceController {
         return null;
     }
     
-    /**
-     * Vérifie les conflits pour les salles
-     */
     private String verifierConflitsSalles(int idSeance, List<Salle> salles, 
                                          Date debut, Date fin,
                                          Collection<Seance> toutesSeances) {
         for (Salle salle : salles) {
-            // Parcourir toutes les séances
             for (Seance seanceExist : toutesSeances) {
-                // Ignorer la séance elle-même si modification
                 if (idSeance > 0 && seanceExist.getIdSeance() != null && 
                     seanceExist.getIdSeance() == idSeance) {
                     continue;
                 }
                 
-                // Vérifier si cette séance concerne la salle
                 if (seanceExist.getSalleList() != null) {
                     for (Salle salleSeance : seanceExist.getSalleList()) {
                         if (salleSeance.getNumeroSalle().equals(salle.getNumeroSalle())) {
-                            // Vérifier la superposition horaire
                             if (seanceExist.getHDebut() != null && seanceExist.getDuree() != null) {
                                 Date debutExist = seanceExist.getHDebut();
                                 Date finExist = new Date(debutExist.getTime() + 
@@ -325,5 +286,54 @@ public class SeanceController {
             }
         }
         return null;
+    }
+    
+    private String verifierVolumetrieHoraire(int idSeance, Enseignement enseignement, 
+                                             TypeLecon typeLecon, int dureeNouvelle,
+                                             Collection<Seance> toutesSeances) {
+        
+        int minutesUtilisees = 0;
+        
+        for (Seance seanceExist : toutesSeances) {
+            if (idSeance > 0 && seanceExist.getIdSeance() != null && 
+                seanceExist.getIdSeance() == idSeance) {
+                continue;
+            }
+            
+            if (seanceExist.getAcronyme() != null && 
+                seanceExist.getAcronyme().getAcronyme().equals(enseignement.getAcronyme()) &&
+                seanceExist.getIntitule() != null &&
+                seanceExist.getIntitule().getIntitule().equals(typeLecon.getIntitule()) &&
+                seanceExist.getDuree() != null) {
+                minutesUtilisees += seanceExist.getDuree();
+            }
+        }
+        
+        minutesUtilisees += dureeNouvelle;
+        int heuresUtilisees = minutesUtilisees / 60;
+        
+        int volumetrieMax = getVolumetrieFromEnseignement(enseignement, typeLecon);
+        
+        if (volumetrieMax > 0 && heuresUtilisees > volumetrieMax) {
+            return "Warning : Volume horaire dépassé pour " + enseignement.getNomEnseignement() + 
+                   " (" + typeLecon.getIntitule() + "). " +
+                   "Utilisé : " + heuresUtilisees + "h / Prévu : " + volumetrieMax + "h";
+        }
+        
+        return null;
+    }
+    
+    private int getVolumetrieFromEnseignement(Enseignement enseignement, TypeLecon typeLecon) {
+        if (enseignement != null && enseignement.getContientList() != null) {
+            for (Object obj : enseignement.getContientList()) {
+                tp.projetpappl.items.Contient contient = (tp.projetpappl.items.Contient) obj;
+                if (contient.getIntitule() != null && 
+                    contient.getIntitule().equals(typeLecon.getIntitule()) &&
+                    contient.getVolumetrie() != null) {
+                    return contient.getVolumetrie().intValue();
+                }
+            }
+        }
+        return 0;
     }
 }
