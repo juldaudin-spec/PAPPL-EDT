@@ -1,0 +1,13 @@
+target/
+*.class
+.idea/
+*.iml
+.vscode/*
+!.vscode/settings.json
+.classpath
+.project
+.settings/
+*.log
+*.war
+*.jar
+surefire-reports/
