@@ -43,7 +43,7 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
     public List<Contient> findContientByIntituleByEnseignementByGroupe(String intitule, String acronyme, String nomGroupe) {
         List<Contient> listContient =null;
         if (intitule!=null&&acronyme!=null&&nomGroupe!=null){
-            String requete = "SELECT contient_id FROM contient JOIN participe ON contient_id WHERE acronyme= :acronyme AND intitule= :intitule AND nom_groupe= :nomGroupe";
+            String requete = "SELECT contient_id FROM contient c JOIN participe p ON p.contient_id=c.contient_id WHERE c.acronyme= :acronyme AND c.intitule= :intitule AND p.nom_groupe= :nomGroupe";
             TypedQuery<String> query = entityManager.createQuery(requete, String.class);
             query.setParameter("acronyme", acronyme);
             query.setParameter("intitule", intitule);
@@ -63,7 +63,7 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
     public List<TypeLecon> findIntituleByEnseignementByGroupe(String acronyme, String nomGroupe) {
         List<TypeLecon> listType = null;
         if (acronyme!=null&&nomGroupe!=null){
-            String requete = "SELECT intitule FROM contient JOIN participe ON contient_id WHERE acronyme= :acronyme AND nom_groupe= :nomGroupe";
+            String requete = "SELECT intitule FROM contient c JOIN participe p ON p.contient_id=c.contient_id WHERE c.acronyme= :acronyme AND p.nom_groupe= :nomGroupe";
             TypedQuery<String> query = entityManager.createQuery(requete, String.class);
             query.setParameter("acronyme", acronyme);
             query.setParameter("nomGroupe", nomGroupe);
