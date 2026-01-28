@@ -47,14 +47,27 @@ public class ContientController {
         
             List<Enseignement> enseignements = contientRepository.findEnseignementByGroupe(groupe.getNomGroupe());
             returned.addObject("enseignements",enseignements);
+            
+            List<List<TypeLecon>> intituleByEnseignement=getIntituleByEnseignement(groupe, enseignements);
+            returned.addObject("intitules",intituleByEnseignement);
+            
+            List<List<List<Contient>>> contients = getListContient(groupe, enseignements, intituleByEnseignement);
+            returned.addObject("contients",contients);
+            }
+        return returned;
+        }
+        
+        public List<List<TypeLecon>> getIntituleByEnseignement(Groupe groupe, List<Enseignement> enseignements){
             List<List<TypeLecon>> intituleByEnseignement=new ArrayList<>();
             if (!enseignements.isEmpty()){
                 for (Enseignement enseignement : enseignements){
             List<TypeLecon> intitules = contientRepository.findIntituleByEnseignementByGroupe(enseignement.getAcronyme(), groupe.getNomGroupe());
             intituleByEnseignement.add(intitules);
                     }}
-            returned.addObject("intitules",intituleByEnseignement);
-            List<List<List<Contient>>> contients = new ArrayList<>();
+        return intituleByEnseignement;
+    }
+    public List<List<List<Contient>>> getListContient (Groupe groupe, List<Enseignement> enseignements, List<List<TypeLecon>> intituleByEnseignement){
+        List<List<List<Contient>>> contients = new ArrayList<>();
             int i=0;
             if (!intituleByEnseignement.isEmpty()){
                 for (Enseignement enseignement : enseignements){
@@ -67,8 +80,9 @@ public class ContientController {
                     contients.add(contientByEnseignement);
                     }
             }
-            returned.addObject("contients",contients);
-        }
-        return returned;
+        return contients;
+        
     }
+    
+      
 }
