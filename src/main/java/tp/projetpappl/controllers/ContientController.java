@@ -36,7 +36,10 @@ public class ContientController {
     public ModelAndView handleIndexGet(HttpServletRequest request) {
         ModelAndView returned = new ModelAndView("compteRenduGroupe");
         String idStr = request.getParameter("idGroupe");
-        Optional<Groupe> groupeOpt = groupeRepository.findById(idStr);
+        Optional<Groupe> groupeOpt =null;
+        if (idStr!=null){
+            groupeOpt=groupeRepository.findById(idStr);
+        }
         Groupe groupe;
         if (groupeOpt!=null){
             groupe=groupeOpt.get();
