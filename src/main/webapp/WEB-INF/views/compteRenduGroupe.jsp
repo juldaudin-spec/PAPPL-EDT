@@ -30,43 +30,62 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">                       
-                            <table class="table table-striped">
-                                <thead>
-                                <th>
-                                    Enseignement
-                                </th>
-                                <th>
-                                    Type de cours
-                                </th>
-                                <th>
-                                    durée à faire
-                                </th>
-                                <th>
-                                    durée programmée
-                                </th>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="enseignement" items="${enseignements}">
+                        <table class="table table-striped">
+                            <thead>
+                            <th class="col-6">
+                                Enseignement
+                            </th>
+                            <th class="col-2">
+                                Type de cours
+                            </th>
+                            <th class="col-2">
+                                durée à faire
+                            </th>
+                            <th class="col-2">
+                                durée programmée
+                            </th>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="enseignement" items="${enseignements}" varStatus="status">
                                     <tr>
-                                        <td>
+                                        <td  class="col-6">
                                             ${enseignement.acronyme}
                                         </td>
-                                    </tr>
-                                    <tr>
+                                        <td colspan="3">
+                                            <div class="col-md-12">   
+                                            <table class="table table-striped">
+                                                <tbody>
+                                                    <c:forEach var="type" items="${intitules.get(status.index)}" varStatus="status2">
+                                                        <tr class="col-6">
+                                                            <td class="col-4">
+                                                                ${type.intitule}
+                                                            </td>
+                                                            <c:forEach var="contient" items="${contients.get(status.index).get(status2.index)}">
+                                                                <td class="col-4">
+                                                                    ${contient.volumetrie}
+                                                                </td>
+                                                            </c:forEach>
+                                                            <td class="col-4">
+                                                                <c:set var="dureeTot" value="0" scope="page"/>
+                                                                <c:forEach var="seance" items="${seances}">
+                                                                    <c:choose>
+                                                                        <c:when test="${(seance.acronyme.acronyme==enseignement.acronyme)&&(seance.intitule.intitule==type.intitule)}">
+                                                                            <c:set var="dureeTot" value="${dureeTot+seance.duree}"/>
+                                                                        </c:when>
+                                                                    </c:choose>
+                                                                </c:forEach>
+                                                                ${dureeTot}
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                            </div>
                                         <td>
-                                        <table class="table table-striped">
-                                            <tbody>
-                                                <tr>
-                                                    test
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <td>
                                     </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </form>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="row">
