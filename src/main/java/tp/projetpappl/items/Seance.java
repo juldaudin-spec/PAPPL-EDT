@@ -22,6 +22,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -199,4 +200,26 @@ public class Seance implements Serializable {
         };
     }
     
+    /**
+     * fonciton pour trier les séance par Enseignement, puis par sous groupe d'intitulé
+     * 
+     * clairement optimisable
+     * 
+     * @param listSeance la liste à trier -- the list to sort
+     * @param listEnseignement pour savoir dans quelle ordre mettre les Enseignements -- to know the order to sort by Enseignement
+     * @param listIntitule pour savoir dans quelle ordre mettre les type de leçon -- to know the order to sort by TypeLecon
+     */
+    public void sortByEnseignementByIntitule(List<Seance> listSeance, List<Enseignement> listEnseignement, List<TypeLecon> listIntitule){
+        List<Seance> listSeanceTemp = new ArrayList<>(listSeance.size());
+        for (Enseignement enseignement : listEnseignement){
+            for (TypeLecon typeLecon: listIntitule){
+                for (Seance seance : listSeance){
+                    if ((seance.getAcronyme().getAcronyme() == null ? enseignement.getAcronyme() == null : seance.getAcronyme().getAcronyme().equals(enseignement.getAcronyme()))&&(seance.getIntitule().getIntitule() == null ? typeLecon.getIntitule() == null : seance.getIntitule().getIntitule().equals(typeLecon.getIntitule()))){
+                        listSeanceTemp.add(seance);
+                    }
+                }
+            }
+        }
+        listSeance=listSeanceTemp;
+    }
 }
