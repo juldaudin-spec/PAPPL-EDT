@@ -40,60 +40,45 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
     GroupeRepository groupeRepository;
     
     @Override
-    public List<Contient> findContientByIntituleByEnseignementByGroupe(String intitule, String acronyme, String nomGroupe) {
+    public List<Contient> findContientByIntituleByEnseignementByGroupe(TypeLecon intitule, Enseignement acronyme, Groupe groupe) {
         List<Contient> listContient =null;
-        if (intitule!=null&&acronyme!=null&&nomGroupe!=null){
-            String requete = "SELECT contient_id FROM contient c JOIN participe p ON p.contient_id=c.contient_id WHERE c.acronyme= :acronyme AND c.intitule= :intitule AND p.nom_groupe= :nomGroupe";
-            TypedQuery<String> query = entityManager.createQuery(requete, String.class);
+        if (intitule!=null&&acronyme!=null&&groupe!=null){
+            String requete = "SELECT c FROM Contient c JOIN c.groupeList g WHERE c.acronyme= :acronyme AND c.intitule= :intitule AND g.nomGroupe= :nomGroupe";
+            TypedQuery<Contient> query = entityManager.createQuery(requete, Contient.class);
             query.setParameter("acronyme", acronyme);
             query.setParameter("intitule", intitule);
-            query.setParameter("nomGroupe", nomGroupe);
-            List<String> listID = query.getResultList();
-            listContient=new ArrayList<>(listID.size());
-            int id;
-            for(String idStr : listID){
-                id=Tools.getIntFromString(idStr);
-                listContient.add(contientRepository.getReferenceById(id));
-            }
+            query.setParameter("nomGroupe", groupe.getNomGroupe());
+            listContient = query.getResultList();
         }
         return listContient;
     }
 
     @Override
-    public List<TypeLecon> findIntituleByEnseignementByGroupe(String acronyme, String nomGroupe) {
+    public List<TypeLecon> findIntituleByEnseignementByGroupe(Enseignement acronyme, Groupe groupe) {
         List<TypeLecon> listType = null;
-        if (acronyme!=null&&nomGroupe!=null){
-            String requete = "SELECT intitule FROM contient c JOIN participe p ON p.contient_id=c.contient_id WHERE c.acronyme= :acronyme AND p.nom_groupe= :nomGroupe";
-            TypedQuery<String> query = entityManager.createQuery(requete, String.class);
+        if (acronyme!=null&&groupe!=null){
+            String requete = "SELECT c.intitule FROM Contient c JOIN c.groupeList g WHERE c.acronyme= :acronyme AND g.nomGroupe= :nomGroupe";
+            TypedQuery<TypeLecon> query = entityManager.createQuery(requete, TypeLecon.class);
             query.setParameter("acronyme", acronyme);
-            query.setParameter("nomGroupe", nomGroupe);
-            List<String> listID = query.getResultList();
-            listType=new ArrayList<>(listID.size());
-            for(String id : listID){                
-                listType.add(typeLeconRepository.getReferenceById(id));
-            }
+            query.setParameter("nomGroupe", groupe.getNomGroupe());
+            listType = query.getResultList();
         }
         return listType;
     }
 
     @Override
-    public List<Enseignement> findEnseignementByGroupe(String nomGroupe) {
-        List<Enseignement> listEnseignement = null;
-        if (nomGroupe!=null){
-            List<String> listID = enseignementRepository.findAcronymeParGroupe(nomGroupe);
-            listEnseignement=new ArrayList<>();
-            for(String id : listID){                
-                listEnseignement.add(enseignementRepository.getReferenceById(id));
-            }
-        }
-        return listEnseignement;
+    public List<Enseignement> findEnseignementByGroupe(Groupe groupe) {
+        String requete = "SELECT c.acronyme FROM Contient c JOIN c.groupeList g WHERE g.nomGroupe= :nomGroupe";
+        TypedQuery<Enseignement> query = entityManager.createQuery(requete, Enseignement.class);
+        query.setParameter("nomGroupe", groupe.getNomGroupe());
+        return query.getResultList();
     }
 
     @Override
-    public List<Groupe> findGroupeByEnseignement(String acronyme) {
+    public List<Groupe> findGroupeByEnseignement(Enseignement acronyme) {
         List<Groupe> listGroupe = null;
         if (acronyme!=null){
-            List<String> listID = groupeRepository.findGroupeParEnseignement(acronyme);
+            List<String> listID = groupeRepository.findGroupeByEnseignement(acronyme.getAcronyme());
             listGroupe=new ArrayList<>();
             for(String id : listID){                
                 listGroupe.add(groupeRepository.getReferenceById(id));
