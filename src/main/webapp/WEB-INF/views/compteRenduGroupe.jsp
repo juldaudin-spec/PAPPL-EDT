@@ -53,33 +53,35 @@
                                         </td>
                                         <td colspan="3">
                                             <div class="col-md-12">   
-                                            <table class="table table-striped">
-                                                <tbody>
-                                                    <c:forEach var="type" items="${intitules.get(status.index)}" varStatus="status2">
-                                                        <tr class="col-6">
-                                                            <td class="col-4">
-                                                                ${type.intitule}
-                                                            </td>
-                                                            <c:forEach var="contient" items="${contients.get(status.index).get(status2.index)}">
+                                                <table class="table table-striped">
+                                                    <tbody>
+                                                        <c:forEach var="type" items="${intitules.get(status.index)}" varStatus="status2">
+                                                            <tr class="col-6">
                                                                 <td class="col-4">
-                                                                    ${contient.volumetrie}
+                                                                    ${type.intitule}
                                                                 </td>
-                                                            </c:forEach>
-                                                            <td class="col-4">
-                                                                <c:set var="dureeTot" value="0" scope="page"/>
-                                                                <c:forEach var="seance" items="${seances}">
-                                                                    <c:choose>
-                                                                        <c:when test="${(seance.acronyme.acronyme==enseignement.acronyme)&&(seance.intitule.intitule==type.intitule)}">
-                                                                            <c:set var="dureeTot" value="${dureeTot+seance.duree}"/>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </c:forEach>
-                                                                ${dureeTot}
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
+                                                                <td class="col-4">
+                                                                    <c:forEach var="contient" items="${contients.get(status.index).get(status2.index)}">
+
+                                                                        <p>${contient.volumetrie}</p>
+
+                                                                    </c:forEach>
+                                                                </td>
+                                                                <td class="col-4">
+                                                                    <c:set var="dureeTot" value="0" scope="page"/>
+                                                                    <c:forEach var="seance" items="${seances}">
+                                                                        <c:choose>
+                                                                            <c:when test="${(seance.acronyme.acronyme==enseignement.acronyme)&&(seance.intitule.intitule==type.intitule)}">
+                                                                                <c:set var="dureeTot" value="${dureeTot+seance.duree}"/>
+                                                                            </c:when>
+                                                                        </c:choose>
+                                                                    </c:forEach>
+                                                                    ${dureeTot}
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         <td>
                                     </tr>
