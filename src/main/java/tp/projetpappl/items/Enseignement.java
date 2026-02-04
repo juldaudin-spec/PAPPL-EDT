@@ -156,9 +156,9 @@ public class Enseignement implements Serializable {
         return "tp.projetpappl.items.Enseignement[ acronyme=" + acronyme + " ]";
     }
     public int compareTo(Object object) {
-        if (object == null) {
+        /*if (object == null) {
             return 1;
-        } else if (!(object instanceof Enseignement)) {
+        } else*/ if (!(object instanceof Enseignement)) {
             return 1;
         }
         Enseignement itemId = (Enseignement) object;
