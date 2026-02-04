@@ -6,6 +6,7 @@ package tp.projetpappl.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import tp.projetpappl.repositories.SeanceRepository;
  */
 @Controller
 public class ContientController {
+
     @Autowired
     private GroupeRepository groupeRepository;
     @Autowired
@@ -46,58 +48,114 @@ public class ContientController {
     public ModelAndView handleIndexGet(HttpServletRequest request) {
         ModelAndView returned = new ModelAndView("compteRenduGroupe");
         String idStr = request.getParameter("idGroupe");
-        Optional<Groupe> groupeOpt =null;
-        if (idStr!=null){
-            groupeOpt=groupeRepository.findById(idStr);
+        Optional<Groupe> groupeOpt = null;
+        if (idStr != null) {
+            groupeOpt = groupeRepository.findById(idStr);
         }
         Groupe groupe;
-        if (groupeOpt!=null){
-            groupe=groupeOpt.get();
-        
+        if (groupeOpt != null) {
+            groupe = groupeOpt.get();
+
             List<Enseignement> enseignements = contientRepository.findEnseignementByGroupe(groupe);
+            List<Seance> listSeance = seanceRepository.findSeanceByGroupe(groupe);
             
-            List<List<TypeLecon>> intituleByEnseignement=getIntituleByEnseignement(groupe, enseignements);
+            Collections.sort(listSeance, Seance.getComparatorByEnseignement());
+            checkEnseignement(enseignements, listSeance);
+            Collections.sort(enseignements, Enseignement.getComparator());
+            
+            List<List<TypeLecon>> intituleByEnseignement = getIntituleByEnseignement(groupe, enseignements);
+            checkTypeLecon(intituleByEnseignement, enseignements, listSeance);
             
             List<List<List<Contient>>> contients = getListContient(groupe, enseignements, intituleByEnseignement);
-            
-            List<Seance> listSeance = seanceRepository.findSeanceByGroupe(groupe);
-            seanceRepository.sortByEnseignementByIntitule(listSeance, enseignements, intituleByEnseignement);
-            
-            returned.addObject("groupe",groupe);
-            returned.addObject("enseignements",enseignements);
-            returned.addObject("intitules",intituleByEnseignement);
-            returned.addObject("contients",contients);
-            returned.addObject("seances",listSeance);
-            }
-        return returned;
+
+            returned.addObject("groupe", groupe);
+            returned.addObject("enseignements", enseignements);
+            returned.addObject("intitules", intituleByEnseignement);
+            returned.addObject("contients", contients);
+            returned.addObject("seances", listSeance);
         }
-        
-        public List<List<TypeLecon>> getIntituleByEnseignement(Groupe groupe, List<Enseignement> enseignements){
-            List<List<TypeLecon>> intituleByEnseignement=new ArrayList<>();
-            if (!enseignements.isEmpty()){
-                for (Enseignement enseignement : enseignements){
-            List<TypeLecon> intitules = contientRepository.findIntituleByEnseignementByGroupe(enseignement, groupe);
-            intituleByEnseignement.add(intitules);
-                    }}
+        return returned;
+    }
+
+    public List<List<TypeLecon>> getIntituleByEnseignement(Groupe groupe, List<Enseignement> enseignements) {
+        List<List<TypeLecon>> intituleByEnseignement = new ArrayList<>();
+        if (!enseignements.isEmpty()) {
+            for (Enseignement enseignement : enseignements) {
+                List<TypeLecon> intitules = contientRepository.findIntituleByEnseignementByGroupe(enseignement, groupe);
+                Collections.sort(intitules, TypeLecon.getComparator());
+                intituleByEnseignement.add(intitules);
+            }
+        }
         return intituleByEnseignement;
     }
-    public List<List<List<Contient>>> getListContient (Groupe groupe, List<Enseignement> enseignements, List<List<TypeLecon>> intituleByEnseignement){
-        List<List<List<Contient>>> contients = new ArrayList<>();
-            int i=0;
-            if (!intituleByEnseignement.isEmpty()){
-                for (Enseignement enseignement : enseignements){
-                    List<List<Contient>> contientByEnseignement = new ArrayList<>();
-                    for (TypeLecon typeLecon : intituleByEnseignement.get(i)){
-            List<Contient> contientByType = contientRepository.findContientByIntituleByEnseignementByGroupe(typeLecon ,enseignement, groupe);
-            contientByEnseignement.add(contientByType);
-                    }
-                    i++;
-                    contients.add(contientByEnseignement);
-                    }
+
+    public void checkEnseignement(List<Enseignement> enseignements, List<Seance> seances) {
+        List<String> acronymes = new ArrayList<>(enseignements.size());
+        for (Enseignement enseignement : enseignements) {
+            acronymes.add(enseignement.getAcronyme());
+        }
+        for (Seance seance : seances) {
+            if (!acronymes.contains(seance.getAcronyme().getAcronyme())) {
+                acronymes.add(seance.getAcronyme().getAcronyme());
+                enseignements.add(seance.getAcronyme());
             }
-        return contients;
-        
+        }
     }
-    
-      
+
+    public List<List<List<Contient>>> getListContient(Groupe groupe, List<Enseignement> enseignements, List<List<TypeLecon>> intituleByEnseignement) {
+        List<List<List<Contient>>> contients = new ArrayList<>();
+        int i = 0;
+        if (!intituleByEnseignement.isEmpty()) {
+            for (Enseignement enseignement : enseignements) {
+                List<List<Contient>> contientByEnseignement = new ArrayList<>();
+                for (TypeLecon typeLecon : intituleByEnseignement.get(i)) {
+                    List<Contient> contientByType = contientRepository.findContientByIntituleByEnseignementByGroupe(typeLecon, enseignement, groupe);
+                    contientByEnseignement.add(contientByType);
+                }
+                i++;
+                contients.add(contientByEnseignement);
+            }
+        }
+        return contients;
+
+    }
+/**
+ * 
+ * @param intituleByEnseignement une liste triée par Enseignement de (liste de TypeLecon triée)
+ * @param enseignements une liste triée d'Enseignement
+ * @param seances une liste triée par eneignement de Seance
+ */
+    private void checkTypeLecon(List<List<TypeLecon>> intituleByEnseignement, List<Enseignement> enseignements, List<Seance> seances) {
+        List<String> types = new ArrayList<>(5);
+        int j=0;
+        List<TypeLecon> listTemp;
+        String previous=null;
+        if (!seances.isEmpty()&&(!intituleByEnseignement.isEmpty())){
+            previous=seances.get(j).getAcronyme().getAcronyme();
+            types = new ArrayList<>(5);
+                for (TypeLecon type : intituleByEnseignement.get(j)){
+                    types.add(type.getIntitule());
+                }
+        }
+        Seance seance; 
+        for (int i =0;i<seances.size();i++) {
+            seance = seances.get(i);
+            if (!seance.getAcronyme().getAcronyme().equals(previous)){
+                j+=1;
+                previous=seance.getAcronyme().getAcronyme();
+                types = new ArrayList<>(5);
+                for (TypeLecon type : intituleByEnseignement.get(j)){
+                    types.add(type.getIntitule());
+                }
+            }
+            if (!types.contains(seance.getIntitule().getIntitule())){
+                types.add(seance.getIntitule().getIntitule());
+                listTemp=intituleByEnseignement.get(j);
+                listTemp.add(seance.getIntitule());
+                intituleByEnseignement.set(j,listTemp);
+            }
+
+        }
+
+    }
 }
