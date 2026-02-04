@@ -62,8 +62,11 @@
                                                                 </td>
                                                                 <td class="col-4">
                                                                     <c:forEach var="contient" items="${contients.get(status.index).get(status2.index)}">
-
-                                                                        <p>${contient.volumetrie}</p>
+                                                                        <c:set var="heures" value="${contient.volumetrie div 60}"  />
+                                                                        <c:set var="minutes" value="${contient.volumetrie mod 60}" />
+                                                                        <fmt:formatNumber var="heures" value="${heures - (heures mod 1)}" pattern="00" />
+                                                                        <fmt:formatNumber var="minutes" value="${minutes}" pattern="00" />
+                                                                        <p>${heures}h${minutes}</p>
 
                                                                     </c:forEach>
                                                                 </td>
@@ -76,7 +79,11 @@
                                                                             </c:when>
                                                                         </c:choose>
                                                                     </c:forEach>
-                                                                    ${dureeTot}
+                                                                    <c:set var="heures" value="${dureeTot div 60}" />
+                                                                    <c:set var="minutes" value="${dureeTot mod 60}" />
+                                                                        <fmt:formatNumber var="heures" value="${heures - (heures mod 1)}" pattern="00" />
+                                                                        <fmt:formatNumber var="minutes" value="${minutes}" pattern="00" />
+                                                                    <p>${heures}h${minutes}</p>
                                                                 </td>
                                                             </tr>
                                                         </c:forEach>
