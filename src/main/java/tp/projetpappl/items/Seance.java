@@ -174,12 +174,9 @@ public class Seance implements Serializable {
     }
     
     public int compareTo(Object objet){
-        if(objet==null){
+        if(!(objet instanceof Seance)){//(objet==null)||!(objet instanceof Seance))
             return 1;
-        }
-        else if (!(objet instanceof Seance)){
-            return 1;
-    }
+        } 
         Seance seance = (Seance) objet;
         if (this.hDebut.equals(seance.getHDebut())){
         return this.idSeance.compareTo(seance.getIdSeance());}
@@ -187,6 +184,29 @@ public class Seance implements Serializable {
             return this.hDebut.compareTo(seance.getHDebut());
         }
     }
+    public int compareToWithEnseignement(Object objet){
+        if(!(objet instanceof Seance)){//(objet==null)||!(objet instanceof Seance))
+            return 1;
+        } 
+        Seance seance = (Seance) objet;
+        if (this.acronyme.getAcronyme().equals(seance.getAcronyme().getAcronyme())){
+        return this.compareToWithIntitule(seance);}
+        else{
+            return this.acronyme.getAcronyme().compareTo(seance.getAcronyme().getAcronyme());
+        }
+    }
+    public int compareToWithIntitule(Object objet){
+        if(!(objet instanceof Seance)){//(objet==null)||!(objet instanceof Seance))
+            return 1;
+        } 
+        Seance seance = (Seance) objet;
+        if (this.intitule.getIntitule().equals(seance.getIntitule().getIntitule())){
+        return this.idSeance.compareTo(seance.getIdSeance());}
+        else{
+            return this.intitule.getIntitule().compareTo(seance.getIntitule().getIntitule());
+        }
+    }
+    
     public static Comparator<Seance> getComparator(){
         return new Comparator<Seance>(){
             @Override
@@ -195,6 +215,19 @@ public class Seance implements Serializable {
                     return -1;
                 }else {
                     return obj1.compareTo(obj2);
+                }
+            }
+        };
+    }
+    
+    public static Comparator<Seance> getComparatorByEnseignement(){
+        return new Comparator<Seance>(){
+            @Override
+            public int compare(Seance obj1, Seance obj2){
+                if (obj1==null){
+                    return -1;
+                }else {
+                    return obj1.compareToWithEnseignement(obj2);
                 }
             }
         };
