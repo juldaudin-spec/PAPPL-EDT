@@ -72,15 +72,15 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         if ((enseignement != null) && (typeLecon != null) && (hDebut != null)) {
             Seance item = new Seance();
             item.setHDebut(hDebut);
-            ArrayList<Enseignant> ListEnseignant = new ArrayList<Enseignant>();
-            ListEnseignant.add(enseignant);
-            ArrayList<Groupe> ListGroupe = new ArrayList<Groupe>();
-            ListGroupe.add(groupe);
-            ArrayList<Salle> ListSalle = new ArrayList<Salle>();
-            ListSalle.add(salle);
-            item.setSalleList(ListSalle);
-            item.setEnseignantList(ListEnseignant);
-            item.setGroupeList(ListGroupe);
+            ArrayList<Enseignant> listEnseignant = new ArrayList<>();
+            listEnseignant.add(enseignant);
+            ArrayList<Groupe> listGroupe = new ArrayList<>();
+            listGroupe.add(groupe);
+            ArrayList<Salle> listSalle = new ArrayList<>();
+            listSalle.add(salle);
+            item.setSalleList(listSalle);
+            item.setEnseignantList(listEnseignant);
+            item.setGroupeList(listGroupe);
             item.setAcronyme(enseignement);
             item.setIntitule(typeLecon);
             item.setDuree(duree);
@@ -142,5 +142,18 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         }
         listSeance = listSeanceTemp;
     }
+
+    @Override
+    public List<Seance> findSeanceByEnseignement(Enseignement enseignement) {
+        List<Seance> listSeance = null;
+        if (enseignement != null) {
+            String requete = "SELECT s FROM Seance s WHERE s.acronyme= :acronyme";
+            TypedQuery<Seance> query = entityManager.createQuery(requete, Seance.class);
+            query.setParameter("acronyme", enseignement);
+            listSeance = query.getResultList();
+        }
+        return listSeance;
+    }
+    
 
 }

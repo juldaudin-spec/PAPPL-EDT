@@ -5,7 +5,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Récapitulatif ${groupe.nomGroupe}</title>
+        <title>Récapitulatif ${enseignement.acronyme}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- jQuery (optionnel pour Bootstrap 5) -->
@@ -25,7 +25,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Récapitulatif de ${groupe.nomGroupe}</h1>
+                        <h1>Récapitulatif de ${enseignement.acronyme}</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -33,23 +33,23 @@
                         <table class="table table-striped">
                             <thead>
                             <th class="col-6">
-                                Enseignement
+                                Groupe
                             </th>
                             <th class="col-2">
                                 Type de cours
                             </th>
                             <th class="col-2">
-                                durée à faire
+                                Durée à faire
                             </th>
                             <th class="col-2">
-                                durée programmée
+                                Durée programmée
                             </th>
                             </thead>
                             <tbody>
-                                <c:forEach var="enseignement" items="${enseignements}" varStatus="status">
+                                <c:forEach var="groupe" items="${groupes}" varStatus="status">
                                     <tr>
                                         <td  class="col-6">
-                                            ${enseignement.acronyme}
+                                            ${groupe.nomGroupe}
                                         </td>
                                         <td colspan="3">
                                             <div class="col-md-12">   

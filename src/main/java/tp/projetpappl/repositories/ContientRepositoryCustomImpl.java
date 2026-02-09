@@ -76,16 +76,9 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
 
     @Override
     public List<Groupe> findGroupeByEnseignement(Enseignement acronyme) {
-        List<Groupe> listGroupe = null;
-        if (acronyme!=null){
-            List<String> listID = groupeRepository.findGroupeByEnseignement(acronyme.getAcronyme());
-            listGroupe=new ArrayList<>();
-            for(String id : listID){                
-                listGroupe.add(groupeRepository.getReferenceById(id));
-            }
-        }
-        return listGroupe;
+        String requete = "SELECT g FROM Contient c JOIN c.groupeList g WHERE c.acronyme= :acronyme";
+        TypedQuery<Groupe> query = entityManager.createQuery(requete, Groupe.class);
+        query.setParameter("acronyme", acronyme);
+        return query.getResultList();
     }
-
-    
-    }
+}

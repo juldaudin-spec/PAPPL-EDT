@@ -207,6 +207,19 @@ public class Seance implements Serializable {
         }
     }
     
+    public int compareToWithGroupe(Object objet){
+        if(!(objet instanceof Seance)){//(objet==null)||!(objet instanceof Seance))
+            return 1;
+        } 
+        Seance seance = (Seance) objet;
+        if ((!this.groupeList.isEmpty())&&(!seance.getGroupeList().isEmpty())&&this.groupeList.get(0).getNomGroupe().equals(seance.getGroupeList().get(0).getNomGroupe())||(this.groupeList.isEmpty())||(seance.getGroupeList().isEmpty())){
+            return this.idSeance.compareTo(seance.getIdSeance());
+        }
+        else{
+            return this.groupeList.get(0).getNomGroupe().compareTo(seance.getGroupeList().get(0).getNomGroupe());
+        }
+    }
+    
     public static Comparator<Seance> getComparator(){
         return new Comparator<Seance>(){
             @Override
@@ -228,6 +241,19 @@ public class Seance implements Serializable {
                     return -1;
                 }else {
                     return obj1.compareToWithEnseignement(obj2);
+                }
+            }
+        };
+    }
+    
+    public static Comparator<Seance> getComparatorByGroupe(){
+        return new Comparator<Seance>(){
+            @Override
+            public int compare(Seance obj1, Seance obj2){
+                if (obj1==null){
+                    return -1;
+                }else {
+                    return obj1.compareToWithGroupe(obj2);
                 }
             }
         };
