@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a380ca7-a55d-4153-a69f-1041d4cb9ee7" name="Changes" comment="" />
+    <list default="true" id="2a380ca7-a55d-4153-a69f-1041d4cb9ee7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +44,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "AffichageEDT",
+    "git-widget-placeholder": "cas",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Oussama/Desktop/PGROUP/PAPPL-EDT/src/main/java/tp/projetpappl"
   }
