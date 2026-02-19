@@ -23,14 +23,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Logiciel de création d'emplois du temps</h2>
+                        <h1>Logiciel de création d'emplois du temps</h1>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12">
-
-                        <h5>Veuillez choisir dans le menu ci-dessus l'action à réaliser</h5>
+                        <p>Veuillez choisir dans le menu ci-dessus l'action à réaliser</p>
                     </div>
                 </div>
             </div>
