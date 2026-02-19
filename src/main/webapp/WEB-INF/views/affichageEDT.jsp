@@ -21,6 +21,8 @@
     </head>
     <body>
         <%@include file="navbar.jspf" %>
+        <%@ page import="java.util.Locale"%>
+        <%@ page import="java.time.format.TextStyle"%>
         <div class="py-5">
             <div class="container">
                 <div class="row">
@@ -45,9 +47,9 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="text-center">Date</th>
+                                        <th scope="col" class="col-2 text-center">Date</th>
                                             <c:forEach var="groupeSelect" items="${listeGroupe}">
-                                            <th scope="col" class="text-center">${groupeSelect}</th>
+                                            <th scope="col-auto" class="text-center">${groupeSelect}</th>
                                             </c:forEach>
                                     </tr>
                                 </thead>
@@ -56,8 +58,26 @@
                                         <tr>
                                             <td>
                                                 <div class="position-relative" id="Jour">
-                                                    ${jour}
+                                                    <div id="date">
+                                                        ${jour}</div>
+                                                    <div id="Horaire" style="--position-element: 0px; --taille-element:1px;">
+                                                        8h </div>
+                                                    <div id="Horaire" style="--position-element: 40px; --taille-element:1px;">
+                                                        10h</div>
+                                                    <div id="Horaire" style="--position-element: 80px; --taille-element:1px;">
+                                                        12h</div>
+                                                    <div id="Horaire" style="--position-element: 120px; --taille-element:1px;">
+                                                        14h</div>
+                                                    <div id="Horaire" style="--position-element: 160px; --taille-element:1px;">
+                                                        16h</div>
+                                                    <div id="Horaire" style="--position-element: 200px; --taille-element:1px;">
+                                                        18h</div>
+                                                    <div id="nomJour">  
+                                                        ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.FRENCH)}
+                                                    </div>
+                                                    
                                                 </div>
+                                                    
                                             </td>
                                             <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
 
@@ -70,7 +90,7 @@
                                                                              --position-element: ${((seance.HDebut.getHours()-8)*60+seance.HDebut.getMinutes())/3}px;
                                                                              --taille-element:   ${seance.duree/3}px;
                                                                              ">
-                                                                            <button class="nav-link" style="text-align:center" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
+                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
                                                                         </div>
                                                                 </c:when>
                                                                 <c:otherwise>

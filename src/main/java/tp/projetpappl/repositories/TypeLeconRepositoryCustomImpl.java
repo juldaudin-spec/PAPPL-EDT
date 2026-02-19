@@ -31,7 +31,7 @@ public class TypeLeconRepositoryCustomImpl implements TypeLeconRepositoryCustom 
     }
     
     @Override
-    public List<String> findTypeLeconParEnseignementParGroupe(String acronyme, String nomGroupe){
+    public List<String> findTypeLeconByEnseignementByGroupe(String acronyme, String nomGroupe){
         String requete = "SELECT intitule FROM Contient JOIN Etudie ON Contient.contient_id=Etudie.contient_id WHERE acronyme= :acronyme AND nom_groupe= :nomGroupe";
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
         query.setParameter("acronyme", acronyme);

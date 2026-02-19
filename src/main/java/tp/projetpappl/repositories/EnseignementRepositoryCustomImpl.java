@@ -36,16 +36,16 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
     }
 
     @Override
-    public List<String> findAcronymeParEnseignant(String acronyme) {// Il y a un problème ici entre le Custom et le CustomImpl
-        String requete = "SELECT acronyme FROM Enseigne WHERE acronyme= :acronyme";
+    public List<String> findAcronymeByEnseignant(String acronyme) {// Il y a un problème ici entre le Custom et le CustomImpl
+        String requete = "SELECT acronyme FROM Enseigne e WHERE e.acronyme= :acronyme";
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
         query.setParameter("acronyme", acronyme);
         return query.getResultList();
     }
     
     @Override
-    public List<String> findAcronymeParGroupe(String nomGroupe) {
-        String requete = "SELECT acronyme FROM Contient JOIN Etudie ON Contient.contient_id=Etudie.contient_id WHERE nom_groupe= :nomGroupe";
+    public List<String> findAcronymeByGroupe(String nomGroupe) {
+        String requete = "SELECT c.acronyme FROM Contient c JOIN c.groupeList g WHERE g.nomGroupe= :nomGroupe";
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
         query.setParameter("nomGroupe", nomGroupe);
         return query.getResultList();
