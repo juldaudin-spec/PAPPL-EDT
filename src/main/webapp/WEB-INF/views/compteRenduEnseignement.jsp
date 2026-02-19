@@ -1,0 +1,112 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Récapitulatif ${enseignement.acronyme}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- jQuery (optionnel pour Bootstrap 5) -->
+        <script src="https://code.jquery.com/jquery-3.7.1.js"
+                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+        <link href="css/groupes.css" type="text/css" rel="stylesheet" />
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+        <%@include file="navbar.jspf" %>
+        <div class="py-5">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Récapitulatif de ${enseignement.acronyme}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">                       
+                        <table class="table table-striped">
+                            <thead>
+                            <th class="col-6">
+                                Groupe
+                            </th>
+                            <th class="col-2">
+                                Type de cours
+                            </th>
+                            <th class="col-2">
+                                Durée à faire
+                            </th>
+                            <th class="col-2">
+                                Durée programmée
+                            </th>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="groupe" items="${groupes}" varStatus="status">
+                                    <tr>
+                                        <td  class="col-6">
+                                            ${groupe.nomGroupe}
+                                        </td>
+                                        <td colspan="3">
+                                            <div class="col-md-12">   
+                                                <table class="table table-striped">
+                                                    <tbody>
+                                                        <c:forEach var="type" items="${intitules.get(status.index)}" varStatus="status2">
+                                                            <tr class="col-6">
+                                                                <td class="col-4">
+                                                                    ${type.intitule}
+                                                                </td>
+                                                                <td class="col-4">
+                                                                    <c:forEach var="contient" items="${contients.get(status.index).get(status2.index)}">
+                                                                        <c:set var="heures" value="${contient.volumetrie div 60}"  />
+                                                                        <c:set var="minutes" value="${contient.volumetrie mod 60}" />
+                                                                        <fmt:formatNumber var="heures" value="${heures - (heures mod 1)}" pattern="0" />
+                                                                        <fmt:formatNumber var="minutes" value="${minutes}" pattern="" />
+                                                                        <p>${heures}h${minutes}</p>
+
+                                                                    </c:forEach>
+                                                                </td>
+                                                                <td class="col-4">
+                                                                    <c:set var="dureeTot" value="0" scope="page"/>
+                                                                    <c:forEach var="seance" items="${seances}">
+                                                                        <c:forEach var="groupeParticipant" items="${seance.groupeList}">
+                                                                        <c:choose>
+                                                                            <c:when test="${(groupe.nomGroupe==groupeParticipant.nomGroupe)&&(seance.intitule.intitule==type.intitule)}">
+                                                                                <c:set var="dureeTot" value="${dureeTot+seance.duree}"/>
+                                                                            </c:when>
+                                                                        </c:choose>
+                                                                        </c:forEach>
+                                                                    </c:forEach>
+                                                                    <c:set var="heures" value="${dureeTot div 60}" />
+                                                                    <c:set var="minutes" value="${dureeTot mod 60}" />
+                                                                        <fmt:formatNumber var="heures" value="${heures - (heures mod 1)}" pattern="0" />
+                                                                        <fmt:formatNumber var="minutes" value="${minutes}" pattern="" />
+                                                                    <p>${heures}h${minutes}</p>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="enseignements.do" method="POST">
+                            <button formaction="enseignements.do">Retour à la liste des Enseignements</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

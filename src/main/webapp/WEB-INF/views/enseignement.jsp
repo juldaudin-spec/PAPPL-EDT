@@ -5,7 +5,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Ajouter Enseignement</title>
+        <title>Créer Matière</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- jQuery (optionnel pour Bootstrap 5) -->
@@ -24,7 +24,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer un nouveau enseignement</h1>
+                        <h1>Créer une nouvelle matière</h1>
                     </div>
                 </div>
                 <div class="row">

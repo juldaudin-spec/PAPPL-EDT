@@ -11,7 +11,7 @@
 <html lang="fr-fr">
     <head>
         <meta charset="UTF-8">
-        <title>Liste Enseignements</title>
+        <title>Liste Matières</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- jQuery (optionnel pour Bootstrap 5) -->
@@ -31,7 +31,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Liste des enseignements</h1>
+                        <h1>Liste des matières</h1>
                     </div>
                 </div>
 
@@ -51,7 +51,11 @@
                             <tbody>
                                 <c:forEach var="item" items="${enseignementsList}">
                                     <tr>
-                                        <td  scope="col">${item.acronyme}</td>
+                                        <td  scope="col">
+                                            <form method="POST">
+                                                <button class="btn" formaction="compteRenduEnseignement.do" name="acronyme" value="${item.acronyme}">${item.acronyme}</button>
+                                            </form>
+                                        </td>
                                         <td>${item.nomEnseignement}</td>
                                         <td>${item.filiere}</td>
                                         <td>${item.responsable.nomEnseignant} ${item.responsable.prenom}</td>
@@ -72,8 +76,7 @@
 
                             <tfoot>
                                 <tr id="addNew">
-                                    <td colspan="3"></td>
-                                    <td class="text-center">
+                                    <td colspan="5">
                                         <form action="enseignement.do" method="POST">
                                             <button class="btn">
                                                 <img src="img/add.png" alt="add" class="icon">

@@ -33,7 +33,7 @@ public class EnseignantController {
     private EnseignantRepository enseignantRepository;
 
     @RequestMapping(value = "enseignant.do", method=RequestMethod.POST)
-    public ModelAndView handlePostEnseignants(HttpServletRequest request) {
+    public ModelAndView handlePostEnseignant(HttpServletRequest request) {
 
         ModelAndView returned = new ModelAndView("enseignant");
         returned.addObject("enseignant",new Enseignant());
@@ -41,7 +41,7 @@ public class EnseignantController {
         return returned;
     }
     @RequestMapping(value = "enseignants.do", method=RequestMethod.POST)
-    public ModelAndView handlePostEnseignant(HttpServletRequest request) {
+    public ModelAndView handlePostEnseignants(HttpServletRequest request) {
         List<Enseignant> myList = new ArrayList<>(enseignantRepository.findAll());
         Collections.sort(myList, Enseignant.getComparator());
 
@@ -52,7 +52,7 @@ public class EnseignantController {
 }
 
     @RequestMapping(value = "editenseignant.do", method = RequestMethod.POST)
-    public ModelAndView handleEditUserPost(HttpServletRequest request) {
+    public ModelAndView handleEditEnseignantPost(HttpServletRequest request) {
         ModelAndView returned;
 
         String initiales = request.getParameter("Initiales");
@@ -71,7 +71,7 @@ public class EnseignantController {
     }
 
     @RequestMapping(value = "saveenseignant.do", method = RequestMethod.POST)
-    public ModelAndView handlePostSaveUser(HttpServletRequest request) {
+    public ModelAndView handlePostSaveEnseignant(HttpServletRequest request) {
 
         ModelAndView returned;
 
@@ -96,7 +96,7 @@ public class EnseignantController {
     }
 
     @RequestMapping(value = "deleteenseignant.do", method = RequestMethod.POST)
-    public ModelAndView handlePostDeleteUser(HttpServletRequest request) {
+    public ModelAndView handlePostDeleteEnseignant(HttpServletRequest request) {
 
         ModelAndView returned;
 

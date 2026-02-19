@@ -59,7 +59,7 @@ public class EnseignementController {
 }
 
     @RequestMapping(value = "editenseignement.do", method = RequestMethod.POST)
-    public ModelAndView handleEditUserPost(HttpServletRequest request) {
+    public ModelAndView handleEditEnseignementPost(HttpServletRequest request) {
         ModelAndView returned;
 
         String acronyme = request.getParameter("Acronyme");
@@ -79,7 +79,7 @@ public class EnseignementController {
     }
 
     @RequestMapping(value = "saveenseignement.do", method = RequestMethod.POST)
-    public ModelAndView handlePostSaveUser(HttpServletRequest request) {
+    public ModelAndView handlePostSaveEnseignement(HttpServletRequest request) {
 
         ModelAndView returned;
 
@@ -107,7 +107,7 @@ public class EnseignementController {
     }
 
     @RequestMapping(value = "deleteenseignement.do", method = RequestMethod.POST)
-    public ModelAndView handlePostDeleteUser(HttpServletRequest request) {
+    public ModelAndView handlePostDeleteEnseignement(HttpServletRequest request) {
 
         ModelAndView returned;
 

@@ -12,4 +12,7 @@ import tp.projetpappl.items.Salle;
  */
 public interface SalleRepositoryCustom {
     Salle getByNumeroSalle(String acronyme);
+    Salle create(String numeroSalle, int capacites,String typologie);
+    Salle update(String numeroSalle, int capacite, String typologie);
+    void remove(String numeroSalle);
 }

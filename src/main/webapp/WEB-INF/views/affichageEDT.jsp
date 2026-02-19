@@ -21,6 +21,8 @@
     </head>
     <body>
         <%@include file="navbar.jspf" %>
+        <%@ page import="java.util.Locale"%>
+        <%@ page import="java.time.format.TextStyle"%>
         <div class="py-5">
             <div class="container">
                 <div class="row">
@@ -56,7 +58,8 @@
                                         <tr>
                                             <td>
                                                 <div class="position-relative" id="Jour">
-                                                    ${jour}
+                                                    <div id="date">
+                                                        ${jour}</div>
                                                     <div id="Horaire" style="--position-element: 0px; --taille-element:1px;">
                                                         8h </div>
                                                     <div id="Horaire" style="--position-element: 40px; --taille-element:1px;">
@@ -69,7 +72,12 @@
                                                         16h</div>
                                                     <div id="Horaire" style="--position-element: 200px; --taille-element:1px;">
                                                         18h</div>
+                                                    <div id="nomJour">  
+                                                        ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.FRENCH)}
+                                                    </div>
+                                                    
                                                 </div>
+                                                    
                                             </td>
                                             <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
 
@@ -82,7 +90,7 @@
                                                                              --position-element: ${((seance.HDebut.getHours()-8)*60+seance.HDebut.getMinutes())/3}px;
                                                                              --taille-element:   ${seance.duree/3}px;
                                                                              ">
-                                                                            <button class="nav-link" style="text-align:center" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
+                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
                                                                         </div>
                                                                 </c:when>
                                                                 <c:otherwise>

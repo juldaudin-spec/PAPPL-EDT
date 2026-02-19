@@ -14,8 +14,8 @@ import tp.projetpappl.items.Enseignement;
  */
 public interface EnseignementRepositoryCustom {
     List<String> findAllAcronyme();
-    List<String> findAcronymeParEnseignant(String initiales);
-    List<String> findAcronymeParGroupe(String initiales);
+    List<String> findAcronymeByEnseignant(String initiales);
+    List<String> findAcronymeByGroupe(String initiales);
     Enseignement getByAcronyme(String acronyme);
     Enseignement update(String acronyme, String nom, String filiere, Enseignant responsable);
     void remove(String acronyme);

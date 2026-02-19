@@ -1,5 +1,5 @@
 <%-- 
-    Document   : groupes
+    Document   : salles
     Created on : 19 janv. 2026, 16:31:33
     Author     : julda
 --%>
@@ -11,7 +11,7 @@
 <html lang="fr-fr">
     <head>
         <meta charset="UTF-8">
-        <title>Liste Groupes</title>
+        <title>Liste Salles</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- jQuery (optionnel pour Bootstrap 5) -->
@@ -31,7 +31,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Liste des groupes</h1>
+                        <h1>Liste des salles</h1>
                     </div>
                 </div>
 
@@ -41,28 +41,26 @@
                         <table class="table table-striped table-md sortable">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="col-md-2">Nom Groupe</th>
-                                    <th scope="col" class="col-md-3">Nombre d'élèves</th>
+                                    <th scope="col" class="col-md-2">Numéro de la salle</th>
+                                    <th scope="col" class="col-md-3">Capacité maximale</th>
+                                    <th scope="col" class="col-md-3">Typologie de la salle (projecteur, sortie audio, etc.)</th>
+                                    <th scope="col" class="col-md-3">Editer/Supprimer une salle</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <c:forEach var="item" items="${groupesList}">
-                                    <tr>                                   
-                                        <td  scope="col">
-                                            <form method="POST">
-                                                <button class="btn" formaction="compteRenduGroupe.do" name="idGroupe" value="${item.nomGroupe}">${item.nomGroupe}</button>
-                                            </form>
-                                        </td>
-
-                                        <td>${item.nbEleve}</td>
+                                <c:forEach var="item" items="${sallesList}">
+                                    <tr>
+                                        <td  scope="col">${item.numeroSalle}</td>
+                                        <td>${item.capacite}</td>
+                                        <td>${item.typologie}</td>
                                         <td class="text-center">
                                             <form action="editUser" method="POST">
-                                                <input type="hidden" name="NomGroupe" value="${item.nomGroupe}" />
-                                                <button class="btn" formaction="editgroupe.do" name="edit" class="icon">
+                                                <input type="hidden" name="NumeroSalle" value="${item.numeroSalle}" />
+                                                <button class="btn" formaction="editsalle.do" name="edit" class="icon">
                                                     <img src="img/edit.png" alt="edit" class="icon">
                                                 </button>
-                                                <button class="btn" name="delete" formaction="deletegroupe.do" class="icon">
+                                                <button class="btn" name="delete" formaction="deletesalle.do" class="icon">
                                                     <img src="img/delete.png" alt="delete" class="icon">
                                                 </button>
                                             </form>
@@ -73,8 +71,8 @@
 
                             <tfoot>
                                 <tr id="addNew">
-                                    <td colspan="3">
-                                        <form action="groupe.do" method="POST">
+                                    <td colspan="5">
+                                        <form action="salle.do" method="POST">
                                             <button class="btn">
                                                 <img src="img/add.png" alt="add" class="icon">
                                             </button>
