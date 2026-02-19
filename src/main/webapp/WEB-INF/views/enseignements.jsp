@@ -51,7 +51,11 @@
                             <tbody>
                                 <c:forEach var="item" items="${enseignementsList}">
                                     <tr>
-                                        <td  scope="col">${item.acronyme}</td>
+                                        <td  scope="col">
+                                            <form method="POST">
+                                                <button class="btn" formaction="compteRenduEnseignement.do" name="acronyme" value="${item.acronyme}">${item.acronyme}</button>
+                                            </form>
+                                        </td>
                                         <td>${item.nomEnseignement}</td>
                                         <td>${item.filiere}</td>
                                         <td>${item.responsable.nomEnseignant} ${item.responsable.prenom}</td>

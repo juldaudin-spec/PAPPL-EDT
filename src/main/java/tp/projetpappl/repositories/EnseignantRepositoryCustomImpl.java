@@ -34,9 +34,10 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
     }
 
     @Override
-    public List<String> findinitialeEnseignantParEnseignement(String acronyme) {
-        String requete = "SELECT initiales FROM Enseigne WHERE acronyme=" + acronyme;
+    public List<String> findinitialeEnseignantByEnseignement(String acronyme) {
+        String requete = "SELECT initiales FROM Enseigne WHERE acronyme= :acronyme";
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
+        query.setParameter("acronyme", acronyme);
         return query.getResultList();
     }
 

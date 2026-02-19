@@ -4,6 +4,9 @@
  */
 package tp.projetpappl.repositories;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +14,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
+import tp.projetpappl.controllers.Tools;
 import tp.projetpappl.items.Enseignant;
 import tp.projetpappl.items.Enseignement;
 import tp.projetpappl.items.Groupe;
@@ -44,6 +48,8 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
     @Autowired
     @Lazy
     SeanceRepository seanceRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public Seance create(Enseignement enseignement, List<Enseignant> Enseignants, TypeLecon typeLecon, List<Groupe> Groupes, List<Salle> Salles, Date hDebut, int duree) {
@@ -105,6 +111,55 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         }
         return null;
     }
+
+    @Override
+    public List<Seance> findSeanceByGroupe(Groupe groupe) {
+        List<Seance> listSeance = null;
+        if (groupe != null) {
+            String requete = "SELECT s FROM Seance s JOIN s.groupeList g WHERE g.nomGroupe= :nomGroupe";
+            TypedQuery<Seance> query = entityManager.createQuery(requete, Seance.class);
+            query.setParameter("nomGroupe", groupe.getNomGroupe());
+            listSeance = query.getResultList();
+        }
+        return listSeance;
+    }
+
+    @Override
+    public void sortByEnseignementByIntitule(List<Seance> listSeance, List<Enseignement> listEnseignement, List<List<TypeLecon>> listIntitule) {
+        List<Seance> listSeanceTemp = new ArrayList<>(listSeance.size());
+        for (int i = 0; i < listEnseignement.size(); i++) {
+            Enseignement enseignement = listEnseignement.get(i);
+            for (TypeLecon typeLecon : listIntitule.get(i)) {
+                for (Seance seance : listSeance) {
+                    if ((seance.getAcronyme().getAcronyme() == null ? enseignement.getAcronyme() == null : seance.getAcronyme().getAcronyme().equals(enseignement.getAcronyme())) && (seance.getIntitule().getIntitule() == null ? typeLecon.getIntitule() == null : seance.getIntitule().getIntitule().equals(typeLecon.getIntitule()))) {
+                        listSeanceTemp.add(seance);
+                    } else {
+                        if (!listEnseignement.contains(seance.getAcronyme())) {
+                            listEnseignement.add(seance.getAcronyme());
+                        } else {
+                            if (!listIntitule.get(i).contains(seance.getIntitule())) {
+                                listIntitule.get(i).add(seance.getIntitule());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        listSeance = listSeanceTemp;
+    }
+
+    @Override
+    public List<Seance> findSeanceByEnseignement(Enseignement enseignement) {
+        List<Seance> listSeance = null;
+        if (enseignement != null) {
+            String requete = "SELECT s FROM Seance s WHERE s.acronyme= :acronyme";
+            TypedQuery<Seance> query = entityManager.createQuery(requete, Seance.class);
+            query.setParameter("acronyme", enseignement);
+            listSeance = query.getResultList();
+        }
+        return listSeance;
+    }
+    
 
     @Override
     public Seance update(int IdSeance, Enseignement enseignement, List<Enseignant> Enseignants, TypeLecon typeLecon, List<Groupe> Groupes, List<Salle> Salles, Date hDebut, int duree) {
