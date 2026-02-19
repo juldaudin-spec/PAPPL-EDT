@@ -11,7 +11,7 @@
 <html lang="fr-fr">
     <head>
         <meta charset="UTF-8">
-        <title>Liste Enseignements</title>
+        <title>Liste Matières</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- jQuery (optionnel pour Bootstrap 5) -->
@@ -31,7 +31,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Liste des enseignements</h1>
+                        <h1>Liste des matières</h1>
                     </div>
                 </div>
 
@@ -76,8 +76,7 @@
 
                             <tfoot>
                                 <tr id="addNew">
-                                    <td colspan="3"></td>
-                                    <td class="text-center">
+                                    <td colspan="5">
                                         <form action="enseignement.do" method="POST">
                                             <button class="btn">
                                                 <img src="img/add.png" alt="add" class="icon">

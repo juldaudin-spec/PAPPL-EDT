@@ -24,6 +24,9 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
     @Autowired
     @Lazy
     EnseignementRepository enseignementRepository;
+    @Autowired
+    @Lazy
+    EnseignantRepository enseignantRepository;
     
     @Override
     public List<String> findAllAcronyme() {
@@ -75,6 +78,8 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
             enseignementAcronyme.setFiliere(filiere);
             enseignementAcronyme.setNomEnseignement(nom);
             // Save to database
+            responsable.getEnseignementList1().add(enseignementAcronyme);
+            enseignantRepository.saveAndFlush(responsable);
             enseignementRepository.saveAndFlush(enseignementAcronyme);
             //Ensure we have the last version
             enseignementAcronyme = getByAcronyme(enseignementAcronyme.getAcronyme());
@@ -105,6 +110,8 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
             item.setResponsable(responsable);
             // Save to database
             enseignementRepository.saveAndFlush(item);
+            responsable.getEnseignementList1().add(item);
+            enseignantRepository.saveAndFlush(responsable);
             //Ensure we have the last version
             return getByAcronyme(acronyme);
         }

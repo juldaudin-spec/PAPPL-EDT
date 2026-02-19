@@ -18,6 +18,7 @@ import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -124,5 +125,25 @@ public class Salle implements Serializable {
     public String toString() {
         return "tp.projetpappl.items.Salle[ numeroSalle=" + numeroSalle + " ]";
     }
-    
+    public int compareTo(Object object) {
+        if (object == null) {
+            return 1;
+        } else if (!(object instanceof Salle)) {
+            return 1;
+        }
+        Salle itemId = (Salle) object;
+        return this.getNumeroSalle().toUpperCase().compareTo(itemId.getNumeroSalle().toUpperCase());
+    }
+    public static Comparator<Groupe> getComparator() {
+        return new Comparator<Groupe>() {
+            @Override
+            public int compare(Groupe object1, Groupe object2){
+                if (object1 == null){
+                    return -1;
+                } else{
+                    return object1.compareTo(object2);
+                }
+            }
+        };
+    }
 }

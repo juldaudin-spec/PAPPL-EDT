@@ -156,4 +156,61 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
     }
     
 
+    @Override
+    public Seance update(int IdSeance, Enseignement enseignement, Enseignant enseignant, TypeLecon typeLecon, Groupe groupe, Salle salle, Date hDebut, int duree) {
+        if (IdSeance>0){
+            IdSeance = seanceRepository.getReferenceById(IdSeance).getIdSeance();
+        }
+        // Ensure we have full data
+        if (enseignement != null) {
+            enseignement = enseignementRepository.getReferenceById(enseignement.getAcronyme());
+        }
+        if (enseignant != null) {
+            enseignant = enseignantRepository.getReferenceById(enseignant.getInitiales());
+        }
+        if (typeLecon != null) {
+            typeLecon = typeLeconRepository.getReferenceById(typeLecon.getIntitule());
+        }
+        if (groupe != null) {
+            groupe = groupeRepository.getReferenceById(groupe.getNomGroupe());
+        }
+
+        // Build new seance
+        if ((IdSeance>0) && (enseignement != null) && (typeLecon != null) && (hDebut != null)) {
+            Seance item = seanceRepository.getReferenceById(IdSeance);
+            item.setHDebut(hDebut);
+            ArrayList<Enseignant> ListEnseignant = new ArrayList<Enseignant>();
+            ListEnseignant.add(enseignant);
+            ArrayList<Groupe> ListGroupe = new ArrayList<Groupe>();
+            ListGroupe.add(groupe);
+            ArrayList<Salle> ListSalle = new ArrayList<Salle>();
+            ListSalle.add(salle);
+            item.setSalleList(ListSalle);
+            item.setEnseignantList(ListEnseignant);
+            item.setGroupeList(ListGroupe);
+            item.setAcronyme(enseignement);
+            item.setIntitule(typeLecon);
+            item.setDuree(duree);
+            seanceRepository.saveAndFlush(item);
+
+            Optional<Seance> result = seanceRepository.findById(item.getIdSeance());
+            if (result.isPresent()) {
+                item = result.get();
+
+                // Set reverse fields
+                enseignement.getSeanceList().add(item);
+                enseignementRepository.saveAndFlush(enseignement);
+                enseignant.getSeanceList().add(item);
+                enseignantRepository.saveAndFlush(enseignant);
+                groupe.getSeanceList().add(item);
+                groupeRepository.saveAndFlush(groupe);
+                salle.getSeanceList().add(item);
+                salleRepository.saveAndFlush(salle);
+
+                // return item
+                return item;
+            }
+        }
+        return null;
+    }
 }
