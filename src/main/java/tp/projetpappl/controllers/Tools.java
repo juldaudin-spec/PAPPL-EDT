@@ -4,16 +4,18 @@
  */
 package tp.projetpappl.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ListFormat.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -68,7 +70,7 @@ public class Tools {
                 voila = value;
             }
         }
-        
+
         return voila;
     }
 
@@ -93,6 +95,46 @@ public class Tools {
         }
 
         return finalList;
+    }
+
+    private static HashMap<String, String> buildIndexedMap(HttpServletRequest request, String value) {
+        // Build param map
+        Map<String, String[]> tempOrig = request.getParameterMap();
+        if (tempOrig == null) {
+            return null;
+        }
+
+        HashMap<String, String> temp = new HashMap<String, String>();
+        for (String s : tempOrig.keySet()) {
+            String[] valueP = tempOrig.get(s);
+            if (valueP.length == 1) {
+                temp.put(s, valueP[0]);
+            }
+        }
+
+        return temp;
+    }
+
+    public static HashMap<String, String> getArrayFromRequest(HttpServletRequest request, String value) {
+        HashMap<String, String> returnedValue = new HashMap<String, String>();
+        String searchFor = value + "[";
+        int len = searchFor.length();
+
+        HashMap<String, String> temp = buildIndexedMap(request, value);
+
+        // Retrieve array
+        for (String s : temp.keySet()) {
+            if (s.startsWith(searchFor)) {
+                int pos = s.indexOf("]", len);
+                String index = s.substring(len, pos).trim();
+                if (index.isEmpty()) {
+                    index = "" + returnedValue.keySet().size();
+                }
+                returnedValue.put(index, temp.get(s));
+            }
+        }
+
+        return returnedValue;
     }
 
 }
