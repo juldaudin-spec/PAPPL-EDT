@@ -3,6 +3,7 @@
   text-align: center;
   align-items: center;
   min-height:240px;
+  min-width:120px;
 }
 #Seance {
   position: absolute;
@@ -23,4 +24,31 @@
   height:var(--taille-element);
   background: #ccc;
   text-align: right;
+}
+#nomJour{
+  position: absolute;
+  top: 100px;
+  right: 0px;   /* Distance depuis la gauche du parent */
+  width: 100%;
+  text-align: center;
+}
+
+#date{
+  position: absolute;
+  top: 20px;
+  right: 0px;   /* Distance depuis la gauche du parent */
+  width: 100%;
+  text-align: center;
+}
+
+#boutonSeance:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px black; /* Complément pour contraste élevé */
+}
+
+:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px black; /* Complément pour contraste élevé */
 }

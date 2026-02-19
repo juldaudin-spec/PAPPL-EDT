@@ -73,11 +73,13 @@
                                                                 <td class="col-4">
                                                                     <c:set var="dureeTot" value="0" scope="page"/>
                                                                     <c:forEach var="seance" items="${seances}">
+                                                                        <c:forEach var="groupeParticipant" items="${seance.groupeList}">
                                                                         <c:choose>
-                                                                            <c:when test="${(seance.acronyme.acronyme==enseignement.acronyme)&&(seance.intitule.intitule==type.intitule)}">
+                                                                            <c:when test="${(groupe.nomGroupe==groupeParticipant.nomGroupe)&&(seance.intitule.intitule==type.intitule)}">
                                                                                 <c:set var="dureeTot" value="${dureeTot+seance.duree}"/>
                                                                             </c:when>
                                                                         </c:choose>
+                                                                        </c:forEach>
                                                                     </c:forEach>
                                                                     <c:set var="heures" value="${dureeTot div 60}" />
                                                                     <c:set var="minutes" value="${dureeTot mod 60}" />
@@ -99,8 +101,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="groupes.do" method="POST">
-                            <button formaction="groupes.do">Retour à la liste des Groupes</button>
+                        <form action="enseignements.do" method="POST">
+                            <button formaction="enseignements.do">Retour à la liste des Enseignements</button>
                         </form>
                     </div>
                 </div>
