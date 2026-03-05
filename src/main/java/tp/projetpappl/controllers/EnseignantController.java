@@ -42,7 +42,7 @@ public class EnseignantController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned = new ModelAndView("enseignant");
@@ -57,7 +57,7 @@ public class EnseignantController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         List<Enseignant> myList = new ArrayList<>(enseignantRepository.findAll());
@@ -76,7 +76,7 @@ public class EnseignantController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned;
@@ -104,7 +104,7 @@ public class EnseignantController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned;
@@ -137,7 +137,7 @@ public class EnseignantController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned;

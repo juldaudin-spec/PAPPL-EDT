@@ -41,7 +41,7 @@ public class SalleController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned = new ModelAndView("salle");
@@ -56,7 +56,7 @@ public class SalleController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         List<Salle> myList = new ArrayList<Salle>(salleRepository.findAll());
@@ -74,7 +74,7 @@ public class SalleController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned;
@@ -102,7 +102,7 @@ public class SalleController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned;
@@ -133,7 +133,7 @@ public class SalleController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned;

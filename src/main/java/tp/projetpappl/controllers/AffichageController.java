@@ -51,7 +51,7 @@ public class AffichageController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned = new ModelAndView("affichageEDT");

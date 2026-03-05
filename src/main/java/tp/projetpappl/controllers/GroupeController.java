@@ -41,7 +41,7 @@ public class GroupeController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned = new ModelAndView("groupe");
@@ -56,7 +56,7 @@ public class GroupeController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         List<Groupe> myList = new ArrayList<>(groupeRepository.findAll());
@@ -75,7 +75,7 @@ public class GroupeController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned;
@@ -103,7 +103,7 @@ public class GroupeController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned;
@@ -136,7 +136,7 @@ public class GroupeController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned;
@@ -159,7 +159,7 @@ public class GroupeController {
 
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
-            return new ModelAndView("redirect:index.do");
+            return new ModelAndView("redirect:login.do");
         }
 
         ModelAndView returned;
