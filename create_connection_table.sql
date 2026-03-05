@@ -9,6 +9,3 @@ CREATE TABLE IF NOT EXISTS connection (
 
 -- Create index for faster lookups
 CREATE INDEX IF NOT EXISTS idx_connection_login ON connection(connection_login);
-
--- Verify table creation
-SELECT * FROM connection LIMIT 1;
