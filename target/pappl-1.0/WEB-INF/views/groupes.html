@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+
+    <head>
+        <title>Groupes</title>
+        <meta charset="UTF-8" />
+        <link href="css/mainPage.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.7.1.js"
+                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous">
+        </script>
+        <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+        <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+
+
+    </head>
+
+    <body>
+        
+        <h1>Créer un nouveau groupe</h1>
+
+        <form action="infos" method="GET">
+            <table class="text-center">
+                <tr>
+                    <th>Nom du groupe</th>
+                    <td>
+                        <input type="text"
+                               name="nomGroupe"
+                               maxlength="128"
+                               required>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Nombre d’élèves</th>
+                    <td>
+                        <input type="number"
+                               name="nbEleve"
+                               min="0">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <button type="submit">Save</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </body>
