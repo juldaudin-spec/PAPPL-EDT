@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import tp.projetpappl.items.Groupe;
 import tp.projetpappl.items.Seance;
 import tp.projetpappl.repositories.GroupeRepository;
+import tp.projetpappl.items.Connection;
+
 
 /**
  * Ceci est le controlleur pour tout ce qui concerne l'affichage de l'emplois du
@@ -31,6 +33,9 @@ import tp.projetpappl.repositories.GroupeRepository;
  */
 @Controller
 public class AffichageController {
+
+    @Autowired
+    private AuthHelper authHelper;
 
     @Autowired
     private GroupeRepository groupeRepository;
@@ -44,6 +49,12 @@ public class AffichageController {
      */
     @RequestMapping(value = "affichageEDT.do", method = RequestMethod.POST)
     public ModelAndView handleIndexGet(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         ModelAndView returned = new ModelAndView("affichageEDT");
 
         if (request != null) {
@@ -82,6 +93,9 @@ public class AffichageController {
             returned.addObject("listeSeance", listSeance);
             returned.addObject("listeGroupe", listeGroupe);
         }
+
+        returned.addObject("user", user);
+
         return returned;
     }
 

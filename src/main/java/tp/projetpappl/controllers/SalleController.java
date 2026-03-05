@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import tp.projetpappl.items.Salle;
 import tp.projetpappl.repositories.SalleRepository;
+import tp.projetpappl.items.Connection;
 
 /**
  *
@@ -30,28 +31,52 @@ import tp.projetpappl.repositories.SalleRepository;
 public class SalleController {
 
     @Autowired
+    private AuthHelper authHelper;
+
+    @Autowired
     private SalleRepository salleRepository;
 
     @RequestMapping(value = "salle.do", method=RequestMethod.POST)
     public ModelAndView handlePostSalles(HttpServletRequest request) {
 
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         ModelAndView returned = new ModelAndView("salle");
         returned.addObject("salle",new Salle());
+
+        returned.addObject("user", user);
 
         return returned;
     }
     @RequestMapping(value = "salles.do", method=RequestMethod.POST)
     public ModelAndView handlePostSalle(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         List<Salle> myList = new ArrayList<Salle>(salleRepository.findAll());
 
         ModelAndView returned = new ModelAndView("salles");
         returned.addObject("sallesList", myList);
+
+        returned.addObject("user", user);
 
         return returned;
 }
 
     @RequestMapping(value = "editsalle.do", method = RequestMethod.POST)
     public ModelAndView handleEditSallePost(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         ModelAndView returned;
 
         String numeroSalle = request.getParameter("NumeroSalle");
@@ -66,11 +91,19 @@ public class SalleController {
             returned.addObject("sallesList", myList);
 
         }
+
+        returned.addObject("user", user);
+
         return returned;
     }
 
     @RequestMapping(value = "savesalle.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveSalle(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
 
         ModelAndView returned;
 
@@ -98,6 +131,11 @@ public class SalleController {
     @RequestMapping(value = "deletesalle.do", method = RequestMethod.POST)
     public ModelAndView handlePostDeleteSalle(HttpServletRequest request) {
 
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:index.do");
+        }
+
         ModelAndView returned;
 
         // Create or update salles
@@ -109,6 +147,8 @@ public class SalleController {
         returned = new ModelAndView("salles");
         Collection<Salle> myList = salleRepository.findAll();
         returned.addObject("sallesList", myList);
+
+        returned.addObject("user", user);
 
         return returned;
     }

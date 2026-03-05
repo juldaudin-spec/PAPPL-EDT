@@ -17,35 +17,68 @@
             <ul class="navbar-nav ms-auto" title="<fmt:message key="menu"/>">
                 <li class="nav-item">
                     <form action="affichageEDT.do" method="POST">
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button class="nav-link text-light" formaction="affichageEDT.do" method="POST" name="idGroupe" value="" title="accès à l'affichage de l'emplois du temps"><fmt:message key="planning"/></button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form method="POST">
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button class="nav-link text-light" formaction="enseignements.do"><fmt:message key="enseignement"/></button>
                     </form>
                 </li>                
                 <li class="nav-item">
                     <form method="POST">
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button class="nav-link text-light" formaction="groupes.do"><fmt:message key="group"/></button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form method="POST">
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button class="nav-link text-light" formaction="enseignants.do"><fmt:message key="enseignant"/></button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form method="POST">
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button class="nav-link text-light" formaction="salle.do"><fmt:message key="room"/></button>
                     </form>
                 </li>                
                 <li class="nav-item">
                     <form method="POST">
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button class="nav-link text-light" formaction="seance.do"><fmt:message key="seance"/></button>
                     </form>
                 </li>
             </ul>
+            
+            <!-- CAS Authentication: Login/Logout buttons -->
+            <ul class="navbar-nav ms-auto">
+                <c:choose>
+                    <c:when test="${not empty user}">
+                        <!-- User is logged in -->
+                        <li class="nav-item">
+                            <span class="navbar-text text-white me-3">
+                                Bonjour, <strong>${user.connectionLogin}</strong>
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light btn-sm" 
+                               href="logout.do?connexion=${user.connectionCode}">
+                                Déconnexion
+                            </a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- User is not logged in -->
+                        <li class="nav-item">
+                            <a class="btn btn-primary btn-sm" href="login.do">
+                                Connexion CAS
+                            </a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </ul>
         </div>
-        </form>
 </nav>
