@@ -31,6 +31,7 @@
                         <h5>Veuillez choisir les groupes à visualiser</h5>
                     </div>
                     <form action="affichageEDT.do" method="POST">
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <select name="idGroupe" multiple>
                             <c:forEach var="groupe" items="${groupes}">
                                 <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>

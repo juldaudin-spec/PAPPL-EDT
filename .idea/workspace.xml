@@ -8,19 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/create_connection_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create_connection_table.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/AffichageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/AffichageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/EnseignantController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/EnseignantController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/EnseignementController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/EnseignementController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/GroupeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/GroupeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/SalleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/SalleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/affichageEDT.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/affichageEDT.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/pappl-1.0.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/AffichageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/AffichageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/EnseignantController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/EnseignantController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/EnseignementController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/EnseignementController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/GroupeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/GroupeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/SalleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/SalleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/affichageEDT.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/affichageEDT.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-tp.projetpappl.controllers.AffichageControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-tp.projetpappl.controllers.AffichageControllerTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/tp.projetpappl.controllers.AffichageControllerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/tp.projetpappl.controllers.AffichageControllerTest.txt" afterDir="false" />
     </list>
@@ -52,20 +42,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.prweb [clean].executor": "Run",
-    "Maven.prweb [compile].executor": "Run",
-    "Maven.prweb [package].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Oussama/Desktop/PGROUP/PAPPL-EDT"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.prweb [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prweb [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prweb [package].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Oussama/Desktop/PGROUP/PAPPL-EDT&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Oussama\Desktop\PGROUP\PAPPL-EDT" />
