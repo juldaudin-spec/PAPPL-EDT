@@ -7,12 +7,15 @@ package tp.projetpappl.repositories;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import tp.projetpappl.items.Enseignant;
 import tp.projetpappl.items.Enseignement;
+import tp.projetpappl.items.Seance;
 /**
  *
  * @author nathan
@@ -62,8 +65,12 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
         }
     }
     @Override
-    public Enseignement update(String acronyme, String nom, String filiere, Enseignant responsable){
+    public Enseignement update(String acronyme, String nom, String filiere, Enseignant responsable, ArrayList<Enseignant> Enseignants){
         Enseignement enseignementAcronyme = null;
+        
+        for (int i = 0; i < Enseignants.size(); i++) {
+            Enseignants.set(i, enseignantRepository.getByInitiales(Enseignants.get(i).getInitiales()));
+        }
         if(acronyme != null){
             // Ensure validity from database
             enseignementAcronyme = getByAcronyme(acronyme);
@@ -77,10 +84,19 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
             enseignementAcronyme = getByAcronyme(acronyme);
             enseignementAcronyme.setFiliere(filiere);
             enseignementAcronyme.setNomEnseignement(nom);
+            enseignementAcronyme.setEnseignantList(Enseignants);
             // Save to database
             responsable.getEnseignementList1().add(enseignementAcronyme);
             enseignantRepository.saveAndFlush(responsable);
             enseignementRepository.saveAndFlush(enseignementAcronyme);
+            
+            Optional<Enseignement> result = enseignementRepository.findById(enseignementAcronyme.getAcronyme());
+            if(result.isPresent()){
+                for (Enseignant enseignant : Enseignants) {
+                    enseignant.getEnseignementList().add(enseignementAcronyme);
+                    enseignantRepository.saveAndFlush(enseignant);
+                }
+            }
             //Ensure we have the last version
             enseignementAcronyme = getByAcronyme(enseignementAcronyme.getAcronyme());
         }
@@ -98,7 +114,12 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
         }
     }
     @Override
-    public Enseignement create(String acronyme, String nom, String filiere, Enseignant responsable){
+    public Enseignement create(String acronyme, String nom, String filiere, Enseignant responsable, ArrayList<Enseignant> Enseignants){
+        for (int i = 0; i < Enseignants.size(); i++) {
+            if (Enseignants.get(i) != null) {
+                Enseignants.set(i, enseignantRepository.getByInitiales(Enseignants.get(i).getInitiales()));
+            }
+        }
         if ((nom != null) && (! nom.isEmpty())
                 && (filiere != null) && (! filiere.isEmpty())
                 && (responsable != null)
@@ -108,10 +129,15 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
             item.setNomEnseignement(nom);
             item.setFiliere(filiere);
             item.setResponsable(responsable);
+            item.setEnseignantList(Enseignants);
             // Save to database
             enseignementRepository.saveAndFlush(item);
             responsable.getEnseignementList1().add(item);
             enseignantRepository.saveAndFlush(responsable);
+            for (Enseignant enseignant : Enseignants) {
+                    enseignant.getEnseignementList().add(item);
+                    enseignantRepository.saveAndFlush(enseignant);
+                }
             //Ensure we have the last version
             return getByAcronyme(acronyme);
         }

@@ -3,20 +3,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 function getTarget(ev) {
-  var target = ev.target;
-  while ((target !== null) && (target !== undefined) && (target.id.substring(0, 4) !== "list")) {
-    target = target.parentNode;
-  }
-  return target;
+  // plus robuste que la boucle manuelle
+  return ev.target.closest('[id^="list"]');
 }
 
-function allowDrop(ev) {
-  ev.preventDefault();
-}
+function allowDrop(ev) { ev.preventDefault(); }
 
 function drag(ev) {
-  ev.dataTransfer.setData("dragelt", ev.target.id);
+  ev.dataTransfer.setData("text/plain", ev.currentTarget.id);
 }
+
+function dropAndRename(ev, oldPrefix, newPrefix) {
+  ev.preventDefault();
+  const data = ev.dataTransfer.getData("text/plain");
+  const dragElt = document.getElementById(data);
+  const target = getTarget(ev);
+
+  if (target && dragElt) {
+    target.appendChild(dragElt);
+    renameDraggedItem(dragElt, oldPrefix, newPrefix);
+  }
+}
+
+function renameDraggedItem(dragElt, oldPrefix, newPrefix) {
+  // rename div id: ml_X -> m_X etc.
+  if (dragElt.id && dragElt.id.startsWith(oldPrefix + "_")) {
+    dragElt.id = newPrefix + dragElt.id.substring(oldPrefix.length);
+  }
+
+  // rename hidden input name: ml[X] -> m[X] etc.
+  const hidden = dragElt.querySelector('input[type="hidden"]');
+  if (hidden && hidden.name && hidden.name.startsWith(oldPrefix + "[")) {
+    hidden.name = newPrefix + hidden.name.substring(oldPrefix.length);
+  }
+}
+
 
 function drop(ev) {
   ev.preventDefault();
@@ -28,38 +49,16 @@ function drop(ev) {
   }
 }
 
-function dropAndRename(ev, oldName, newName) {
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("dragelt");
-  var dragElt = document.getElementById(data);
-  var target = getTarget(ev);
-  if ((target !== null) && (target !== undefined) && (dragElt !== null)) {
-    target.appendChild(dragElt);
-
-    replaceElements(target, oldName, newName);
-  }
-}
-
 function filterList(theListID, theInputId) {
-  if ((theListID !== null) && (theListID !== undefined) && (theInputId !== null) && (theInputId !== undefined)) {
-    var input = document.getElementById(theInputId);
-    var list = document.getElementById(theListID);
-    if ((input !== null) && (input !== undefined) && (list !== null) && (list !== undefined)) {
-      var filter = input.value.toUpperCase();
-      var elements = list.childNodes;
-      for (var i = 0; i < elements.length; i++) {
-        var element = elements[i];
-        if (element.nodeType === Node.ELEMENT_NODE) {
-          if (element.tagName === "DIV") {
-            var elementContent = getTextChild(element);
-            if (elementContent.toUpperCase().indexOf(filter) > -1) {
-              element.style.display = "";
-            } else {
-              element.style.display = "none";
-            }
-          }
-        }
-      }
-    }
+  const input = document.getElementById(theInputId);
+  const list = document.getElementById(theListID);
+  if (!input || !list) return;
+
+  const filter = (input.value || "").toUpperCase();
+
+  // children = uniquement les éléments (pas les text nodes)
+  for (const element of list.children) {
+    const txt = (element.textContent || "").toUpperCase();
+    element.style.display = txt.includes(filter) ? "" : "none";
   }
 }

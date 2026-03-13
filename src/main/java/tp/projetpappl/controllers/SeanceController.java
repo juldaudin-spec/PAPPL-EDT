@@ -131,8 +131,9 @@ public class SeanceController {
         Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
         String intituleLecon = request.getParameter("TypeLecon");
         TypeLecon typeLecon = typeLeconRepository.getByIntitule(intituleLecon);
+        System.out.println("PARAMS: " + request.getParameterMap().keySet());
         HashMap<String, String> nomGroupes
-                = Tools.getArrayFromRequest(request, "ml");
+                = Tools.getArrayFromRequest(request, "m");
         ArrayList<Groupe> groupes = new ArrayList<>();
 
         for (String nomGroupe : nomGroupes.values()) {
@@ -143,7 +144,7 @@ public class SeanceController {
         }
 
         HashMap<String, String> numeroSalles
-                = Tools.getArrayFromRequest(request, "sl");
+                = Tools.getArrayFromRequest(request, "s");
         ArrayList<Salle> salles = new ArrayList<>();
 
         for (String numeroSalle : numeroSalles.values()) {
@@ -157,7 +158,7 @@ public class SeanceController {
         Date hDebut = Tools.getDateFromString(hDebutStr, "yyyy-MM-dd'T'HH:mm");
 
         HashMap<String, String> initialesEnseignants
-                = Tools.getArrayFromRequest(request, "el");
+                = Tools.getArrayFromRequest(request, "e");
         ArrayList<Enseignant> enseignants = new ArrayList<>();
 
         for (String initialesEnseignant : initialesEnseignants.values()) {
