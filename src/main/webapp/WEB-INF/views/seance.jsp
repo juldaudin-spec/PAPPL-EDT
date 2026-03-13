@@ -24,7 +24,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer une nouvelle séance</h1>
+                        <h1>Créer/Modifier une séance</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -33,12 +33,17 @@
                             <table class="table table-striped">
                                 <tbody>
                                     <c:choose>
-                                        <c:when test="${(empty seance) || (empty seance.idSeance)}"><input name="IdSeance" value="-1" type="hidden"/></c:when>
-                                    <c:otherwise><input type="hidden" class="form-control" name="IdSeance" value="${seance.idSeance}"/></c:otherwise>
+                                        <c:when test="${(empty seance) || (empty seance.idSeance)}">
+                                        <input name="IdSeance" value="-1" type="hidden"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="hidden" class="form-control" name="IdSeance" value="${seance.idSeance}"/>
+                                    </c:otherwise>
                                 </c:choose>
                                 <tr>
                                     <th scope="col">Date et heure de début</th>
-                                    <td><input type="datetime-local" class="form-control" name="HDebut" value="${seance.HDebut}"/></td>
+                                    <td><input type="datetime-local" class="form-control" name="HDebut" value="${seance.HDebut}" placeholder="${seance.HDebut}"/></td>
+                                <p>${seance.HDebut} voici l'horaire</p>
                                 </tr>
                                 <tr>
                                     <th scope="col">Durée (minutes)</th>
@@ -69,7 +74,7 @@
                                                 class="form-control form-select form-select-lg mb-3">
                                             <c:choose>
                                                 <c:when test="${(empty seance) || (empty seance.intitule)}"><option value="" disabled selected>Choisissez un type de leçon</option></c:when>
-                                                <c:otherwise><option value="${seance.intitule}" disabled selected>${seance.intitule.intitule} ${seance.responsable.prenom}</option></c:otherwise>
+                                                <c:otherwise><option value="${seance.intitule}" disabled selected>${seance.intitule.intitule}</option></c:otherwise>
                                             </c:choose>
 
                                             <c:forEach var="typeLecon" items="${typeLeconsList}">
