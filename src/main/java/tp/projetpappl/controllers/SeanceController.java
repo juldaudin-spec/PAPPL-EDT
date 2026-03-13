@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,10 +58,18 @@ public class SeanceController {
 
     @RequestMapping(value = "seance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSeance(HttpServletRequest request) {
-
-        ModelAndView returned = new ModelAndView("seance");
-        returned.addObject("enseignantsList", enseignantRepository.findAll());
-        returned.addObject("seance", new Seance());
+        String seanceStr="seance";
+        ModelAndView returned = new ModelAndView(seanceStr);
+        String idSeanceStr = request.getParameter("idSeance");
+        if ((idSeanceStr != null) &&(!idSeanceStr.isEmpty())){
+            Optional<Seance> seance=seanceRepository.findById(Tools.getIntFromString(idSeanceStr));
+            if (seance.isPresent()){
+            returned.addObject(seanceStr, seance.get());}
+        }
+        else{
+            returned.addObject(seanceStr,new Seance());
+        }
+        returned.addObject("enseignantsList", enseignantRepository.findAll()); //TODO à changer pour n'afficher que ce qui est disponible, et pour les enseignants: ceux qui enseignent dans la matière
         returned.addObject("groupesList", groupeRepository.findAll());
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
