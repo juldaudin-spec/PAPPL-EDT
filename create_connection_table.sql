@@ -21,7 +21,7 @@ DECLARE
     deleted_count INTEGER;
 BEGIN
     DELETE FROM connection
-    WHERE created_at < NOW() - INTERVAL '24 hours';  -- ← EXPIRATION TIME: 24 hours
+    WHERE created_at < NOW() - INTERVAL '2 hours';  -- ← EXPIRATION TIME: 2 hours
 
     GET DIAGNOSTICS deleted_count = ROW_COUNT;
 
