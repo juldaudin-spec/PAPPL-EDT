@@ -23,6 +23,7 @@ import tp.projetpappl.items.Enseignant;
 import tp.projetpappl.items.Enseignement;
 import tp.projetpappl.repositories.EnseignantRepository;
 import tp.projetpappl.repositories.EnseignementRepository;
+import tp.projetpappl.items.Connection;
 
 /**
  *
@@ -32,20 +33,36 @@ import tp.projetpappl.repositories.EnseignementRepository;
 public class EnseignementController {
 
     @Autowired
+    private AuthHelper authHelper;
+
+    @Autowired
     private EnseignementRepository enseignementRepository;
     @Autowired EnseignantRepository enseignantRepository;
 
     @RequestMapping(value = "enseignement.do", method=RequestMethod.POST)
     public ModelAndView handlePostEnseignements(HttpServletRequest request) {
 
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
+
         ModelAndView returned = new ModelAndView("enseignement");
         returned.addObject("enseignantsList", enseignantRepository.findAll());
         returned.addObject("enseignement",new Enseignement());
+
+        returned.addObject("user", user);
 
         return returned;
     }
     @RequestMapping(value = "enseignements.do", method=RequestMethod.POST)
     public ModelAndView handlePostEnseignement(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
+
         List<Enseignement> myList = new ArrayList<>(enseignementRepository.findAll());
         Collections.sort(myList, Enseignement.getComparator());
         List<Enseignant> Enseignants = new ArrayList<>(enseignantRepository.findAll());
@@ -55,11 +72,19 @@ public class EnseignementController {
         returned.addObject("enseignementsList", myList);
         returned.addObject("enseignantsList", Enseignants);
 
+        returned.addObject("user", user);
+
         return returned;
 }
 
     @RequestMapping(value = "editenseignement.do", method = RequestMethod.POST)
     public ModelAndView handleEditEnseignementPost(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
+
         ModelAndView returned;
 
         String acronyme = request.getParameter("Acronyme");
@@ -75,11 +100,19 @@ public class EnseignementController {
             returned.addObject("enseignementsList", myList);
 
         }
+
+        returned.addObject("user", user);
+
         return returned;
     }
 
     @RequestMapping(value = "saveenseignement.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveEnseignement(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
 
         ModelAndView returned;
 
@@ -103,11 +136,19 @@ public class EnseignementController {
         returned = new ModelAndView("enseignement");
         returned.addObject("newenseignement", succes);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
+
+        returned.addObject("user", user);
+
         return returned;
     }
 
     @RequestMapping(value = "deleteenseignement.do", method = RequestMethod.POST)
     public ModelAndView handlePostDeleteEnseignement(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
 
         ModelAndView returned;
 
@@ -122,6 +163,8 @@ public class EnseignementController {
         returned.addObject("enseignementsList", myList);
         Collection<Enseignant> Enseignants = enseignantRepository.findAll();
         returned.addObject("enseignantsList", Enseignants);
+
+        returned.addObject("user", user);
 
         return returned;
     }
