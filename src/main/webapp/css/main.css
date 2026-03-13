@@ -35,6 +35,6 @@ form {
     display: flex;
     justify-content: center;
 }
-button.nav-link{
-    color :white;
+p{
+    text-align: center
 }

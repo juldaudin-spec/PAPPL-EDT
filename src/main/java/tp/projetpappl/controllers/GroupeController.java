@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import tp.projetpappl.items.Groupe;
 import tp.projetpappl.repositories.GroupeRepository;
+import tp.projetpappl.items.Connection;
 
 /**
  *
@@ -30,29 +31,53 @@ import tp.projetpappl.repositories.GroupeRepository;
 public class GroupeController {
 
     @Autowired
+    private AuthHelper authHelper;
+
+    @Autowired
     private GroupeRepository groupeRepository;
 
     @RequestMapping(value = "groupe.do", method=RequestMethod.POST)
     public ModelAndView handlePostGroupes(HttpServletRequest request) {
 
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
+
         ModelAndView returned = new ModelAndView("groupe");
         returned.addObject("groupe",new Groupe());
+
+        returned.addObject("user", user);
 
         return returned;
     }
     @RequestMapping(value = "groupes.do", method=RequestMethod.POST)
     public ModelAndView handlePostGroupe(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
+
         List<Groupe> myList = new ArrayList<>(groupeRepository.findAll());
         Collections.sort(myList, Groupe.getComparator());
 
         ModelAndView returned = new ModelAndView("groupes");
         returned.addObject("groupesList", myList);
 
+        returned.addObject("user", user);
+
         return returned;
 }
 
     @RequestMapping(value = "editgroupe.do", method = RequestMethod.POST)
     public ModelAndView handleEditGroupePost(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
+
         ModelAndView returned;
 
         String nomGroupe = request.getParameter("NomGroupe");
@@ -67,11 +92,19 @@ public class GroupeController {
             returned.addObject("groupesList", myList);
 
         }
+
+        returned.addObject("user", user);
+
         return returned;
     }
 
     @RequestMapping(value = "savegroupe.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveGroupe(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
 
         ModelAndView returned;
 
@@ -92,11 +125,19 @@ public class GroupeController {
             returned = new ModelAndView("groupe");
         }
         returned.addObject("newgroupe", succes);
+
+        returned.addObject("user", user);
+
         return returned;
     }
 
     @RequestMapping(value = "deletegroupe.do", method = RequestMethod.POST)
     public ModelAndView handlePostDeleteGroupe(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
 
         ModelAndView returned;
 
@@ -115,6 +156,11 @@ public class GroupeController {
     
     @RequestMapping(value = "csvgroupe.do", method = RequestMethod.POST)
     public ModelAndView handlePostCSVGroupe(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
 
         ModelAndView returned;
 
@@ -142,6 +188,9 @@ public class GroupeController {
         }
         returned = new ModelAndView("groupe");
         returned.addObject("newgroupe", success);
+
+        returned.addObject("user", user);
+
         return returned;
     }
 }
