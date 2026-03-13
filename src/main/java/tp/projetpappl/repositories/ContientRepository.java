@@ -13,5 +13,6 @@ import tp.projetpappl.items.Contient;
  */
 @Repository
 public interface ContientRepository extends JpaRepository<Contient, Integer>, ContientRepositoryCustom{
+
     
 }

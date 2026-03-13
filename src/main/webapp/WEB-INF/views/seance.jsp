@@ -47,7 +47,6 @@
                                 <tr>
                                     <th scope="col">Matière</th>
                                     <td colspan="2">
-                                        <input type="hidden" name="IdSeance" value="${seance.idSeance}" />
                                         <select name="Enseignement" required
                                                 class="form-control form-select form-select-lg mb-3">
                                             <c:choose>
@@ -64,7 +63,6 @@
                                 <tr>
                                     <th scope="col">Type de leçon</th>
                                     <td colspan="2">
-                                        <input type="hidden" name="IdSeance" value="${seance.idSeance}" />
                                         <select name="TypeLecon" required
                                                 class="form-control form-select form-select-lg mb-3">
                                             <c:choose>
@@ -88,7 +86,7 @@
                                                          class="list-group overflow-auto border border-primary" 
                                                          style="height:350px;overflow-y: scroll;" 
                                                          tabindex="0" 
-                                                         ondrop="dropAndRename(event, 'm')" 
+                                                         ondrop="dropAndRename(event, 'ml', 'm')" 
                                                          ondragover="allowDrop(event)">
                                                         <c:forEach var="itemIter" items="${seance.groupeList}">
                                                             <div class="list-group-item list-group-item-action" id="m_${itemIter.nomGroupe}" draggable="true" ondragstart="drag(event)">
@@ -103,10 +101,10 @@
                                                          class="list-group overflow-auto border border-primary" 
                                                          style="height:350px;overflow-y: scroll;" 
                                                          tabindex="0" 
-                                                         ondrop="dropAndRename(event, 'ml')" 
+                                                         ondrop="dropAndRename(event, 'm', 'ml')" 
                                                          ondragover="allowDrop(event)">
                                                         <c:forEach var="groupe" items="${groupesList}">
-                                                            <div class="list-group-item list-group-item-action" id="m_${groupe.nomGroupe}" draggable="true" ondragstart="drag(event)" style="display:block">
+                                                            <div class="list-group-item list-group-item-action" id="ml_${groupe.nomGroupe}" draggable="true" ondragstart="drag(event)" style="display:block">
                                                                 <input type="hidden" name="ml[${groupe.nomGroupe}]" value="${groupe.nomGroupe}"/>
                                                                 ${groupe.nomGroupe}
                                                             </div>
@@ -130,7 +128,7 @@
                                                          class="list-group overflow-auto border border-primary" 
                                                          style="height:350px;overflow-y: scroll;" 
                                                          tabindex="0" 
-                                                         ondrop="dropAndRename(event, 'e')" 
+                                                         ondrop="dropAndRename(event, 'el', 'e')" 
                                                          ondragover="allowDrop(event)">
                                                         <c:forEach var="itemIter" items="${seance.enseignantList}">
                                                             <div class="list-group-item list-group-item-action" id="e_${itemIter.initiales}" draggable="true" ondragstart="drag(event)">
@@ -145,10 +143,10 @@
                                                          class="list-group overflow-auto border border-primary" 
                                                          style="height:350px;overflow-y: scroll;" 
                                                          tabindex="0" 
-                                                         ondrop="dropAndRename(event, 'el')" 
+                                                         ondrop="dropAndRename(event, 'e','el')" 
                                                          ondragover="allowDrop(event)">
                                                         <c:forEach var="enseignant" items="${enseignantsList}">
-                                                            <div class="list-group-item list-group-item-action" id="e_${enseignant.initiales}" draggable="true" ondragstart="drag(event)" style="display:block">
+                                                            <div class="list-group-item list-group-item-action" id="el_${enseignant.initiales}" draggable="true" ondragstart="drag(event)" style="display:block">
                                                                 <input type="hidden" name="el[${enseignant.initiales}]" value="${enseignant.initiales}"/>
                                                                 ${enseignant.nomEnseignant} ${enseignant.prenom}
                                                             </div>
@@ -172,7 +170,7 @@
                                                          class="list-group overflow-auto border border-primary" 
                                                          style="height:350px;overflow-y: scroll;" 
                                                          tabindex="0" 
-                                                         ondrop="dropAndRename(event, 's')" 
+                                                         ondrop="dropAndRename(event, 'sl', 's')" 
                                                          ondragover="allowDrop(event)">
                                                         <c:forEach var="itemIter" items="${seance.salleList}">
                                                             <div class="list-group-item list-group-item-action" id="s_${itemIter.numeroSalle}" draggable="true" ondragstart="drag(event)">
@@ -187,10 +185,10 @@
                                                          class="list-group overflow-auto border border-primary" 
                                                          style="height:350px;overflow-y: scroll;" 
                                                          tabindex="0" 
-                                                         ondrop="dropAndRename(event, 'sl')" 
+                                                         ondrop="dropAndRename(event,'s', 'sl')" 
                                                          ondragover="allowDrop(event)">
                                                         <c:forEach var="salle" items="${sallesList}">
-                                                            <div class="list-group-item list-group-item-action" id="s_${salle.numeroSalle}" draggable="true" ondragstart="drag(event)" style="display:block">
+                                                            <div class="list-group-item list-group-item-action" id="sl_${salle.numeroSalle}" draggable="true" ondragstart="drag(event)" style="display:block">
                                                                 <input type="hidden" name="sl[${salle.numeroSalle}]" value="${salle.numeroSalle}"/>
                                                                 ${salle.numeroSalle}
                                                             </div>
