@@ -4,10 +4,14 @@
  */
 package tp.projetpappl.repositories;
 
+import java.math.BigInteger;
+import tp.projetpappl.items.Contient;
+
 /**
  *
  * @author nathan
  */
 public interface ContientRepositoryCustom {
+    public Contient create(String acronyme, String intitule, BigInteger heures, String salle);
     
 }

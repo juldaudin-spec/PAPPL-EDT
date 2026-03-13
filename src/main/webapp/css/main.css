@@ -35,3 +35,6 @@ form {
     display: flex;
     justify-content: center;
 }
+button.nav-link{
+    color :white;
+}
