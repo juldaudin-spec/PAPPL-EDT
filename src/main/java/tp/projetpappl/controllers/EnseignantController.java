@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import tp.projetpappl.items.Enseignant;
 import tp.projetpappl.repositories.EnseignantRepository;
+import tp.projetpappl.items.Connection;
+
 
 /**
  *
@@ -30,29 +32,53 @@ import tp.projetpappl.repositories.EnseignantRepository;
 public class EnseignantController {
 
     @Autowired
+    private AuthHelper authHelper;
+
+    @Autowired
     private EnseignantRepository enseignantRepository;
 
     @RequestMapping(value = "enseignant.do", method=RequestMethod.POST)
-    public ModelAndView handlePostEnseignants(HttpServletRequest request) {
+    public ModelAndView handlePostEnseignant(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
 
         ModelAndView returned = new ModelAndView("enseignant");
         returned.addObject("enseignant",new Enseignant());
 
+        returned.addObject("user", user);
+
         return returned;
     }
     @RequestMapping(value = "enseignants.do", method=RequestMethod.POST)
-    public ModelAndView handlePostEnseignant(HttpServletRequest request) {
+    public ModelAndView handlePostEnseignants(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
+
         List<Enseignant> myList = new ArrayList<>(enseignantRepository.findAll());
         Collections.sort(myList, Enseignant.getComparator());
 
         ModelAndView returned = new ModelAndView("enseignants");
         returned.addObject("enseignantsList", myList);
 
+        returned.addObject("user", user);
+
         return returned;
 }
 
     @RequestMapping(value = "editenseignant.do", method = RequestMethod.POST)
-    public ModelAndView handleEditUserPost(HttpServletRequest request) {
+    public ModelAndView handleEditEnseignantPost(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
+
         ModelAndView returned;
 
         String initiales = request.getParameter("Initiales");
@@ -67,11 +93,19 @@ public class EnseignantController {
             returned.addObject("enseignantsList", myList);
 
         }
+
+        returned.addObject("user", user);
+
         return returned;
     }
 
     @RequestMapping(value = "saveenseignant.do", method = RequestMethod.POST)
-    public ModelAndView handlePostSaveUser(HttpServletRequest request) {
+    public ModelAndView handlePostSaveEnseignant(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
 
         ModelAndView returned;
 
@@ -92,11 +126,19 @@ public class EnseignantController {
             returned = new ModelAndView("enseignant");
         }
         returned.addObject("newenseignant", succes);
+
+        returned.addObject("user", user);
+
         return returned;
     }
 
     @RequestMapping(value = "deleteenseignant.do", method = RequestMethod.POST)
-    public ModelAndView handlePostDeleteUser(HttpServletRequest request) {
+    public ModelAndView handlePostDeleteEnseignant(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
 
         ModelAndView returned;
 
@@ -109,6 +151,8 @@ public class EnseignantController {
         returned = new ModelAndView("enseignants");
         Collection<Enseignant> myList = enseignantRepository.findAll();
         returned.addObject("enseignantsList", myList);
+
+        returned.addObject("user", user);
 
         return returned;
     }
