@@ -59,6 +59,9 @@
                                             <tr>
                                                 <td>
                                                     <div class="position-relative" id="Jour">
+                                                        <div id="nomJour">  
+                                                            ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.FRENCH)}
+                                                        </div>
                                                         <div id="date">
                                                             ${jour}</div>
                                                         <div id="Horaire" style="--position-element: 0px; --taille-element:1px;">
@@ -73,10 +76,7 @@
                                                             16h</div>
                                                         <div id="Horaire" style="--position-element: 200px; --taille-element:1px;">
                                                             18h</div>
-                                                        <div id="nomJour">  
-                                                            ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.FRENCH)}
-                                                        </div>
-
+                                                        
                                                     </div>
 
                                                 </td>
