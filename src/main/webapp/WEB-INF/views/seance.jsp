@@ -211,7 +211,10 @@
                                 <tfoot>
                                     <tr>
                                         <td scope="col" colspan="2" class="text-center">
+                                            
+                                            <input type="hidden" name="connexion" value="${user.connectionCode}">
                                             <button type="submit" class="btn btn-block btn-primary"><fmt:message key="save"/></button>
+                                        
                                         </td>
                                     </tr>
                                 </tfoot>

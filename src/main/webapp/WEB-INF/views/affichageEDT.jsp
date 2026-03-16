@@ -29,7 +29,7 @@
                                 <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
                             </c:forEach>
                         </select>
-                        
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button>
                             <fmt:message key="submit"/>
                         </button>
@@ -38,13 +38,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <form formaction="seance.do" method="POST">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th scope="col" class="col-2 text-center"><fmt:message key="date"/></th>
                                                 <c:forEach var="groupeSelect" items="${listeGroupe}">
-                                                <th scope="col-auto" class="text-center">${groupeSelect}</th>
+                                                <th scope="col-auto" class="text-center">${groupeSelect}
+                                                <form action="exporterICS.do">
+                                                    <input type="hidden" name="connexion" value="${user.connectionCode}">
+                                                    <input type="hidden" name="groupeSelect" value=${groupeSelect}>
+                                                    <button>Exporter au format ICS</button>
+                                                </form>
+                                            </th>
                                                 </c:forEach>
                                         </tr>
                                     </thead>
@@ -74,6 +79,7 @@
                                                     </div>
 
                                                 </td>
+                                                <form formaction="seance.do" method="POST"></form>
                                                 <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
 
                                                     <td class="texte-center">

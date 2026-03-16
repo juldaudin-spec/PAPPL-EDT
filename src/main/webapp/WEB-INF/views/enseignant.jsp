@@ -73,6 +73,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form action="enseignants.do" method="POST">
+                            <input type="hidden" name="connexion" value="${user.connectionCode}">
                             <button formaction="enseignants.do"><fmt:message key="backToEnseignants"/></button>
                         </form>
                     </div>
