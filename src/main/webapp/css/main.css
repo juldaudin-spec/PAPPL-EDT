@@ -38,3 +38,8 @@ form {
 p{
     text-align: center
 }
+:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px black; /* Complément pour contraste élevé */
+}
