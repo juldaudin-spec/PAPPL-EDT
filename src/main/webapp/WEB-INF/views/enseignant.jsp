@@ -5,17 +5,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Ajouter Enseignant</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"
-                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
+        <%@include file="imports.jspf" %>
         <link href="css/enseignants.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
@@ -43,11 +34,20 @@
                                     
                                     <tr>
                                         <th scope="col">Nom</th>
-                                        <td><input type="text" class="form-control" name="Nom" value="${enseignant.nomEnseignant}"/></td>
+                                        <td>
+                                            <label> 
+                                                Nom de l'enseignant
+                                            <input type="text" class="form-control" name="Nom" value="${enseignant.nomEnseignant}"/></td>
+                                            </label>
                                     </tr>
                                     <tr>
                                         <th scope="col">Prenom</th>
-                                        <td><input type="text" class="form-control" name="Prenom" value="${enseignant.prenom}"/></td>
+                                        <td>
+                                            <label> 
+                                                Prénom de l'enseignant
+                                            <input type="text" class="form-control" name="Prenom" value="${enseignant.prenom}"/>
+                                            </label>
+                                        </td>
                                     </tr>
                                 </tbody>
                                 <tfoot>

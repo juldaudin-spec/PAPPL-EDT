@@ -6,18 +6,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Emploi du temps</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"
-                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-        <link href="css/mainPage.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <%@include file="imports.jspf" %>
         <link rel="stylesheet" href="css/EDT.css">
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
@@ -31,11 +21,13 @@
                         <h5>Veuillez choisir les groupes à visualiser</h5>
                     </div>
                     <form action="affichageEDT.do" method="POST">
-                        <select name="idGroupe" multiple>
+                        <label for="groupes">sélection groupes : </label>
+                        <select id="groupes" name="idGroupe" multiple>
                             <c:forEach var="groupe" items="${groupes}">
                                 <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
                             </c:forEach>
                         </select>
+                        
                         <button>
                             valider
                         </button>
