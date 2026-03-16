@@ -205,7 +205,10 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td scope="col" colspan="2" class="text-center"><button type="submit" class="btn btn-block btn-primary">Save</button></td>
+                                        <td scope="col" colspan="2" class="text-center">
+                                            <input type="hidden" name="connexion" value="${user.connectionCode}">
+                                            <button type="submit" class="btn btn-block btn-primary">Save</button>
+                                        </td>
                                     </tr>
                                 </tfoot>
                             </table>

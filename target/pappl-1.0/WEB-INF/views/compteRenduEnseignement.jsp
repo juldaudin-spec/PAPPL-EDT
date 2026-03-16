@@ -102,6 +102,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form action="enseignements.do" method="POST">
+                            <input type="hidden" name="connexion" value="${user.connectionCode}">
                             <button formaction="enseignements.do">Retour à la liste des Enseignements</button>
                         </form>
                     </div>

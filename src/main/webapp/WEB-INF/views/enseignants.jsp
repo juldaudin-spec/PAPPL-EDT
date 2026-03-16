@@ -55,6 +55,7 @@
                                         <td>${item.prenom}</td>
                                         <td class="text-center">
                                             <form action="editUser" method="POST">
+                                                <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <input type="hidden" name="Initiales" value="${item.initiales}" />
                                                 <button class="btn" formaction="editenseignant.do" name="edit" class="icon">
                                                     <img src="img/edit.png" alt="edit" class="icon">
