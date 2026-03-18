@@ -5,8 +5,9 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Récapitulatif ${enseignement.acronyme}</title>
         <%@include file="imports.jspf" %>
+        <title><fmt:message key="summary"/> ${enseignement.acronyme}</title>
+        
         <link href="css/groupes.css" type="text/css" rel="stylesheet" />
         
     </head>
@@ -17,7 +18,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Récapitulatif de ${enseignement.acronyme}</h1>
+                        <h1><fmt:message key="summary"/> ${enseignement.acronyme}</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -25,16 +26,16 @@
                         <table class="table table-striped">
                             <thead>
                             <th class="col-6">
-                                Groupe
+                                <fmt:message key="group"/>
                             </th>
                             <th class="col-2">
-                                Type de cours
+                                <fmt:message key="courseType"/>
                             </th>
                             <th class="col-2">
-                                Durée à faire
+                                <fmt:message key="duration"/>
                             </th>
                             <th class="col-2">
-                                Durée programmée
+                                <fmt:message key="scheduled"/>
                             </th>
                             </thead>
                             <tbody>
@@ -94,7 +95,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form action="enseignements.do" method="POST">
-                            <button formaction="enseignements.do">Retour à la liste des Enseignements</button>
+                            <button formaction="enseignements.do"><fmt:message key="backToEnseignements"/></button>
                         </form>
                     </div>
                 </div>
