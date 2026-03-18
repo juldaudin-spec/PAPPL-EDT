@@ -4,9 +4,8 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Ajouter Salle</title>
         <%@include file="imports.jspf" %>
+        <title><fmt:message key="addRoom"/></title>
         <link href="css/salles.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
@@ -16,7 +15,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer une nouvelle salle</h1>
+                        <h1><fmt:message key="addRoom"/></h1>
                     </div>
                 </div>
                 <div class="row">
@@ -25,7 +24,7 @@
                             <table class="table table-striped">
                                 <tbody>
                                     <tr>
-                                        <th scope="col">Numéro de la salle</th>
+                                        <th scope="col"><fmt:message key="wichRoom"/></th>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${(empty salle) || (empty salle.numeroSalle)}"><input name="NumeroSalle" value=""/></c:when>
@@ -34,17 +33,17 @@
                                         </td>
                                     
                                     <tr>
-                                        <th scope="col">Nombre d'élèves</th>
+                                        <th scope="col"><fmt:message key="nbStudent"/></th>
                                         <td><input type="int" class="form-control" name="Capacite" value="${salle.capacite}"/></td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Typologie de la salle</th>
+                                        <th scope="col"><fmt:message key="roomInfo"/></th>
                                         <td><input type="text" class="form-control" name="Typologie" value="${salle.typologie}"/></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td scope="col" colspan="2" class="text-center"><button type="submit" class="btn btn-block btn-primary">Save</button></td>
+                                        <td scope="col" colspan="2" class="text-center"><button type="submit" class="btn btn-block btn-primary"><fmt:message key="save"/></button></td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -54,14 +53,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <c:if test='${newsalle}'>
-                            <p>Salle créé/modifié avec succès</p>
+                            <p><fmt:message key="roomSaved"/></p>
                         </c:if>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <form action="salles.do" method="POST">
-                            <button formaction="salles.do">Afficher la liste des Salles</button>
+                            <button formaction="salles.do"><fmt:message key="backToRooms"/></button>
                         </form>
                     </div>
                 </div>
