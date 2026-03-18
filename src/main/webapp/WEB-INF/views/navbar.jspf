@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
     <div class="container">
-        <a class="navbar-brand" href="#" title="Retour à l'accueil">${view}</a>
+        <a class="navbar-brand" href="#" title="<fmt:message key="returnHome"/>">${view}</a>
         <a class="navbar-brand" href="index.do">
             <img src="img/centraleNantes.png" alt ="Logo Centrale Nantes" class="icon">
         </a>
@@ -14,35 +14,35 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar1">
-            <ul class="navbar-nav ms-auto" title="menu des actions possibles">
+            <ul class="navbar-nav ms-auto" title="<fmt:message key="menu"/>">
                 <li class="nav-item">
                     <form action="affichageEDT.do" method="POST">
-                        <button class="nav-link" formaction="affichageEDT.do" method="POST" name="idGroupe" value="" title="accès à l'affichage de l'emplois du temps">Afficher</button>
+                        <button class="nav-link" formaction="affichageEDT.do" method="POST" name="idGroupe" value="" title="accès à l'affichage de l'emplois du temps"><fmt:message key="planning"/></button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form method="POST">
-                        <button class="nav-link" formaction="enseignements.do">Enseignement</button>
+                        <button class="nav-link" formaction="enseignements.do"><fmt:message key="enseignement"/></button>
                     </form>
                 </li>                
                 <li class="nav-item">
                     <form method="POST">
-                        <button class="nav-link" formaction="groupes.do">Groupe</button>
+                        <button class="nav-link" formaction="groupes.do"><fmt:message key="group"/></button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form method="POST">
-                        <button class="nav-link" formaction="enseignants.do">Enseignant</button>
+                        <button class="nav-link" formaction="enseignants.do"><fmt:message key="enseignant"/></button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form method="POST">
-                        <button class="nav-link" formaction="salle.do">Salle</button>
+                        <button class="nav-link" formaction="salle.do"><fmt:message key="room"/></button>
                     </form>
                 </li>                
                 <li class="nav-item">
                     <form method="POST">
-                        <button class="nav-link" formaction="seance.do">Séance</button>
+                        <button class="nav-link" formaction="seance.do"><fmt:message key="seance"/></button>
                     </form>
                 </li>
             </ul>
