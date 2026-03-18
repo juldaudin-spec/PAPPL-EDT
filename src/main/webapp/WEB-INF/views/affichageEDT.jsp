@@ -4,9 +4,11 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Emploi du temps</title>
         <%@include file="imports.jspf" %>
+        <meta charset="UTF-8">
+        <title>
+            <fmt:message key="EDT"/>
+        </title>
         <link rel="stylesheet" href="css/EDT.css">
     </head>
     <body>
@@ -18,10 +20,10 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <h5>Veuillez choisir les groupes à visualiser</h5>
+                        <h5><fmt:message key="chooseGroupe"/></h5>
                     </div>
                     <form action="affichageEDT.do" method="POST">
-                        <label for="groupes">sélection groupes : </label>
+                        <label for="groupes"><fmt:message key="selectGroupe"/>sélection groupes : </label>
                         <select id="groupes" name="idGroupe" multiple>
                             <c:forEach var="groupe" items="${groupes}">
                                 <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
@@ -29,7 +31,7 @@
                         </select>
                         
                         <button>
-                            valider
+                            <fmt:message key="submit"/>valider
                         </button>
                     </form>
                 </div>
@@ -40,7 +42,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="col-2 text-center">Date</th>
+                                            <th scope="col" class="col-2 text-center"><fmt:message key="date"/>Date</th>
                                                 <c:forEach var="groupeSelect" items="${listeGroupe}">
                                                 <th scope="col-auto" class="text-center">${groupeSelect}</th>
                                                 </c:forEach>
@@ -52,7 +54,7 @@
                                                 <td>
                                                     <div class="position-relative" id="Jour">
                                                         <div id="nomJour">  
-                                                            ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.FRENCH)}
+                                                            ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, pageContext.request.locale)}
                                                         </div>
                                                         <div id="date">
                                                             ${jour}</div>
