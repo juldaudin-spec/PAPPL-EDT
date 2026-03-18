@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Récapitulatif ${groupe.nomGroupe}</title>
         <%@include file="imports.jspf" %>
+        <meta charset="UTF-8">
+        <title><fmt:message key="summary"/> ${groupe.nomGroupe}</title>
+        
         <link href="css/groupes.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
@@ -16,7 +17,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Récapitulatif de ${groupe.nomGroupe}</h1>
+                        <h1><fmt:message key="summary"/> ${groupe.nomGroupe}</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -24,16 +25,16 @@
                         <table class="table table-striped">
                             <thead>
                             <th class="col-6">
-                                Enseignement
+                                <fmt:message key="Enseignement"/>
                             </th>
                             <th class="col-2">
-                                Type de cours
+                                <fmt:message key="courseType"/>
                             </th>
                             <th class="col-2">
-                                durée à faire
+                                <fmt:message key="duration"/>
                             </th>
                             <th class="col-2">
-                                durée programmée
+                                <fmt:message key="scheduled"/>
                             </th>
                             </thead>
                             <tbody>
@@ -91,7 +92,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form action="groupes.do" method="POST">
-                            <button formaction="groupes.do">Retour à la liste des Groupes</button>
+                            <button formaction="groupes.do"><fmt:message key="backToGroups"/></button>
                         </form>
                     </div>
                 </div>
