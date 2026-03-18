@@ -3,9 +3,8 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Accueil</title>
         <%@include file="imports.jspf" %>
+        <title><fmt:message key="home"/></title>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
@@ -13,12 +12,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Logiciel de création d'emplois du temps</h1>
+                        <h1><fmt:message key="whatIsIt"/></h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <p>Veuillez choisir dans le menu ci-dessus l'action à réaliser</p>
+                        <p><fmt:message key="whatToDo"/></p>
                     </div>
                 </div>
             </div>
