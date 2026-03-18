@@ -10,9 +10,8 @@
 <!DOCTYPE html>
 <html lang="fr-fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Liste Salles</title>
         <%@include file="imports.jspf" %>
+        <title><fmt:message key="listRoom"/></title>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
@@ -21,7 +20,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Liste des salles</h1>
+                        <h1><fmt:message key="listRoom"/></h1>
                     </div>
                 </div>
 
@@ -31,10 +30,10 @@
                         <table class="table table-striped table-md sortable">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="col-md-2">Numéro de la salle</th>
-                                    <th scope="col" class="col-md-3">Capacité maximale</th>
-                                    <th scope="col" class="col-md-3">Typologie de la salle (projecteur, sortie audio, etc.)</th>
-                                    <th scope="col" class="col-md-3">Editer/Supprimer une salle</th>
+                                    <th scope="col" class="col-md-2"><fmt:message key="wichRoom"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="roomCapacity"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="roomInfo"/><fmt:message key="listRoomInfo"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="editRoom"/></th>
                                 </tr>
                             </thead>
 
