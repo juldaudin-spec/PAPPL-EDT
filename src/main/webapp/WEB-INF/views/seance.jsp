@@ -6,17 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Ajouter Seance</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"
-                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-        <link href="css/seances.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
+        <%@include file="imports.jspf" %>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
@@ -42,8 +32,7 @@
                                 </c:choose>
                                 <tr>
                                     <th scope="col">Date et heure de début</th>
-                                    <td><input type="datetime-local" class="form-control" name="HDebut" value="${seance.HDebut}" placeholder="${seance.HDebut}"/></td>
-                                <p>${seance.HDebut} voici l'horaire</p>
+                                    <td><input type="datetime-local" class="form-control" name="HDebut" value="<fmt:formatDate value="${seance.HDebut}" pattern="yyyy-MM-dd'T'HH:mm" />"/></td>
                                 </tr>
                                 <tr>
                                     <th scope="col">Durée (minutes)</th>
@@ -212,7 +201,9 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td scope="col" colspan="2" class="text-center"><button type="submit" class="btn btn-block btn-primary">Save</button></td>
+                                        <td scope="col" colspan="2" class="text-center">
+                                            <button type="submit" class="btn btn-block btn-primary">Save</button>
+                                        </td>
                                     </tr>
                                 </tfoot>
                             </table>
