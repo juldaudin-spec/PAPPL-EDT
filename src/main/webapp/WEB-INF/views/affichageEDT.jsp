@@ -23,7 +23,7 @@
                         <h5><fmt:message key="chooseGroupe"/></h5>
                     </div>
                     <form action="affichageEDT.do" method="POST">
-                        <label for="groupes"><fmt:message key="selectGroupe"/>sélection groupes : </label>
+                        <label for="groupes"><fmt:message key="selectGroupe"/> </label>
                         <select id="groupes" name="idGroupe" multiple>
                             <c:forEach var="groupe" items="${groupes}">
                                 <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
@@ -31,7 +31,7 @@
                         </select>
                         
                         <button>
-                            <fmt:message key="submit"/>valider
+                            <fmt:message key="submit"/>
                         </button>
                     </form>
                 </div>
@@ -42,7 +42,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="col-2 text-center"><fmt:message key="date"/>Date</th>
+                                            <th scope="col" class="col-2 text-center"><fmt:message key="date"/></th>
                                                 <c:forEach var="groupeSelect" items="${listeGroupe}">
                                                 <th scope="col-auto" class="text-center">${groupeSelect}</th>
                                                 </c:forEach>
