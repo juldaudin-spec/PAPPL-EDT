@@ -10,9 +10,8 @@
 <!DOCTYPE html>
 <html lang="fr-fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Liste Matières</title>
         <%@include file="imports.jspf" %>
+        <title><fmt:message key="listEnseignement"/></title>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
@@ -21,7 +20,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Liste des matières</h1>
+                        <h1><fmt:message key="listEnseignement"/></h1>
                     </div>
                 </div>
 
@@ -31,10 +30,10 @@
                         <table class="table table-striped table-md sortable">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="col-md-2">Acronyme</th>
-                                    <th scope="col" class="col-md-3">Nom de l'enseignement</th>
-                                    <th scope="col" class="col-md-3">Filière(s)</th>
-                                    <th scope="col" class="col-md-3">Responsable</th>
+                                    <th scope="col" class="col-md-2"><fmt:message key="enseignementAcronyme"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="enseignementName"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="programme"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="maanager"/></th>
                                 </tr>
                             </thead>
 
