@@ -4,9 +4,8 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Ajouter Seance</title>
         <%@include file="imports.jspf" %>
+        <title><fmt:message key="addSeance"/></title>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
@@ -14,7 +13,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer/Modifier une séance</h1>
+                        <h1><fmt:message key="addSeance"/></h1>
                     </div>
                 </div>
                 <div class="row">
@@ -31,21 +30,21 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <tr>
-                                    <th scope="col">Date et heure de début</th>
+                                    <th scope="col"><fmt:message key="start"/></th>
                                     <td><input type="datetime-local" class="form-control" name="HDebut" value="<fmt:formatDate value="${seance.HDebut}" pattern="yyyy-MM-dd'T'HH:mm" />"/></td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Durée (minutes)</th>
+                                    <th scope="col"><fmt:message key="duration"/><fmt:message key="minutes"/></th>
                                     <td><input type="int" class="form-control" name="Duree" value="${seance.duree}"/></td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Matière</th>
+                                    <th scope="col"><fmt:message key="enseignement"/></th>
                                     <td colspan="2">
                                         <input type="hidden" name="IdSeance" value="${seance.idSeance}" />
                                         <select name="Enseignement" required
                                                 class="form-control form-select form-select-lg mb-3">
                                             <c:choose>
-                                                <c:when test="${(empty seance) || (empty seance.acronyme)}"><option value="" disabled selected>Choisissez la matière</option></c:when>
+                                                <c:when test="${(empty seance) || (empty seance.acronyme)}"><option value="" disabled selected><fmt:message key="chooseEnseignement"/></option></c:when>
                                                 <c:otherwise><option value="${seance.acronyme}" disabled selected>${seance.acronyme.nomEnseignement}</option></c:otherwise>
                                             </c:choose>
 
@@ -56,13 +55,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Type de leçon</th>
+                                    <th scope="col"><fmt:message key="courseType"/></th>
                                     <td colspan="2">
                                         <input type="hidden" name="IdSeance" value="${seance.idSeance}" />
                                         <select name="TypeLecon" required
                                                 class="form-control form-select form-select-lg mb-3">
                                             <c:choose>
-                                                <c:when test="${(empty seance) || (empty seance.intitule)}"><option value="" disabled selected>Choisissez un type de leçon</option></c:when>
+                                                <c:when test="${(empty seance) || (empty seance.intitule)}"><option value="" disabled selected><fmt:message key="chooseCourseType"/></option></c:when>
                                                 <c:otherwise><option value="${seance.intitule}" disabled selected>${seance.intitule.intitule}</option></c:otherwise>
                                             </c:choose>
 
@@ -73,7 +72,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Groupe(s)</th>
+                                    <th scope="col"><fmt:message key="group_s"/></th>
                                     <td>
                                         <div class="container">
                                             <div class="row">
@@ -115,7 +114,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Enseignant(s)</th>
+                                    <th scope="col"><fmt:message key="enseignant_s"/></th>
                                     <td>
                                         <div class="container">
                                             <div class="row">
@@ -149,7 +148,7 @@
                                                         </c:forEach>
                                                     </div>
                                                     <div onkeyup="filterList('listAllenseignants', 'listAllenseignantsFilter')" >
-                                                        <input type="text" id="listAllenseignantsFilter" placeholder="Rechercher.." title="Type in a name" style="width:100%">
+                                                        <input type="text" id="listAllenseignantsFilter" placeholder="<fmt:message key="search"/>" title="Type in a name" style="width:100%">
                                                     </div>
                                                 </div>
                                             </div>
@@ -157,7 +156,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Salle(s)</th>
+                                    <th scope="col"><fmt:message key="room_s"/></th>
                                     <td>
                                         <div class="container">
                                             <div class="row">
@@ -191,7 +190,7 @@
                                                         </c:forEach>
                                                     </div>
                                                     <div onkeyup="filterList('listAllsalles', 'listAllsallesFilter')" >
-                                                        <input type="text" id="listAllsallesFilter" placeholder="Rechercher.." title="Type in a name" style="width:100%">
+                                                        <input type="text" id="listAllsallesFilter" placeholder="<fmt:message key="search"/>" title="Type in a name" style="width:100%">
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,7 +201,7 @@
                                 <tfoot>
                                     <tr>
                                         <td scope="col" colspan="2" class="text-center">
-                                            <button type="submit" class="btn btn-block btn-primary">Save</button>
+                                            <button type="submit" class="btn btn-block btn-primary"><fmt:message key="save"/></button>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -213,7 +212,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <c:if test='${newseance}'>
-                            <p>Seance créé/modifié avec succès</p>
+                            <p><fmt:message key="seanceSaved"/></p>
                         </c:if>
                     </div>
                 </div>
