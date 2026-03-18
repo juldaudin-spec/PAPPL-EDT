@@ -4,9 +4,8 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Créer Matière</title>
         <%@include file="imports.jspf" %>
+        <title><fmt:message key="addEnseignement"/></title>
         <link href="css/enseignements.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
@@ -15,7 +14,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer une nouvelle matière</h1>
+                        <h1><fmt:message key="addEnseignement"/></h1>
                     </div>
                 </div>
                 <div class="row">
@@ -24,7 +23,7 @@
                             <table class="table table-striped">
                                 <tbody>
                                     <tr>
-                                        <th scope="col">Nom de l'Enseignement</th>
+                                        <th scope="col"><fmt:message key="enseignementAcronyme"/></th>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${(empty enseignement) || (empty enseignement.acronyme)}"><input name="Acronyme" value=""/></c:when>
@@ -33,21 +32,21 @@
                                         </td>
                                     
                                     <tr>
-                                        <th scope="col">Nom Enseignement</th>
+                                        <th scope="col"><fmt:message key="enseignementName"/></th>
                                         <td><input type="text" class="form-control" name="NomEnseignement" value="${enseignement.nomEnseignement}"/></td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Filière</th>
+                                        <th scope="col"><fmt:message key="programme"/></th>
                                         <td><input type="text" class="form-control" name="Filiere" value="${enseignement.filiere}"/></td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Responsable</th>
+                                        <th scope="col"><fmt:message key="manager"/></th>
                                         <td colspan="2">
                                             <input type="hidden" name="AcronymeEnseignement" value="${enseignement.acronyme}" />
                                             <select name="InitialesEnseignant" required
                                                     class="form-control form-select form-select-lg mb-3">
                                                 <c:choose>
-                                                <c:when test="${(empty enseignement) || (empty enseignement.responsable)}"><option value="" disabled selected>Choisissez un enseignant</option></c:when>
+                                                <c:when test="${(empty enseignement) || (empty enseignement.responsable)}"><option value="" disabled selected><fmt:message key="chooseEnseignant"/></option></c:when>
                                                 <c:otherwise><option value="${enseignement.responsable.initiales}" disabled selected>${enseignement.responsable.nomEnseignant} ${enseignement.responsable.prenom}</option></c:otherwise>
                                             </c:choose>
                                                 
@@ -69,14 +68,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <c:if test='${newenseignement}'>
-                            <p>Enseignement créé/modifié avec succès</p>
+                            <p><fmt:message key="enseignementSaved"/></p>
                         </c:if>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <form action="enseignements.do" method="POST">
-                            <button formaction="enseignements.do">Afficher la liste des Enseignements</button>
+                            <button formaction="enseignements.do"><fmt:message key="backToEnseignements"/></button>
                         </form>
                     </div>
                 </div>
