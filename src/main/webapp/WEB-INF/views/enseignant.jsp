@@ -27,10 +27,13 @@
                                     <tr>
                                         <th scope="col"><fmt:message key="initials"/></th>
                                         <td>
+                                            <label>
+                                                <fmt:message key="initials"/>
                                             <c:choose>
                                                 <c:when test="${(empty enseignant) || (empty enseignant.initiales)}"><input name="Initiales" value=""/></c:when>
                                                 <c:otherwise><input type="text" class="form-control" name="Initiales" value="${enseignant.initiales}"/></c:otherwise>
                                             </c:choose>
+                                            </label>
                                         </td>
                                     
                                     <tr>
