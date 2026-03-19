@@ -33,7 +33,7 @@
                                     <th scope="col" class="col-md-2"><fmt:message key="enseignementAcronyme"/></th>
                                     <th scope="col" class="col-md-3"><fmt:message key="enseignementName"/></th>
                                     <th scope="col" class="col-md-3"><fmt:message key="programme"/></th>
-                                    <th scope="col" class="col-md-3"><fmt:message key="maanager"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="manager"/></th>
                                 </tr>
                             </thead>
 
