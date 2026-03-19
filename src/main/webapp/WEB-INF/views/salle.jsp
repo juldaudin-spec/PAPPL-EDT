@@ -26,19 +26,27 @@
                                     <tr>
                                         <th scope="col"><fmt:message key="wichRoom"/></th>
                                         <td>
+                                            <label class="hidden-label" for="NumeroSalle">
+                                                <fmt:message key="wichRoom"/></label>
                                             <c:choose>
-                                                <c:when test="${(empty salle) || (empty salle.numeroSalle)}"><input name="NumeroSalle" value=""/></c:when>
-                                                <c:otherwise><input type="text" class="form-control" name="NumeroSalle" value="${salle.numeroSalle}"/></c:otherwise>
+                                                <c:when test="${(empty salle) || (empty salle.numeroSalle)}"><input name="NumeroSalle" id="NumeroSalle" value=""/></c:when>
+                                                <c:otherwise><input type="text" class="form-control" name="NumeroSalle" id="NumeroSalle" value="${salle.numeroSalle}"/></c:otherwise>
                                             </c:choose>
                                         </td>
                                     
                                     <tr>
                                         <th scope="col"><fmt:message key="nbStudent"/></th>
-                                        <td><input type="int" class="form-control" name="Capacite" value="${salle.capacite}"/></td>
+                                        <td>
+                                            <label class="hidden-label" for="Capacite">
+                                                <fmt:message key="nbStudent"/></label>
+                                            <input type="int" class="form-control" name="Capacite" id="Capacite" value="${salle.capacite}"/></td>
                                     </tr>
                                     <tr>
                                         <th scope="col"><fmt:message key="roomInfo"/></th>
-                                        <td><input type="text" class="form-control" name="Typologie" value="${salle.typologie}"/></td>
+                                        <td>
+                                            <label class="hidden-label" for="Typologie">
+                                                <fmt:message key="roomInfo"/></label>
+                                            <input type="text" class="form-control" name="Typologie" id="Typologie" value="${salle.typologie}"/></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
