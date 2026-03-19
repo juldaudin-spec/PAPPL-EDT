@@ -26,14 +26,21 @@
                                     <tr>
                                         <th scope="col"><fmt:message key="groupName"/></th>
                                         <td>
+                                            <label class="hidden-label" for="NomGroupe">
+                                                <fmt:message key="groupName"/>
+                                            </label>
                                             <c:choose>
-                                                <c:when test="${(empty groupe) || (empty groupe.nomGroupe)}"><input name="NomGroupe" value=""/></c:when>
-                                                <c:otherwise><input type="text" class="form-control" name="NomGroupe" value="${groupe.nomGroupe}"/></c:otherwise>
+                                                <c:when test="${(empty groupe) || (empty groupe.nomGroupe)}"><input name="NomGroupe" id="NomGroupe" value=""/></c:when>
+                                                <c:otherwise><input type="text" class="form-control" name="NomGroupe" id="NomGroupe" value="${groupe.nomGroupe}"/></c:otherwise>
                                             </c:choose>
                                         </td>
                                     <tr>
+                                        
                                         <th scope="col"><fmt:message key="nbStudent"/></th>
-                                        <td><input type="text" class="form-control" name="NbEleve" value="${groupe.nbEleve}"/></td>
+                                        <td>
+                                            <label class="hidden-label" for="NbEleve">
+                                            <fmt:message key="nbStudent"/></label>
+                                            <input type="text" class="form-control" name="NbEleve" id="NbEleve" value="${groupe.nbEleve}"/></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
