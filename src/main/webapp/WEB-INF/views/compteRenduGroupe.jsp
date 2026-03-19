@@ -25,7 +25,7 @@
                         <table class="table table-striped">
                             <thead>
                             <th class="col-6">
-                                <fmt:message key="Enseignement"/>
+                                <fmt:message key="enseignement"/>
                             </th>
                             <th class="col-2">
                                 <fmt:message key="courseType"/>
