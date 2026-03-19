@@ -25,35 +25,52 @@
                                     <tr>
                                         <th scope="col"><fmt:message key="enseignementAcronyme"/></th>
                                         <td>
+                                            <label class="hidden-label" for="Acronyme">
+                                                <fmt:message key="enseignementAcronyme"/>
+                                            </label>
                                             <c:choose>
-                                                <c:when test="${(empty enseignement) || (empty enseignement.acronyme)}"><input name="Acronyme" value=""/></c:when>
-                                                <c:otherwise><input type="text" class="form-control" name="Acronyme" value="${enseignement.acronyme}"/></c:otherwise>
+                                                <c:when test="${(empty enseignement) || (empty enseignement.acronyme)}"><input id="Acronyme" name="Acronyme" value=""/></c:when>
+                                                <c:otherwise><input id="Acronyme" type="text" class="form-control" name="Acronyme" value="${enseignement.acronyme}"/></c:otherwise>
                                             </c:choose>
                                         </td>
-                                    
+
                                     <tr>
                                         <th scope="col"><fmt:message key="enseignementName"/></th>
-                                        <td><input type="text" class="form-control" name="NomEnseignement" value="${enseignement.nomEnseignement}"/></td>
+                                        <td>
+                                            <label class="hidden-label" for="NomEnseignement">
+                                                <fmt:message key="enseignementName"/></label>
+                                            <input type="text" class="form-control" name="NomEnseignement" id="NomEnseignement" value="${enseignement.nomEnseignement}"/>
+
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"><fmt:message key="programme"/></th>
-                                        <td><input type="text" class="form-control" name="Filiere" value="${enseignement.filiere}"/></td>
+                                        <td>
+                                            <label class="hidden-label" for="Filiere">
+                                                <fmt:message key="programme"/>
+                                            </label>
+                                            <input type="text" class="form-control" name="Filiere" id="Filiere" value="${enseignement.filiere}"/>
+
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"><fmt:message key="manager"/></th>
                                         <td colspan="2">
-                                            <input type="hidden" name="AcronymeEnseignement" value="${enseignement.acronyme}" />
+                                            <label class="hidden-label" for="AcronymeEnseignement">
+                                                <fmt:message key="manager"/></label>
+                                            <input type="hidden" name="AcronymeEnseignement" id="AcronymeEnseignement" value="${enseignement.acronyme}" />
                                             <select name="InitialesEnseignant" required
-                                                    class="form-control form-select form-select-lg mb-3">
+                                                    class="form-control form-select form-select-lg mb-3" id="AcronymeEnseignement">
                                                 <c:choose>
-                                                <c:when test="${(empty enseignement) || (empty enseignement.responsable)}"><option value="" disabled selected><fmt:message key="chooseEnseignant"/></option></c:when>
-                                                <c:otherwise><option value="${enseignement.responsable.initiales}" disabled selected>${enseignement.responsable.nomEnseignant} ${enseignement.responsable.prenom}</option></c:otherwise>
-                                            </c:choose>
-                                                
+                                                    <c:when test="${(empty enseignement) || (empty enseignement.responsable)}"><option value="" disabled selected><fmt:message key="chooseEnseignant"/></option></c:when>
+                                                    <c:otherwise><option value="${enseignement.responsable.initiales}" disabled selected>${enseignement.responsable.nomEnseignant} ${enseignement.responsable.prenom}</option></c:otherwise>
+                                                </c:choose>
+
                                                 <c:forEach var="enseignant" items="${enseignantsList}">
                                                     <option value="${enseignant.initiales}">${enseignant.nomEnseignant} ${enseignant.prenom}</option>
                                                 </c:forEach>
                                             </select>
+
                                         </td>
                                 </tbody>
                                 <tfoot>
