@@ -50,3 +50,11 @@ button{
     font-size: 24px;
 }
 
+.hidden-label {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  width: 1px;
+}
+
