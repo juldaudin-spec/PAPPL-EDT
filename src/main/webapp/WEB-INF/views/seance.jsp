@@ -31,17 +31,25 @@
                                 </c:choose>
                                 <tr>
                                     <th scope="col"><fmt:message key="start"/></th>
-                                    <td><input type="datetime-local" class="form-control" name="HDebut" value="<fmt:formatDate value="${seance.HDebut}" pattern="yyyy-MM-dd'T'HH:mm" />"/></td>
+                                    <td>
+                                        <label class="hidden-label" for="HDebut">
+                                            <fmt:message key="start"/></label>
+                                            <input type="datetime-local" class="form-control" name="HDebut" id="HDebut" value="<fmt:formatDate value="${seance.HDebut}" pattern="yyyy-MM-dd'T'HH:mm" />"/></td>
                                 </tr>
                                 <tr>
                                     <th scope="col"><fmt:message key="duration"/><fmt:message key="minutes"/></th>
-                                    <td><input type="int" class="form-control" name="Duree" value="${seance.duree}"/></td>
+                                    <td>
+                                        <label class="hidden-label" for="Duree">
+                                            <fmt:message key="duration"/><fmt:message key="minutes"/></label>
+                                        <input type="int" class="form-control" name="Duree" id="Duree" value="${seance.duree}"/></td>
                                 </tr>
                                 <tr>
                                     <th scope="col"><fmt:message key="enseignement"/></th>
                                     <td colspan="2">
-                                        <input type="hidden" name="IdSeance" value="${seance.idSeance}" />
-                                        <select name="Enseignement" required
+                                        <label class="hidden-label" for="IdSeance">
+                                        <fmt:message key="enseignement"/></label>
+                                        <input type="hidden" name="IdSeance" id="IdSeance" value="${seance.idSeance}" />
+                                        <select name="Enseignement" id="IdSeance" required
                                                 class="form-control form-select form-select-lg mb-3">
                                             <c:choose>
                                                 <c:when test="${(empty seance) || (empty seance.acronyme)}"><option value="" disabled selected><fmt:message key="chooseEnseignement"/></option></c:when>
@@ -57,8 +65,10 @@
                                 <tr>
                                     <th scope="col"><fmt:message key="courseType"/></th>
                                     <td colspan="2">
-                                        <input type="hidden" name="IdSeance" value="${seance.idSeance}" />
-                                        <select name="TypeLecon" required
+                                        <label class="hidden-label" for="IdSeance">
+                                        <fmt:message key="courseType"/></label>
+                                        <input type="hidden" name="IdSeance" id="IdSeance" value="${seance.idSeance}" />
+                                        <select name="TypeLecon" id="IdSeance" required
                                                 class="form-control form-select form-select-lg mb-3">
                                             <c:choose>
                                                 <c:when test="${(empty seance) || (empty seance.intitule)}"><option value="" disabled selected><fmt:message key="chooseCourseType"/></option></c:when>
