@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import tp.projetpappl.items.Connection;
 import tp.projetpappl.items.Enseignant;
 import tp.projetpappl.items.Enseignement;
 import tp.projetpappl.items.Groupe;
@@ -54,10 +55,16 @@ public class SeanceController {
 
     @Autowired
     private SalleRepository salleRepository;
+    
+    @Autowired
+    private AuthHelper authHelper;
 
     @RequestMapping(value = "seance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSeance(HttpServletRequest request) {
-
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
         ModelAndView returned = new ModelAndView("seance");
         returned.addObject("enseignantsList", enseignantRepository.findAll());
         returned.addObject("seance", new Seance());
@@ -65,6 +72,7 @@ public class SeanceController {
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
         returned.addObject("sallesList", salleRepository.findAll());
+        returned.addObject("user",user);
         return returned;
     }
 
@@ -106,7 +114,10 @@ public class SeanceController {
      */
     @RequestMapping(value = "saveseance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveSeance(HttpServletRequest request) {
-
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
         ModelAndView returned;
 
         // Create or update seances
@@ -122,8 +133,9 @@ public class SeanceController {
         Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
         String intituleLecon = request.getParameter("TypeLecon");
         TypeLecon typeLecon = typeLeconRepository.getByIntitule(intituleLecon);
+        System.out.println("PARAMS: " + request.getParameterMap().keySet());
         HashMap<String, String> nomGroupes
-                = Tools.getArrayFromRequest(request, "ml");
+                = Tools.getArrayFromRequest(request, "m");
         ArrayList<Groupe> groupes = new ArrayList<>();
 
         for (String nomGroupe : nomGroupes.values()) {
@@ -134,7 +146,7 @@ public class SeanceController {
         }
 
         HashMap<String, String> numeroSalles
-                = Tools.getArrayFromRequest(request, "sl");
+                = Tools.getArrayFromRequest(request, "s");
         ArrayList<Salle> salles = new ArrayList<>();
 
         for (String numeroSalle : numeroSalles.values()) {
@@ -148,7 +160,7 @@ public class SeanceController {
         Date hDebut = Tools.getDateFromString(hDebutStr, "yyyy-MM-dd'T'HH:mm");
 
         HashMap<String, String> initialesEnseignants
-                = Tools.getArrayFromRequest(request, "el");
+                = Tools.getArrayFromRequest(request, "e");
         ArrayList<Enseignant> enseignants = new ArrayList<>();
 
         for (String initialesEnseignant : initialesEnseignants.values()) {
@@ -175,6 +187,7 @@ public class SeanceController {
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
         returned.addObject("sallesList", salleRepository.findAll());
+        returned.addObject("user",user);
         return returned;
     }
     /*

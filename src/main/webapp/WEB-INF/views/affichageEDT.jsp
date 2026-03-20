@@ -37,6 +37,7 @@
                                 <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
                             </c:forEach>
                         </select>
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button>
                             valider
                         </button>
@@ -50,7 +51,20 @@
                                     <tr>
                                         <th scope="col" class="col-2 text-center">Date</th>
                                             <c:forEach var="groupeSelect" items="${listeGroupe}">
-                                            <th scope="col-auto" class="text-center">${groupeSelect}</th>
+                                            <th scope="col-auto" class="text-center">${groupeSelect}
+                                                <form action="exporterICS.do">
+                                                    <input type="hidden" name="connexion" value="${user.connectionCode}">
+                                                    <input type="hidden" name="groupeSelect" value=${groupeSelect}>
+                                                    <button>Exporter au format ICS</button>
+                                                </form>
+                                            </th>
+                                            <th scope="col-auto" class="text-center">${groupeSelect}
+                                                <form action="exporterExcel.do">
+                                                    <input type="hidden" name="connexion" value="${user.connectionCode}">
+                                                    <input type="hidden" name="groupeSelect" value=${groupeSelect}>
+                                                    <button>Exporter au format Excel</button>
+                                                </form>
+                                            </th>
                                             </c:forEach>
                                     </tr>
                                 </thead>
@@ -87,12 +101,15 @@
                                                         <c:forEach var="seance" items="${seanceByDay}">
                                                             <c:choose>
                                                                 <c:when test="${not empty seance.acronyme}">
+                                                                    <form action="seance.do" method="POST">
                                                                         <div id="Seance" style="
                                                                              --position-element: ${((seance.HDebut.getHours()-8)*60+seance.HDebut.getMinutes())/3}px;
                                                                              --taille-element:   ${seance.duree/3}px;
                                                                              ">
-                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
+                                                                            <input type="hidden" name="connexion" value="${user.connectionCode}">
+                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center" formaction="editseance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
                                                                         </div>
+                                                                    </form>
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                         

@@ -112,7 +112,7 @@ public class CASClient {
      * Get current server address
      */
     public String getServerURL() {
-        String returnedAdress = "http://" + CASClient.getLocalIPAdress() + ":8080/pappl-1.0";
+        String returnedAdress = "http://" + CASClient.getLocalIPAdress() + ":8080/pappl";
         return returnedAdress;
     }
 

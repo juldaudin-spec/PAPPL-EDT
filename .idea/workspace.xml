@@ -5,8 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a380ca7-a55d-4153-a69f-1041d4cb9ee7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/EnseignementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/EnseignementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/SeanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/SeanceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ContientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ContientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ContientRepositoryCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ContientRepositoryCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ContientRepositoryCustomImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ContientRepositoryCustomImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/EnseignementRepositoryCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/EnseignementRepositoryCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/EnseignementRepositoryCustomImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/EnseignementRepositoryCustomImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/tools/CASClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/tools/CASClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/enseignement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/enseignement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/seance.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/seance.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/SeanceController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/META-INF/persistence.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/SeanceController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/affichageEDT.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/affichageEDT.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/cours.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/enseignants.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/groupes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/mainPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/matières.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/seance.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/css/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-tp.projetpappl.controllers.AffichageControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-tp.projetpappl.controllers.AffichageControllerTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/tp.projetpappl.controllers.AffichageControllerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/tp.projetpappl.controllers.AffichageControllerTest.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +74,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Oussama/Desktop/PGROUP/PAPPL-EDT"
   }
