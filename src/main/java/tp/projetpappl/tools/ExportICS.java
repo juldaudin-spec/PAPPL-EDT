@@ -66,7 +66,7 @@ public class ExportICS {
                 + "SUMMARY:" + seance.getIntitule().getIntitule() + "_" + seance.getAcronyme().getAcronyme() + "\n"
                 + "DESCRIPTION;ENCODING=QUOTED-PRINTABLE:- Infos : =0A- Groupe(s) :";
         for (Groupe groupe : seance.getGroupeList()) {
-            returned = returned + " " + groupe.getNomGroupe();
+            returned = returned + ", " + groupe.getNomGroupe();
         }
         returned = returned + "=0A - Intervenant(s) :";
         for (Enseignant enseignant : seance.getEnseignantList()) {

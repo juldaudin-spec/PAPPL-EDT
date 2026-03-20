@@ -12,8 +12,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,6 +37,9 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import tp.projetpappl.items.Enseignant;
+import tp.projetpappl.items.Groupe;
+import tp.projetpappl.items.Seance;
 
 /**
  *
@@ -172,7 +178,7 @@ public class ExcelUtil {
             theStyle.setFillForegroundColor(backgroundColor.getIndex());
             theStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         }
-/*        if (foregroundColor != null) {
+        /*        if (foregroundColor != null) {
             theStyle.setFillForegroundColor(backgroundColor.getIndex());
             theStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         }*/
@@ -432,5 +438,136 @@ public class ExcelUtil {
         }
 
         return outputStream;
+    }
+
+    public static File createExcelFile(Groupe groupe) {
+
+        String fileName = "EDT";
+        String title = "Emploi du temps";
+        String sheetName = "Feuille1";
+
+        // Create document
+        ExcelUtil document = new ExcelUtil(fileName, sheetName);
+        document.setDefault("Calibri", 12);
+
+        // Styles
+        CellStyle cellStdLeft = document.createStyle(null, null, false,
+                IndexedColors.WHITE, HorizontalAlignment.LEFT, VerticalAlignment.TOP, BorderStyle.THIN, true);
+        CellStyle cellStdRight = document.createStyle(null, null, false,
+                IndexedColors.WHITE, HorizontalAlignment.RIGHT, VerticalAlignment.TOP, BorderStyle.THIN, true);
+        CellStyle cellStdCenter = document.createStyle(null, null, false,
+                IndexedColors.WHITE, HorizontalAlignment.CENTER, VerticalAlignment.TOP, BorderStyle.THIN, true);
+        CellStyle cellValidCenter = document.createStyle(null, null, false,
+                IndexedColors.LIGHT_GREEN, HorizontalAlignment.CENTER, VerticalAlignment.TOP, BorderStyle.THIN, true);
+
+        // Header and footer
+        document.setHeader(title);
+
+        // Set width
+        document.getSheet().setColumnWidth(0, 50 * 256);    // Semaine
+        document.getSheet().setColumnWidth(1, 6 * 256);    //
+        
+        // Columns headers
+        document.newRow();
+        document.setCell(0, "Semaine", cellStdCenter);
+        document.setCell(1, "Lundi", cellStdCenter);
+        document.setCell(41, "Mardi", cellStdCenter);
+        document.setCell(81, "Mercredi", cellStdCenter);
+        document.setCell(121, "Jeudi", cellStdCenter);
+        document.setCell(161, "Vendredi", cellStdCenter);
+        
+        document.newRow();
+        for(Integer i=1; i<201 ; i++){
+            int caseDuJour = (i-1)%40;
+            int heure = 8 + caseDuJour/4;
+            Integer minutes = caseDuJour%4 *15;
+            String minstr = minutes.toString();
+            document.setCell(i, heure+"h"+minstr);
+        }
+        
+        List<Seance> listSeance = groupe.getSeanceList();
+        
+        Collections.sort(listSeance, Seance.getComparator());
+
+        // Document
+        int rank = 0;
+        Integer weekprecedent = null;
+        for (Seance seance : listSeance) {
+            Date date = seance.getHDebut();
+            Integer year = date.getYear() + 1900;
+            Integer month = date.getMonth() + 1;
+            Integer day = date.getDate();
+            Integer jour = date.getDay();
+            Integer heure = date.getHours();
+            Integer min = date.getMinutes();
+            Integer fin = min + seance.getDuree();
+            String monthstr = month.toString();
+            if (month < 10) {
+                monthstr = "0" + month.toString();
+            }
+            String daystr = day.toString();
+            if (day < 10) {
+                daystr = "0" + day.toString();
+            }
+            Integer week = day - jour + 1;//Premier jour de la semaine
+            String datestr = year.toString() + "-" + monthstr + "-" + daystr;
+            String weekstr = year.toString() + "-" + monthstr + "-" + week;
+            String weekfinstr = year.toString() + "-" + monthstr + "-" + (week + 7);
+            if (week != weekprecedent) {
+                Integer increment;
+                if(weekprecedent == null){
+                    increment = week;
+                    weekstr = year.toString() + "-" + monthstr + "-" + increment.toString();
+                    Integer finalinc = increment +  6;
+                    weekfinstr = year.toString() + "-" + monthstr + "-" + finalinc.toString();
+
+                    rank++;
+                    document.newRow();
+                    document.setCell(0, "Semaine du " + weekstr + " au " + weekfinstr, cellStdLeft);
+                } else {
+                    increment = weekprecedent;
+                }
+                while (increment < week) {
+                    weekstr = year.toString() + "-" + monthstr + "-" + increment.toString();
+                    Integer finalinc = increment +  6;
+                    weekfinstr = year.toString() + "-" + monthstr + "-" + finalinc.toString();
+
+                    rank++;
+                    document.newRow();
+                    document.setCell(0, "Semaine du " + weekstr + " au " + weekfinstr, cellStdLeft);
+                    increment = increment + 7;
+                }
+            }
+            String contenuCell = "";
+            for(Enseignant enseignant : seance.getEnseignantList()){
+                if(contenuCell.isBlank()){
+                    contenuCell= enseignant.getInitiales();
+                } else{
+                    contenuCell= contenuCell + ", "+ enseignant.getInitiales();
+                }
+            }
+            for(Enseignant enseignant : seance.getEnseignantList()){
+                if(contenuCell.isBlank()){
+                    contenuCell= enseignant.getInitiales();
+                } else{
+                    contenuCell= contenuCell + ", "+ enseignant.getInitiales();
+                }
+            }
+            float  h = heure;
+            float hfin = heure + (float) fin/60;
+            while(h<hfin && h < 18){
+                if (h>=heure+(float) min/60){
+                    int cellule = 40*(jour-1)+1+Math.round((h-8)*4);
+                    document.setCell(cellule, seance.getAcronyme().getAcronyme()+"\n"+seance.getIntitule().getIntitule()+"\n"+contenuCell, cellStdLeft);
+                }
+                h= h + (float) 1/4;
+            }
+            weekprecedent = week;
+        }
+
+        // Close document
+        File theFile = document.close();
+        return theFile;
+        //return ResponseEntity.unprocessableEntity().body((InputStreamResource) null);
     }
 }
