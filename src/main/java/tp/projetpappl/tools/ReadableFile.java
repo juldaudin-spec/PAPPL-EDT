@@ -227,4 +227,14 @@ public class ReadableFile {
             this.reader = null;
         }
     }
+    public List<List<String>> readFile(){
+        List<List<String>> returnedValue;
+        returnedValue = new ArrayList<List<String>>();
+        List<String> ligne = this.readList();
+        while(ligne != null){
+            returnedValue.add(ligne);
+            ligne = this.readList();
+        }
+        return returnedValue ;
+    }
 }
