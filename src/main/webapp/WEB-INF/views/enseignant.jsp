@@ -86,11 +86,9 @@
                                     <input class="form-control" type="file" id="fileInput" name="fichier">
                                 </div>
 
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-block btn-primary">
-                                        Envoyer
-                                    </button>
-                                </div>
+                                <button type="submit" class="btn btn-block btn-primary">
+                                    Envoyer
+                                </button>
 
                             </form>
                         </c:if>

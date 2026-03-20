@@ -41,7 +41,7 @@
                                                 <c:otherwise><input type="text" class="form-control" name="NumeroSalle" value="${salle.numeroSalle}"/></c:otherwise>
                                             </c:choose>
                                         </td>
-                                    
+
                                     <tr>
                                         <th scope="col">Nombre d'élèves</th>
                                         <td><input type="int" class="form-control" name="Capacite" value="${salle.capacite}"/></td>
@@ -76,6 +76,25 @@
                             <input type="hidden" name="connexion" value="${user.connectionCode}">
                             <button formaction="salles.do">Afficher la liste des Salles</button>
                         </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <c:if test="${(empty salle) || (empty salle.nomSalle)}">
+                            <form action="createimportsalles.do" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="connexion" value="${user.connectionCode}">
+
+                                <div class="mb-3">
+                                    <label for="fileInput" class="form-label">Type de fichier : nom Salle, capacité, équipements  (Excel ou CSV)</label>
+                                    <input class="form-control" type="file" id="fileInput" name="fichier">
+                                </div>
+
+                                <button type="submit" class="btn btn-block btn-primary">
+                                    Envoyer
+                                </button>
+
+                            </form>
+                        </c:if>
                     </div>
                 </div>
             </div>

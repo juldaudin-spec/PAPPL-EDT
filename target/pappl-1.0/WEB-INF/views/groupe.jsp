@@ -74,13 +74,22 @@
                         </form>
                     </div>
                 </div>
-               <div class="row">
-                    <div class="col-md-12">
-                        <form action="groupes.do" method="POST">
+                <div class="col-md-12">
+                    <c:if test="${(empty groupe) || (empty groupe.nomGroupe)}">
+                        <form action="createimportgroupes.do" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="connexion" value="${user.connectionCode}">
-                            <button formaction="groupes.do">Importer une liste de groupes</button>
+
+                            <div class="mb-3">
+                                <label for="fileInput" class="form-label">Type de fichier : nomGroupe, nombre d'élèves  (Excel ou CSV)</label>
+                                <input class="form-control" type="file" id="fileInput" name="fichier">
+                            </div>
+
+                            <button type="submit" class="btn btn-block btn-primary">
+                                Envoyer
+                            </button>
+
                         </form>
-                    </div>
+                    </c:if>
                 </div>
             </div>
         </div>
