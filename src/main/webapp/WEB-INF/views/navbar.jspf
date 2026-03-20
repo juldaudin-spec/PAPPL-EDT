@@ -17,32 +17,32 @@
             <ul class="navbar-nav ms-auto" title="<fmt:message key="menu"/>">
                 <li class="nav-item">
                     <form action="affichageEDT.do" method="POST">
-                        <button class="nav-link" formaction="affichageEDT.do" method="POST" name="idGroupe" value="" title="accès à l'affichage de l'emplois du temps"><fmt:message key="planning"/></button>
+                        <button class="nav-link text-light" formaction="affichageEDT.do" method="POST" name="idGroupe" value="" title="accès à l'affichage de l'emplois du temps"><fmt:message key="planning"/></button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form method="POST">
-                        <button class="nav-link" formaction="enseignements.do"><fmt:message key="enseignement"/></button>
+                        <button class="nav-link text-light" formaction="enseignements.do"><fmt:message key="enseignement"/></button>
                     </form>
                 </li>                
                 <li class="nav-item">
                     <form method="POST">
-                        <button class="nav-link" formaction="groupes.do"><fmt:message key="group"/></button>
+                        <button class="nav-link text-light" formaction="groupes.do"><fmt:message key="group"/></button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form method="POST">
-                        <button class="nav-link" formaction="enseignants.do"><fmt:message key="enseignant"/></button>
+                        <button class="nav-link text-light" formaction="enseignants.do"><fmt:message key="enseignant"/></button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form method="POST">
-                        <button class="nav-link" formaction="salle.do"><fmt:message key="room"/></button>
+                        <button class="nav-link text-light" formaction="salle.do"><fmt:message key="room"/></button>
                     </form>
                 </li>                
                 <li class="nav-item">
                     <form method="POST">
-                        <button class="nav-link" formaction="seance.do"><fmt:message key="seance"/></button>
+                        <button class="nav-link text-light" formaction="seance.do"><fmt:message key="seance"/></button>
                     </form>
                 </li>
             </ul>
