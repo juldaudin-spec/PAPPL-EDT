@@ -56,6 +56,7 @@
                                         <td>${item.typologie}</td>
                                         <td class="text-center">
                                             <form action="editUser" method="POST">
+                                                <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <input type="hidden" name="NumeroSalle" value="${item.numeroSalle}" />
                                                 <button class="btn" formaction="editsalle.do" name="edit" class="icon">
                                                     <img src="img/edit.png" alt="edit" class="icon">
@@ -74,6 +75,7 @@
                                     <td colspan="5">
                                         <form action="salle.do" method="POST">
                                             <button class="btn">
+                                                <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <img src="img/add.png" alt="add" class="icon">
                                             </button>
                                         </form>

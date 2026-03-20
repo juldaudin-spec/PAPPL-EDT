@@ -53,7 +53,10 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td scope="col" colspan="2" class="text-center"><button type="submit" class="btn btn-block btn-primary">Save</button></td>
+                                        <td scope="col" colspan="2" class="text-center">
+                                            <input type="hidden" name="connexion" value="${user.connectionCode}">
+                                            <button type="submit" class="btn btn-block btn-primary">Save</button>
+                                        </td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -70,6 +73,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form action="salles.do" method="POST">
+                            <input type="hidden" name="connexion" value="${user.connectionCode}">
                             <button formaction="salles.do">Afficher la liste des Salles</button>
                         </form>
                     </div>

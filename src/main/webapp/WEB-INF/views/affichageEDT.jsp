@@ -36,6 +36,7 @@
                                 <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
                             </c:forEach>
                         </select>
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button>
                             valider
                         </button>
@@ -49,7 +50,13 @@
                                     <tr>
                                         <th scope="col" class="col-2 text-center">Date</th>
                                             <c:forEach var="groupeSelect" items="${listeGroupe}">
-                                            <th scope="col-auto" class="text-center">${groupeSelect}</th>
+                                            <th scope="col-auto" class="text-center">${groupeSelect}
+                                                <form action="exporterICS.do">
+                                                    <input type="hidden" name="connexion" value="${user.connectionCode}">
+                                                    <input type="hidden" name="groupeSelect" value=${groupeSelect}>
+                                                    <button>Exporter au format ICS</button>
+                                                </form>
+                                            </th>
                                             </c:forEach>
                                     </tr>
                                 </thead>

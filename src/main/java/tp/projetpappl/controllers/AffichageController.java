@@ -4,7 +4,10 @@
  */
 package tp.projetpappl.controllers;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +27,7 @@ import tp.projetpappl.items.Groupe;
 import tp.projetpappl.items.Seance;
 import tp.projetpappl.repositories.GroupeRepository;
 import tp.projetpappl.items.Connection;
-
+import tp.projetpappl.tools.ExportICS;
 
 /**
  * Ceci est le controlleur pour tout ce qui concerne l'affichage de l'emplois du
@@ -85,7 +89,7 @@ public class AffichageController {
 
             List<Date> listHDebut = listHDebut(myList2);
             List<LocalDate> listDate = getTheDates(listHDebut);
-            List<List<List<Seance>>> listSeance = groupByDates( listDate,myList2);
+            List<List<List<Seance>>> listSeance = groupByDates(listDate, myList2);
 
             returned.addObject("groupes", groupes);
             returned.addObject("HDebut", listDate);
@@ -96,6 +100,25 @@ public class AffichageController {
         returned.addObject("user", user);
 
         return returned;
+    }
+
+    @GetMapping("exporterICS.do")
+    public void handleExportGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return;
+        }
+
+        String groupeNom = request.getParameter("groupeSelect");
+        Groupe groupe = groupeRepository.getByNomGroupe(groupeNom);
+
+        String icsContent = ExportICS.createCalendarGroupe(groupe);
+
+        response.setContentType("text/calendar");
+        response.setHeader("Content-Disposition", "attachment; filename=groupeNom+\"event.ics\"");
+        response.getWriter().write(icsContent);
     }
 
     /**
@@ -168,7 +191,7 @@ public class AffichageController {
     }
 
     public List<LocalDate> getTheDates(List<Date> listHDebut) {
-        List<LocalDate> listOfDay =null;
+        List<LocalDate> listOfDay = null;
         if (listHDebut != null) {
             listHDebut.sort(Comparator.naturalOrder());
             Date date;
@@ -177,7 +200,7 @@ public class AffichageController {
             for (int i = 0; i < listHDebut.size(); i++) {
                 date = listHDebut.get(i);
                 localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                if (!listOfDay.contains(localDate)){
+                if (!listOfDay.contains(localDate)) {
                     listOfDay.add(localDate);
                 }
             }
@@ -190,7 +213,7 @@ public class AffichageController {
     }
 
     public List<List<List<Seance>>> groupByDates(List<LocalDate> listDates, List<List<Seance>> myList2) {
-        List<List<List<Seance>>> seanceByDay=null;
+        List<List<List<Seance>>> seanceByDay = null;
         if (listDates != null && myList2 != null) {
             seanceByDay = new ArrayList<>(listDates.size());//par jour et par groupe
             List<List<Seance>> seanceOfDay;
@@ -201,7 +224,7 @@ public class AffichageController {
                 for (List<Seance> seanceGroupe : myList2) {
                     seanceOfGroupe = new ArrayList<>();
                     Collections.sort(seanceGroupe, Seance.getComparator());
-                    while (!seanceGroupe.isEmpty()&&comparerDate(date, seanceGroupe.get(0).getHDebut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
+                    while (!seanceGroupe.isEmpty() && comparerDate(date, seanceGroupe.get(0).getHDebut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
                         seanceOfGroupe.add(seanceGroupe.remove(0));
                     }
                     seanceOfDay.add(seanceOfGroupe);
