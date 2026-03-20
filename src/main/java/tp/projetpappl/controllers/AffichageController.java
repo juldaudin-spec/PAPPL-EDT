@@ -7,7 +7,10 @@ package tp.projetpappl.controllers;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +31,7 @@ import tp.projetpappl.items.Groupe;
 import tp.projetpappl.items.Seance;
 import tp.projetpappl.repositories.GroupeRepository;
 import tp.projetpappl.items.Connection;
+import static tp.projetpappl.tools.ExcelUtil.createExcelFile;
 import tp.projetpappl.tools.ExportICS;
 
 /**
@@ -117,16 +122,43 @@ public class AffichageController {
         String icsContent = ExportICS.createCalendarGroupe(groupe);
 
         response.setContentType("text/calendar");
-        response.setHeader("Content-Disposition", "attachment; filename=groupeNom+\"event.ics\"");
+        response.setHeader("Content-Disposition", "attachment; filename=" + groupeNom + ".ics");
         response.getWriter().write(icsContent);
     }
 
-    /**
-     * Permet de récupérer la liste des heures où les cours commencent
-     *
-     * @param myList2
-     * @return
-     */
+    @GetMapping("exporterExcel.do")
+    public void handleExportExcelGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return;
+        }
+
+        String groupeNom = request.getParameter("groupeSelect");
+        Groupe groupe = groupeRepository.getByNomGroupe(groupeNom);
+        File file = createExcelFile(groupe);
+        response.setContentType(
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader(
+                "Content-Disposition", "attachment; filename="+groupeNom+".xlsx");
+        try (FileInputStream fis = new FileInputStream(file); OutputStream os = response.getOutputStream()) {
+
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.flush();
+        }
+    }
+        /**
+         * Permet de récupérer la liste des heures où les cours commencent
+         *
+         * @param myList2
+         * @return
+         */
     public List<Date> listHDebut(List<List<Seance>> myList2) {
         List<Date> listHDebut = null;
         if (myList2 != null) {
