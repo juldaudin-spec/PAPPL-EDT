@@ -165,6 +165,14 @@
                         </form>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="enseignements.do" method="POST">
+                            <button formaction="listenseignements.do">Importer une liste d'enseignements</button>
+                            <input type="hidden" name="connexion" value="${user.connectionCode}">
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

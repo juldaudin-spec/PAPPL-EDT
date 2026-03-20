@@ -63,6 +63,7 @@
                                     <td colspan="4" class="text-center">
                                         <form action="enseignant.do" method="POST">
                                             <button class="btn">
+                                                <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <img src="img/add.png" alt="add" class="icon">
                                             </button>
                                         </form>

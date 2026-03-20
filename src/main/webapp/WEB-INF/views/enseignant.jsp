@@ -35,7 +35,7 @@
                                             </c:choose>
                                             </label>
                                         </td>
-                                    
+
                                     <tr>
                                         <th scope="col"><fmt:message key="name"/></th>
                                         <td>
@@ -56,7 +56,10 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td scope="col" colspan="2" class="text-center"><button type="submit" class="btn btn-block btn-primary">Save</button></td>
+                                        <td scope="col" colspan="2" class="text-center">
+                                            <input type="hidden" name="connexion" value="${user.connectionCode}">
+                                            <button type="submit" class="btn btn-block btn-primary">Save</button>
+                                        </td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -75,6 +78,22 @@
                         <form action="enseignants.do" method="POST">
                             <input type="hidden" name="connexion" value="${user.connectionCode}">
                             <button formaction="enseignants.do"><fmt:message key="backToEnseignants"/></button>
+                        </form>
+                    </div>
+                    <div class="col-md-12">
+                        <form action="/upload" method="post" enctype="multipart/form-data">
+
+                            <div class="mb-3">
+                                <label for="fileInput" class="form-label">Choisir un fichier à importer</label>
+                                <input class="form-control" type="file" id="fileInput" name="fichier">
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-block btn-primary">
+                                    Envoyer
+                                </button>
+                            </div>
+
                         </form>
                     </div>
                 </div>

@@ -50,7 +50,14 @@
                                                     <button>Exporter au format ICS</button>
                                                 </form>
                                             </th>
-                                                </c:forEach>
+                                                <th scope="col-auto" class="text-center">${groupeSelect}
+                                                <form action="exporterExcel.do">
+                                                    <input type="hidden" name="connexion" value="${user.connectionCode}">
+                                                    <input type="hidden" name="groupeSelect" value=${groupeSelect}>
+                                                    <button>Exporter au format Excel</button>
+                                                </form>
+                                            </th>
+                                            </c:forEach>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -91,7 +98,8 @@
                                                                              --position-element: ${((seance.HDebut.getHours()-8)*60+seance.HDebut.getMinutes())/3}px;
                                                                              --taille-element:   ${seance.duree/3}px;
                                                                              ">
-                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center" name="idSeance" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
+                                                                            <input type="hidden" name="connexion" value="${user.connectionCode}">
+                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center" name="idSeance" formaction="editseance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
                                                                         </div>
                                                                     </c:when>
                                                                     <c:otherwise>
@@ -102,6 +110,7 @@
                                                         </div>
                                                     </td>
                                                 </c:forEach>
+                                                </form>
                                             </tr>
                                         </c:forEach>
                                     </tbody>

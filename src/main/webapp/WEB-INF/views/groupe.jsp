@@ -34,7 +34,7 @@
                                                 <c:otherwise><input type="text" class="form-control" name="NomGroupe" id="NomGroupe" value="${groupe.nomGroupe}"/></c:otherwise>
                                             </c:choose>
                                         </td>
-                                    <tr>
+<tr>
                                         
                                         <th scope="col"><fmt:message key="nbStudent"/></th>
                                         <td>
@@ -67,6 +67,22 @@
                         <form action="groupes.do" method="POST">
                             <input type="hidden" name="connexion" value="${user.connectionCode}">
                             <button formaction="groupes.do"><fmt:message key="backToGroups"/></button>
+                        </form>
+                    </div>
+                </div>
+               <div class="row">
+                    <div class="col-md-12">
+                        <form action="groupes.do" method="POST">
+                            <input type="hidden" name="connexion" value="${user.connectionCode}">
+                            <button formaction="groupes.do"><fmt:message key="backToGroups"/></button>
+                        </form>
+                    </div>
+                </div>
+               <div class="row">
+                    <div class="col-md-12">
+                        <form action="groupes.do" method="POST">
+                            <input type="hidden" name="connexion" value="${user.connectionCode}">
+                            <button formaction="groupes.do">Importer une liste de groupes</button>
                         </form>
                     </div>
                 </div>

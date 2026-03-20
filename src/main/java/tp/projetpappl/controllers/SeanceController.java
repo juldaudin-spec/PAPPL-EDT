@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import tp.projetpappl.items.Connection;
 import tp.projetpappl.items.Enseignant;
 import tp.projetpappl.items.Enseignement;
 import tp.projetpappl.items.Groupe;
@@ -55,10 +56,16 @@ public class SeanceController {
 
     @Autowired
     private SalleRepository salleRepository;
+    
+    @Autowired
+    private AuthHelper authHelper;
 
     @RequestMapping(value = "seance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSeance(HttpServletRequest request) {
-        String seanceStr="seance";
+        String seanceStr="seance";        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
         ModelAndView returned = new ModelAndView(seanceStr);
         String idSeanceStr = request.getParameter("idSeance");
         if ((idSeanceStr != null) &&(!idSeanceStr.isEmpty())){
@@ -74,6 +81,7 @@ public class SeanceController {
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
         returned.addObject("sallesList", salleRepository.findAll());
+        returned.addObject("user",user);
         return returned;
     }
 
@@ -115,7 +123,10 @@ public class SeanceController {
      */
     @RequestMapping(value = "saveseance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveSeance(HttpServletRequest request) {
-
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
         ModelAndView returned;
 
         // Create or update seances
@@ -185,6 +196,7 @@ public class SeanceController {
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
         returned.addObject("sallesList", salleRepository.findAll());
+        returned.addObject("user",user);
         return returned;
     }
     /*

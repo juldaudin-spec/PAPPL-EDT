@@ -41,7 +41,7 @@
                                                 <c:otherwise><input type="text" class="form-control" name="NomGroupe" value="${groupe.nomGroupe}"/></c:otherwise>
                                             </c:choose>
                                         </td>
-                                    
+
                                     <tr>
                                         <th scope="col">Nombre d'élèves</th>
                                         <td><input type="text" class="form-control" name="NbEleve" value="${groupe.nbEleve}"/></td>
@@ -71,6 +71,14 @@
                         <form action="groupes.do" method="POST">
                             <input type="hidden" name="connexion" value="${user.connectionCode}">
                             <button formaction="groupes.do">Afficher la liste des Groupes</button>
+                        </form>
+                    </div>
+                </div>
+               <div class="row">
+                    <div class="col-md-12">
+                        <form action="groupes.do" method="POST">
+                            <input type="hidden" name="connexion" value="${user.connectionCode}">
+                            <button formaction="groupes.do">Importer une liste de groupes</button>
                         </form>
                     </div>
                 </div>
