@@ -56,15 +56,14 @@
                                                     <input type="hidden" name="groupeSelect" value=${groupeSelect}>
                                                     <button>Exporter au format ICS</button>
                                                 </form>
-                                            </th>
-                                            <th scope="col-auto" class="text-center">${groupeSelect}
                                                 <form action="exporterExcel.do">
                                                     <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                     <input type="hidden" name="groupeSelect" value=${groupeSelect}>
                                                     <button>Exporter au format Excel</button>
                                                 </form>
                                             </th>
-                                            </c:forEach>
+                                        </c:forEach>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,9 +88,9 @@
                                                     <div id="nomJour">  
                                                         ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.FRENCH)}
                                                     </div>
-                                                    
+
                                                 </div>
-                                                    
+
                                             </td>
                                             <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
 
@@ -111,21 +110,21 @@
                                                                     </form>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                        
+
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </c:forEach>
-                                                        </div>
-                                                    </td>
-                                                </c:forEach>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
+                                                    </div>
+                                                </td>
+                                            </c:forEach>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </body>
-    </html>
+        </div>
+    </body>
+</html>
