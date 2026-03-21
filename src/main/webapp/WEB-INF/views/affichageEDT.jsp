@@ -55,44 +55,44 @@
                                                     <button>Exporter au format Excel</button>
                                                 </form>
                                             </th>
-                                            </c:forEach>
+                                        </c:forEach>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach var="jour" items="${HDebut}" varStatus="status">
-                                            <tr>
-                                                <td>
-                                                    <div class="position-relative" id="Jour">
-                                                        <div id="date">
-                                                            ${jour}</div>
-                                                        <div id="Horaire" style="--position-element: 0px; --taille-element:1px;">
-                                                            8h </div>
-                                                        <div id="Horaire" style="--position-element: 40px; --taille-element:1px;">
-                                                            10h</div>
-                                                        <div id="Horaire" style="--position-element: 80px; --taille-element:1px;">
-                                                            12h</div>
-                                                        <div id="Horaire" style="--position-element: 120px; --taille-element:1px;">
-                                                            14h</div>
-                                                        <div id="Horaire" style="--position-element: 160px; --taille-element:1px;">
-                                                            16h</div>
-                                                        <div id="Horaire" style="--position-element: 200px; --taille-element:1px;">
-                                                            18h</div>
-                                                        <div id="nomJour">  
-                                                            ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.FRENCH)}
-                                                        </div>
-
-
+                                        <tr>
+                                            <td>
+                                                <div class="position-relative" id="Jour">
+                                                    <div id="date">
+                                                        ${jour}</div>
+                                                    <div id="Horaire" style="--position-element: 0px; --taille-element:1px;">
+                                                        8h </div>
+                                                    <div id="Horaire" style="--position-element: 40px; --taille-element:1px;">
+                                                        10h</div>
+                                                    <div id="Horaire" style="--position-element: 80px; --taille-element:1px;">
+                                                        12h</div>
+                                                    <div id="Horaire" style="--position-element: 120px; --taille-element:1px;">
+                                                        14h</div>
+                                                    <div id="Horaire" style="--position-element: 160px; --taille-element:1px;">
+                                                        16h</div>
+                                                    <div id="Horaire" style="--position-element: 200px; --taille-element:1px;">
+                                                        18h</div>
+                                                    <div id="nomJour">  
+                                                        ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.FRENCH)}
                                                     </div>
 
-                                                </td>
-                                                <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
 
-                                                    <td class="texte-center">
-                                                        <div class="position-relative" >
-                                                            <c:forEach var="seance" items="${seanceByDay}">
-                                                                <c:choose>
-                                                                    <c:when test="${not empty seance.acronyme}">
-                                                                        <form action="seance.do" method="POST"></form>
+                                                </div>
+
+                                            </td>
+                                            <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
+
+                                                <td class="texte-center">
+                                                    <div class="position-relative" >
+                                                        <c:forEach var="seance" items="${seanceByDay}">
+                                                            <c:choose>
+                                                                <c:when test="${not empty seance.acronyme}">
+                                                                    <form action="seance.do" method="POST">
                                                                         <div id="Seance" style="
                                                                              --position-element: ${((seance.HDebut.getHours()-8)*60+seance.HDebut.getMinutes())/3}px;
                                                                              --taille-element:   ${seance.duree/3}px;
@@ -103,17 +103,17 @@
                                                                     </form>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                        
+
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </c:forEach>
-                                                        </div>
-                                                    </td>
-                                                </c:forEach>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
+                                                    </div>
+                                                </td>
+                                            </c:forEach>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                             </form>
                         </div>
                     </div>
