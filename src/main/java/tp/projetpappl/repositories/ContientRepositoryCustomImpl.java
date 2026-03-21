@@ -52,9 +52,6 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
     @Autowired
     @Lazy
     private TypeLeconRepository typeLeconRepository;
-    @Autowired
-    @Lazy
-    GroupeRepository groupeRepository;
 
     @Autowired
     @Lazy

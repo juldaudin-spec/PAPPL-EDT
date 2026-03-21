@@ -21,7 +21,6 @@ public interface ContientRepositoryCustom {
     List<TypeLecon> findIntituleByEnseignementByGroupe(Enseignement acronyme, Groupe nomGroupe);
     List<Enseignement> findEnseignementByGroupe(Groupe nomGroupe);
     List<Groupe> findGroupeByEnseignement(Enseignement acronyme);    
-    List<Groupe> findGroupeByEnseignement(Enseignement acronyme);
     public Contient create(String acronyme, String intitule, BigInteger heures, String salle);
     
 }
