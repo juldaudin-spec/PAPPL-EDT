@@ -22,6 +22,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -173,12 +174,9 @@ public class Seance implements Serializable {
     }
     
     public int compareTo(Object objet){
-        if(objet==null){
+        if(!(objet instanceof Seance)){//(objet==null)||!(objet instanceof Seance))
             return 1;
-        }
-        else if (!(objet instanceof Seance)){
-            return 1;
-    }
+        } 
         Seance seance = (Seance) objet;
         if (this.hDebut.equals(seance.getHDebut())){
         return this.idSeance.compareTo(seance.getIdSeance());}
@@ -186,6 +184,42 @@ public class Seance implements Serializable {
             return this.hDebut.compareTo(seance.getHDebut());
         }
     }
+    public int compareToWithEnseignement(Object objet){
+        if(!(objet instanceof Seance)){//(objet==null)||!(objet instanceof Seance))
+            return 1;
+        } 
+        Seance seance = (Seance) objet;
+        if (this.acronyme.getAcronyme().equals(seance.getAcronyme().getAcronyme())){
+        return this.compareToWithIntitule(seance);}
+        else{
+            return this.acronyme.getAcronyme().compareTo(seance.getAcronyme().getAcronyme());
+        }
+    }
+    public int compareToWithIntitule(Object objet){
+        if(!(objet instanceof Seance)){//(objet==null)||!(objet instanceof Seance))
+            return 1;
+        } 
+        Seance seance = (Seance) objet;
+        if (this.intitule.getIntitule().equals(seance.getIntitule().getIntitule())){
+        return this.idSeance.compareTo(seance.getIdSeance());}
+        else{
+            return this.intitule.getIntitule().compareTo(seance.getIntitule().getIntitule());
+        }
+    }
+    
+    public int compareToWithGroupe(Object objet){
+        if(!(objet instanceof Seance)){//(objet==null)||!(objet instanceof Seance))
+            return 1;
+        } 
+        Seance seance = (Seance) objet;
+        if ((!this.groupeList.isEmpty())&&(!seance.getGroupeList().isEmpty())&&this.groupeList.get(0).getNomGroupe().equals(seance.getGroupeList().get(0).getNomGroupe())||(this.groupeList.isEmpty())||(seance.getGroupeList().isEmpty())){
+            return this.idSeance.compareTo(seance.getIdSeance());
+        }
+        else{
+            return this.groupeList.get(0).getNomGroupe().compareTo(seance.getGroupeList().get(0).getNomGroupe());
+        }
+    }
+    
     public static Comparator<Seance> getComparator(){
         return new Comparator<Seance>(){
             @Override
@@ -199,4 +233,52 @@ public class Seance implements Serializable {
         };
     }
     
+    public static Comparator<Seance> getComparatorByEnseignement(){
+        return new Comparator<Seance>(){
+            @Override
+            public int compare(Seance obj1, Seance obj2){
+                if (obj1==null){
+                    return -1;
+                }else {
+                    return obj1.compareToWithEnseignement(obj2);
+                }
+            }
+        };
+    }
+    
+    public static Comparator<Seance> getComparatorByGroupe(){
+        return new Comparator<Seance>(){
+            @Override
+            public int compare(Seance obj1, Seance obj2){
+                if (obj1==null){
+                    return -1;
+                }else {
+                    return obj1.compareToWithGroupe(obj2);
+                }
+            }
+        };
+    }
+    
+    /**
+     * fonciton pour trier les séance par Enseignement, puis par sous groupe d'intitulé
+     * 
+     * clairement optimisable
+     * 
+     * @param listSeance la liste à trier -- the list to sort
+     * @param listEnseignement pour savoir dans quelle ordre mettre les Enseignements -- to know the order to sort by Enseignement
+     * @param listIntitule pour savoir dans quelle ordre mettre les type de leçon -- to know the order to sort by TypeLecon
+     */
+    public void sortByEnseignementByIntitule(List<Seance> listSeance, List<Enseignement> listEnseignement, List<TypeLecon> listIntitule){
+        List<Seance> listSeanceTemp = new ArrayList<>(listSeance.size());
+        for (Enseignement enseignement : listEnseignement){
+            for (TypeLecon typeLecon: listIntitule){
+                for (Seance seance : listSeance){
+                    if ((seance.getAcronyme().getAcronyme() == null ? enseignement.getAcronyme() == null : seance.getAcronyme().getAcronyme().equals(enseignement.getAcronyme()))&&(seance.getIntitule().getIntitule() == null ? typeLecon.getIntitule() == null : seance.getIntitule().getIntitule().equals(typeLecon.getIntitule()))){
+                        listSeanceTemp.add(seance);
+                    }
+                }
+            }
+        }
+        listSeance=listSeanceTemp;
+    }
 }

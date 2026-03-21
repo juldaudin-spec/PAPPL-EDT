@@ -51,12 +51,17 @@
                             <tbody>
                                 <c:forEach var="item" items="${enseignementsList}">
                                     <tr>
-                                        <td  scope="col">${item.acronyme}</td>
+                                        <td  scope="col">
+                                            <form method="POST">
+                                                <button class="btn" formaction="compteRenduEnseignement.do" name="acronyme" value="${item.acronyme}">${item.acronyme}</button>
+                                            </form>
+                                        </td>
                                         <td>${item.nomEnseignement}</td>
                                         <td>${item.filiere}</td>
                                         <td>${item.responsable.nomEnseignant} ${item.responsable.prenom}</td>
                                         <td class="text-center">
                                             <form action="editUser" method="POST">
+                                                <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <input type="hidden" name="Acronyme" value="${item.acronyme}" />
                                                 <button class="btn" formaction="editenseignement.do" name="edit" class="icon">
                                                     <img src="img/edit.png" alt="edit" class="icon">
@@ -75,6 +80,7 @@
                                     <td colspan="5">
                                         <form action="enseignement.do" method="POST">
                                             <button class="btn">
+                                                <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <img src="img/add.png" alt="add" class="icon">
                                             </button>
                                         </form>

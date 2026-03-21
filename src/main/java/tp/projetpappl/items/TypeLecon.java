@@ -18,6 +18,7 @@ import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -112,5 +113,27 @@ public class TypeLecon implements Serializable {
     public String toString() {
         return "tp.projetpappl.items.TypeLecon[ intitule=" + intitule + " ]";
     }
+
     
+    public static Comparator<TypeLecon> getComparator(){
+        return new Comparator<TypeLecon>(){
+            @Override
+            public int compare(TypeLecon obj1, TypeLecon obj2){
+                if (obj1==null){
+                    return -1;
+                }else {
+                    return obj1.compareTo(obj2);
+                }
+            }
+        };
+    }
+    
+    public int compareTo(Object objet) {
+        if (!(objet instanceof TypeLecon)) {//(objet==null)||!(objet instanceof Seance))
+            return 1;
+        }
+        TypeLecon type = (TypeLecon) objet;
+        return this.intitule.compareTo(type.getIntitule());
+    }
+
 }

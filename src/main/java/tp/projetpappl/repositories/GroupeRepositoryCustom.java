@@ -13,9 +13,10 @@ import tp.projetpappl.items.Groupe;
  */
 public interface GroupeRepositoryCustom {
     List<String> findAllNomGroupe();
-    List<String> findGroupeParEnseignement(String acronyme);
+    List<String> findGroupeByEnseignement(String acronyme);
     Groupe getByNomGroupe(String nom);
     Groupe update(String nomGroupe, int nbEleves);
     void remove(String nomGroupe);
     Groupe create(String nomGroupe, int nbEleves);
+    public List<Groupe> createByListStr(List<List<String>> listEnseignantStr);
 }

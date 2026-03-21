@@ -7,10 +7,13 @@ package tp.projetpappl.repositories;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
+import tp.projetpappl.controllers.Tools;
+import tp.projetpappl.items.Enseignant;
 import tp.projetpappl.items.Groupe;
 /**
  *
@@ -34,9 +37,10 @@ public class GroupeRepositoryCustomImpl implements GroupeRepositoryCustom {
     }
     
     @Override
-    public List<String> findGroupeParEnseignement(String acronyme){
-        String requete = "SELECT nom_groupe FROM Etudie JOIN Contient ON Contient.contient_id=Etudie.contient_id WHERE acronyme="+acronyme;
+    public List<String> findGroupeByEnseignement(String acronyme){
+        String requete = "SELECT nom_groupe FROM Etudie JOIN Contient ON Contient.contient_id=Etudie.contient_id WHERE acronyme= :acronyme";
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
+        query.setParameter("acronyme", acronyme);
         return query.getResultList();
     }
     @Override
@@ -85,5 +89,14 @@ public class GroupeRepositoryCustomImpl implements GroupeRepositoryCustom {
             return getByNomGroupe(nomGroupe);
         }
         return null;
+    }
+    public List<Groupe> createByListStr(List<List<String>> listEnseignantStr) {
+        List<Groupe> listGroupe = new ArrayList<Groupe>();
+        for(List<String> groupeStr : listEnseignantStr){
+            Groupe groupe = groupeRepository.create(groupeStr.get(0),Tools.getIntFromString(groupeStr.get(1)));
+            if(groupe != null)
+                listGroupe.add(groupe);
+        }
+        return listGroupe;
     }
 }

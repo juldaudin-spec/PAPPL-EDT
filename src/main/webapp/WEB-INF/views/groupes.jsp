@@ -48,11 +48,17 @@
 
                             <tbody>
                                 <c:forEach var="item" items="${groupesList}">
-                                    <tr>
-                                        <td  scope="col">${item.nomGroupe}</td>
+                                    <tr>                                   
+                                        <td  scope="col">
+                                            <form method="POST">
+                                                <button class="btn" formaction="compteRenduGroupe.do" name="idGroupe" value="${item.nomGroupe}">${item.nomGroupe}</button>
+                                            </form>
+                                        </td>
+
                                         <td>${item.nbEleve}</td>
                                         <td class="text-center">
                                             <form action="editUser" method="POST">
+                                                <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <input type="hidden" name="NomGroupe" value="${item.nomGroupe}" />
                                                 <button class="btn" formaction="editgroupe.do" name="edit" class="icon">
                                                     <img src="img/edit.png" alt="edit" class="icon">
@@ -71,6 +77,7 @@
                                     <td colspan="3">
                                         <form action="groupe.do" method="POST">
                                             <button class="btn">
+                                                <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <img src="img/add.png" alt="add" class="icon">
                                             </button>
                                         </form>

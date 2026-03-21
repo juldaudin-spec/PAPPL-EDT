@@ -40,7 +40,7 @@
                                                 <c:otherwise><input type="text" class="form-control" name="Initiales" value="${enseignant.initiales}"/></c:otherwise>
                                             </c:choose>
                                         </td>
-                                    
+
                                     <tr>
                                         <th scope="col">Nom</th>
                                         <td><input type="text" class="form-control" name="Nom" value="${enseignant.nomEnseignant}"/></td>
@@ -52,7 +52,10 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td scope="col" colspan="2" class="text-center"><button type="submit" class="btn btn-block btn-primary">Save</button></td>
+                                        <td scope="col" colspan="2" class="text-center">
+                                            <input type="hidden" name="connexion" value="${user.connectionCode}">
+                                            <button type="submit" class="btn btn-block btn-primary">Save</button>
+                                        </td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -69,8 +72,26 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form action="enseignants.do" method="POST">
+                            <input type="hidden" name="connexion" value="${user.connectionCode}">
                             <button formaction="enseignants.do">Afficher la liste des Enseignants</button>
                         </form>
+                    </div>
+                    <div class="col-md-12">
+                        <c:if test="${(empty enseignant) || (empty enseignant.initiales)}">
+                            <form action="createimportenseignants.do" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="connexion" value="${user.connectionCode}">
+
+                                <div class="mb-3">
+                                    <label for="fileInput" class="form-label">Type de fichier : Acronyme, Nom, Prénom (Excel ou CSV)</label>
+                                    <input class="form-control" type="file" id="fileInput" name="fichier">
+                                </div>
+
+                                <button type="submit" class="btn btn-block btn-primary">
+                                    Envoyer
+                                </button>
+
+                            </form>
+                        </c:if>
                     </div>
                 </div>
             </div>

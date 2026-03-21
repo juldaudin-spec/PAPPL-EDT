@@ -7,6 +7,7 @@ package tp.projetpappl.repositories;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -34,9 +35,10 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
     }
 
     @Override
-    public List<String> findinitialeEnseignantParEnseignement(String acronyme) {
-        String requete = "SELECT initiales FROM Enseigne WHERE acronyme=" + acronyme;
+    public List<String> findinitialeEnseignantByEnseignement(String acronyme) {
+        String requete = "SELECT initiales FROM Enseigne WHERE acronyme= :acronyme";
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
+        query.setParameter("acronyme", acronyme);
         return query.getResultList();
     }
 
@@ -102,6 +104,16 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
             return getByInitiales(initiales);
         }
         return null;
+    }
+    
+    public List<Enseignant> createByListStr(List<List<String>> listEnseignantStr) {
+        List<Enseignant> listEnseignant = new ArrayList<Enseignant>();
+        for(List<String> enseignantStr : listEnseignantStr){
+            Enseignant enseignant = enseignantRepository.create(enseignantStr.get(0),enseignantStr.get(1),enseignantStr.get(2));
+            if(enseignant != null)
+                listEnseignant.add(enseignant);
+        }
+        return listEnseignant;
     }
 
 }

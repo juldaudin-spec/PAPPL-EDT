@@ -12,6 +12,6 @@ import tp.projetpappl.items.TypeLecon;
  */
 public interface TypeLeconRepositoryCustom {
     List<String> findAllTypeLecon();
-    List<String> findTypeLeconParEnseignementParGroupe(String acronyme, String nomGroupe);
+    List<String> findTypeLeconByEnseignementByGroupe(String acronyme, String nomGroupe);
     TypeLecon getByIntitule(String intitule);
 }
