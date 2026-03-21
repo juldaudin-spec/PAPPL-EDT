@@ -4,10 +4,16 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+<<<<<<< HEAD
         <%@include file="imports.jspf" %>
         <meta charset="UTF-8">
         <title><fmt:message key="summary"/> ${groupe.nomGroupe}</title>
         
+=======
+        <meta charset="UTF-8">
+        <title>Récapitulatif ${groupe.nomGroupe}</title>
+        <%@include file="imports.jspf" %>
+>>>>>>> 33d973b6f47ba0a48550595588d742b3dc5f17f9
         <link href="css/groupes.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
@@ -17,7 +23,11 @@
 
                 <div class="row">
                     <div class="col-md-12">
+<<<<<<< HEAD
                         <h1><fmt:message key="summary"/> ${groupe.nomGroupe}</h1>
+=======
+                        <h1>Récapitulatif de ${groupe.nomGroupe}</h1>
+>>>>>>> 33d973b6f47ba0a48550595588d742b3dc5f17f9
                     </div>
                 </div>
                 <div class="row">
@@ -25,6 +35,7 @@
                         <table class="table table-striped">
                             <thead>
                             <th class="col-6">
+<<<<<<< HEAD
                                 <fmt:message key="enseignement"/>
                             </th>
                             <th class="col-2">
@@ -35,6 +46,18 @@
                             </th>
                             <th class="col-2">
                                 <fmt:message key="scheduled"/>
+=======
+                                Enseignement
+                            </th>
+                            <th class="col-2">
+                                Type de cours
+                            </th>
+                            <th class="col-2">
+                                durée à faire
+                            </th>
+                            <th class="col-2">
+                                durée programmée
+>>>>>>> 33d973b6f47ba0a48550595588d742b3dc5f17f9
                             </th>
                             </thead>
                             <tbody>
@@ -93,7 +116,11 @@
                     <div class="col-md-12">
                         <form action="groupes.do" method="POST">
                             <input type="hidden" name="connexion" value="${user.connectionCode}">
+<<<<<<< HEAD
                             <button formaction="groupes.do"><fmt:message key="backToGroups"/></button>
+=======
+                            <button formaction="groupes.do">Retour à la liste des Groupes</button>
+>>>>>>> 33d973b6f47ba0a48550595588d742b3dc5f17f9
                         </form>
                     </div>
                 </div>

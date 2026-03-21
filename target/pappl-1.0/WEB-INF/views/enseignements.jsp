@@ -10,8 +10,14 @@
 <!DOCTYPE html>
 <html lang="fr-fr">
     <head>
+<<<<<<< HEAD
         <%@include file="imports.jspf" %>
         <title><fmt:message key="listEnseignement"/></title>
+=======
+        <meta charset="UTF-8">
+        <title>Liste Matières</title>
+        <%@include file="imports.jspf" %>
+>>>>>>> 33d973b6f47ba0a48550595588d742b3dc5f17f9
     </head>
     <body>
         <%@include file="navbar.jspf" %>
@@ -20,7 +26,11 @@
 
                 <div class="row">
                     <div class="col-md-12">
+<<<<<<< HEAD
                         <h1><fmt:message key="listEnseignement"/></h1>
+=======
+                        <h1>Liste des matières</h1>
+>>>>>>> 33d973b6f47ba0a48550595588d742b3dc5f17f9
                     </div>
                 </div>
 
@@ -30,10 +40,17 @@
                         <table class="table table-striped table-md sortable">
                             <thead>
                                 <tr>
+<<<<<<< HEAD
                                     <th scope="col" class="col-md-2"><fmt:message key="enseignementAcronyme"/></th>
                                     <th scope="col" class="col-md-3"><fmt:message key="enseignementName"/></th>
                                     <th scope="col" class="col-md-3"><fmt:message key="programme"/></th>
                                     <th scope="col" class="col-md-3"><fmt:message key="manager"/></th>
+=======
+                                    <th scope="col" class="col-md-2">Acronyme</th>
+                                    <th scope="col" class="col-md-3">Nom de l'enseignement</th>
+                                    <th scope="col" class="col-md-3">Filière(s)</th>
+                                    <th scope="col" class="col-md-3">Responsable</th>
+>>>>>>> 33d973b6f47ba0a48550595588d742b3dc5f17f9
                                 </tr>
                             </thead>
 

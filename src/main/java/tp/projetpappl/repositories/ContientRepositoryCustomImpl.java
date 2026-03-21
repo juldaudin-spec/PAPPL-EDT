@@ -23,6 +23,13 @@ import tp.projetpappl.controllers.Tools;
 import tp.projetpappl.items.Contient;
 import tp.projetpappl.items.Enseignement;
 import tp.projetpappl.items.Groupe;
+import java.math.BigInteger;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
+import tp.projetpappl.items.Contient;
+import tp.projetpappl.items.Enseignement;
 import tp.projetpappl.items.TypeLecon;
 /**
  *
@@ -34,13 +41,17 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
     private EntityManager entityManager;
     @Autowired
     @Lazy
-    ContientRepository contientRepository;
+    private GroupeRepository groupeRepository;
     @Autowired
     @Lazy
-    TypeLeconRepository typeLeconRepository;
+    private EnseignementRepository enseignementRepository;
+    
     @Autowired
     @Lazy
-    EnseignementRepository enseignementRepository;
+    private ContientRepository contientRepository;
+    @Autowired
+    @Lazy
+    private TypeLeconRepository typeLeconRepository;
     @Autowired
     @Lazy
     GroupeRepository groupeRepository;

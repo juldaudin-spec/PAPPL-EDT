@@ -5,9 +5,14 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+<<<<<<< HEAD
         <%@include file="imports.jspf" %>
         <title><fmt:message key="summary"/> ${enseignement.acronyme}</title>
         
+=======
+        <title>Récapitulatif ${enseignement.acronyme}</title>
+        <%@include file="imports.jspf" %>
+>>>>>>> 33d973b6f47ba0a48550595588d742b3dc5f17f9
         <link href="css/groupes.css" type="text/css" rel="stylesheet" />
         
     </head>
@@ -18,7 +23,11 @@
 
                 <div class="row">
                     <div class="col-md-12">
+<<<<<<< HEAD
                         <h1><fmt:message key="summary"/> ${enseignement.acronyme}</h1>
+=======
+                        <h1>Récapitulatif de ${enseignement.acronyme}</h1>
+>>>>>>> 33d973b6f47ba0a48550595588d742b3dc5f17f9
                     </div>
                 </div>
                 <div class="row">
@@ -26,6 +35,7 @@
                         <table class="table table-striped">
                             <thead>
                             <th class="col-6">
+<<<<<<< HEAD
                                 <fmt:message key="group"/>
                             </th>
                             <th class="col-2">
@@ -36,6 +46,18 @@
                             </th>
                             <th class="col-2">
                                 <fmt:message key="scheduled"/>
+=======
+                                Groupe
+                            </th>
+                            <th class="col-2">
+                                Type de cours
+                            </th>
+                            <th class="col-2">
+                                Durée à faire
+                            </th>
+                            <th class="col-2">
+                                Durée programmée
+>>>>>>> 33d973b6f47ba0a48550595588d742b3dc5f17f9
                             </th>
                             </thead>
                             <tbody>
@@ -96,7 +118,11 @@
                     <div class="col-md-12">
                         <form action="enseignements.do" method="POST">
                             <input type="hidden" name="connexion" value="${user.connectionCode}">
+<<<<<<< HEAD
                             <button formaction="enseignements.do"><fmt:message key="backToEnseignements"/></button>
+=======
+                            <button formaction="enseignements.do">Retour à la liste des Enseignements</button>
+>>>>>>> 33d973b6f47ba0a48550595588d742b3dc5f17f9
                         </form>
                     </div>
                 </div>

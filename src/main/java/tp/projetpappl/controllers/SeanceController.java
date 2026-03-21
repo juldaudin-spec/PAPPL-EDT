@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import tp.projetpappl.items.Connection;
+import tp.projetpappl.items.Connection;
 import tp.projetpappl.items.Enseignant;
 import tp.projetpappl.items.Enseignement;
 import tp.projetpappl.items.Groupe;
@@ -59,15 +60,19 @@ public class SeanceController {
     
     @Autowired
     private AuthHelper authHelper;
+    
+    @Autowired
+    private AuthHelper authHelper;
 
     @RequestMapping(value = "seance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSeance(HttpServletRequest request) {
-        String seanceStr="seance";        Connection user = authHelper.getAuthenticatedUser(request);
+        String seanceStr="seance";
+        Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
             return new ModelAndView("redirect:login.do");
         }
-        ModelAndView returned = new ModelAndView(seanceStr);
-        String idSeanceStr = request.getParameter("idSeance");
+        ModelAndView returned = new ModelAndView("seance");
+String idSeanceStr = request.getParameter("idSeance");
         if ((idSeanceStr != null) &&(!idSeanceStr.isEmpty())){
             Optional<Seance> seance=seanceRepository.findById(Tools.getIntFromString(idSeanceStr));
             if (seance.isPresent()){
@@ -76,11 +81,13 @@ public class SeanceController {
         else{
             returned.addObject(seanceStr,new Seance());
         }//TODO à changer pour n'afficher que ce qui est disponible, et pour les enseignants: ceux qui enseignent dans la matière, et pareil pojur le reste
-        returned.addObject("enseignantsList", enseignantRepository.findAll()); 
+        returned.addObject("enseignantsList", enseignantRepository.findAll());
+        returned.addObject("seance", new Seance());
         returned.addObject("groupesList", groupeRepository.findAll());
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
         returned.addObject("sallesList", salleRepository.findAll());
+        returned.addObject("user",user);
         returned.addObject("user",user);
         return returned;
     }
@@ -123,6 +130,10 @@ public class SeanceController {
      */
     @RequestMapping(value = "saveseance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveSeance(HttpServletRequest request) {
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
             return new ModelAndView("redirect:login.do");
@@ -197,6 +208,7 @@ public class SeanceController {
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
         returned.addObject("sallesList", salleRepository.findAll());
         returned.addObject("user",user);
+        returned.addObject("user",user);
         return returned;
     }
     /*
@@ -221,3 +233,13 @@ public class SeanceController {
     }
      */
 }
+
+
+      
+
+       
+
+
+
+
+

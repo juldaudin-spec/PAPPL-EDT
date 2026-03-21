@@ -86,6 +86,14 @@
                         </form>
                     </div>
                 </div>
+               <div class="row">
+                    <div class="col-md-12">
+                        <form action="groupes.do" method="POST">
+                            <input type="hidden" name="connexion" value="${user.connectionCode}">
+                            <button formaction="groupes.do">Importer une liste de groupes</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

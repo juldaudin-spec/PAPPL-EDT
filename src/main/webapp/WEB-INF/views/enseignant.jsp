@@ -35,7 +35,7 @@
                                             </c:choose>
                                             </label>
                                         </td>
-
+                                    
                                     <tr>
                                         <th scope="col"><fmt:message key="name"/></th>
                                         <td>
@@ -93,6 +93,8 @@
                                     Envoyer
                                 </button>
                             </div>
+
+                       
 
                         </form>
                     </div>

@@ -4,14 +4,13 @@
  */
 package tp.projetpappl.repositories;
 
-import java.math.BigInteger;
-import tp.projetpappl.items.Contient;
-
 import java.util.List;
 import tp.projetpappl.items.Contient;
 import tp.projetpappl.items.Enseignement;
 import tp.projetpappl.items.Groupe;
 import tp.projetpappl.items.TypeLecon;
+import java.math.BigInteger;
+import tp.projetpappl.items.Contient;
 
 /**
  *
@@ -21,6 +20,8 @@ public interface ContientRepositoryCustom {
     List<Contient> findContientByIntituleByEnseignementByGroupe(TypeLecon intitule,Enseignement acronyme,Groupe nomGroupe);
     List<TypeLecon> findIntituleByEnseignementByGroupe(Enseignement acronyme, Groupe nomGroupe);
     List<Enseignement> findEnseignementByGroupe(Groupe nomGroupe);
-    List<Groupe> findGroupeByEnseignement(Enseignement acronyme);    public Contient create(String acronyme, String intitule, BigInteger heures, String salle);
+    List<Groupe> findGroupeByEnseignement(Enseignement acronyme);    
+    List<Groupe> findGroupeByEnseignement(Enseignement acronyme);
+    public Contient create(String acronyme, String intitule, BigInteger heures, String salle);
     
 }
