@@ -217,9 +217,31 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+
+                        <%-- Succès --%>
                         <c:if test='${newseance}'>
-                            <p>Seance créé/modifié avec succès</p>
+                            <div class="alert alert-success">Séance créée/modifiée avec succès</div>
                         </c:if>
+
+                        <%-- Erreur bloquante (conflit enseignant ou groupe) --%>
+                        <c:if test="${not empty error}">
+                            <div class="alert alert-danger">${error}</div>
+                        </c:if>
+
+                        <%-- Warnings salles (non bloquant) --%>
+                        <c:if test="${not empty warningsSalles}">
+                            <c:forEach var="w" items="${warningsSalles}">
+                                <div class="alert alert-warning">${w}</div>
+                            </c:forEach>
+                        </c:if>
+
+                        <%-- Warnings maquette (non bloquant) --%>
+                        <c:if test="${not empty warningsMaquette}">
+                            <c:forEach var="w" items="${warningsMaquette}">
+                                <div class="alert alert-info">${w}</div>
+                            </c:forEach>
+                        </c:if>
+
                     </div>
                 </div>
             </div>
