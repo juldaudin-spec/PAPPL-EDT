@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,11 +62,21 @@ public class SeanceController {
 
     @RequestMapping(value = "seance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSeance(HttpServletRequest request) {
+        String seanceStr="seance";
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
             return new ModelAndView("redirect:login.do");
         }
         ModelAndView returned = new ModelAndView("seance");
+String idSeanceStr = request.getParameter("idSeance");
+        if ((idSeanceStr != null) &&(!idSeanceStr.isEmpty())){
+            Optional<Seance> seance=seanceRepository.findById(Tools.getIntFromString(idSeanceStr));
+            if (seance.isPresent()){
+            returned.addObject(seanceStr, seance.get());}
+        }
+        else{
+            returned.addObject(seanceStr,new Seance());
+        }//TODO à changer pour n'afficher que ce qui est disponible, et pour les enseignants: ceux qui enseignent dans la matière, et pareil pojur le reste
         returned.addObject("enseignantsList", enseignantRepository.findAll());
         returned.addObject("seance", new Seance());
         returned.addObject("groupesList", groupeRepository.findAll());
@@ -133,9 +144,8 @@ public class SeanceController {
         Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
         String intituleLecon = request.getParameter("TypeLecon");
         TypeLecon typeLecon = typeLeconRepository.getByIntitule(intituleLecon);
-        System.out.println("PARAMS: " + request.getParameterMap().keySet());
         HashMap<String, String> nomGroupes
-                = Tools.getArrayFromRequest(request, "m");
+                = Tools.getArrayFromRequest(request, "ml");
         ArrayList<Groupe> groupes = new ArrayList<>();
 
         for (String nomGroupe : nomGroupes.values()) {
@@ -146,7 +156,7 @@ public class SeanceController {
         }
 
         HashMap<String, String> numeroSalles
-                = Tools.getArrayFromRequest(request, "s");
+                = Tools.getArrayFromRequest(request, "sl");
         ArrayList<Salle> salles = new ArrayList<>();
 
         for (String numeroSalle : numeroSalles.values()) {
@@ -160,7 +170,7 @@ public class SeanceController {
         Date hDebut = Tools.getDateFromString(hDebutStr, "yyyy-MM-dd'T'HH:mm");
 
         HashMap<String, String> initialesEnseignants
-                = Tools.getArrayFromRequest(request, "e");
+                = Tools.getArrayFromRequest(request, "el");
         ArrayList<Enseignant> enseignants = new ArrayList<>();
 
         for (String initialesEnseignant : initialesEnseignants.values()) {
@@ -212,3 +222,13 @@ public class SeanceController {
     }
      */
 }
+
+
+      
+
+       
+
+
+
+
+

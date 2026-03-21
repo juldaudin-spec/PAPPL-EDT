@@ -6,17 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Ajouter Seance</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"
-                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-        <link href="css/seances.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
+        <%@include file="imports.jspf" %>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
@@ -24,7 +14,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer une nouvelle séance</h1>
+                        <h1>Créer/Modifier une séance</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -33,12 +23,16 @@
                             <table class="table table-striped">
                                 <tbody>
                                     <c:choose>
-                                        <c:when test="${(empty seance) || (empty seance.idSeance)}"><input name="IdSeance" value="-1" type="hidden"/></c:when>
-                                    <c:otherwise><input type="hidden" class="form-control" name="IdSeance" value="${seance.idSeance}"/></c:otherwise>
+                                        <c:when test="${(empty seance) || (empty seance.idSeance)}">
+                                        <input name="IdSeance" value="-1" type="hidden"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="hidden" class="form-control" name="IdSeance" value="${seance.idSeance}"/>
+                                    </c:otherwise>
                                 </c:choose>
                                 <tr>
                                     <th scope="col">Date et heure de début</th>
-                                    <td><input type="datetime-local" class="form-control" name="HDebut" value="${seance.HDebut}"/></td>
+                                    <td><input type="datetime-local" class="form-control" name="HDebut" value="<fmt:formatDate value="${seance.HDebut}" pattern="yyyy-MM-dd'T'HH:mm" />"/></td>
                                 </tr>
                                 <tr>
                                     <th scope="col">Durée (minutes)</th>
@@ -67,7 +61,7 @@
                                                 class="form-control form-select form-select-lg mb-3">
                                             <c:choose>
                                                 <c:when test="${(empty seance) || (empty seance.intitule)}"><option value="" disabled selected>Choisissez un type de leçon</option></c:when>
-                                                <c:otherwise><option value="${seance.intitule}" disabled selected>${seance.intitule.intitule} ${seance.responsable.prenom}</option></c:otherwise>
+                                                <c:otherwise><option value="${seance.intitule}" disabled selected>${seance.intitule.intitule}</option></c:otherwise>
                                             </c:choose>
 
                                             <c:forEach var="typeLecon" items="${typeLeconsList}">
