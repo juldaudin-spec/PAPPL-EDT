@@ -98,7 +98,7 @@
                                                                              --taille-element:   ${seance.duree/3}px;
                                                                              ">
                                                                             <input type="hidden" name="connexion" value="${user.connectionCode}">
-                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center" formaction="editseance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
+                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
                                                                         </div>
                                                                     </form>
                                                                 </c:when>
