@@ -40,6 +40,7 @@
                                     <tr>                                   
                                         <td  scope="col">
                                             <form method="POST">
+                                                <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <button class="btn" formaction="compteRenduGroupe.do" name="idGroupe" value="${item.nomGroupe}">${item.nomGroupe}</button>
                                             </form>
                                         </td>
