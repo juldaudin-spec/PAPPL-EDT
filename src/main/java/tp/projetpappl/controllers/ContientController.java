@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import static tp.projetpappl.controllers.Tools.getIntFromString;
+import tp.projetpappl.items.Connection;
 import tp.projetpappl.items.Contient;
 import tp.projetpappl.items.Enseignement;
 import tp.projetpappl.items.Groupe;
@@ -43,9 +44,17 @@ public class ContientController {
     @Autowired
     @Lazy
     private EnseignementRepository enseignementRepository;
+    @Autowired
+    private AuthHelper authHelper;
 
     @RequestMapping(value = "compteRenduGroupe.do", method = RequestMethod.POST)
     public ModelAndView handleSummaryGroupeGet(HttpServletRequest request) {
+        
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
+        
         ModelAndView returned = new ModelAndView("compteRenduGroupe");
         String idStr = request.getParameter("idGroupe");
         Optional<Groupe> groupeOpt = null;
@@ -67,7 +76,7 @@ public class ContientController {
             checkTypeLecon(intituleByEnseignement, listSeance);
 
             List<List<List<Contient>>> contients = getListContient(groupe, enseignements, intituleByEnseignement);
-
+            returned.addObject("user", user);
             returned.addObject("groupe", groupe);
             returned.addObject("enseignements", enseignements);
             returned.addObject("intitules", intituleByEnseignement);
@@ -79,6 +88,12 @@ public class ContientController {
 
     @RequestMapping(value = "compteRenduEnseignement.do", method = RequestMethod.POST)
     public ModelAndView handleSummaryEnseignementGet(HttpServletRequest request) {
+        
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
+        
         ModelAndView returned = new ModelAndView("compteRenduEnseignement");
         String idStr = request.getParameter("acronyme");
         Optional<Enseignement> enseignementOpt = null;
@@ -100,7 +115,7 @@ public class ContientController {
             checkTypeLecon(intituleByEnseignement, listSeance, groupes);
 
             List<List<List<Contient>>> contients = getListContient(enseignement, groupes, intituleByEnseignement);
-
+            returned.addObject("user", user);
             returned.addObject("groupes", groupes);
             returned.addObject("enseignement", enseignement);
             returned.addObject("intitules", intituleByEnseignement);
