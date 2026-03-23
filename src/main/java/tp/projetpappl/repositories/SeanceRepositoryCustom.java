@@ -20,7 +20,8 @@ import tp.projetpappl.items.TypeLecon;
 public interface SeanceRepositoryCustom {
     Seance create(Enseignement enseignement, List<Enseignant> Enseignants, TypeLecon typeLecon, List<Groupe> groupe, List<Salle> Salles, Date hDebut, int duree);
     Seance update(int IdSeance, Enseignement enseignement, List<Enseignant> Enseignants, TypeLecon typeLecon, List<Groupe> groupe, List<Salle> Salles, Date hDebut, int duree);
+    void remove(int seance);
     List<Seance> findSeanceByGroupe(Groupe groupe);
     List<Seance> findSeanceByEnseignement(Enseignement enseignement);
-    void sortByEnseignementByIntitule(List<Seance> listSeance, List<Enseignement> listEnseignement, List<List<TypeLecon>> listIntitule); 
+    void sortByEnseignementByIntitule(List<Seance> listSeance, List<Enseignement> listEnseignement, List<List<TypeLecon>> listIntitule);
 }
