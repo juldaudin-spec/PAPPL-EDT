@@ -221,4 +221,15 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         }
         return null;
     }
+
+    @Override
+    public void remove(int idSeance) {
+        if (idSeance>=0){
+            Seance seance = seanceRepository.getReferenceById(idSeance);
+            //TODO vérifier que ça efface bien
+        if (seance!=null){
+            seanceRepository.delete(seance);
+        }
+        }
+    }
 }
