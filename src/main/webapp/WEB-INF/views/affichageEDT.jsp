@@ -4,53 +4,47 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <%@include file="imports.jspf" %>
         <meta charset="UTF-8">
-        <title>Emploi du temps</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"
-                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-        <link href="css/mainPage.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <title>
+            <fmt:message key="EDT"/>
+        </title>
         <link rel="stylesheet" href="css/EDT.css">
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
         <%@ page import="java.util.Locale"%>
         <%@ page import="java.time.format.TextStyle"%>
-        <div class="py-5">
+        <div class="py-5" id="main-content">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
 
-                        <h5>Veuillez choisir les groupes à visualiser</h5>
+                        <h5><fmt:message key="chooseGroupe"/></h5>
                     </div>
                     <form action="affichageEDT.do" method="POST">
-                        <select name="idGroupe" multiple>
+                        <label for="groupes"><fmt:message key="selectGroupe"/> </label>
+                        <select id="groupes" name="idGroupe" multiple>
                             <c:forEach var="groupe" items="${groupes}">
                                 <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
                             </c:forEach>
                         </select>
                         <input type="hidden" name="connexion" value="${user.connectionCode}">
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button>
-                            valider
+                            <fmt:message key="submit"/>
                         </button>
                     </form>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="col-2 text-center">Date</th>
-                                            <c:forEach var="groupeSelect" items="${listeGroupe}">
-                                            <th scope="col-auto" class="text-center">${groupeSelect}
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="col-2 text-center"><fmt:message key="date"/></th>
+                                                <c:forEach var="groupeSelect" items="${listeGroupe}">
+                                                <th scope="col-auto" class="text-center">${groupeSelect}
                                                 <form action="exporterICS.do">
                                                     <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                     <input type="hidden" name="groupeSelect" value=${groupeSelect}>
@@ -62,37 +56,37 @@
                                                     <button>Exporter au format Excel</button>
                                                 </form>
                                             </th>
-                                        </c:forEach>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="jour" items="${HDebut}" varStatus="status">
-                                        <tr>
-                                            <td>
-                                                <div class="position-relative" id="Jour">
-                                                    <div id="date">
-                                                        ${jour}</div>
-                                                    <div id="Horaire" style="--position-element: 0px; --taille-element:1px;">
-                                                        8h </div>
-                                                    <div id="Horaire" style="--position-element: 40px; --taille-element:1px;">
-                                                        10h</div>
-                                                    <div id="Horaire" style="--position-element: 80px; --taille-element:1px;">
-                                                        12h</div>
-                                                    <div id="Horaire" style="--position-element: 120px; --taille-element:1px;">
-                                                        14h</div>
-                                                    <div id="Horaire" style="--position-element: 160px; --taille-element:1px;">
-                                                        16h</div>
-                                                    <div id="Horaire" style="--position-element: 200px; --taille-element:1px;">
-                                                        18h</div>
-                                                    <div id="nomJour">  
-                                                        ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.FRENCH)}
+                                            </c:forEach>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="jour" items="${HDebut}" varStatus="status">
+                                            <tr>
+                                                <td>
+                                                    <div class="position-relative" id="Jour">
+                                                        <div id="nomJour">
+                                                            ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, pageContext.request.locale)}
+                                                        </div>
+                                                        <div id="date">
+                                                            ${jour}</div>
+                                                        <div id="Horaire" style="--position-element: 0px; --taille-element:1px;">
+                                                            8h </div>
+                                                        <div id="Horaire" style="--position-element: 40px; --taille-element:1px;">
+                                                            10h</div>
+                                                        <div id="Horaire" style="--position-element: 80px; --taille-element:1px;">
+                                                            12h</div>
+                                                        <div id="Horaire" style="--position-element: 120px; --taille-element:1px;">
+                                                            14h</div>
+                                                        <div id="Horaire" style="--position-element: 160px; --taille-element:1px;">
+                                                            16h</div>
+                                                        <div id="Horaire" style="--position-element: 200px; --taille-element:1px;">
+                                                            18h</div>
+
                                                     </div>
 
-                                                </div>
-
-                                            </td>
-                                            <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
+                                                </td>
+                                                <form formaction="seance.do" method="POST"></form>
+                                                <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
 
                                                 <td class="texte-center">
                                                     <div class="position-relative" >
@@ -105,22 +99,24 @@
                                                                              --taille-element:   ${seance.duree/3}px;
                                                                              ">
                                                                             <input type="hidden" name="connexion" value="${user.connectionCode}">
-                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center" formaction="editseance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
+                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center; color:black" name="idSeance" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button>
                                                                         </div>
                                                                     </form>
                                                                 </c:when>
                                                                 <c:otherwise>
 
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </c:forEach>
-                                                    </div>
-                                                </td>
-                                            </c:forEach>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </c:forEach>
+                                                        </div>
+                                                    </td>
+                                                </c:forEach>
+                                                </form>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
                 </div>

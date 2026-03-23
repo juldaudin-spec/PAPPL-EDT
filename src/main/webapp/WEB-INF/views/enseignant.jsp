@@ -3,28 +3,20 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <%@include file="imports.jspf" %>
         <meta charset="UTF-8">
-        <title>Ajouter Enseignant</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"
-                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
+        <title><fmt:message key="addEnseignant"/></title>
+        
         <link href="css/enseignants.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
-        <div class="py-5">
+        <div class="py-5" id="main-content">
             <div class="container">
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer un nouvel enseignant</h1>
+                        <h1><fmt:message key="addNewEnseignant"/></h1>
                     </div>
                 </div>
                 <div class="row">
@@ -33,21 +25,33 @@
                             <table class="table table-striped">
                                 <tbody>
                                     <tr>
-                                        <th scope="col">Initiales</th>
+                                        <th scope="col"><fmt:message key="initials"/></th>
                                         <td>
+                                            <label>
+                                                <fmt:message key="initials"/>
                                             <c:choose>
                                                 <c:when test="${(empty enseignant) || (empty enseignant.initiales)}"><input name="Initiales" value=""/></c:when>
                                                 <c:otherwise><input type="text" class="form-control" name="Initiales" value="${enseignant.initiales}"/></c:otherwise>
                                             </c:choose>
+                                            </label>
                                         </td>
-
+                                    
                                     <tr>
-                                        <th scope="col">Nom</th>
-                                        <td><input type="text" class="form-control" name="Nom" value="${enseignant.nomEnseignant}"/></td>
+                                        <th scope="col"><fmt:message key="name"/></th>
+                                        <td>
+                                            <label> 
+                                                <fmt:message key="name"/>
+                                            <input type="text" class="form-control" name="Nom" value="${enseignant.nomEnseignant}"/></td>
+                                            </label>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Prenom</th>
-                                        <td><input type="text" class="form-control" name="Prenom" value="${enseignant.prenom}"/></td>
+                                        <th scope="col"><fmt:message key="firstname"/></th>
+                                        <td>
+                                            <label> 
+                                                <fmt:message key="firstname"/>
+                                            <input type="text" class="form-control" name="Prenom" value="${enseignant.prenom}"/>
+                                            </label>
+                                        </td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
@@ -65,7 +69,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <c:if test='${newenseignant}'>
-                            <p>Enseignant créé/modifié avec succès</p>
+                            <p><fmt:message key="enseignantSaved"/></p>
                         </c:if>
                     </div>
                 </div>
@@ -73,7 +77,7 @@
                     <div class="col-md-12">
                         <form action="enseignants.do" method="POST">
                             <input type="hidden" name="connexion" value="${user.connectionCode}">
-                            <button formaction="enseignants.do">Afficher la liste des Enseignants</button>
+                            <button formaction="enseignants.do"><fmt:message key="backToEnseignants"/></button>
                         </form>
                     </div>
                     <div class="col-md-12">

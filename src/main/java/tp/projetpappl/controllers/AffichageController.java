@@ -51,7 +51,8 @@ public class AffichageController {
 
     /**
      * permet d'ouvrir la page d'affichage des EDT
-     *
+     * grant access to the planning
+     * 
      * @param request
      * @return
      */

@@ -38,3 +38,27 @@ form {
 p{
     text-align: center
 }
+:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px black; /* Complément pour contraste élevé */
+}
+
+button{
+    /* min-height:44px;
+    //min-width:44px;*/
+    font-size: 24px;
+}
+
+.hidden-label {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  width: 1px;
+}
+
+
+button.nav-link{
+    color :white;
+}

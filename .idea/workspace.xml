@@ -5,24 +5,280 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a380ca7-a55d-4153-a69f-1041d4cb9ee7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/messages/messages.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/messages/messages_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/messages/messages_fr.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/messages/messages_fr_FR.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/imports.jspf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/affichageEDT.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_connection_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create_connection_table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/AffichageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/AffichageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_connection_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQLscript.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/AffichageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/AffichageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/EnseignantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/EnseignantController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/EnseignementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/EnseignementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/SeanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/SeanceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ContientRepositoryCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ContientRepositoryCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ContientRepositoryCustomImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ContientRepositoryCustomImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/affichageEDT.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/affichageEDT.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/compteRenduEnseignement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/compteRenduEnseignement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/compteRenduGroupe.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/compteRenduGroupe.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/cours.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/enseignant.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/enseignant.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/enseignants.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/enseignants.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/enseignants.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/enseignement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/enseignement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/enseignements.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/enseignements.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groupe.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groupe.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groupes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groupes.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groupes.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mainPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/matières.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/navbar.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/navbar.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/salle.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/salle.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/salles.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/salles.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/seance.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/seance.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/EDT.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/EDT.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/autre/DataBaseTools.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/AffichageController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/ContientController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/EnseignantController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/EnseignantController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/EnseignementController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/EnseignementController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/GroupeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/GroupeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/IndexController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/LoginController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/SalleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/SalleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/pappl-1.0.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/AffichageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/AffichageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/controllers/Tools.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Connection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Contient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Enseignant$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Enseignant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Enseignement$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Enseignement.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Gerer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Groupe$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Groupe.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Salle$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Salle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Seance$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Seance$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Seance$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/Seance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/TypeLecon$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/items/TypeLecon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/ConnectionRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/ConnectionRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/ConnectionRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/ContientRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/EnseignantRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/EnseignementRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/GererRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/GererRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/GererRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/GroupeRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/GroupeRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/GroupeRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/SalleRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/SalleRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/SalleRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/SeanceRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/SeanceRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/SeanceRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/TypeLeconRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/TypeLeconRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/repositories/TypeLeconRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tp/projetpappl/tools/CASClient$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/META-INF/context.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/applicationContext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/autre/DataBaseTools.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/AffichageController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/ContientController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/EnseignantController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/EnseignantController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/EnseignementController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/EnseignementController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/GroupeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/GroupeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/IndexController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/LoginController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/SalleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/SalleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-tp.projetpappl.controllers.AffichageControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-tp.projetpappl.controllers.AffichageControllerTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/tp.projetpappl.controllers.AffichageControllerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/tp.projetpappl.controllers.AffichageControllerTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/controllers/Tools.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Connection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Contient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Enseignant$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Enseignant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Enseignement$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Enseignement.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Gerer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Groupe$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Groupe.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Salle$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Salle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Seance$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Seance$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Seance$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/Seance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/TypeLecon$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/items/TypeLecon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/ConnectionRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/ConnectionRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/ConnectionRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/ContientRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/EnseignantRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/EnseignementRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/GererRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/GererRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/GererRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/GroupeRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/GroupeRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/GroupeRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/SalleRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/SalleRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/SalleRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/SeanceRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/SeanceRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/SeanceRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/TypeLeconRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/TypeLeconRepositoryCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/repositories/TypeLeconRepositoryCustomImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/classes/tp/projetpappl/tools/CASClient$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/HikariCP-5.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/angus-activation-2.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/antlr4-runtime-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/aspectjweaver-1.9.22.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/byte-buddy-1.15.11.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/checker-qual-3.31.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/classmate-1.5.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/eclipselink-4.0.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/hibernate-commons-annotations-7.0.3.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/hibernate-core-6.6.11.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/istack-commons-runtime-4.1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jackson-annotations-2.18.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jackson-core-2.18.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jackson-databind-2.18.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.activation-api-2.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.annotation-api-2.1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.authentication-api-3.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.ejb-api-4.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.el-api-5.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.enterprise.cdi-api-4.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.enterprise.lang-model-4.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.faces-api-4.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.inject-api-2.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.interceptor-api-2.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.jakartaee-web-api-10.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.json-2.0.0-module.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.json-api-2.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.json.bind-api-3.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.persistence-api-3.2.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.security.enterprise-api-3.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.servlet-api-6.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.servlet.jsp.jstl-3.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.servlet.jsp.jstl-api-3.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.transaction-api-2.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.validation-api-3.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.websocket-api-2.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.websocket-client-api-2.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.ws.rs-api-3.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jakarta.xml.bind-api-4.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jandex-3.2.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jaxb-core-4.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jaxb-core-4.0.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jaxb-runtime-4.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jaxb-xjc-4.0.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jboss-logging-3.5.0.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/json-20230618.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/jul-to-slf4j-2.0.17.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/log4j-api-2.24.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/log4j-to-slf4j-2.24.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/logback-classic-1.5.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/logback-core-1.5.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/micrometer-commons-1.14.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/micrometer-observation-1.14.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/postgresql-42.6.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/slf4j-api-2.0.17.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/snakeyaml-2.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-aop-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-aspects-6.2.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-beans-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-boot-3.4.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-boot-autoconfigure-3.4.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-boot-starter-3.4.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-boot-starter-data-jpa-3.4.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-boot-starter-jdbc-3.4.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-boot-starter-logging-3.4.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-context-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-context-support-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-core-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-data-commons-3.4.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-data-jpa-3.4.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-expression-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-jcl-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-jdbc-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-messaging-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-orm-6.2.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-tx-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-web-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/spring-webmvc-6.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/txw2-4.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/lib/yasson-2.0.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/compteRenduEnseignement.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/compteRenduGroupe.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/enseignements.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/groupe.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/groupes.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/WEB-INF/views/navbar.jspf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/.DS_Store_1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/.DS_Store_1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-grid.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-grid.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-grid.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-grid.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-reboot.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-reboot.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-reboot.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-reboot.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-utilities.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-utilities.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-utilities.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-utilities.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-utilities.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-utilities.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-utilities.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap-utilities.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/css/bootstrap.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.esm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.esm.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.esm.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.esm.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/bootstrap/js/bootstrap.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/css/EDT.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/img/add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/img/centraleNantes.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/img/delete.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pappl-1.0/img/edit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/tp/projetpappl/controllers/AffichageControllerTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +317,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "#33 on Merging main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Oussama/Desktop/PGROUP/PAPPL-EDT"
   }
@@ -116,7 +372,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768832143583</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002">
+      <option name="closed" value="true" />
+      <created>1774020531777</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1774020531777</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
 </project>

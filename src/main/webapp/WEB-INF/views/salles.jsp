@@ -10,28 +10,17 @@
 <!DOCTYPE html>
 <html lang="fr-fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Liste Salles</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"
-                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-        <link href="css/main.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
+        <%@include file="imports.jspf" %>
+        <title><fmt:message key="listRoom"/></title>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
-        <div class="py-5">
+        <div class="py-5" id="main-content">
             <div class="container">
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Liste des salles</h1>
+                        <h1><fmt:message key="listRoom"/></h1>
                     </div>
                 </div>
 
@@ -41,10 +30,10 @@
                         <table class="table table-striped table-md sortable">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="col-md-2">Numéro de la salle</th>
-                                    <th scope="col" class="col-md-3">Capacité maximale</th>
-                                    <th scope="col" class="col-md-3">Typologie de la salle (projecteur, sortie audio, etc.)</th>
-                                    <th scope="col" class="col-md-3">Editer/Supprimer une salle</th>
+                                    <th scope="col" class="col-md-2"><fmt:message key="wichRoom"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="roomCapacity"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="roomInfo"/><fmt:message key="listRoomInfo"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="editRoom"/></th>
                                 </tr>
                             </thead>
 

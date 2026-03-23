@@ -4,28 +4,20 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <%@include file="imports.jspf" %>
         <meta charset="UTF-8">
-        <title>Récapitulatif ${groupe.nomGroupe}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"
-                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
+        <title><fmt:message key="summary"/> ${groupe.nomGroupe}</title>
+        
         <link href="css/groupes.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
-        <div class="py-5">
+        <div class="py-5" id="main-content">
             <div class="container">
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Récapitulatif de ${groupe.nomGroupe}</h1>
+                        <h1><fmt:message key="summary"/> ${groupe.nomGroupe}</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -33,16 +25,16 @@
                         <table class="table table-striped">
                             <thead>
                             <th class="col-6">
-                                Enseignement
+                                <fmt:message key="enseignement"/>
                             </th>
                             <th class="col-2">
-                                Type de cours
+                                <fmt:message key="courseType"/>
                             </th>
                             <th class="col-2">
-                                durée à faire
+                                <fmt:message key="duration"/>
                             </th>
                             <th class="col-2">
-                                durée programmée
+                                <fmt:message key="scheduled"/>
                             </th>
                             </thead>
                             <tbody>
@@ -101,7 +93,7 @@
                     <div class="col-md-12">
                         <form action="groupes.do" method="POST">
                             <input type="hidden" name="connexion" value="${user.connectionCode}">
-                            <button formaction="groupes.do">Retour à la liste des Groupes</button>
+                            <button formaction="groupes.do"><fmt:message key="backToGroups"/></button>
                         </form>
                     </div>
                 </div>
