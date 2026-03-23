@@ -136,10 +136,10 @@
                                                          ondrop="dropAndRename(event, 'el', 'e')" 
                                                          ondragover="allowDrop(event)">
                                                         <c:forEach var="itemIter" items="${seance.enseignantList}">
-                                                            <div class="list-group-item list-group-item-action" id="e_${itemIter.initiales}" draggable="true" ondragstart="drag(event)">
+                                                             <div class="list-group-item list-group-item-action" id="e_${itemIter.initiales}" draggable="true" ondragstart="drag(event)">
                                                                 <input type="hidden" name="e[${itemIter.initiales}]" value="${itemIter.initiales}"/>
-                                                                ${itemIter.initiales.nomEnseignant} ${itemIter.initiales.prenom}
-                                                            </div>
+                                                                ${itemIter.nomEnseignant} ${itemIter.prenom}
+                                                            </div> 
                                                         </c:forEach>
                                                     </div>
                                                 </div>
@@ -151,10 +151,11 @@
                                                          ondrop="dropAndRename(event, 'e','el')" 
                                                          ondragover="allowDrop(event)">
                                                         <c:forEach var="enseignant" items="${enseignantsList}">
+                                                            <!--
                                                             <div class="list-group-item list-group-item-action" id="el_${enseignant.initiales}" draggable="true" ondragstart="drag(event)" style="display:block">
                                                                 <input type="hidden" name="el[${enseignant.initiales}]" value="${enseignant.initiales}"/>
                                                                 ${enseignant.nomEnseignant} ${enseignant.prenom}
-                                                            </div>
+                                                            </div>-->
                                                         </c:forEach>
                                                     </div>
                                                     <div onkeyup="filterList('listAllenseignants', 'listAllenseignantsFilter')" >
