@@ -86,6 +86,7 @@ public class SeanceController {
         }//TODO à changer pour n'afficher que ce qui est disponible, et pour les enseignants: ceux qui enseignent dans la matière, et pareil pojur le reste
         returned.addObject(seanceStr, seanceChoisie);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
+        returned.addObject("seance", new Seance());
         returned.addObject("groupesList", groupeRepository.findAll());
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
@@ -101,6 +102,15 @@ public class SeanceController {
             return new ModelAndView("redirect:login.do");
         }
 
+        String acronymeEnseignement = request.getParameter("Enseignement");
+        Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
+        if (!authHelper.canModifyFiliere(request, enseignement.getFiliere())) {
+            ModelAndView forbidden = new ModelAndView("403");
+            forbidden.addObject("user", user);
+            return forbidden;
+        }
+
+
         ModelAndView returned = new ModelAndView("seance");
         boolean succes = false;
 
@@ -114,8 +124,8 @@ public class SeanceController {
                 throw new IllegalArgumentException("Durée invalide : merci de saisir une durée strictement supérieure à 0.");
             }
 
-            String acronymeEnseignement = request.getParameter("Enseignement");
-            Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
+            //String acronymeEnseignement = request.getParameter("Enseignement");
+            //Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
 
             String intituleLecon = request.getParameter("TypeLecon");
             TypeLecon typeLecon = typeLeconRepository.getByIntitule(intituleLecon);

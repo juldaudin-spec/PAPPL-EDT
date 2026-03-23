@@ -15,7 +15,7 @@
         <%@include file="navbar.jspf" %>
         <%@ page import="java.util.Locale"%>
         <%@ page import="java.time.format.TextStyle"%>
-        <div class="py-5">
+        <div class="py-5" id="main-content">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -29,6 +29,7 @@
                                 <option value="${groupe.nomGroupe}">${groupe.nomGroupe}</option>
                             </c:forEach>
                         </select>
+                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button>
                             <fmt:message key="submit"/>
@@ -49,8 +50,6 @@
                                                     <input type="hidden" name="groupeSelect" value=${groupeSelect}>
                                                     <button>Exporter au format ICS</button>
                                                 </form>
-                                            </th>
-                                                <th scope="col-auto" class="text-center">${groupeSelect}
                                                 <form action="exporterExcel.do">
                                                     <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                     <input type="hidden" name="groupeSelect" value=${groupeSelect}>
@@ -65,7 +64,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="position-relative" id="Jour">
-                                                        <div id="nomJour">  
+                                                        <div id="nomJour">
                                                             ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, pageContext.request.locale)}
                                                         </div>
                                                         <div id="date">
@@ -82,27 +81,29 @@
                                                             16h</div>
                                                         <div id="Horaire" style="--position-element: 200px; --taille-element:1px;">
                                                             18h</div>
-                                                        
+
                                                     </div>
 
                                                 </td>
                                                 <form formaction="seance.do" method="POST"></form>
                                                 <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
 
-                                                    <td class="texte-center">
-                                                        <div class="position-relative" >
-                                                            <c:forEach var="seance" items="${seanceByDay}">
-                                                                <c:choose>
-                                                                    <c:when test="${not empty seance.acronyme}">
+                                                <td class="texte-center">
+                                                    <div class="position-relative" >
+                                                        <c:forEach var="seance" items="${seanceByDay}">
+                                                            <c:choose>
+                                                                <c:when test="${not empty seance.acronyme}">
+                                                                    <form action="seance.do" method="POST">
                                                                         <div id="Seance" style="
                                                                              --position-element: ${((seance.HDebut.getHours()-8)*60+seance.HDebut.getMinutes())/3}px;
                                                                              --taille-element:   ${seance.duree/3}px;
                                                                              ">
                                                                             <input type="hidden" name="connexion" value="${user.connectionCode}">
-                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center" name="idSeance" formaction="editseance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
+                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center; color:black" name="idSeance" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button>
                                                                         </div>
-                                                                    </c:when>
-                                                                    <c:otherwise>
+                                                                    </form>
+                                                                </c:when>
+                                                                <c:otherwise>
 
                                                                     </c:otherwise>
                                                                 </c:choose>

@@ -21,4 +21,5 @@ public interface EnseignementRepositoryCustom {
     Enseignement update(String acronyme, String nom, String filiere, Enseignant responsable, ArrayList<Enseignant> enseignants);
     void remove(String acronyme);
     Enseignement create(String acronyme, String nom, String filiere, Enseignant responsable, ArrayList<Enseignant> enseignants);
+    public boolean existsByResponsableAndFiliere(Enseignant responsable, String filiere);
 }
