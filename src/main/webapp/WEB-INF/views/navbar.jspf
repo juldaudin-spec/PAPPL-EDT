@@ -42,7 +42,7 @@
                 <li class="nav-item">
                     <form method="POST">
                         <input type="hidden" name="connexion" value="${user.connectionCode}">
-                        <button class="nav-link text-light" formaction="salle.do"><fmt:message key="room"/></button>
+                        <button class="nav-link text-light" formaction="salles.do"><fmt:message key="room"/></button>
                     </form>
                 </li>                
                 <li class="nav-item">
