@@ -10,19 +10,8 @@
 <!DOCTYPE html>
 <html lang="fr-fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Liste Groupes</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"
-                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-        <link href="css/main.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
+        <%@include file="imports.jspf" %>
+        <title><fmt:message key="listGroups"/></title>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
@@ -31,7 +20,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Liste des groupes</h1>
+                        <h1><fmt:message key="listGroups"/></h1>
                     </div>
                 </div>
 
@@ -41,8 +30,8 @@
                         <table class="table table-striped table-md sortable">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="col-md-2">Nom Groupe</th>
-                                    <th scope="col" class="col-md-3">Nombre d'élèves</th>
+                                    <th scope="col" class="col-md-2"><fmt:message key="groupName"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="nbStudent"/></th>
                                 </tr>
                             </thead>
 
@@ -51,6 +40,7 @@
                                     <tr>                                   
                                         <td  scope="col">
                                             <form method="POST">
+                                                <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <button class="btn" formaction="compteRenduGroupe.do" name="idGroupe" value="${item.nomGroupe}">${item.nomGroupe}</button>
                                             </form>
                                         </td>

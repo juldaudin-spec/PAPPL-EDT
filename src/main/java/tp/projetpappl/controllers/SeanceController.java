@@ -16,6 +16,8 @@ import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,20 +65,32 @@ public class SeanceController {
 
     @RequestMapping(value = "seance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSeance(HttpServletRequest request) {
+        String seanceStr = "seance";
         Connection user = authHelper.getAuthenticatedUser(request);
+        Seance seanceChoisie;
         if (user == null) {
             return new ModelAndView("redirect:login.do");
         }
 
-        ModelAndView returned = new ModelAndView("seance");
+        ModelAndView returned = new ModelAndView(seanceStr);
+        String idSeanceStr = request.getParameter("idSeance");
+        if ((idSeanceStr != null) && (!idSeanceStr.isEmpty())) {
+            Optional<Seance> seance = seanceRepository.findById(Tools.getIntFromString(idSeanceStr));
+            if (seance.isPresent()) {
+                seanceChoisie = seance.get();
+            } else {
+                seanceChoisie = new Seance();
+            }
+        } else {
+            seanceChoisie = new Seance();
+        }//TODO à changer pour n'afficher que ce qui est disponible, et pour les enseignants: ceux qui enseignent dans la matière, et pareil pojur le reste
+        returned.addObject(seanceStr, seanceChoisie);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
-        returned.addObject("seance", new Seance());
         returned.addObject("groupesList", groupeRepository.findAll());
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
         returned.addObject("sallesList", salleRepository.findAll());
         returned.addObject("user", user);
-
         return returned;
     }
 
@@ -174,7 +188,6 @@ public class SeanceController {
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
         returned.addObject("sallesList", salleRepository.findAll());
         returned.addObject("user", user);
-
         return returned;
     }
 

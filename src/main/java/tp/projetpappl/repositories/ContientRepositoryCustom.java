@@ -5,6 +5,7 @@
 package tp.projetpappl.repositories;
 
 import java.util.List;
+import tp.projetpappl.items.Contient;
 import tp.projetpappl.items.Enseignement;
 import tp.projetpappl.items.Groupe;
 import tp.projetpappl.items.TypeLecon;

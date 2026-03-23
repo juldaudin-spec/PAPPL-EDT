@@ -30,7 +30,6 @@
                             </c:forEach>
                         </select>
                         <input type="hidden" name="connexion" value="${user.connectionCode}">
-                        <input type="hidden" name="connexion" value="${user.connectionCode}">
                         <button>
                             <fmt:message key="submit"/>
                         </button>
@@ -50,6 +49,8 @@
                                                     <input type="hidden" name="groupeSelect" value=${groupeSelect}>
                                                     <button>Exporter au format ICS</button>
                                                 </form>
+                                            </th>
+                                                <th scope="col-auto" class="text-center">${groupeSelect}
                                                 <form action="exporterExcel.do">
                                                     <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                     <input type="hidden" name="groupeSelect" value=${groupeSelect}>
@@ -88,22 +89,20 @@
                                                 <form formaction="seance.do" method="POST"></form>
                                                 <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
 
-                                                <td class="texte-center">
-                                                    <div class="position-relative" >
-                                                        <c:forEach var="seance" items="${seanceByDay}">
-                                                            <c:choose>
-                                                                <c:when test="${not empty seance.acronyme}">
-                                                                    <form action="seance.do" method="POST">
+                                                    <td class="texte-center">
+                                                        <div class="position-relative" >
+                                                            <c:forEach var="seance" items="${seanceByDay}">
+                                                                <c:choose>
+                                                                    <c:when test="${not empty seance.acronyme}">
                                                                         <div id="Seance" style="
                                                                              --position-element: ${((seance.HDebut.getHours()-8)*60+seance.HDebut.getMinutes())/3}px;
                                                                              --taille-element:   ${seance.duree/3}px;
                                                                              ">
                                                                             <input type="hidden" name="connexion" value="${user.connectionCode}">
-                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center; color:black" name="idSeance" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
+                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center" name="idSeance" formaction="editseance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
                                                                         </div>
-                                                                    </form>
-                                                                </c:when>
-                                                                <c:otherwise>
+                                                                    </c:when>
+                                                                    <c:otherwise>
 
                                                                     </c:otherwise>
                                                                 </c:choose>

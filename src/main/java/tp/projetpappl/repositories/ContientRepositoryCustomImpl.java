@@ -4,6 +4,10 @@
  */
 package tp.projetpappl.repositories;
 
+import java.math.BigInteger;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -12,6 +16,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
+import tp.projetpappl.items.Contient;
+import tp.projetpappl.items.Enseignement;
+import tp.projetpappl.items.TypeLecon;
 import tp.projetpappl.controllers.Tools;
 import tp.projetpappl.items.Contient;
 import tp.projetpappl.items.Enseignement;
@@ -30,7 +37,6 @@ import tp.projetpappl.items.TypeLecon;
  */
 @Repository
 public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
-
     @PersistenceContext
     private EntityManager entityManager;
     @Autowired
@@ -46,6 +52,7 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
     @Autowired
     @Lazy
     private TypeLeconRepository typeLeconRepository;
+
     @Autowired
     @Lazy
     private SalleRepository salleRepository;
@@ -84,6 +91,8 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
         }
         return null;
     }
+
+    
     
     @Override
     public List<Contient> findContientByIntituleByEnseignementByGroupe(TypeLecon intitule, Enseignement acronyme, Groupe groupe) {
