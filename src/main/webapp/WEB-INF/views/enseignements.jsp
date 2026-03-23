@@ -43,7 +43,7 @@
                                         <td  scope="col">
                                             <form method="POST">
                                                 <input type="hidden" name="connexion" value="${user.connectionCode}">
-                                                <button class="btn" formaction="compteRenduEnseignement.do" name="acronyme" value="${item.acronyme}">${item.acronyme}</button>
+                                                <button class="btn nav-link" style="color:black" formaction="compteRenduEnseignement.do" name="acronyme" value="${item.acronyme}">${item.acronyme}</button>
                                             </form>
                                         </td>
                                         <td>${item.nomEnseignement}</td>
@@ -53,10 +53,10 @@
                                             <form action="editUser" method="POST">
                                                 <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <input type="hidden" name="Acronyme" value="${item.acronyme}" />
-                                                <button class="btn" formaction="editenseignement.do" name="edit" class="icon">
+                                                <button class="btn nav-link" formaction="editenseignement.do" name="edit" class="icon">
                                                     <img src="img/edit.png" alt="edit" class="icon">
                                                 </button>
-                                                <button class="btn" name="delete" formaction="deleteenseignement.do" class="icon">
+                                                <button class="btn nav-link" name="delete" formaction="deleteenseignement.do" class="icon">
                                                     <img src="img/delete.png" alt="delete" class="icon">
                                                 </button>
                                             </form>
@@ -69,7 +69,7 @@
                                 <tr id="addNew">
                                     <td colspan="5">
                                         <form action="enseignement.do" method="POST">
-                                            <button class="btn">
+                                            <button class="btn nav-link">
                                                 <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <img src="img/add.png" alt="add" class="icon">
                                             </button>
