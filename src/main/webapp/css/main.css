@@ -3,7 +3,7 @@ body {
 }
 img.icon {
     display : inline;
-    height : 40px;
+    height : 40px !important;
 }
 table {
     margin: 80px auto 0;
@@ -39,15 +39,18 @@ p{
     text-align: center
 }
 :focus-visible {
-  outline: 3px solid white;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 6px black; /* Complément pour contraste élevé */
+  outline: 3px solid white !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 6px black !important; /* Complément pour contraste élevé */
 }
 
 button{
     /* min-height:44px;
     //min-width:44px;*/
     font-size: 24px;
+}
+.icon:focus-visible{
+
 }
 
 .hidden-label {
