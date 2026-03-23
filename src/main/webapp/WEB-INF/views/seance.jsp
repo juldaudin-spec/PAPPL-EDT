@@ -19,7 +19,7 @@
                     <div>
                 <form action="saveseance.do" method="POST">
                     <input type="hidden" name="connexion" value="${user.connectionCode}">
-                    <input type="hidden" name="Initiales" value="${seance.idSeance}"/>
+                    <input type="hidden" name="idSeance" value="${seance.idSeance}"/>
                     <button class="btn" name="delete" formaction="deleteseance.do" class="icon">
                         <img src="img/delete.png" alt="delete" class="icon">
                     </button>

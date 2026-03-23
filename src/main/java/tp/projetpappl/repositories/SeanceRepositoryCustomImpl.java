@@ -228,7 +228,11 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
             Seance seance = seanceRepository.getReferenceById(idSeance);
             //TODO vérifier que ça efface bien
         if (seance!=null){
-            seanceRepository.delete(seance);
+            seance.setGroupeList(new ArrayList<>());
+            seance.setSalleList(new ArrayList<>());
+            seance.setEnseignantList(new ArrayList<>());
+            seanceRepository.saveAndFlush(seance);
+            seanceRepository.delete(seance);   
         }
         }
     }
