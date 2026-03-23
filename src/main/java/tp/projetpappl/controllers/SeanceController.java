@@ -118,6 +118,15 @@ public class SeanceController {
         if (user == null) {
             return new ModelAndView("redirect:login.do");
         }
+
+        String acronymeEnseignement = request.getParameter("Enseignement");
+        Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
+        if (!authHelper.canModifyFiliere(request, enseignement.getFiliere())) {
+            ModelAndView forbidden = new ModelAndView("403");
+            forbidden.addObject("user", user);
+            return forbidden;
+        }
+
         ModelAndView returned;
 
         // Create or update seances
@@ -129,8 +138,8 @@ public class SeanceController {
             throw new IllegalArgumentException("Duree invalide, merci de remplir une durée strictement supérieur à 0");
         }
 
-        String acronymeEnseignement = request.getParameter("Enseignement");
-        Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
+        //String acronymeEnseignement = request.getParameter("Enseignement");
+        //Enseignement enseignement = enseignementRepository.getByAcronyme(acronymeEnseignement);
         String intituleLecon = request.getParameter("TypeLecon");
         TypeLecon typeLecon = typeLeconRepository.getByIntitule(intituleLecon);
         System.out.println("PARAMS: " + request.getParameterMap().keySet());

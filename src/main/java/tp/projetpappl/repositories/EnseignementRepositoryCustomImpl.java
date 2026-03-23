@@ -143,4 +143,19 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
         }
         return null;
     }
+
+    @Override
+    public boolean existsByResponsableAndFiliere(Enseignant responsable, String filiere) {
+        try {
+            Long count = entityManager.createQuery(
+                            "SELECT COUNT(e) FROM Enseignement e WHERE e.responsable = :responsable AND e.filiere = :filiere",
+                            Long.class)
+                    .setParameter("responsable", responsable)
+                    .setParameter("filiere", filiere)
+                    .getSingleResult();
+            return count > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

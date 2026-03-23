@@ -105,4 +105,18 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
         return null;
     }
 
+    @Override
+    public Enseignant getByLogin(String login) {
+        try {
+            return entityManager
+                    .createNamedQuery("Enseignant.findByLogin", Enseignant.class)
+                    .setParameter("login", login)
+                    .getSingleResult();
+        } catch (jakarta.persistence.NoResultException e) {
+            return null;
+        }
+    }
+
+
+
 }

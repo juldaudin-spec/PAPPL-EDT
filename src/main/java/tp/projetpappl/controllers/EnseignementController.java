@@ -104,9 +104,19 @@ public class EnseignementController {
             return new ModelAndView("redirect:login.do");
         }
 
+        String acronyme = request.getParameter("Acronyme");
+        if (acronyme != null) {
+            Enseignement enseignement = enseignementRepository.getByAcronyme(acronyme);
+            if (!authHelper.canModifyFiliere(request, enseignement.getFiliere())) {
+                ModelAndView forbidden = new ModelAndView("403");
+                forbidden.addObject("user", user);
+                return forbidden;
+            }
+        }
+
         ModelAndView returned;
 
-        String acronyme = request.getParameter("Acronyme");
+        //String acronyme = request.getParameter("Acronyme");
         if (acronyme != null) {
             //ID may exist
             Enseignement enseignement = enseignementRepository.getByAcronyme(acronyme);
@@ -135,12 +145,19 @@ public class EnseignementController {
             return new ModelAndView("redirect:login.do");
         }
 
+        String filiere = request.getParameter("Filiere");
+        if (!authHelper.canModifyFiliere(request, filiere)) {
+            ModelAndView forbidden = new ModelAndView("403");
+            forbidden.addObject("user", user);
+            return forbidden;
+        }
+
         ModelAndView returned;
 
         // Create or update enseignements
         String acronyme = request.getParameter("Acronyme");
         String nomEnseignement = request.getParameter("NomEnseignement");
-        String filiere = request.getParameter("Filiere");
+        //String filiere = request.getParameter("Filiere");
         String responsableStr = request.getParameter("InitialesEnseignant");
         ArrayList<Contient> contientList = new ArrayList<Contient>();
         HashMap<String, String> nomEnseignants
@@ -190,10 +207,18 @@ public class EnseignementController {
             return new ModelAndView("redirect:login.do");
         }
 
+        String acronyme = request.getParameter("Acronyme");
+        Enseignement enseignement = enseignementRepository.getByAcronyme(acronyme);
+        if (!authHelper.canModifyFiliere(request, enseignement.getFiliere())) {
+            ModelAndView forbidden = new ModelAndView("403");
+            forbidden.addObject("user", user);
+            return forbidden;
+        }
+
         ModelAndView returned;
 
         // Create or update enseignements
-        String acronyme = request.getParameter("Acronyme");
+        //String acronyme = request.getParameter("Acronyme");
 
         enseignementRepository.remove(acronyme);
 
