@@ -231,7 +231,9 @@ public class ReadableFile {
         List<List<String>> returnedValue;
         returnedValue = new ArrayList<List<String>>();
         List<String> ligne = this.readList();
-        while(ligne != null){
+        boolean ligneprec = true;
+        while(ligne != null && ligneprec){
+            ligneprec = (ligne != null);
             returnedValue.add(ligne);
             ligne = this.readList();
         }
