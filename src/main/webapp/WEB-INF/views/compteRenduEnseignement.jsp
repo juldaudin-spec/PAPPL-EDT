@@ -60,7 +60,6 @@
                                                                         <fmt:formatNumber var="heures" value="${heures - (heures mod 1)}" pattern="0" />
                                                                         <fmt:formatNumber var="minutes" value="${minutes}" pattern="" />
                                                                         <p>${heures}h${minutes}</p>
-
                                                                     </c:forEach>
                                                                 </td>
                                                                 <td class="col-4">

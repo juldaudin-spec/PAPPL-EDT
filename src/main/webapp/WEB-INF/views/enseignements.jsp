@@ -42,6 +42,7 @@
                                     <tr>
                                         <td  scope="col">
                                             <form method="POST">
+                                                <input type="hidden" name="connexion" value="${user.connectionCode}">
                                                 <button class="btn" formaction="compteRenduEnseignement.do" name="acronyme" value="${item.acronyme}">${item.acronyme}</button>
                                             </form>
                                         </td>

@@ -151,11 +151,10 @@
                                                          ondrop="dropAndRename(event, 'e','el')" 
                                                          ondragover="allowDrop(event)">
                                                         <c:forEach var="enseignant" items="${enseignantsList}">
-                                                            <!--
                                                             <div class="list-group-item list-group-item-action" id="el_${enseignant.initiales}" draggable="true" ondragstart="drag(event)" style="display:block">
                                                                 <input type="hidden" name="el[${enseignant.initiales}]" value="${enseignant.initiales}"/>
                                                                 ${enseignant.nomEnseignant} ${enseignant.prenom}
-                                                            </div>-->
+                                                            </div>
                                                         </c:forEach>
                                                     </div>
                                                     <div onkeyup="filterList('listAllenseignants', 'listAllenseignantsFilter')" >

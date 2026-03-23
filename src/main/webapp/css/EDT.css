@@ -40,9 +40,13 @@
   width: 100%;
   text-align: center;
 }
+#boutonSeance{
+    color:black;
+}
 
 #boutonSeance:focus-visible {
   outline: 3px solid white;
+  color:black;
   outline-offset: 2px;
   box-shadow: 0 0 0 6px black; /* Complément pour contraste élevé */
 }
