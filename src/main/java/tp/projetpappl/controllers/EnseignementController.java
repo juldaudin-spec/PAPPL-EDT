@@ -15,14 +15,20 @@ import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.math.BigInteger;
+import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import tp.projetpappl.items.Contient;
+import tp.projetpappl.items.Contient;
 import tp.projetpappl.items.Enseignant;
 import tp.projetpappl.items.Enseignement;
+import tp.projetpappl.items.Salle;
+import tp.projetpappl.items.TypeLecon;
+import tp.projetpappl.repositories.ContientRepository;
 import tp.projetpappl.items.Salle;
 import tp.projetpappl.items.TypeLecon;
 import tp.projetpappl.repositories.ContientRepository;
@@ -31,6 +37,7 @@ import tp.projetpappl.repositories.EnseignementRepository;
 import tp.projetpappl.items.Connection;
 import tp.projetpappl.repositories.SalleRepository;
 import tp.projetpappl.repositories.TypeLeconRepository;
+import tp.projetpappl.items.Connection;
 
 /**
  *
@@ -61,6 +68,7 @@ public class EnseignementController {
             return new ModelAndView("redirect:login.do");
         }
 
+
         ModelAndView returned = new ModelAndView("enseignement");
         returned.addObject("enseignantsList", enseignantRepository.findAll());
         returned.addObject("enseignement", new Enseignement());
@@ -68,6 +76,7 @@ public class EnseignementController {
         returned.addObject("typeLeconsList", leconList);
         List<Salle> salleList = salleRepository.findAll();
         returned.addObject("sallesList", salleList);
+
 
         returned.addObject("user", user);
 
@@ -82,6 +91,7 @@ public class EnseignementController {
             return new ModelAndView("redirect:login.do");
         }
 
+
         List<Enseignement> myList = new ArrayList<>(enseignementRepository.findAll());
         Collections.sort(myList, Enseignement.getComparator());
         List<Enseignant> Enseignants = new ArrayList<>(enseignantRepository.findAll());
@@ -90,6 +100,8 @@ public class EnseignementController {
         ModelAndView returned = new ModelAndView("enseignements");
         returned.addObject("enseignementsList", myList);
         returned.addObject("enseignantsList", Enseignants);
+
+
 
         returned.addObject("user", user);
 
@@ -103,6 +115,7 @@ public class EnseignementController {
         if (user == null) {
             return new ModelAndView("redirect:login.do");
         }
+
 
         String acronyme = request.getParameter("Acronyme");
         if (acronyme != null) {
@@ -159,6 +172,7 @@ public class EnseignementController {
         String nomEnseignement = request.getParameter("NomEnseignement");
         //String filiere = request.getParameter("Filiere");
         String responsableStr = request.getParameter("InitialesEnseignant");
+
         ArrayList<Contient> contientList = new ArrayList<Contient>();
         HashMap<String, String> nomEnseignants
                 = Tools.getArrayFromRequest(request, "e");
@@ -186,15 +200,25 @@ public class EnseignementController {
             BigInteger h = BigInteger.valueOf(heures);
             Contient contient = contientRepository.create(acronyme, typeLecon.getIntitule(), h, salle);
         }
-        
+
+        for (TypeLecon typeLecon : typeLeconRepository.findAll()) {
+            String heuresStr = request.getParameter(typeLecon.getIntitule());
+            int heures = Tools.getIntFromString(heuresStr);
+            String demande = "salle[" + typeLecon.getIntitule() + "]";
+            String salle = request.getParameter(demande);
+            BigInteger h = BigInteger.valueOf(heures);
+            Contient contient = contientRepository.create(acronyme, typeLecon.getIntitule(), h, salle);
+        }
+
         returned = new ModelAndView("enseignement");
         returned.addObject("newenseignement", succes);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
-
-        returned.addObject("user", user);
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
         returned.addObject("sallesList", salleRepository.findAll());
         returned.addObject("enseignement", enseignementRepository.getByAcronyme(acronyme)); // si besoin
+
+
+        returned.addObject("user", user);
 
         return returned;
     }
@@ -215,6 +239,8 @@ public class EnseignementController {
             return forbidden;
         }
 
+
+
         ModelAndView returned;
 
         // Create or update enseignements
@@ -228,6 +254,7 @@ public class EnseignementController {
         returned.addObject("enseignementsList", myList);
         Collection<Enseignant> Enseignants = enseignantRepository.findAll();
         returned.addObject("enseignantsList", Enseignants);
+
 
         returned.addObject("user", user);
 

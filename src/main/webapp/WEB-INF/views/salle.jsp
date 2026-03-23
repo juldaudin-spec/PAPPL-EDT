@@ -4,28 +4,18 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Ajouter Salle</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"
-                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
+        <%@include file="imports.jspf" %>
+        <title><fmt:message key="addRoom"/></title>
         <link href="css/salles.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
-        <div class="py-5">
+        <div class="py-5" id="main-content">
             <div class="container">
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Créer une nouvelle salle</h1>
+                        <h1><fmt:message key="addRoom"/></h1>
                     </div>
                 </div>
                 <div class="row">
@@ -34,28 +24,36 @@
                             <table class="table table-striped">
                                 <tbody>
                                     <tr>
-                                        <th scope="col">Numéro de la salle</th>
+                                        <th scope="col"><fmt:message key="wichRoom"/></th>
                                         <td>
+                                            <label class="hidden-label" for="NumeroSalle">
+                                                <fmt:message key="wichRoom"/></label>
                                             <c:choose>
-                                                <c:when test="${(empty salle) || (empty salle.numeroSalle)}"><input name="NumeroSalle" value=""/></c:when>
-                                                <c:otherwise><input type="text" class="form-control" name="NumeroSalle" value="${salle.numeroSalle}"/></c:otherwise>
+                                                <c:when test="${(empty salle) || (empty salle.numeroSalle)}"><input name="NumeroSalle" id="NumeroSalle" value=""/></c:when>
+                                                <c:otherwise><input type="text" class="form-control" name="NumeroSalle" id="NumeroSalle" value="${salle.numeroSalle}"/></c:otherwise>
                                             </c:choose>
                                         </td>
                                     
                                     <tr>
-                                        <th scope="col">Nombre d'élèves</th>
-                                        <td><input type="int" class="form-control" name="Capacite" value="${salle.capacite}"/></td>
+                                        <th scope="col"><fmt:message key="nbStudent"/></th>
+                                        <td>
+                                            <label class="hidden-label" for="Capacite">
+                                                <fmt:message key="nbStudent"/></label>
+                                            <input type="int" class="form-control" name="Capacite" id="Capacite" value="${salle.capacite}"/></td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Typologie de la salle</th>
-                                        <td><input type="text" class="form-control" name="Typologie" value="${salle.typologie}"/></td>
+                                        <th scope="col"><fmt:message key="roomInfo"/></th>
+                                        <td>
+                                            <label class="hidden-label" for="Typologie">
+                                                <fmt:message key="roomInfo"/></label>
+                                            <input type="text" class="form-control" name="Typologie" id="Typologie" value="${salle.typologie}"/></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td scope="col" colspan="2" class="text-center">
                                             <input type="hidden" name="connexion" value="${user.connectionCode}">
-                                            <button type="submit" class="btn btn-block btn-primary">Save</button>
+                                            <button type="submit" class="btn btn-block btn-primary"><fmt:message key="save"/></button>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -66,7 +64,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <c:if test='${newsalle}'>
-                            <p>Salle créé/modifié avec succès</p>
+                            <p><fmt:message key="roomSaved"/></p>
                         </c:if>
                     </div>
                 </div>
@@ -74,7 +72,7 @@
                     <div class="col-md-12">
                         <form action="salles.do" method="POST">
                             <input type="hidden" name="connexion" value="${user.connectionCode}">
-                            <button formaction="salles.do">Afficher la liste des Salles</button>
+                            <button formaction="salles.do"><fmt:message key="backToRooms"/></button>
                         </form>
                     </div>
                 </div>

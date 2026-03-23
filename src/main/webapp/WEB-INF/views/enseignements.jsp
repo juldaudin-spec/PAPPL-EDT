@@ -10,28 +10,17 @@
 <!DOCTYPE html>
 <html lang="fr-fr">
     <head>
-        <meta charset="UTF-8">
-        <title>Liste Matières</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- jQuery (optionnel pour Bootstrap 5) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"
-                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-        <link href="css/main.css" type="text/css" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
+        <%@include file="imports.jspf" %>
+        <title><fmt:message key="listEnseignement"/></title>
     </head>
     <body>
         <%@include file="navbar.jspf" %>
-        <div class="py-5">
+        <div class="py-5" id="main-content">
             <div class="container">
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Liste des matières</h1>
+                        <h1><fmt:message key="listEnseignement"/></h1>
                     </div>
                 </div>
 
@@ -41,10 +30,10 @@
                         <table class="table table-striped table-md sortable">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="col-md-2">Acronyme</th>
-                                    <th scope="col" class="col-md-3">Nom de l'enseignement</th>
-                                    <th scope="col" class="col-md-3">Filière(s)</th>
-                                    <th scope="col" class="col-md-3">Responsable</th>
+                                    <th scope="col" class="col-md-2"><fmt:message key="enseignementAcronyme"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="enseignementName"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="programme"/></th>
+                                    <th scope="col" class="col-md-3"><fmt:message key="manager"/></th>
                                 </tr>
                             </thead>
 

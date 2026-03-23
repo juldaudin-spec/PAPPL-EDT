@@ -116,7 +116,7 @@ public class EnseignantController {
         if (!authHelper.canModifyGlobal(request)) {
             ModelAndView forbidden = new ModelAndView("403");
             forbidden.addObject("user", user);
-            return forbidden;);
+            return forbidden;
         }
 
         ModelAndView returned;
@@ -155,7 +155,7 @@ public class EnseignantController {
         if (!authHelper.canModifyGlobal(request)) {
             ModelAndView forbidden = new ModelAndView("403");
             forbidden.addObject("user", user);
-            return forbidden;;
+            return forbidden;
         }
 
         ModelAndView returned;
