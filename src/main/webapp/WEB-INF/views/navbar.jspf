@@ -5,8 +5,8 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
     <div class="container">
-        <a class="navbar-brand" href="#" title="<fmt:message key="returnHome"/>">${view}</a>
-        <a class="navbar-brand" href="index.do">
+        <!--<a class="navbar-brand" href="#" >${view}</a>-->
+        <a class="navbar-brand" href="index.do" title="<fmt:message key="returnHome"/>">
             <img src="img/centraleNantes.png" alt ="Logo Centrale Nantes" class="icon">
         </a>
         <label><fmt:message key="showMenu"/>
