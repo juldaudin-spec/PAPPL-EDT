@@ -13,7 +13,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1><fmt:message key="addSeance"/> ${seance}</h1>
+                        <h1><fmt:message key="addSeance"/></h1>
                     </div>
                 </div>
                 <div class="row">
@@ -53,7 +53,7 @@
                                                 class="form-control form-select form-select-lg mb-3">
                                             <c:choose>
                                                 <c:when test="${(empty seance) || (empty seance.acronyme)}"><option value="" disabled selected><fmt:message key="chooseEnseignement"/></option></c:when>
-                                                <c:otherwise><option value="${seance.acronyme}" disabled selected>${seance.acronyme.nomEnseignement}</option></c:otherwise>
+                                                <c:otherwise><option value="${seance.acronyme.acronyme}">${seance.acronyme.nomEnseignement}</option></c:otherwise>
                                             </c:choose>
 
                                             <c:forEach var="enseignement" items="${enseignementsList}">
@@ -72,7 +72,7 @@
                                                 class="form-control form-select form-select-lg mb-3">
                                             <c:choose>
                                                 <c:when test="${(empty seance) || (empty seance.intitule)}"><option value="" disabled selected><fmt:message key="chooseCourseType"/></option></c:when>
-                                                <c:otherwise><option value="${seance.intitule}" disabled selected>${seance.intitule.intitule}</option></c:otherwise>
+                                                <c:otherwise><option value="${seance.intitule.intitule}">${seance.intitule.intitule}</option></c:otherwise>
                                             </c:choose>
 
                                             <c:forEach var="typeLecon" items="${typeLeconsList}">

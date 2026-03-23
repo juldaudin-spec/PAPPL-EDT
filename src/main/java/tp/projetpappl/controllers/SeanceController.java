@@ -65,7 +65,7 @@ public class SeanceController {
 
     @RequestMapping(value = "seance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSeance(HttpServletRequest request) {
-        String seanceStr="seance";
+        String seanceStr = "seance";
         Connection user = authHelper.getAuthenticatedUser(request);
         Seance seanceChoisie;
         if (user == null) {
@@ -74,16 +74,14 @@ public class SeanceController {
 
         ModelAndView returned = new ModelAndView(seanceStr);
         String idSeanceStr = request.getParameter("idSeance");
-        if ((idSeanceStr != null) &&(!idSeanceStr.isEmpty())){
-            Optional<Seance> seance=seanceRepository.findById(Tools.getIntFromString(idSeanceStr));
-            if (seance.isPresent()){
+        if ((idSeanceStr != null) && (!idSeanceStr.isEmpty())) {
+            Optional<Seance> seance = seanceRepository.findById(Tools.getIntFromString(idSeanceStr));
+            if (seance.isPresent()) {
                 seanceChoisie = seance.get();
+            } else {
+                seanceChoisie = new Seance();
             }
-            else{
-            seanceChoisie = new Seance();
-        }
-        }
-        else{
+        } else {
             seanceChoisie = new Seance();
         }//TODO à changer pour n'afficher que ce qui est disponible, et pour les enseignants: ceux qui enseignent dans la matière, et pareil pojur le reste
         returned.addObject(seanceStr, seanceChoisie);
@@ -92,24 +90,10 @@ public class SeanceController {
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
         returned.addObject("sallesList", salleRepository.findAll());
-        returned.addObject("user",user);
+        returned.addObject("user", user);
         return returned;
     }
-    /*
-    @RequestMapping(value = "seances.do", method=RequestMethod.POST)
-    public ModelAndView handlePostSeance(HttpServletRequest request) {
-        List<Seance> myList = new ArrayList<>(seanceRepository.findAll());
-        Collections.sort(myList, Seance.getComparator());
-        List<Enseignant> Enseignants = new ArrayList<>(enseignantRepository.findAll());
-        Collections.sort(myList, Seance.getComparator());
 
-        ModelAndView returned = new ModelAndView("seances");
-        returned.addObject("seancesList", myList);
-        returned.addObject("enseignantsList", Enseignants);
-
-        return returned;
-    }
- */
     @RequestMapping(value = "saveseance.do", method = RequestMethod.POST)
     public ModelAndView handlePostSaveSeance(HttpServletRequest request) {
         Connection user = authHelper.getAuthenticatedUser(request);
@@ -430,12 +414,3 @@ public class SeanceController {
         return false;
     }
 }
-
-      
-
-       
-
-
-
-
-
