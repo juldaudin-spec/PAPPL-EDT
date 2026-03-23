@@ -67,22 +67,27 @@ public class SeanceController {
     public ModelAndView handlePostSeance(HttpServletRequest request) {
         String seanceStr="seance";
         Connection user = authHelper.getAuthenticatedUser(request);
+        Seance seanceChoisie;
         if (user == null) {
             return new ModelAndView("redirect:login.do");
         }
 
-        ModelAndView returned = new ModelAndView("seance");
-String idSeanceStr = request.getParameter("idSeance");
+        ModelAndView returned = new ModelAndView(seanceStr);
+        String idSeanceStr = request.getParameter("idSeance");
         if ((idSeanceStr != null) &&(!idSeanceStr.isEmpty())){
             Optional<Seance> seance=seanceRepository.findById(Tools.getIntFromString(idSeanceStr));
             if (seance.isPresent()){
-            returned.addObject(seanceStr, seance.get());}
+                seanceChoisie = seance.get();
+            }
+            else{
+            seanceChoisie = new Seance();
+        }
         }
         else{
-            returned.addObject(seanceStr,new Seance());
+            seanceChoisie = new Seance();
         }//TODO à changer pour n'afficher que ce qui est disponible, et pour les enseignants: ceux qui enseignent dans la matière, et pareil pojur le reste
+        returned.addObject(seanceStr, seanceChoisie);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
-        returned.addObject("seance", new Seance());
         returned.addObject("groupesList", groupeRepository.findAll());
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
