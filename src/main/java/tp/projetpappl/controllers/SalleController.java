@@ -13,15 +13,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import tp.projetpappl.items.Salle;
 import tp.projetpappl.repositories.SalleRepository;
 import tp.projetpappl.items.Connection;
+import tp.projetpappl.tools.ReadableFile;
 
 /**
  *
@@ -166,6 +171,40 @@ public class SalleController {
         Collection<Salle> myList = salleRepository.findAll();
         returned.addObject("sallesList", myList);
 
+        returned.addObject("user", user);
+
+        return returned;
+    }
+    @RequestMapping(value = "createimportsalles.do", method = RequestMethod.POST)
+    public ModelAndView handlePostSaveImportEnseignant(
+            @RequestParam("fichier") MultipartFile file,
+            HttpServletRequest request) throws IOException {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+
+        ModelAndView returned;
+
+        boolean succes = false;
+
+        if (file != null && !file.isEmpty()) {
+
+            // conversion MultipartFile → File
+            File tempFile = File.createTempFile("upload_", file.getOriginalFilename());
+            file.transferTo(tempFile);
+
+            ReadableFile input = new ReadableFile(tempFile);
+            List<List<String>> sallesliststr = input.readFile();
+
+            if (!sallesliststr.isEmpty()) {
+                salleRepository.createByListStr(sallesliststr);
+                succes = true;
+            }
+
+            tempFile.delete(); // nettoyage
+        }
+
+        returned = new ModelAndView("salle");
+        returned.addObject("newsalle", succes);
         returned.addObject("user", user);
 
         return returned;
