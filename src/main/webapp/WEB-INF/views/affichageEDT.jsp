@@ -15,7 +15,7 @@
         <%@include file="navbar.jspf" %>
         <%@ page import="java.util.Locale"%>
         <%@ page import="java.time.format.TextStyle"%>
-        <div class="py-5">
+        <div class="py-5" id="main-content">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -64,7 +64,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="position-relative" id="Jour">
-                                                        <div id="nomJour">  
+                                                        <div id="nomJour">
                                                             ${jour.getDayOfWeek().getDisplayName(TextStyle.FULL, pageContext.request.locale)}
                                                         </div>
                                                         <div id="date">
@@ -81,7 +81,7 @@
                                                             16h</div>
                                                         <div id="Horaire" style="--position-element: 200px; --taille-element:1px;">
                                                             18h</div>
-                                                        
+
                                                     </div>
 
                                                 </td>
@@ -99,7 +99,7 @@
                                                                              --taille-element:   ${seance.duree/3}px;
                                                                              ">
                                                                             <input type="hidden" name="connexion" value="${user.connectionCode}">
-                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center; color:black" name="idSeance" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button> 
+                                                                            <button class="nav-link" id="boutonSeance" style="text-align:center; color:black" name="idSeance" formaction="seance.do" value="${seance.idSeance}" method="POST">${seance.acronyme.acronyme}</button>
                                                                         </div>
                                                                     </form>
                                                                 </c:when>

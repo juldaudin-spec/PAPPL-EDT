@@ -18,5 +18,7 @@ public interface EnseignantRepositoryCustom {
     public Enseignant update(String initiales, String prenom, String nom);
     public Enseignant create(String initiales, String prenom, String nom);
     public void remove(String initiales);
+    public Enseignant getByLogin(String login);
+
 
 }

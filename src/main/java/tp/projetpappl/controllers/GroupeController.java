@@ -78,6 +78,12 @@ public class GroupeController {
             return new ModelAndView("redirect:login.do");
         }
 
+        if (!authHelper.canModifyGlobal(request)) {
+            ModelAndView forbidden = new ModelAndView("403");
+            forbidden.addObject("user", user);
+            return forbidden;
+        }
+
         ModelAndView returned;
 
         String nomGroupe = request.getParameter("NomGroupe");
@@ -104,6 +110,12 @@ public class GroupeController {
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
             return new ModelAndView("redirect:login.do");
+        }
+
+        if (!authHelper.canModifyGlobal(request)) {
+            ModelAndView forbidden = new ModelAndView("403");
+            forbidden.addObject("user", user);
+            return forbidden;
         }
 
         ModelAndView returned;
@@ -139,6 +151,12 @@ public class GroupeController {
             return new ModelAndView("redirect:login.do");
         }
 
+        if (!authHelper.canModifyGlobal(request)) {
+            ModelAndView forbidden = new ModelAndView("403");
+            forbidden.addObject("user", user);
+            return forbidden;
+        }
+
         ModelAndView returned;
 
         // Create or update groupes
@@ -160,6 +178,12 @@ public class GroupeController {
         Connection user = authHelper.getAuthenticatedUser(request);
         if (user == null) {
             return new ModelAndView("redirect:login.do");
+        }
+
+        if (!authHelper.canModifyGlobal(request)) {
+            ModelAndView forbidden = new ModelAndView("403");
+            forbidden.addObject("user", user);
+            return forbidden;
         }
 
         ModelAndView returned;
