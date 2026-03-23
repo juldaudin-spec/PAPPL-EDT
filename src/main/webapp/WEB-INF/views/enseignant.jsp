@@ -81,22 +81,21 @@
                         </form>
                     </div>
                     <div class="col-md-12">
-                        <form action="/upload" method="post" enctype="multipart/form-data">
+                        <c:if test="${(empty enseignant) || (empty enseignant.initiales)}">
+                            <form action="createimportenseignants.do" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="connexion" value="${user.connectionCode}">
 
-                            <div class="mb-3">
-                                <label for="fileInput" class="form-label">Choisir un fichier à importer</label>
-                                <input class="form-control" type="file" id="fileInput" name="fichier">
-                            </div>
+                                <div class="mb-3">
+                                    <label for="fileInput" class="form-label">Type de fichier : Acronyme, Nom, Prénom (Excel ou CSV)</label>
+                                    <input class="form-control" type="file" id="fileInput" name="fichier">
+                                </div>
 
-                            <div class="d-grid">
                                 <button type="submit" class="btn btn-block btn-primary">
                                     Envoyer
                                 </button>
-                            </div>
 
-                       
-
-                        </form>
+                            </form>
+                        </c:if>
                     </div>
                 </div>
             </div>

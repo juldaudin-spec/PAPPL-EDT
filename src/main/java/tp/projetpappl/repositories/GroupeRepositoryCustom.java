@@ -18,4 +18,5 @@ public interface GroupeRepositoryCustom {
     Groupe update(String nomGroupe, int nbEleves);
     void remove(String nomGroupe);
     Groupe create(String nomGroupe, int nbEleves);
+    public List<Groupe> createByListStr(List<List<String>> listEnseignantStr);
 }
