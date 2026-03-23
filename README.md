@@ -111,7 +111,7 @@ L'application utilise l'authentification **CAS de Centrale Nantes**. Cliquez sur
 | Rôle | Accès |
 |------|-------|
 | **Visiteur connecté (CAS)** | Consultation de l'emploi du temps uniquement |
-| **Responsable de filière** | Modification des enseignements, séances et contenus de sa filière |
+| **Responsable d'option** | Modification des enseignements, séances et contenus de sa filière |
 | **Admin global** | Accès complet à toutes les fonctionnalités |
 
 
