@@ -78,7 +78,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <c:if test="${(empty salle) || (empty salle.nomSalle)}">
+                        <c:if test="${(empty salle) || (empty salle.numeroSalle)}">
                             <form action="createimportsalles.do" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="connexion" value="${user.connectionCode}">
 
