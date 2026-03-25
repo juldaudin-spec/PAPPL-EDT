@@ -201,15 +201,6 @@ public class EnseignementController {
             Contient contient = contientRepository.create(acronyme, typeLecon.getIntitule(), h, salle);
         }
 
-        for (TypeLecon typeLecon : typeLeconRepository.findAll()) {
-            String heuresStr = request.getParameter(typeLecon.getIntitule());
-            int heures = Tools.getIntFromString(heuresStr);
-            String demande = "salle[" + typeLecon.getIntitule() + "]";
-            String salle = request.getParameter(demande);
-            BigInteger h = BigInteger.valueOf(heures);
-            Contient contient = contientRepository.create(acronyme, typeLecon.getIntitule(), h, salle);
-        }
-
         returned = new ModelAndView("enseignement");
         returned.addObject("newenseignement", succes);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
