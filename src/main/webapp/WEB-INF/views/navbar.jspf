@@ -6,14 +6,14 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
     <div class="container">
-        <a class="navbar-brand" href="#" title="<fmt:message key="returnHome"/>">${view}</a>
-        <a class="navbar-brand" href="index.do">
+        <!--<a class="navbar-brand" href="#" >${view}</a>-->
+        <a class="navbar-brand" href="index.do" title="<fmt:message key="returnHome"/>">
             <img src="img/centraleNantes.png" alt ="Logo Centrale Nantes" class="icon">
         </a>
-
+        <label><fmt:message key="showMenu"/>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar1">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button></label>
         <div class="collapse navbar-collapse" id="navbar1">
             <ul class="navbar-nav ms-auto" title="<fmt:message key="menu"/>">
                 <li class="nav-item">

@@ -40,7 +40,7 @@ public class ReadableFile {
     /**
      * Get file as a readable file
      *
-     * @param aFile
+     * @param aFile the file we want to read
      */
     public ReadableFile(File aFile) {
         this.reader = null;
@@ -226,5 +226,21 @@ public class ReadableFile {
             }
             this.reader = null;
         }
+    }
+    /**
+     * read a Readable file row by row (either Excel file or not)
+     * @return the List of rows which are a List of String
+     */
+    public List<List<String>> readFile(){
+        List<List<String>> returnedValue;
+        returnedValue = new ArrayList<List<String>>();
+        List<String> ligne = this.readList();
+        boolean ligneprec = true;
+        while(ligne != null && ligneprec){
+            ligneprec = (ligne != null);
+            returnedValue.add(ligne);
+            ligne = this.readList();
+        }
+        return returnedValue ;
     }
 }

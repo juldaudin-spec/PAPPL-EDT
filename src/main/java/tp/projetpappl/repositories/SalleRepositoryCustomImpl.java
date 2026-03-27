@@ -6,9 +6,13 @@ package tp.projetpappl.repositories;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
+import tp.projetpappl.controllers.Tools;
+import tp.projetpappl.items.Salle;
 import tp.projetpappl.items.Salle;
 /**
  *
@@ -77,5 +81,14 @@ public class SalleRepositoryCustomImpl implements SalleRepositoryCustom {
             return getByNumeroSalle(numeroSalle);
         }
         return null;
+    }
+    public List<Salle> createByListStr(List<List<String>> listEnseignantStr) {
+        List<Salle> listSalle = new ArrayList<Salle>();
+        for(List<String> salleStr : listEnseignantStr){
+            Salle salle = salleRepository.create(salleStr.get(0),Tools.getIntFromString(salleStr.get(1)),salleStr.get(2));
+            if(salle != null)
+                listSalle.add(salle);
+        }
+        return listSalle;
     }
 }

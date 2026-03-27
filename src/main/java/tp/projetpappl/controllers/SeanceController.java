@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import static tp.projetpappl.controllers.Tools.getIntFromString;
 import tp.projetpappl.items.Connection;
 import tp.projetpappl.items.Contient;
 import tp.projetpappl.items.Enseignant;
@@ -86,7 +87,6 @@ public class SeanceController {
         }//TODO à changer pour n'afficher que ce qui est disponible, et pour les enseignants: ceux qui enseignent dans la matière, et pareil pojur le reste
         returned.addObject(seanceStr, seanceChoisie);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
-        returned.addObject("seance", new Seance());
         returned.addObject("groupesList", groupeRepository.findAll());
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
@@ -423,4 +423,29 @@ public class SeanceController {
 
         return false;
     }
+    
+    @RequestMapping(value = "deleteseance.do", method = RequestMethod.POST)
+    public ModelAndView handlePostDeleteSeance(HttpServletRequest request) {
+
+        Connection user = authHelper.getAuthenticatedUser(request);
+        if (user == null) {
+            return new ModelAndView("redirect:login.do");
+        }
+        
+        ModelAndView returned;
+
+        String idSeanceStr = request.getParameter("idSeance");
+        int idSeance=-1;
+        if (idSeanceStr != null){
+            idSeance=getIntFromString(idSeanceStr);
+        }
+      
+        seanceRepository.remove(idSeance);
+
+        returned = new ModelAndView("index");
+        returned.addObject("user", user);
+
+        return returned;
+    }
+    
 }

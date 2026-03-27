@@ -4,6 +4,7 @@
  */
 package tp.projetpappl.repositories;
 
+import java.util.List;
 import tp.projetpappl.items.Salle;
 
 /**
@@ -15,4 +16,6 @@ public interface SalleRepositoryCustom {
     Salle create(String numeroSalle, int capacites,String typologie);
     Salle update(String numeroSalle, int capacite, String typologie);
     void remove(String numeroSalle);
+    public List<Salle> createByListStr(List<List<String>> listEnseignantStr);
+        
 }

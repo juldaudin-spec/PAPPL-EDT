@@ -221,4 +221,37 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         }
         return null;
     }
+
+    @Override
+    public void remove(int idSeance) {
+        if (idSeance>=0){
+            Seance seance = seanceRepository.getReferenceById(idSeance);
+        if (seance!=null){
+            List<Seance> listSeance;
+            for (Groupe groupe : seance.getGroupeList()){
+                listSeance = groupe.getSeanceList();
+                listSeance.remove(seance);
+                groupe.setSeanceList(listSeance);
+                groupeRepository.saveAndFlush(groupe);
+            }
+            seance.setGroupeList(new ArrayList<>());
+            for (Salle salle : seance.getSalleList()){
+                listSeance = salle.getSeanceList();
+                listSeance.remove(seance);
+                salle.setSeanceList(listSeance);
+                salleRepository.saveAndFlush(salle);
+            }
+            seance.setSalleList(new ArrayList<>());
+            for (Enseignant enseignant : seance.getEnseignantList()){
+                listSeance = enseignant.getSeanceList();
+                listSeance.remove(seance);
+                enseignant.setSeanceList(listSeance);
+                enseignantRepository.saveAndFlush(enseignant);
+            }
+            seance.setEnseignantList(new ArrayList<>());
+            seanceRepository.saveAndFlush(seance);
+            seanceRepository.delete(seance);   
+        }
+        }
+    }
 }

@@ -85,7 +85,6 @@
                                                     </div>
 
                                                 </td>
-                                                <form formaction="seance.do" method="POST"></form>
                                                 <c:forEach var="seanceByDay" items="${listeSeance[status.index]}">
 
                                                 <td class="texte-center">
@@ -111,12 +110,10 @@
                                                         </div>
                                                     </td>
                                                 </c:forEach>
-                                                </form>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
                                 </table>
-                            </form>
                         </div>
                     </div>
                 </div>
