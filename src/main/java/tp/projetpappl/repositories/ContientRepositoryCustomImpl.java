@@ -56,6 +56,15 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
     @Autowired
     @Lazy
     private SalleRepository salleRepository;
+    /**
+     * créer un élément de la maquette d'une matière (la quantité d'un type de leçon et les salles espérées)
+     * create a piece of syllabus for a course (quantity of a lesson type and the rooms expected)
+     * @param acronyme
+     * @param intitule
+     * @param minutes
+     * @param salle
+     * @return 
+     */
     public Contient create(String acronyme, String intitule, BigInteger minutes, String salle){
         TypeLecon typeLecon = null;
         Enseignement enseignement = null;
@@ -93,7 +102,14 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
     }
 
     
-    
+    /**
+     * récupère les éléments de la maquette pour un type de leçon d'un enseignement que suit un groupe
+     * return the pieces of the syllabus for a lesson type for a course followed by a group
+     * @param intitule
+     * @param acronyme
+     * @param groupe
+     * @return 
+     */
     @Override
     public List<Contient> findContientByIntituleByEnseignementByGroupe(TypeLecon intitule, Enseignement acronyme, Groupe groupe) {
         List<Contient> listContient =null;
@@ -107,7 +123,13 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
         }
         return listContient;
     }
-
+/**
+ * récupère les types de leçon que doit suivre le groupe dans la matière 
+ * return the lesson type that the groupe must follow in that course
+ * @param acronyme
+ * @param groupe
+ * @return 
+ */
     @Override
     public List<TypeLecon> findIntituleByEnseignementByGroupe(Enseignement acronyme, Groupe groupe) {
         List<TypeLecon> listType = null;
@@ -120,7 +142,12 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
         }
         return listType;
     }
-
+/**
+ * récupère les matières que le groupe doit suivre
+ * return the courses that a group must follow
+ * @param groupe
+ * @return 
+ */
     @Override
     public List<Enseignement> findEnseignementByGroupe(Groupe groupe) {
         String requete = "SELECT c.acronyme FROM Contient c JOIN c.groupeList g WHERE g.nomGroupe= :nomGroupe";
@@ -128,7 +155,12 @@ public class ContientRepositoryCustomImpl implements ContientRepositoryCustom {
         query.setParameter("nomGroupe", groupe.getNomGroupe());
         return query.getResultList();
     }
-
+/**
+ * renvoie les groupes qui doivent suivre la matière
+ * return the groups who must follow this course
+ * @param acronyme
+ * @return 
+ */
     @Override
     public List<Groupe> findGroupeByEnseignement(Enseignement acronyme) {
         String requete = "SELECT g FROM Contient c JOIN c.groupeList g WHERE c.acronyme= :acronyme";

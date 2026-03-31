@@ -27,15 +27,21 @@ public class GroupeRepositoryCustomImpl implements GroupeRepositoryCustom {
     @Lazy
     private GroupeRepository groupeRepository;
     /**
-     *
-     * @return
+     * récupère tous les groupes de la base de données
+     * get every group from database
+     * @return 
      */
     @Override
     public List<String> findAllNomGroupe(){
         TypedQuery<String> query = entityManager.createQuery("SELECT nom_groupe FROM Groupe", String.class);
         return query.getResultList();
     }
-    
+    /**
+     * récupère tous les groupes qui doivent suivre un enseignement 
+     * get every group who must follow a course
+     * @param acronyme
+     * @return 
+     */
     @Override
     public List<String> findGroupeByEnseignement(String acronyme){
         String requete = "SELECT nom_groupe FROM Etudie JOIN Contient ON Contient.contient_id=Etudie.contient_id WHERE acronyme= :acronyme";
@@ -43,10 +49,23 @@ public class GroupeRepositoryCustomImpl implements GroupeRepositoryCustom {
         query.setParameter("acronyme", acronyme);
         return query.getResultList();
     }
+    /**
+     * récupère un groupe par son id
+     * get a group from its id
+     * @param nom
+     * @return 
+     */
     @Override
     public Groupe getByNomGroupe(String nom){
         return entityManager.createNamedQuery("Groupe.findByNomGroupe", Groupe.class).setParameter("nomGroupe", nom).getSingleResult();
     }
+    /**
+     * mise à jour des info d'un groupe
+     * update group's information
+     * @param nomGroupe
+     * @param nbEleve
+     * @return 
+     */
     @Override
     public Groupe update(String nomGroupe, int nbEleve){
         Groupe groupe = null;
@@ -66,6 +85,11 @@ public class GroupeRepositoryCustomImpl implements GroupeRepositoryCustom {
         }
         return groupe;
     }
+    /**
+     * supprime un groupe
+     * delete a group
+     * @param nomGroupe 
+     */
     @Override
     public void remove(String nomGroupe){
         if (nomGroupe !=null){
@@ -77,6 +101,13 @@ public class GroupeRepositoryCustomImpl implements GroupeRepositoryCustom {
             groupeRepository.delete(getByNomGroupe(nomGroupe));
         }
     }
+    /**
+     * créer un groupe
+     * create a group
+     * @param nomGroupe
+     * @param nbEleves
+     * @return 
+     */
     @Override
     public Groupe create(String nomGroupe, int nbEleves){
         if (nomGroupe != null && (!nomGroupe.isEmpty())){

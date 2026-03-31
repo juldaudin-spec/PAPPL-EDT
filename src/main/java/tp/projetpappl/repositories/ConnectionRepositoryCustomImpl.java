@@ -49,7 +49,12 @@ public class ConnectionRepositoryCustomImpl implements ConnectionRepositoryCusto
         
         return newCode.toString();
     }
-
+/**
+ * créer un code de connexion
+ * create a connexion code
+ * @param login
+ * @return 
+ */
     @Override
     public Connection create(String login) {
         Connection item = null;
@@ -73,7 +78,11 @@ public class ConnectionRepositoryCustomImpl implements ConnectionRepositoryCusto
         }
         return item;
     }
-    
+    /**
+     * supprime la connexion d'un utilisateur
+     * delete the connexion of a user
+     * @param item 
+     */
     @Override
     public void remove(Connection item) {
         if (item != null) {
@@ -84,7 +93,12 @@ public class ConnectionRepositoryCustomImpl implements ConnectionRepositoryCusto
             }
         }
     }
-
+/**
+ * recupère la connexion par son id 
+ * return a connexion by its id
+ * @param connectionCode
+ * @return 
+ */
     @Override
     public Connection getByConnectionCode(String connectionCode) {
         if ((connectionCode != null) && (!connectionCode.isEmpty())) {

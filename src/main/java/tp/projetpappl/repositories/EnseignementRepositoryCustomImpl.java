@@ -30,14 +30,23 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
     @Autowired
     @Lazy
     EnseignantRepository enseignantRepository;
-    
+    /**
+     * récupération de toutes les matières
+     * get all courses
+     * @return 
+     */
     @Override
     public List<String> findAllAcronyme() {
         String requete = "SELECT Acronyme FROM Enseignement";
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
         return query.getResultList();
     }
-
+/**
+ * récupère les matières dans lesquelles cet enseignant enseigne
+ * get the courses where this teacher teach
+ * @param acronyme
+ * @return 
+ */
     @Override
     public List<String> findAcronymeByEnseignant(String acronyme) {// Il y a un problème ici entre le Custom et le CustomImpl
         String requete = "SELECT acronyme FROM Enseigne e WHERE e.acronyme= :acronyme";
@@ -45,7 +54,12 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
         query.setParameter("acronyme", acronyme);
         return query.getResultList();
     }
-    
+    /**
+     * renvoie les matières suivies par ce groupe 
+     * get the courses followed by this group
+     * @param nomGroupe
+     * @return 
+     */
     @Override
     public List<String> findAcronymeByGroupe(String nomGroupe) {
         String requete = "SELECT c.acronyme FROM Contient c JOIN c.groupeList g WHERE g.nomGroupe= :nomGroupe";
@@ -53,6 +67,12 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
         query.setParameter("nomGroupe", nomGroupe);
         return query.getResultList();
     }
+    /**
+     * renvoie la séance par son id
+     * get seance by its id
+     * @param acronyme
+     * @return 
+     */
     @Override
     public Enseignement getByAcronyme(String acronyme) {
         try {
@@ -64,6 +84,16 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
             return null;
         }
     }
+    /**
+     * met la matière à jour
+     * update courses informations
+     * @param acronyme
+     * @param nom
+     * @param filiere
+     * @param responsable
+     * @param Enseignants
+     * @return 
+     */
     @Override
     public Enseignement update(String acronyme, String nom, String filiere, Enseignant responsable, ArrayList<Enseignant> Enseignants){
         Enseignement enseignementAcronyme = null;
@@ -102,6 +132,11 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
         }
         return enseignementAcronyme;
     }
+    /**
+     * supprime la matière
+     * delete this course
+     * @param acronyme 
+     */
     @Override
     public void remove(String acronyme){
         if (acronyme !=null){
@@ -113,6 +148,16 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
             enseignementRepository.delete(getByAcronyme(acronyme));
         }
     }
+    /**
+     * créer une matière
+     * create a course
+     * @param acronyme
+     * @param nom
+     * @param filiere
+     * @param responsable
+     * @param Enseignants
+     * @return 
+     */
     @Override
     public Enseignement create(String acronyme, String nom, String filiere, Enseignant responsable, ArrayList<Enseignant> Enseignants){
         for (int i = 0; i < Enseignants.size(); i++) {
@@ -143,7 +188,13 @@ public class EnseignementRepositoryCustomImpl implements EnseignementRepositoryC
         }
         return null;
     }
-
+    /**
+     * renvoie vrai si et seulement si un enseignant est responsable d'une matière pour une filière donnée
+     * return true only if a teacher is a course manager in this particular program
+     * @param responsable
+     * @param filiere
+     * @return 
+     */
     @Override
     public boolean existsByResponsableAndFiliere(Enseignant responsable, String filiere) {
         try {

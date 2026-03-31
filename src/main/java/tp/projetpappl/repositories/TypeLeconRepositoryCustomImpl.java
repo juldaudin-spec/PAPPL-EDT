@@ -24,12 +24,23 @@ public class TypeLeconRepositoryCustomImpl implements TypeLeconRepositoryCustom 
     @PersistenceContext
     private EntityManager entityManager;
     
+    /**
+     * récupère tous les types de leçon de la base de données
+     * get every lesson types from database
+     * @return 
+     */
     @Override
     public List<String> findAllTypeLecon(){
         TypedQuery<String> query = entityManager.createQuery("SELECT intitule FROM Type_Lecon", String.class);
         return query.getResultList();
     }
-    
+    /**
+     * récupère les types de leçon dans la maquette d'un groupe pour une matière donnée
+     * get every lesson type of the syllabus for a group for a course
+     * @param acronyme
+     * @param nomGroupe
+     * @return 
+     */
     @Override
     public List<String> findTypeLeconByEnseignementByGroupe(String acronyme, String nomGroupe){
         String requete = "SELECT intitule FROM Contient JOIN Etudie ON Contient.contient_id=Etudie.contient_id WHERE acronyme= :acronyme AND nom_groupe= :nomGroupe";
@@ -38,7 +49,12 @@ public class TypeLeconRepositoryCustomImpl implements TypeLeconRepositoryCustom 
         query.setParameter("nomGrouoe", nomGroupe);
         return query.getResultList();
     }
-    
+    /**
+     * récupère un type de leçon par son id
+     * get a lesson type by its id
+     * @param intitule
+     * @return 
+     */
     @Override
     public TypeLecon getByIntitule(String intitule){
         try {
