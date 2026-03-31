@@ -17,6 +17,12 @@ public class AdminRepositoryCustomImpl implements AdminRepositoryCustom {
     @Lazy
     private AdminRepository adminRepository;
 
+   /**
+    * renvoie un admin par son id
+    * return an admin by its id
+    * @param login
+    * @return 
+    */ 
     @Override
     public Admin getByLogin(String login) {
         try {
@@ -28,7 +34,14 @@ public class AdminRepositoryCustomImpl implements AdminRepositoryCustom {
             return null;
         }
     }
-
+/**
+ * créer un nouvel administrateur
+ * create a new administrator
+ * @param login
+ * @param nom
+ * @param prenom
+ * @return 
+ */
     @Override
     public Admin create(String login, String nom, String prenom) {
         if (login != null && !login.isEmpty() && nom != null && !nom.isEmpty()) {
@@ -40,7 +53,11 @@ public class AdminRepositoryCustomImpl implements AdminRepositoryCustom {
         }
         return null;
     }
-
+/**
+ * supprime un admin
+ * remove an admin
+ * @param login 
+ */
     @Override
     public void remove(String login) {
         if (login != null) {

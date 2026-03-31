@@ -26,14 +26,23 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
     @Autowired
     @Lazy
     EnseignantRepository enseignantRepository;
-
+/**
+ * renvoie tous les enseignants
+ * return every teachers
+ * @return 
+ */
     @Override
     public List<String> findAllInitaleEnseignant() {
         String requete = "SELECT initiales FROM Enseignant";
         TypedQuery<String> query = entityManager.createQuery(requete, String.class);
         return query.getResultList();
     }
-
+/**
+ * renvoie les enseignants qui enseignent dans une matière donnée
+ * return teachers who teach in a given course
+ * @param acronyme
+ * @return 
+ */
     @Override
     public List<String> findinitialeEnseignantByEnseignement(String acronyme) {
         String requete = "SELECT initiales FROM Enseigne WHERE acronyme= :acronyme";
@@ -41,7 +50,12 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
         query.setParameter("acronyme", acronyme);
         return query.getResultList();
     }
-
+/**
+ * renvoie un enseignant par son id
+ * return a teacher by its id
+ * @param initiales
+ * @return 
+ */
     @Override
     public Enseignant getByInitiales(String initiales) {
         try {
@@ -53,7 +67,14 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
             return null;
         }
     }
-
+/**
+ * met à jour les infos d'un enseignant
+ * update informations of this teacher
+ * @param initiales
+ * @param prenom
+ * @param nom
+ * @return 
+ */
     @Override
     public Enseignant update(String initiales, String prenom, String nom) {
         Enseignant enseignantInitiales = null;
@@ -76,7 +97,11 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
         }
         return enseignantInitiales;
     }
-
+/**
+ * supprime un enseignant
+ * delete a teacher
+ * @param initiales 
+ */
     @Override
     public void remove(String initiales) {
         if (initiales != null) {
@@ -88,7 +113,14 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
             enseignantRepository.delete(getByInitiales(initiales));
         }
     }
-
+/**
+ * créer un enseignant
+ * create a teacher
+ * @param initiales
+ * @param prenom
+ * @param nom
+ * @return 
+ */
     @Override
     public Enseignant create(String initiales, String prenom, String nom) {
         if ((nom != null) && (!nom.isEmpty())
@@ -105,7 +137,12 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
         }
         return null;
     }
-    
+    /**
+     * créer des enseignants à partir d'une liste
+     * create teachers from a list
+     * @param listEnseignantStr
+     * @return 
+     */
     public List<Enseignant> createByListStr(List<List<String>> listEnseignantStr) {
         List<Enseignant> listEnseignant = new ArrayList<Enseignant>();
         for(List<String> enseignantStr : listEnseignantStr){
@@ -115,7 +152,12 @@ public class EnseignantRepositoryCustomImpl implements EnseignantRepositoryCusto
         }
         return listEnseignant;
     }
-
+/**
+ * récupère un enseignant à partir de son login
+ * get a teacher from its login
+ * @param login
+ * @return 
+ */
     @Override
     public Enseignant getByLogin(String login) {
         try {
