@@ -20,10 +20,31 @@
 	
     <developers>
         <developer>
-            <name>Nathan</name>
+            <name>Nathan DEGODET</name>
             <organization>Ecole Centrale Nantes</organization>
             <organizationUrl>http://www.ec-nantes.fr</organizationUrl>
         </developer>
+        <developer>
+            <name>Julien DAUDIN</name>
+            <organization>Ecole Centrale Nantes</organization>
+            <organizationUrl>http://www.ec-nantes.fr</organizationUrl>
+        </developer>
+        <developer>
+            <name>Oussama KAZOUBI</name>
+            <organization>Ecole Centrale Nantes</organization>
+            <organizationUrl>http://www.ec-nantes.fr</organizationUrl>
+        </developer>
+        <developer>
+            <name>Imane LAASRI</name>
+            <organization>Ecole Centrale Nantes</organization>
+            <organizationUrl>http://www.ec-nantes.fr</organizationUrl>
+        </developer>
+        <developer>
+            <name>Jean-Yves MARTIN</name>
+            <organization>Ecole Centrale Nantes</organization>
+            <organizationUrl>http://www.ec-nantes.fr</organizationUrl>
+        </developer>
+        
     </developers>
   
     <dependencies>

@@ -50,7 +50,18 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
     SeanceRepository seanceRepository;
     @PersistenceContext
     private EntityManager entityManager;
-
+/**
+ * permet de créer une séance
+ * allow to create a session
+ * @param enseignement
+ * @param Enseignants
+ * @param typeLecon
+ * @param Groupes
+ * @param Salles
+ * @param hDebut
+ * @param duree
+ * @return 
+ */
     @Override
     public Seance create(Enseignement enseignement, List<Enseignant> Enseignants, TypeLecon typeLecon, List<Groupe> Groupes, List<Salle> Salles, Date hDebut, int duree) {
 
@@ -111,7 +122,12 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         }
         return null;
     }
-
+/**
+ * permet de récupérer les séances d'un groupe
+ * get all session of a group
+ * @param groupe
+ * @return 
+ */
     @Override
     public List<Seance> findSeanceByGroupe(Groupe groupe) {
         List<Seance> listSeance = null;
@@ -123,7 +139,13 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         }
         return listSeance;
     }
-
+    /**
+     * trie une liste de séance par type de leçon
+     * sort a session list by lesson type
+     * @param listSeance
+     * @param listEnseignement
+     * @param listIntitule 
+     */
     @Override
     public void sortByEnseignementByIntitule(List<Seance> listSeance, List<Enseignement> listEnseignement, List<List<TypeLecon>> listIntitule) {
         List<Seance> listSeanceTemp = new ArrayList<>(listSeance.size());
@@ -147,7 +169,12 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         }
         listSeance = listSeanceTemp;
     }
-
+    /**
+     * permet de récupérer les séances d'une matière
+     * get all session of a course
+     * @param enseignement
+     * @return 
+     */
     @Override
     public List<Seance> findSeanceByEnseignement(Enseignement enseignement) {
         List<Seance> listSeance = null;
@@ -160,7 +187,19 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         return listSeance;
     }
     
-
+/**
+ * permet de mettre à jour une séance pour changer des éléments
+ * allow to change information of a session
+ * @param IdSeance
+ * @param enseignement
+ * @param Enseignants
+ * @param typeLecon
+ * @param Groupes
+ * @param Salles
+ * @param hDebut
+ * @param duree
+ * @return 
+ */
     @Override
     public Seance update(int IdSeance, Enseignement enseignement, List<Enseignant> Enseignants, TypeLecon typeLecon, List<Groupe> Groupes, List<Salle> Salles, Date hDebut, int duree) {
         if (IdSeance > 0) {
@@ -222,14 +261,37 @@ public class SeanceRepositoryCustomImpl implements SeanceRepositoryCustom {
         return null;
     }
 
+    /**
+     * fonction qui permet la suppression d'une séance
+     * allow to suppress a session
+     * @param idSeance 
+     */
     @Override
     public void remove(int idSeance) {
         if (idSeance>=0){
             Seance seance = seanceRepository.getReferenceById(idSeance);
-            //TODO vérifier que ça efface bien
         if (seance!=null){
+            List<Seance> listSeance;
+            for (Groupe groupe : seance.getGroupeList()){
+                listSeance = groupe.getSeanceList();
+                listSeance.remove(seance);
+                groupe.setSeanceList(listSeance);
+                groupeRepository.saveAndFlush(groupe);
+            }
             seance.setGroupeList(new ArrayList<>());
+            for (Salle salle : seance.getSalleList()){
+                listSeance = salle.getSeanceList();
+                listSeance.remove(seance);
+                salle.setSeanceList(listSeance);
+                salleRepository.saveAndFlush(salle);
+            }
             seance.setSalleList(new ArrayList<>());
+            for (Enseignant enseignant : seance.getEnseignantList()){
+                listSeance = enseignant.getSeanceList();
+                listSeance.remove(seance);
+                enseignant.setSeanceList(listSeance);
+                enseignantRepository.saveAndFlush(enseignant);
+            }
             seance.setEnseignantList(new ArrayList<>());
             seanceRepository.saveAndFlush(seance);
             seanceRepository.delete(seance);   

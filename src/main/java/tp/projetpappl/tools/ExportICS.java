@@ -51,7 +51,8 @@ public class ExportICS {
         return returned;
 
     }
-
+    
+    //Create the event at the ICS format (like it is when we export from Onboard) 
     private static String createEvent(Seance seance) {
         Date debut = seance.getHDebut(); // Date actuelle
         Calendar calendar = Calendar.getInstance();
@@ -85,6 +86,11 @@ public class ExportICS {
         return returned;
     }
 
+    /**
+     *
+     * @param groupe groupe we want a EDT from
+     * @return EDT at the ICS format with all seances from a groupe (like it is when we export an ICS file from Onboard)
+     */
     public static String createCalendarGroupe(Groupe groupe) {
         List<Seance> listSeance = groupe.getSeanceList();
         String returned = "BEGIN:VCALENDAR\n"

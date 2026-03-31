@@ -26,6 +26,12 @@ public class SalleRepositoryCustomImpl implements SalleRepositoryCustom {
     @Lazy
     private SalleRepository salleRepository;
     
+    /**
+     * récupère une salle par son id
+     * get a room by its id
+     * @param numeroSalle
+     * @return 
+     */
     @Override
     public Salle getByNumeroSalle(String numeroSalle) {
         try {
@@ -37,6 +43,14 @@ public class SalleRepositoryCustomImpl implements SalleRepositoryCustom {
             return null;
         }
     }
+    /**
+     * met les infos d'une salle à jour
+     * update room's information
+     * @param numeroSalle
+     * @param capacite
+     * @param typologie
+     * @return 
+     */
     @Override
     public Salle update(String numeroSalle, int capacite, String typologie){
         Salle salle = null;
@@ -57,6 +71,11 @@ public class SalleRepositoryCustomImpl implements SalleRepositoryCustom {
         }
         return salle;
     }
+    /**
+     * suppression d'une salle
+     * deletion of a room
+     * @param numeroSalle 
+     */
     @Override
     public void remove(String numeroSalle){
         if (numeroSalle !=null){
@@ -68,6 +87,14 @@ public class SalleRepositoryCustomImpl implements SalleRepositoryCustom {
             salleRepository.delete(getByNumeroSalle(numeroSalle));
         }
     }
+    /**
+     * création d'une salle
+     * creation of a room
+     * @param numeroSalle
+     * @param capacites
+     * @param typologie
+     * @return 
+     */
     @Override
     public Salle create(String numeroSalle, int capacites,String typologie){
         if (numeroSalle != null && (!numeroSalle.isEmpty())){
@@ -82,6 +109,12 @@ public class SalleRepositoryCustomImpl implements SalleRepositoryCustom {
         }
         return null;
     }
+    /**
+     * création d'une liste de salle
+     * creation of a room list
+     * @param listEnseignantStr
+     * @return 
+     */
     public List<Salle> createByListStr(List<List<String>> listEnseignantStr) {
         List<Salle> listSalle = new ArrayList<Salle>();
         for(List<String> salleStr : listEnseignantStr){

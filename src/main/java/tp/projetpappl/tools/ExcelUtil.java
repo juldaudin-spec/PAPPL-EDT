@@ -39,6 +39,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import tp.projetpappl.items.Enseignant;
 import tp.projetpappl.items.Groupe;
+import tp.projetpappl.items.Salle;
 import tp.projetpappl.items.Seance;
 
 /**
@@ -58,8 +59,8 @@ public class ExcelUtil {
 
     /**
      *
-     * @param fileName
-     * @param sheetName
+     * @param fileName Name of the Excel file
+     * @param sheetName Name of the sheet
      */
     public ExcelUtil(String fileName, String sheetName) {
         this.fileName = fileName;
@@ -109,7 +110,7 @@ public class ExcelUtil {
 
     /**
      *
-     * @return
+     * @return 
      */
     public Workbook getDocument() {
         return this.document;
@@ -125,7 +126,7 @@ public class ExcelUtil {
 
     /**
      *
-     * @return
+     * @return return the Excel file
      */
     public File getExcelFile() {
         return tempExcel;
@@ -211,7 +212,7 @@ public class ExcelUtil {
     /**
      * Set header
      *
-     * @param title
+     * @param title title of the header
      */
     public void setHeader(String title) {
         Header header = this.sheet.getHeader();
@@ -234,8 +235,8 @@ public class ExcelUtil {
 
     /**
      *
-     * @param lineNumber
-     * @return
+     * @param lineNumber 
+     * @return create and return a new empty row at the selected position
      */
     public Row createRow(int lineNumber) {
         if (lineNumber > this.maxRow) {
@@ -258,7 +259,7 @@ public class ExcelUtil {
 
     /**
      *
-     * @return
+     * @return create and return an empty new row
      */
     public Row newRow() {
         if (this.maxRow < 0) {
@@ -272,8 +273,8 @@ public class ExcelUtil {
     /**
      *
      * @param row
-     * @param colNumber
-     * @return
+     * @param colNumber column number
+     * @return create and return a new empty cell at the position (row, column)
      */
     public Cell createCell(Row row, int colNumber) {
         Cell theCell = row.getCell(colNumber);
@@ -285,8 +286,8 @@ public class ExcelUtil {
 
     /**
      *
-     * @param colNumber
-     * @return
+     * @param colNumber column number
+     * @return create and return a new empty cell at the selected column on the current row
      */
     public Cell createCell(int colNumber) {
         return createCell(this.currentRow, colNumber);
@@ -295,7 +296,7 @@ public class ExcelUtil {
     /**
      *
      * @param row
-     * @param colNumber
+     * @param colNumber column number
      * @param text
      * @param style
      */
@@ -350,7 +351,7 @@ public class ExcelUtil {
     /**
      *
      * @param row
-     * @param colNumber
+     * @param colNumber column number
      * @param text
      */
     public void setCell(Row row, int colNumber, Object text) {
@@ -359,7 +360,7 @@ public class ExcelUtil {
 
     /**
      *
-     * @param colNumber
+     * @param colNumber column number
      * @param text
      */
     public void setCell(int colNumber, Object text) {
@@ -367,8 +368,8 @@ public class ExcelUtil {
     }
 
     /**
-     *
-     * @param colNumber
+     * create a new empty cell at the selected column on the current row
+     * @param colNumber column number
      */
     public void setCell(int colNumber) {
         setCell(this.currentRow, colNumber, null, null);
@@ -376,7 +377,7 @@ public class ExcelUtil {
 
     /**
      *
-     * @return
+     * @return the Excel file we closed
      */
     public File close() {
         FileOutputStream outputStream = null;
@@ -440,6 +441,11 @@ public class ExcelUtil {
         return outputStream;
     }
 
+    /**
+     *
+     * @param groupe groupe from the database, for which we need an Excel File
+     * @return the Excel schedule with all lessons the group have
+     */
     public static File createExcelFile(Groupe groupe) {
 
         String fileName = "EDT";
@@ -492,8 +498,8 @@ public class ExcelUtil {
         // Document
         int rank = 0;
         Integer weekprecedent = null;
-        for (Seance seance : listSeance) {
-            Date date = seance.getHDebut();
+        for (Seance seance : listSeance) {// We add each seance on the Excel file at the exact position (+/- 15min)
+            Date date = seance.getHDebut();//Date recovery with year, month, day, day of the week, hour, minute
             Integer year = date.getYear() + 1900;
             Integer month = date.getMonth() + 1;
             Integer day = date.getDate();
@@ -510,7 +516,7 @@ public class ExcelUtil {
                 daystr = "0" + day.toString();
             }
             Integer week = day - jour + 1;//Premier jour de la semaine
-            String datestr = year.toString() + "-" + monthstr + "-" + daystr;
+            String datestr = year.toString() + "-" + monthstr + "-" + daystr; //YYYY-MM-DD
             String weekstr = year.toString() + "-" + monthstr + "-" + week;
             String weekfinstr = year.toString() + "-" + monthstr + "-" + (week + 7);
             if (week != weekprecedent) {
@@ -523,7 +529,7 @@ public class ExcelUtil {
 
                     rank++;
                     document.newRow();
-                    document.setCell(0, "Semaine du " + weekstr + " au " + weekfinstr, cellStdLeft);
+                    document.setCell(0, "Semaine du " + weekstr + " au " + weekfinstr, cellStdLeft);//Semaine du YYYY-MM-DD au YYYY-MM-DD
                 } else {
                     increment = weekprecedent;
                 }
@@ -539,35 +545,36 @@ public class ExcelUtil {
                 }
             }
             String contenuCell = "";
-            for(Enseignant enseignant : seance.getEnseignantList()){
+            for(Enseignant enseignant : seance.getEnseignantList()){//We add the enseignants initials on the Cell
                 if(contenuCell.isBlank()){
                     contenuCell= enseignant.getInitiales();
                 } else{
                     contenuCell= contenuCell + ", "+ enseignant.getInitiales();
                 }
             }
-            for(Enseignant enseignant : seance.getEnseignantList()){
+            
+            String contenuCellSalle = "";
+            for(Salle salle : seance.getSalleList()){//We add the salle numbers on the Cell
                 if(contenuCell.isBlank()){
-                    contenuCell= enseignant.getInitiales();
+                    contenuCellSalle= salle.getNumeroSalle();
                 } else{
-                    contenuCell= contenuCell + ", "+ enseignant.getInitiales();
+                    contenuCellSalle= contenuCell + ", "+ salle.getNumeroSalle();
                 }
             }
             float  h = heure;
             float hfin = heure + (float) fin/60;
-            while(h<hfin && h < 18){
+            while(h<hfin && h < 18){//Add the seance on each cell until it end
                 if (h>=heure+(float) min/60){
                     int cellule = 40*(jour-1)+1+Math.round((h-8)*4);
-                    document.setCell(cellule, seance.getAcronyme().getAcronyme()+"\n"+seance.getIntitule().getIntitule()+"\n"+contenuCell, cellStdLeft);
+                    document.setCell(cellule, seance.getAcronyme().getAcronyme()+"\n"+seance.getIntitule().getIntitule()+"\n"+contenuCell+"\n"+contenuCellSalle, cellStdLeft);
                 }
                 h= h + (float) 1/4;
             }
-            weekprecedent = week;
+            weekprecedent = week;//Recovery to compare weeks next seance adn create new row(s) if it's not the same
         }
 
         // Close document
-        File theFile = document.close();
+        File theFile = document.close();//Close the document before give it back
         return theFile;
-        //return ResponseEntity.unprocessableEntity().body((InputStreamResource) null);
     }
 }

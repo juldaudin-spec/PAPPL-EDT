@@ -87,7 +87,6 @@ public class SeanceController {
         }//TODO à changer pour n'afficher que ce qui est disponible, et pour les enseignants: ceux qui enseignent dans la matière, et pareil pojur le reste
         returned.addObject(seanceStr, seanceChoisie);
         returned.addObject("enseignantsList", enseignantRepository.findAll());
-        returned.addObject("seance", new Seance());
         returned.addObject("groupesList", groupeRepository.findAll());
         returned.addObject("enseignementsList", enseignementRepository.findAll());
         returned.addObject("typeLeconsList", typeLeconRepository.findAll());
