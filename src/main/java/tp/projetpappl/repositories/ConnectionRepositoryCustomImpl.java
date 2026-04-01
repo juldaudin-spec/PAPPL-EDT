@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Implementation of custom Connection repository methods
  * 
- * @author Assistant
+ * @author Oussama
  */
 @Repository
 public class ConnectionRepositoryCustomImpl implements ConnectionRepositoryCustom {

@@ -7,24 +7,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.query.Param;
 
 /**
- * Repository for Connection entity
- * 
- * @author Assistant
+ *
+ * @author Oussama
  */
+
 @Repository
 public interface ConnectionRepository extends JpaRepository<Connection, String>, ConnectionRepositoryCustom {
 
-    /**
-     * Find all entries with the code
-     * @param connectionCode
-     * @return
-     */
     public Collection<Connection> findByConnectionCode(@Param("connectionCode")String connectionCode);
 
-    /**
-     * Find all entries with the login
-     * @param connectionLogin
-     * @return
-     */
     public Collection<Connection> findByConnectionLogin(@Param("connectionLogin")String connectionLogin);
 }

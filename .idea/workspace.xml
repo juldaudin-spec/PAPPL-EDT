@@ -6,7 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="2a380ca7-a55d-4153-a69f-1041d4cb9ee7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/EnseignementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/EnseignementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/AuthHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/AuthHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/items/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/items/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/items/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/items/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/AdminRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/AdminRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/AdminRepositoryCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/AdminRepositoryCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/AdminRepositoryCustomImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/AdminRepositoryCustomImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ConnectionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ConnectionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ConnectionRepositoryCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ConnectionRepositoryCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ConnectionRepositoryCustomImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/repositories/ConnectionRepositoryCustomImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tp/projetpappl/tools/CASClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tp/projetpappl/tools/CASClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,20 +47,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.prweb [clean].executor": "Run",
-    "Maven.prweb [compile].executor": "Run",
-    "Maven.prweb [package].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Oussama/Desktop/PGROUP/PAPPL-EDT"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.prweb [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prweb [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prweb [package].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Oussama/Desktop/PGROUP/PAPPL-EDT&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Oussama\Desktop\PGROUP\PAPPL-EDT" />

@@ -2,6 +2,11 @@ package tp.projetpappl.repositories;
 
 import tp.projetpappl.items.Admin;
 
+/**
+ *
+ * @author Oussama
+ */
+
 public interface AdminRepositoryCustom {
     public Admin getByLogin(String login);
     public Admin create(String login, String nom, String prenom);

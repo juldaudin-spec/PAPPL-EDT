@@ -7,6 +7,11 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import tp.projetpappl.items.Admin;
 
+/**
+ *
+ * @author Oussama
+ */
+
 @Repository
 public class AdminRepositoryCustomImpl implements AdminRepositoryCustom {
 
